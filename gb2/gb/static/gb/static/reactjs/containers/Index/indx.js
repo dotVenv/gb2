@@ -3,9 +3,10 @@ import React from "react";
 
 
 const Indx = () => {
+    console.log('reached');
     return (
         <> 
-            Hello World 
+            <h5>Hello World </h5>
         </>
     );
 };

@@ -8,15 +8,13 @@ import { Indx } from "../../containers";
 
 export default function App(){
   return(
-    <NextUIProvider>
-        <React.StrictMode>
-            <BrowserRouter>
-                <Route path='' Component={<Indx />}/>
-            </BrowserRouter>
-
-        </React.StrictMode>
-
-    </NextUIProvider>
+    <React.StrictMode>
+      <NextUIProvider>
+        <BrowserRouter>
+            <Route path='' Component={<Indx />}/>
+        </BrowserRouter>
+      </NextUIProvider>
+    </React.StrictMode>
 
   );
 };
