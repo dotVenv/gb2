@@ -13,10 +13,10 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 module.exports = {
     mode: 'development',
-    entry:{homeApp:'./gb2/gb/static/gb/static/reactjs/pages/index.js',},
+    entry:{home:'./gb2/gb/static/gb/static/reactjs/pages/index.js',},
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, './gb2/gb/static/gbgb/static/css'),
+        path: path.resolve(__dirname, './gb2/gb/static/gb/static/css'),
         },
 
     devServer: {
