@@ -4,7 +4,13 @@
   "description": "gamers-bounty",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm-run-all --parallel build:webpack build:tailwind",
+    "build:dev": "npm-run-all --parallel watch:webpack watch:tailwind",
+    "build:webpack": "webpack --mode production",
+    "build:tailwind": "npx tailwindcss -i ./gb2/gb/static/gb/static/css/custom.css -o ./gb2/gb/static/gb/static/css/output.css",
+    "watch:webpack": "webpack --mode development --watch",
+    "watch:tailwind": "npx tailwindcss -i ./gb2/gb/static/gb/static/css/custom.css -o ./gb2/gb/static/gb/static/css/output.css --watch",
+    "serve:webpack": "webpack serve"
   },
   "keywords": [
     "online",
@@ -13,7 +19,30 @@
   "author": "dotVenv",
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@nextui-org/react": "^2.4.6",
+    "@preact/signals-react": "^2.2.0",
+    "css-loader": "^7.1.2",
+    "framer-motion": "^11.3.24",
+    "jquery": "^3.7.1",
+    "next": "14.2.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.93.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-react": "^7.24.7",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.9",
+    "webpack-cli": "^5.1.4",
+    "workbox-webpack-plugin": "^7.1.0"
   }
 }
