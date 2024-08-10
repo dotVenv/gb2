@@ -75,6 +75,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'gb2.urls'
 DEFAULT_HOST = 'www'
 ROOT_HOSTCONF = 'gb2.hosts'
+URLCONF = 'gb2.urls'
 
 TEMPLATES = [
     {
@@ -94,7 +95,7 @@ TEMPLATES = [
 
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"
     },
 }
 
