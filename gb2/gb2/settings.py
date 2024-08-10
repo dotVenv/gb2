@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +38,16 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    
     'gb',
+    'whitenoise.runserver_nostatic',
+    'whitenoise',
+    'django_hosts',
+    'django_prometheus',
     'django.contrib.admin',
     'django.contrib.auth',
+    'rest_framework',
+    'djoser',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -41,16 +55,25 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'gb2.urls'
+DEFAULT_HOST = 'www'
+ROOT_HOSTCONF = 'gb2.hosts'
 
 TEMPLATES = [
     {
@@ -68,17 +91,29 @@ TEMPLATES = [
     },
 ]
 
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
+
+
 WSGI_APPLICATION = 'gb2.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django_prometheus.db.backends.mysql',
+        'NAME': os.environ.get('DB_DEV_NAME'),
+        'USER': os.environ.get('DB_DEV_USER'),
+        'HOST':os.environ.get('DB_DEV_HOST'),
+        'PORT': os.environ.get('DB_DEV_PORT'),
+        'PASSWORD':os.environ.get('DB_DEV_PWD'),
+    },
 }
 
 
@@ -116,9 +151,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_URL = 'staticfiles/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_URL = 'mediafiles/'
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
