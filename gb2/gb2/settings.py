@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     
     'gb',
+    'gb_api',
     'whitenoise.runserver_nostatic',
     'whitenoise',
     'django_hosts',
@@ -115,7 +116,7 @@ DATABASES = {
         'PASSWORD':os.environ.get('DB_DEV_PWD'),
     },
 }
-
+AUTH_USER_MODEL = "gb_api.gbUser"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
