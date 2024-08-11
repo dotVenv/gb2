@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     
     'gb',
     'gb_api',
-    'whitenoise.runserver_nostatic',
+    #'whitenoise.runserver_nostatic',
     'whitenoise',
     'django_hosts',
     'django_prometheus',
@@ -77,10 +77,12 @@ DEFAULT_HOST = 'www'
 ROOT_HOSTCONF = 'gb2.hosts'
 URLCONF = 'gb2.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,11 +96,19 @@ TEMPLATES = [
 ]
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"
     },
 }
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django_prometheus.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
 
 
 
@@ -115,6 +125,9 @@ DATABASES = {
         'HOST':os.environ.get('DB_DEV_HOST'),
         'PORT': os.environ.get('DB_DEV_PORT'),
         'PASSWORD':os.environ.get('DB_DEV_PWD'),
+        'OPTIONS': {
+            'init_command': "SET default_storage_engine=INNODB",
+        },
     },
 }
 AUTH_USER_MODEL = "gb_api.gbUser"
@@ -164,3 +177,6 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#PROMETHEUS_EXPORT_MIGRATIONS = os.getenv("PROMETHEUS_EXPORT_MIGRATIONS", True)
+PROMETHEUS_LATENCY_BUCKETS = (0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0, 25.0, 50.0, 75.0, float("inf"),)
+PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.5, 9.0, 12.0, 15.0, 20.0, 30.0, float("inf"))
