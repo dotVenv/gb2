@@ -2,5 +2,6 @@
 {% load static %}
 {% block title %} Gamers-Bounty {% endblock %}
 {% block body %}
+         {% csrf_token %} 
         <div id='gbi_root'></div>
 {% endblock %}
