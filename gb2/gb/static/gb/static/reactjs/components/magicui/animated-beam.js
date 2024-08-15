@@ -1,9 +1,9 @@
-"use client";;
-import { useEffect, useId, useState } from "react";
+"use client";
+
+import React,{ useEffect, useId, useState } from "react";
 import { motion } from "framer-motion";
 
-import { cn } from "@/gb2/gb/static/gb/static/reactjs/components/ui/lib/utils";
-
+import { cn } from "@nextui-org/react";
 export const AnimatedBeam = ({
   className,
   containerRef,
