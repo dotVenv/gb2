@@ -41,7 +41,6 @@ const EasySteps = () => {
                     <div className="flex flex-col justify-center">
                     <Code size='sm' variant='flat'>You</Code>
                     <Circle ref={div7Ref}>
-                        
                         <Icons.user />
                     </Circle>
                     </div>
@@ -53,10 +52,7 @@ const EasySteps = () => {
                     </div>
                    
                     <div className="flex flex-col justify-center gap-2">
-                    <Code size='sm' className='mr-4' variant='flat'>Champ</Code>
-                    <Circle ref={div1Ref}>
-                        <Icons.googleDrive />
-                    </Circle>
+                    
                     <Code size='sm' className='mr-4' variant='flat'>Mode</Code>
                     <Circle ref={div2Ref}>
                         <Icons.googleDocs />
@@ -73,21 +69,16 @@ const EasySteps = () => {
                         <Icons.notion />
                     </Circle>
                     </div>
+                    <div className="flex flex-col justify-center">
+                    <Code size='sm' className='mr-4' variant='flat'>Champ</Code>
+                    <Circle ref={div1Ref}>
+                        <Icons.champ />
+                    </Circle>
+                    </div>
                 </div>
 
                    {/* AnimatedBeams */}
-            <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div1Ref}
-                toRef={div6Ref}
-                duration={3}
-            />
-             <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div1Ref}
-                toRef={div6Ref}
-                duration={3}
-            />
+           
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div2Ref}
@@ -98,26 +89,30 @@ const EasySteps = () => {
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div6Ref}
-                duration={3}
+                duration={4}
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div4Ref}
                 toRef={div6Ref}
-                duration={3}
-            />
-            <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div5Ref}
-                toRef={div6Ref}
-                duration={3}
+                duration={5}
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div6Ref}
-                toRef={div7Ref}
-                duration={3}
+                toRef={div5Ref}
+                duration={7}
+                reverse
             />
+            
+           
+            <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div6Ref}
+                toRef={div7Ref}
+                duration={1.2}
+            />
+
                 </div>
            
           
@@ -155,38 +150,11 @@ const Icons = {
             viewBox="0 0 512 512">
                 <path fill="#000000" d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L80 128c-8.8 0-16-7.2-16-16s7.2-16 16-16l368 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L64 32zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
     ),
-    googleDrive: () => (
-      <svg
-        width="100"
-        height="100"
-        viewBox="0 0 87.3 78"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z"
-          fill="#0066da"
-        />
-        <path
-          d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z"
-          fill="#00ac47"
-        />
-        <path
-          d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z"
-          fill="#ea4335"
-        />
-        <path
-          d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z"
-          fill="#00832d"
-        />
-        <path
-          d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"
-          fill="#2684fc"
-        />
-        <path
-          d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"
-          fill="#ffba00"
-        />
-      </svg>
+    champ: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" 
+        height="12" width="13.5" viewBox="0 0 576 512">
+            <path fill="#16cce3" d="M400 0L176 0c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8L24 64C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9L192 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l192 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-26.1 0C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24L446.4 64c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112l84.4 0c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6l84.4 0c-5.1 66.3-31.1 111.2-63 142.3z"/>
+        </svg>
     ),
     whatsapp: () => (
       <svg
