@@ -14,5 +14,6 @@ export { default as AnimatedGradientText } from './magicui/animated-gradient-tex
 export { default as OrbitingCircles } from './magicui/orbiting-circles';
 export { default as OrbCirlces } from './OrbitingCircles/orbcircles';
 export { default as SponsorCards } from './SponsorCards/sponsorcards';
-export {default as EasySteps } from './EasySteps/easysteps';
+export { default as EasySteps } from './EasySteps/easysteps';
+export { default as AnimationTest } from './AnimationTest/animationtest';
 export {  cn } from './ui/lib/utils';
