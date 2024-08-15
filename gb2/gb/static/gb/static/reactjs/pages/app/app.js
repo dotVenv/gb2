@@ -24,4 +24,7 @@ export default function App(){
 
   );
 };
-createRoot(document.getElementById('gbi_root')).render(<App />)
+createRoot(document.getElementById('gbi_root')).render(
+  <main className="dark text-white bg-dark">
+    <App />
+  </main>)

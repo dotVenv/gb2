@@ -1,11 +1,14 @@
 import React from "react";
-
-
-
+import { LatestNews, NaviBar } from "../../components";
+import { Spacer } from "@nextui-org/react";
 const Indx = () => {
+
     return (
         <> 
-            <h5>Hello World </h5>
+          
+                <NaviBar />
+                <LatestNews />
+        
         </>
     );
 };
