@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": false,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "./gb2/gb/static/gb/static/css/output.css",
+    "baseColor": "zinc",
+    "cssVariables": true,
+    "prefix": "js"
+  },
+  "aliases": {
+    "components": "@/gb2/gb/static/gb/static/reactjs/components/",
+    "utils": "@/gb2/gb/static/gb/static/reactjs/components/ui/lib/utils",
+    "ui": "@/gb2/gb/static/gb/static/reactjs/components//ui",
+    "magicui": "@/gb2/gb/static/gb/static/reactjs/components//magicui"
+  }
+}
