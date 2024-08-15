@@ -1,8 +1,7 @@
 import React from 'react';
-import { cn } from '../index'
+import { cn } from '@nextui-org/react';
 
-const BorderBeam = ({
-  className,
+const BorderBeam = ({ className,
   size = 200,
   duration = 15,
   anchor = 90,

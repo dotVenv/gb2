@@ -1,27 +1,26 @@
-import React from "react";
-import { NaviBar, BorderBeam } from "../../components";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import React, {Suspense} from "react";
+import { NaviBar, SimpleSteps, DotPattern } from "../../components";
+import { cn } from "@nextui-org/react";
 const Indx = () => {
 
     return (
         <> 
             <div className="pt-4 pb-4"></div>
+            
             <NaviBar />
-            <div className='col-4 '>
-                <Card 
-                    isFooterBlurred
-                    className="ml-4 h-[200px] w-[350px] rounded-xl">
-                        <CardBody>
-                            
-                        </CardBody>
-                        <CardFooter
-                         className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                            <p className='text-tiny font-bold'> Register To Compete </p>
-                        </CardFooter>
-                        <BorderBeam  />
-                </Card>
-                
+            <section>
+            <div className='col-4 flex'>
+                <Suspense fallback={<p> Loading...</p>}>
+                    <SimpleSteps />
+                </Suspense>
             </div>
+                <DotPattern
+                    className={cn(
+                    "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+                    )}
+                />
+            </section>
+            <div className="pt-4 pb-4"></div>
         
         </>
     );

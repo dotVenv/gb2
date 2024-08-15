@@ -5,7 +5,7 @@ import {NextUIProvider} from "@nextui-org/react";
 import { Indx } from "../../containers";
 
 
-export default function App(){
+export default  function App(){
   console.log(
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
