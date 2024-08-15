@@ -1,15 +1,14 @@
 import React from 'react';
 import { cn } from '@nextui-org/react';
 
-const BorderBeam = ({ className,
-  size = 200,
-  duration = 15,
-  anchor = 90,
-  borderWidth = 2.5,
-  colorFrom = "#ffaa40",
-  colorTo = "#9c40ff",
-  delay = 0
-}) => {
+const BorderBeam = ({ className}) => {
+  var size = 200;
+  var duration = 15;
+  var anchor = 90;
+  var borderWidth = 2.5;
+  var colorFrom = "#ffaa40";
+  var colorTo = "#9c40ff";
+  var delay = 0;
   return (
     (<div
       style={

@@ -5,8 +5,8 @@ const NaviBar = () =>{
     return(
         <>
             <Tabs 
-               style={{'position':'absolute', 'bottom': '5px',  }}
-                className='align-center justify-center  mx-auto'
+                className="sticky"
+                style={{'position':'fixed', 'bottom':'5px', 'float': 'middle'}}
                 color='secondary' aria-label="Mode Select" radius="md">
                     <Tab key="photos" title="Photos"/>
                     <Tab key="music" title="Music"/>

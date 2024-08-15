@@ -11,14 +11,11 @@ import { cn } from '@nextui-org/react';
  * @param className defines the class name to be applied to the component
  * @param children contains react node elements.
  */
- const ShineBorder = ({
-  borderRadius = 9,
-  borderWidth = 4,
-  duration = 25,
-  color = "#000000",
-  className,
-  children
-  }) =>  {
+ const ShineBorder = ({className,children}) =>  {
+  var borderRadius = 9;
+  var borderWidth = 4;
+  var duration = 25;
+  var color = "#000000";
   return (
     (<div
       style={
