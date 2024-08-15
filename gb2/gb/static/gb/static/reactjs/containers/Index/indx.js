@@ -6,22 +6,27 @@ const Indx = () => {
     return (
         <> 
             <div className="pt-4 pb-4"></div>
-            
+            <DotPattern
+                className={cn(
+                "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+                )}
+                />
             <NaviBar />
             <section>
-            <div className='col-4 flex'>
-                <Suspense fallback={<p> Loading...</p>}>
+           
+               <div className='col-4 grid grid-cols-2 mx-auto justify-center align-center'>
                     <SimpleSteps />
-                </Suspense>
-            </div>
-                <DotPattern
-                    className={cn(
-                    "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-                    )}
-                />
+                </div>
+           
+
             </section>
-            <div className="pt-4 pb-4"></div>
-        
+            <section>
+                <div>
+                    <hr></hr>
+                   
+                </div>
+             </section>
+             <div className="pt-4 pb-4"></div>
         </>
     );
 };
