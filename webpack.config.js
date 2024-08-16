@@ -48,7 +48,7 @@ module.exports = {
               },
             },
             {
-              test: /\.(png|jpg|jpeg|gif|svg)$/,
+              test: /\.(png|jpg|jpeg|gif|svg|glb|gltf)$/,
               use: [
                 {
                   loader: 'file-loader',
@@ -63,10 +63,12 @@ module.exports = {
               test: /\.css$/,
               use: ['style-loader', 'css-loader'],
             },
+            
           ],
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx','.glb', '.gltf', '.png', '.jpg'],
+        
       },
     optimization: {
         usedExports: false,

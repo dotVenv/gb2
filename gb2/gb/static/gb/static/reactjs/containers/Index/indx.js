@@ -23,27 +23,32 @@ const Indx = () => {
                 />
             <section>
                 <Spacer></Spacer>
-               
-               <SponsorCards />
-               <br></br>
-               <Spacer></Spacer>
-               <WordRotate  
-                    className="text-6xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
-                    words={["REGISTER", "PLAY", "WIN MONEY"]}/>
-                    <Spacer></Spacer>
-                
+                <AnimationTest>
+                <SponsorCards />
                 <br></br>
-                <AnimationTest />
+                <Spacer></Spacer>
+                <WordRotate  
+                        className="text-6xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
+                        words={["REGISTER", "PLAY", "WIN MONEY"]}/>
+                        <Spacer></Spacer>
+                </AnimationTest>
+                    <div>
+                </div>
             </section>
-            
+           <Spacer></Spacer>
+           <br></br>
+           <div className="pt-4 pb-4"></div>
             <DotPattern
                 className={cn(
                 "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
                 )}
                 />
-                <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
-               
+            <div>
+            <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
+              
+            </div>
              <section className='w-50 mx-auto bg-transparent justify-center align-center'>
+              
                 <div className='bg-transparent '>
                 <Card className='bg-transparent shadow'>
                 <div className="relative flex h-[450px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-foreground md:shadow-xl">
