@@ -1,16 +1,14 @@
 import React, {Suspense} from "react";
 import { 
-     
     DotPattern,
     TextRevealByWord, 
     BorderBeam,
     EasySteps,
     SponsorCards,
-    WordRotate,
-    AnimationTest} from "../../components";
+    WordRotate} from "../../components";
 
 import gblogo from '../../../imgs/pngs/gb_logo.png';
-import { cn,  Card, CardBody, Spacer, CardHeader } from "@nextui-org/react";
+import { cn,  Card, Spacer } from "@nextui-org/react";
 const Indx = () => {
 
     return (
@@ -23,7 +21,6 @@ const Indx = () => {
                 />
             <section>
                 <Spacer></Spacer>
-                <AnimationTest>
                 <SponsorCards />
                 <br></br>
                 <Spacer></Spacer>
@@ -31,7 +28,7 @@ const Indx = () => {
                         className="text-6xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
                         words={["REGISTER", "PLAY", "WIN MONEY"]}/>
                         <Spacer></Spacer>
-                </AnimationTest>
+               
                     <div>
                 </div>
             </section>
