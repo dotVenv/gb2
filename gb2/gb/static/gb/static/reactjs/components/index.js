@@ -16,5 +16,4 @@ export { default as OrbCirlces } from './OrbitingCircles/orbcircles';
 export { default as SponsorCards } from './SponsorCards/sponsorcards';
 export { default as EasySteps } from './EasySteps/easysteps';
 export { default as AnimationTest } from './AnimationTest/animationtest';
-export {  IsoRoomModel } from './AnimationTest/Iso_room';
 export {  cn } from './ui/lib/utils';

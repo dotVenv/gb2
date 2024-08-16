@@ -1,8 +1,8 @@
 import React, { Suspense, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
 import { OrbitControls,Environment } from "@react-three/drei";
-import  {IsoRoomModel}  from "../index";
-import { Card } from "@nextui-org/react";
+import { Card, Spacer } from "@nextui-org/react";
+import { MotionConfig, motion } from "framer-motion"
+import { Canvas } from "@react-three/fiber";
 
 
 const AnimationTest = ({children}) => {
@@ -14,12 +14,17 @@ const AnimationTest = ({children}) => {
             <div className="  inset-0 z-10">
                 {children}
             </div>
-            <div className='w-[550px] h-[450px]  bg-transparent align-center justify-center mx-auto'>
-            <Canvas className=' inset-0 z-0'>
-                <ambientLight intensity={0.5} />
-                <OrbitControls />
-                <IsoRoomModel />
-            </Canvas>
+            <Spacer></Spacer>
+            <div className=' bg-transparent '>
+            <MotionConfig transition={{ type: "spring" }}>
+                <motion.div  className='w-[550px] h-[450px]  align-center justify-center mx-auto' >
+                    <Canvas className='inset-0 z-0'>
+                        <ambientLight intensity={0.5} />
+                        <OrbitControls />
+                    
+                    </Canvas>
+                </motion.div>
+            </MotionConfig>
             </div>
         </div>
         <br></br>
