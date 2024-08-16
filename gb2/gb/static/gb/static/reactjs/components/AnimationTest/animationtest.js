@@ -1,7 +1,6 @@
 import React, { Suspense, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Card, Spacer, Code } from "@nextui-org/react";
-import { GuyGamerModel } from "./guy_gamer";
 import { MotionConfig, motion } from "framer-motion"
 import { Canvas } from "@react-three/fiber";
 import HyperText from "../magicui/hyper-text";
@@ -29,7 +28,7 @@ const AnimationTest = ({children}) => {
                         <Canvas className='absolute inset-0 z-0'>
                             
                             <OrbitControls />
-                            <GuyGamerModel />
+                            
                         </Canvas>
                     </motion.div>
                 </motion.div>
