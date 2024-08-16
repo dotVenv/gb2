@@ -5,10 +5,13 @@ import {
     BorderBeam,
     EasySteps,
     SponsorCards,
-    WordRotate} from "../../components";
+    WordRotate,
+    HyperText,
+    CheAnim,
+    DescriptionSplit} from "../../components";
 
 import gblogo from '../../../imgs/pngs/gb_logo.png';
-import { cn,  Card, Spacer } from "@nextui-org/react";
+import { cn,  Card, CardBody, Spacer } from "@nextui-org/react";
 const Indx = () => {
 
     return (
@@ -25,12 +28,20 @@ const Indx = () => {
                 <br></br>
                 <Spacer></Spacer>
                 <WordRotate  
-                        className="text-6xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
+                        className="text-3xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
                         words={["REGISTER", "PLAY", "WIN MONEY"]}/>
                         <Spacer></Spacer>
                
                     <div>
                 </div>
+            </section>
+            <Spacer></Spacer>
+            <section>
+                <div className="pt-4 pb-4"></div>
+                <Spacer></Spacer>
+                    <CheAnim>
+                        <DescriptionSplit />  
+                    </CheAnim>
             </section>
            <Spacer></Spacer>
            <br></br>
@@ -41,8 +52,7 @@ const Indx = () => {
                 )}
                 />
             <div>
-            <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
-              
+                <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
             </div>
              <section className='w-50 mx-auto bg-transparent justify-center align-center'>
               

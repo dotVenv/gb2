@@ -12,6 +12,8 @@ export { default as OrbCirlces } from './OrbitingCircles/orbcircles';
 export { default as SponsorCards } from './SponsorCards/sponsorcards';
 export { default as EasySteps } from './EasySteps/easysteps';
 export { default as HyperText } from './magicui/hyper-text';
+export { default as CheAnim } from './Animations/che_holder';
+export { default as DescriptionSplit } from './DescriptSplit/descriptsplit';
 export {  cn } from './ui/lib/utils';
 export { BorderBeam } from './magicui/border-beam';
 export { GridPattern } from './magicui/animated-grid-pattern';
