@@ -39,9 +39,9 @@ const Indx = () => {
             <section>
                 <div className="pt-4 pb-4"></div>
                 <Spacer></Spacer>
-                    <CheAnim>
-                        <DescriptionSplit />  
-                    </CheAnim>
+                    
+                    <DescriptionSplit />  
+                    
             </section>
            <Spacer></Spacer>
            <br></br>
