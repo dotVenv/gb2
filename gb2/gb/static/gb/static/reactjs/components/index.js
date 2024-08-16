@@ -16,4 +16,5 @@ export { default as OrbCirlces } from './OrbitingCircles/orbcircles';
 export { default as SponsorCards } from './SponsorCards/sponsorcards';
 export { default as EasySteps } from './EasySteps/easysteps';
 export { default as AnimationTest } from './AnimationTest/animationtest';
+export { default as HyperText } from './magicui/hyper-text';
 export {  cn } from './ui/lib/utils';
