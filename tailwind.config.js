@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 const {nextui} = require("@nextui-org/react");
+/** @type {import('next').NextConfig} */
+const nextConfig = {transpilePackages: ['three'],};
+const withTM = require('next-transpile-modules')(['three'])
 
 module.exports = {
+  withTM,
   content: [
     "./gb2/**/*.{js,ts,jsx,tsx,mdx,html}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
