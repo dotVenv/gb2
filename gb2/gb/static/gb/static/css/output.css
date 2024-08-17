@@ -652,10 +652,6 @@ video {
   visibility: visible;
 }
 
-.\!visible {
-  visibility: visible !important;
-}
-
 .invisible {
   visibility: hidden;
 }
@@ -1264,10 +1260,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[300px\] {
-  height: 300px;
 }
 
 .max-h-64 {
@@ -2002,6 +1994,11 @@ video {
   gap: 1rem;
 }
 
+.gap-x-0 {
+  -moz-column-gap: 0px;
+       column-gap: 0px;
+}
+
 .gap-x-0\.5 {
   -moz-column-gap: 0.125rem;
        column-gap: 0.125rem;
@@ -2025,30 +2022,16 @@ video {
   row-gap: 0.5rem;
 }
 
-.gap-y-1 {
-  row-gap: 0.25rem;
-}
-
-.gap-x-1 {
-  -moz-column-gap: 0.25rem;
-       column-gap: 0.25rem;
-}
-
-.gap-x-0 {
-  -moz-column-gap: 0px;
-       column-gap: 0px;
+.space-x-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0px * var(--tw-space-x-reverse));
+  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-0\.5 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.125rem * var(--tw-space-x-reverse));
   margin-left: calc(0.125rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-0 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0px * var(--tw-space-x-reverse));
-  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
@@ -3167,14 +3150,14 @@ video {
   line-height: 2rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
 }
 
 .text-8xl {
@@ -3232,11 +3215,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .font-bold {
@@ -3554,6 +3532,10 @@ video {
   opacity: 1;
 }
 
+.opacity-15 {
+  opacity: 0.15;
+}
+
 .opacity-30 {
   opacity: 0.3;
 }
@@ -3576,10 +3558,6 @@ video {
 
 .opacity-disabled {
   opacity: var(--nextui-disabled-opacity);
-}
-
-.opacity-15 {
-  opacity: 0.15;
 }
 
 .shadow {

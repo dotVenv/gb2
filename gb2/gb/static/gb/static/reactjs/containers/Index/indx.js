@@ -8,10 +8,12 @@ import {
     WordRotate,
     HyperText,
     CheAnim,
-    DescriptionSplit} from "../../components";
+    DescriptionSplit,
+    PlayerModelHolder} from "../../components";
 
 import gblogo from '../../../imgs/pngs/gb_logo.png';
 import { cn,  Card, CardBody, Spacer } from "@nextui-org/react";
+
 const Indx = () => {
 
     return (
@@ -39,8 +41,9 @@ const Indx = () => {
             <section>
                 <div className="pt-4 pb-4"></div>
                 <Spacer></Spacer>
-                    
-                    <DescriptionSplit />  
+                <PlayerModelHolder>
+                    <DescriptionSplit /> 
+                </PlayerModelHolder>
                     
             </section>
            <Spacer></Spacer>

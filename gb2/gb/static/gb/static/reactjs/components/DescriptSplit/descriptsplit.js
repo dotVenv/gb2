@@ -4,7 +4,7 @@ import { Card, CardBody,Spacer } from "@nextui-org/react";
 import { animate, motion } from "framer-motion";
 import { signal } from "@preact/signals-react";
 import HyperText from "../magicui/hyper-text";
-
+import {PlayerModelHolder} from '../index';
 const items = [
     {
         text: "Unlock your full potential", 
@@ -40,6 +40,7 @@ const DescriptionSplit = () => {
         <>
         { items.map((key, index) => {
              return(
+                
                 <div className=" grid grid-cols-2 space-x-0 gap-x-0 justify-center align-center mx-auto" key={index}>
                     <motion.div
                         initial={{x:250,y:0}}
@@ -60,6 +61,7 @@ const DescriptionSplit = () => {
                     </motion.div>
                     <br></br>  
                     <Spacer></Spacer>
+                    
                 </div>
                 
                 )
