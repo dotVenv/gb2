@@ -37,7 +37,9 @@ const items = [
 const DescriptionSplit = () => {
 
     return(
-        <>
+        <section>
+                <div className="pt-4 pb-4"></div>
+                <Spacer></Spacer>
         { items.map((key, index) => {
              return(
                 
@@ -66,7 +68,7 @@ const DescriptionSplit = () => {
                 
                 )
         })}
-        </>
+        </section>
    );
 
 };

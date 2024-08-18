@@ -1,18 +1,16 @@
 import React, {Suspense} from "react";
+import MainSection from "../sections/mainsection";
+import TourneyJourney from "../sections/tourneyjourney";
+
 import { 
     DotPattern,
     TextRevealByWord, 
-    BorderBeam,
-    EasySteps,
-    SponsorCards,
-    WordRotate,
-    HyperText,
-    CheAnim,
     DescriptionSplit,
-    PlayerModelHolder} from "../../components";
+    Experience
+    } from "../../components";
 
-import gblogo from '../../../imgs/pngs/gb_logo.png';
 import { cn,  Card, CardBody, Spacer, Button } from "@nextui-org/react";
+import { Canvas } from "@react-three/fiber";
 
 
 const CustomButton = ({children}) => {
@@ -26,73 +24,49 @@ const CustomButton = ({children}) => {
         </div>
     </>)
 };
+
+const DP = () =>{
+
+    return(
+        <DotPattern
+            className={cn(
+            "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
+            )}
+        />
+    );
+};
 const Indx = () => {
 
     return (
         <> 
-            <div className="pt-4 pb-4"></div>
-            <DotPattern
-                className={cn(
-                "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
-                )}
-                />
-            <section>
-                <Spacer></Spacer>
-                <CustomButton >
-                    <div>
-                        <p className='text-black text-small font-bold'>Click the badge to sign up </p>
-                    </div>
-                </CustomButton>
-                <SponsorCards />
-                
-                <br></br>
-                <Spacer></Spacer>
-                <WordRotate  
-                        className="text-3xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
-                        words={["REGISTER", "PLAY", "WIN MONEY"]}/>
-                        <Spacer></Spacer>
-               
-                    <div>
-                </div>
-            </section>
-            <Spacer></Spacer>
-            <section>
-                <div className="pt-4 pb-4"></div>
-                <Spacer></Spacer>
-                <PlayerModelHolder>
-                    <DescriptionSplit /> 
-                </PlayerModelHolder>
-                    
-            </section>
-           <Spacer></Spacer>
-           <br></br>
-           <div className="pt-4 pb-4"></div>
-            <DotPattern
-                className={cn(
-                "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
-                )}
-                />
-            <div>
-                <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
-            </div>
-             <section className='w-50 mx-auto bg-transparent justify-center align-center'>
-              
-                <div className='bg-transparent '>
-                <Card className='bg-transparent shadow'>
-                <div className="relative flex h-[450px]  w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-foreground md:shadow-xl">
-
-                    <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-gray dark:to-slate-900/10">
-                            <EasySteps />
-                    </span>
-                    <BorderBeam size={250} duration={12} delay={9} />
-                    </div>
-                </Card>
-                </div>
-             </section>
-             <div className="pt-4 pb-4"></div>
+            <Experience />
         </>
     );
 };
 
 
 export default Indx;
+
+
+
+{/* 
+    
+    <div className="pt-4 pb-4"></div>
+    <DP />
+    <MainSection />
+    <Spacer></Spacer>
+    <DescriptionSplit /> 
+    <Spacer></Spacer>
+    <br></br>
+    <div className="pt-4 pb-4"></div>
+        
+    <DP />
+    <div>
+        <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
+    </div>
+    <TourneyJourney />
+    <div className="pt-4 pb-4"></div>
+
+
+    
+    */}

@@ -47,12 +47,12 @@ const PlayerModelHolder = ({children}) => {
 
             >
                 <Canvas
-                    camera={{ position: [1, 1, 11] }} shadows
+                    camera={{ position: [1, 1, 11] }} 
                     className='h-[450px]'
                 >
                    
                    <ambientLight intensity={1} />
-                    <VoxelPlayerModel animPlaying={animPlaying} castShadow />
+                    <VoxelPlayerModel animPlaying={animPlaying}  />
                     <OrbitControls
                         enableZoom={false}
                         enablePan={false}
