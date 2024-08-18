@@ -12,8 +12,20 @@ import {
     PlayerModelHolder} from "../../components";
 
 import gblogo from '../../../imgs/pngs/gb_logo.png';
-import { cn,  Card, CardBody, Spacer } from "@nextui-org/react";
+import { cn,  Card, CardBody, Spacer, Button } from "@nextui-org/react";
 
+
+const CustomButton = ({children}) => {
+
+    return (
+
+    <>
+    <div className='row flex col-4'>
+        {children}
+        <Button size='sm' className='col-4'> This is our badge</Button>
+        </div>
+    </>)
+};
 const Indx = () => {
 
     return (
@@ -26,7 +38,13 @@ const Indx = () => {
                 />
             <section>
                 <Spacer></Spacer>
+                <CustomButton >
+                    <div>
+                        <p className='text-black text-small font-bold'>Click the badge to sign up </p>
+                    </div>
+                </CustomButton>
                 <SponsorCards />
+                
                 <br></br>
                 <Spacer></Spacer>
                 <WordRotate  

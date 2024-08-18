@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { PlayerSittingAnim } from "./Sitting_anim";
+import VoxelPlayerModel from "./VoxelPlayer";
 import { motion } from "framer-motion";
 import { signal } from "@preact/signals-react";
 
 const currentAnim = signal('sitting');
-const hasSat = signal(false);
+const hasJumped = signal(false);
 const PlayerModelHolder = ({children}) => {
 
     
@@ -19,13 +20,13 @@ const PlayerModelHolder = ({children}) => {
 
             const scrollPosition = window.scrollY;
             if (scrollPosition >= 300){
-                hasSat.value = false;
+                hasJumped.value = false;
             }
             if (scrollPosition < 300) {
-                setAnimPlaying('sitting');
-                hasSat.value = true;
+                setAnimPlaying('boxing');
+                hasJumped.value = true;
             } else if (scrollPosition < 380) {
-                setAnimPlaying('fall_getup');
+                setAnimPlaying('jump_down');
             }
         };
 
@@ -49,13 +50,13 @@ const PlayerModelHolder = ({children}) => {
                     camera={{ position: [1, 1, 11] }} shadows
                     className='h-[450px]'
                 >
-                    <ambientLight intensity={1} />
-                    <directionalLight castShadow />
-                    <PlayerSittingAnim animPlaying={animPlaying} castShadow />
+                   
+                   <ambientLight intensity={1} />
+                    <VoxelPlayerModel animPlaying={animPlaying} castShadow />
                     <OrbitControls
                         enableZoom={false}
                         enablePan={false}
-                        enableRotate={false}
+                        
                     />
                 </Canvas>
             </motion.div>
