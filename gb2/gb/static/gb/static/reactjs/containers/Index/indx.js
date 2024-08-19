@@ -1,5 +1,4 @@
-import React, {Suspense} from "react";
-import MainSection from "../sections/mainsection";
+import React, {Suspense, useRef} from "react";
 import TourneyJourney from "../sections/tourneyjourney";
 
 import { 
@@ -38,12 +37,19 @@ const DP = () =>{
 };
 const Indx = () => {
 
+    const MainSection = useRef();
     return (
         <> 
-            
-            <Experience>
-                <MainSection />
-            </Experience>
+            <Suspense fallback={<p> Loading Environment...</p>} >
+                <DP /> 
+                <CustomButton />
+                <Experience >
+                    <section>  
+                        <DescriptionSplit /> 
+                    </section>
+                </Experience>
+                
+            </Suspense>
         </>
     );
 };

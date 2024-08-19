@@ -6,9 +6,11 @@ import gblogo from '../../../imgs/pngs/gb_logo.png';
 const SponsorCards = () =>{
     return(
         <>
-        <AnimatedGradientText >
-                    <img src={gblogo} style={{'height':'175px', 'width':'175px'}} />
-               </AnimatedGradientText>
+          
+            <AnimatedGradientText className='w-[350px]'>
+                <img src={gblogo} style={{'height':'250px', 'width':'250px'}} />
+            </AnimatedGradientText>
+            
         </>
     );
 };

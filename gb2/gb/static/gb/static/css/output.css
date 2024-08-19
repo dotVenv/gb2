@@ -648,6 +648,10 @@ video {
   pointer-events: auto;
 }
 
+.\!visible {
+  visibility: visible !important;
+}
+
 .visible {
   visibility: visible;
 }
@@ -1393,6 +1397,10 @@ video {
 
 .w-9 {
   width: 2.25rem;
+}
+
+.w-\[350px\] {
+  width: 350px;
 }
 
 .w-\[375px\] {
@@ -3562,6 +3570,14 @@ video {
 
 .opacity-disabled {
   opacity: var(--nextui-disabled-opacity);
+}
+
+.opacity-20 {
+  opacity: 0.2;
+}
+
+.opacity-10 {
+  opacity: 0.1;
 }
 
 .shadow {
