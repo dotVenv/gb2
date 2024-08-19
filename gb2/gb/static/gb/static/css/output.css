@@ -652,10 +652,6 @@ video {
   visibility: visible;
 }
 
-.\!visible {
-  visibility: visible !important;
-}
-
 .invisible {
   visibility: hidden;
 }
@@ -1229,6 +1225,10 @@ video {
   height: 58px;
 }
 
+.h-\[900px\] {
+  height: 900px;
+}
+
 .h-\[calc\(100dvh_-_var\(--navbar-height\)\)\] {
   height: calc(100dvh - var(--navbar-height));
 }
@@ -1264,10 +1264,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[900px\] {
-  height: 900px;
 }
 
 .max-h-64 {
@@ -1451,14 +1447,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[300px\] {
-  width: 300px;
-}
-
-.w-\[400px\] {
-  width: 400px;
 }
 
 .min-w-10 {

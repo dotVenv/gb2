@@ -8,7 +8,6 @@ import { MotionCanvas } from "framer-motion-3d";
 import { motion } from "framer-motion";
 
 const Experience = ({children}) =>{ 
-    const watcherRef = useRef();
     return(
             <> 
                 <div className='relative'>
@@ -29,7 +28,7 @@ const Experience = ({children}) =>{
                                     <ambientLight intensity={2} />
                                     <pointLight position={[0, 0, 1.949]} />
                                    
-                                     <WatcherModel ref={watcherRef} />
+                                     <WatcherModel />
                                     
                                     <OrbitControls 
                                         enableZoom={false}
