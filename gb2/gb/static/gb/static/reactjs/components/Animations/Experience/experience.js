@@ -6,16 +6,11 @@ import { Capsule, OrbitControls, PerspectiveCamera, ScrollControls, useScroll } 
 const Experience = () =>{ 
     const Scroll = useScroll();
     return(
-        <>
-            <Canvas 
-                camera={<PerspectiveCamera  position={[1,1,1]}/>}
-                fallback={<div>Sorry no WebGL supported!</div>}>
-                <mesh scale={1}>
-                    <boxGeometry />
-                    <OrbitControls />
-                </mesh>
-            </Canvas>
-        </>
+            <> 
+               <Canvas>
+                
+               </Canvas>
+            </>
     );
 };
 
