@@ -652,6 +652,10 @@ video {
   visibility: visible;
 }
 
+.\!visible {
+  visibility: visible !important;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -1262,6 +1266,10 @@ video {
   height: 100vh;
 }
 
+.h-\[900px\] {
+  height: 900px;
+}
+
 .max-h-64 {
   max-height: 16rem;
 }
@@ -1443,6 +1451,14 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[300px\] {
+  width: 300px;
+}
+
+.w-\[400px\] {
+  width: 400px;
 }
 
 .min-w-10 {

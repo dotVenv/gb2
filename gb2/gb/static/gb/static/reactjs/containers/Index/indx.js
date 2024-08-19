@@ -6,7 +6,8 @@ import {
     DotPattern,
     TextRevealByWord, 
     DescriptionSplit,
-    Experience
+    Experience,
+   
     } from "../../components";
 
 import { cn,  Card, CardBody, Spacer, Button } from "@nextui-org/react";
@@ -39,7 +40,10 @@ const Indx = () => {
 
     return (
         <> 
-            <Experience />
+            
+            <Experience>
+                <MainSection />
+            </Experience>
         </>
     );
 };
