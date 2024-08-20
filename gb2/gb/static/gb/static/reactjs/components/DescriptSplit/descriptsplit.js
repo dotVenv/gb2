@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+import { Canvas } from "@react-three/fiber";
 import { Card, CardBody,Spacer } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import ReloadAnim from '../Animations/Player/Reload_anim';
+import { motion } from "framer-motion";
+import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 const items = [
     {
         text: "SHOWCASE YOUR SKILLS", 
@@ -50,16 +53,28 @@ const items = [
 const DescriptionSplit = () => {
 
     return(
-            <TextScrollAnim >
-                <div className="pt-4 pb-4"></div>
-                <Spacer></Spacer>
-                <Card isBlurred>
-                    <CardBody>
-                        <ReloadAnim />
-                    </CardBody>
-                </Card>
-        
-            </TextScrollAnim>
+           <>
+            <div className='relative grid grid-cols-2'>
+                <TextScrollAnim />  
+                <div className='relative z-10 inset-0   justify-end'>
+                
+                    <Spacer></Spacer>
+                        
+                        <Canvas>
+                            <Environment preset='sunset' />
+                            <ambientLight intensity={0.3} />
+                            <pointLight position={[-1,3,1]}/>
+                            <PerspectiveCamera makeDefault fov={4} position={[1 ,1, 0.05]} />
+                           
+                           <OrbitControls enableZoom={false} enableRotate={false} />
+                           <ReloadAnim />  
+                        </Canvas>
+                </div> 
+                
+                    
+            </div>   
+            </>
+           
    );
 
 };

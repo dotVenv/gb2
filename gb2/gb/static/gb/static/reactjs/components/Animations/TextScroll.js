@@ -53,20 +53,12 @@ const ParallaxText = ({ children, baseVelocity = 100 }) => {
 }
 
 // Renamed TextScrollAnim to App to match the typical component naming convention.
-const TextScrollAnim = ({children}) => {
+const TextScrollAnim = () => {
     return (
-        <section>
-            <div className='relative grid grid-cols-2'>
-                
-                
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <ParallaxText baseVelocity={-5}>Framer Motion</ParallaxText>
-                    <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
-                </div>
-                    
-                <div className=' z-10 inset-0 col-4  justify-end'>
-                {children}
-                </div> 
+        <section> 
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <ParallaxText baseVelocity={-5}>Framer Motion</ParallaxText>
+                <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
             </div>
         </section>
     );

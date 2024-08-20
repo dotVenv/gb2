@@ -20,7 +20,7 @@ const ReloadAnim = ({props}) => {
   const { nodes, materials } = useGraph(clone)
   const { actions } = useAnimations(animations, group)
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} position={[0,0,0]} rotation={[0,Math.PI,0]}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="SAIGA_9fbx" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
