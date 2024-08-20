@@ -39,6 +39,6 @@ const Ripple = React.memo(function Ripple({
   );
 });
 
-Ripple.displayName = "Ripple";
+Ripple.displayName = "Showcase";
 
 export default Ripple;

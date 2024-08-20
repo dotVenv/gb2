@@ -42,10 +42,12 @@ const Indx = () => {
         <> 
             <Suspense fallback={<p> Loading Environment...</p>} >
                 <DP /> 
-                <CustomButton />
+               
                 <Experience >
-                    <section>  
-                        <DescriptionSplit /> 
+                    <DP />
+                    <DescriptionSplit /> 
+                    <section>
+                        <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
                     </section>
                 </Experience>
                 

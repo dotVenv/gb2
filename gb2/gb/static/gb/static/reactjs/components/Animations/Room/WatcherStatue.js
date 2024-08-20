@@ -17,7 +17,7 @@ import DescriptionSplit from '../../DescriptSplit/descriptsplit';
 const WatcherStatueModel = ({props}) => {
   const statueRef = useRef(null);
   const logoRef = useRef(null);
-  const scroll = useScroll();
+
   const { nodes, materials } = useLoader(GLTFLoader,'staticfiles/gb/static/glb/the_watcher.glb')
  
   useFrame(() => {

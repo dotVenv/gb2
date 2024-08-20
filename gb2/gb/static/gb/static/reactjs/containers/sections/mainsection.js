@@ -3,8 +3,8 @@ import {
     SponsorCards,
     WordRotate,
    } from "../../components";
-
-import { Spacer } from "@nextui-org/react";
+import { motion } from "framer-motion";
+import { Spacer, Button } from "@nextui-org/react";
 
 
 const MainSection = () => {
@@ -19,11 +19,10 @@ const MainSection = () => {
                 <Spacer></Spacer>
                 <WordRotate  
                         className="text-3xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
-                        words={["REGISTER", "PLAY", "WIN MONEY"]}/>
+                        words={["REGISTER TODAY", "PLAY GAMES", "WIN MONEY"]}/>
                         <Spacer></Spacer>
+                       
                
-                    <div>
-                </div>
             </section>
         </>
     );
