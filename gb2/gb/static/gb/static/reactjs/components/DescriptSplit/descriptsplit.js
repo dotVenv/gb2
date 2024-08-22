@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Canvas } from "@react-three/fiber";
-
+import { motion } from "framer-motion";
 import { Card, CardBody,CardFooter,Spacer, CardHeader, Image, Button } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
-
+import { signal } from '@preact/signals-react';
 import form_team from '../../../imgs/pngs/form_team.png';
 
 const descItems = [
@@ -25,12 +24,25 @@ const descItems = [
   
 ]
 
+const currentIndex = signal(null);
+
+
+
 const DescriptionSplit = () => {
 
+    const handleHover = (index) =>{
+        currentIndex.value = index;
+        return ({scale:1.2,rotateY:360})
+    };
+
+    useEffect(() => {
+        console.log('CI updated to ' + currentIndex.value);
+    }, [currentIndex.value])
+    
     return(
            <>
-            <div className='relative h-[40vh]'>
-                <div className='absolute overflow-hidden  inset-0 justify-center mx-auto'>
+            <div className='relative h-[40vh] justify-center mx-auto align-center'>
+                <div className='absolute overflow-hidden  inset-0 '>
                         <b className='top-0'> <TextScrollAnim  displayText={0}/> </b>
                         <Spacer></Spacer>
                         <b className='bottom-0'><TextScrollAnim  displayText={1}/></b> 
@@ -38,17 +50,31 @@ const DescriptionSplit = () => {
                 </div>      
                <Spacer></Spacer>
                
-               <div className='relative  top-20 bottom-50 h-[400px] max-w-[900px] justify-between mx-auto gap-2 grid grid-cols-3 grid-rows-2 col-8'>
+               <div className='relative  top-20 bottom-50 h-[400px] gap-2 space-x-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 '>
                 { descItems.map((key, index) =>{
                     return(
-                        <Card className='bg-gray-50 ' key={index}>
-                            <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-                                <p className="text-tiny text-white/60 uppercase font-bold">What to watch</p>
-                                <h4 className="text-white font-medium text-large">Stream the Acme event</h4>
-                            </CardHeader>
-                            <img src={key.img} />
+                        <motion.div
+                            initial={{x:0,y:0}}
+                            whileHover={{scale:1.2,rotateY:360}}
+                            key={index} 
+                        >
+
+                            <Card 
+                                className='bg-gray-50 '
+                                radius='lg' 
+                                isHoverable 
+                                isBlurred
+                                >
+                                
+                                <img className="container-fluid image-container w-[250px] h-[250px]" src={key.img}  />
+                                
+                               {currentIndex.value == index 
+                                    ? <CardFooter> Hello Gamer </CardFooter>
+                                    
+                                    : undefined }
+                            </Card>
                             
-                        </Card>
+                        </motion.div>
                     )
                 })}
                     
