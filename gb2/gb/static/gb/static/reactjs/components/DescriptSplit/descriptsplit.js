@@ -1,50 +1,25 @@
 import React, { useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
-import { Card, CardBody,Spacer } from "@nextui-org/react";
+
+import { Card, CardBody,CardFooter,Spacer, CardHeader, Image, Button } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
-import ReloadAnim from '../Animations/Player/Reload_anim';
-import { motion } from "framer-motion";
-import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
-const items = [
+
+import form_team from '../../../imgs/pngs/form_team.png';
+
+const descItems = [
     {
-        text: "SHOWCASE YOUR SKILLS", 
-        initial: {x:-250,y:0},
-        animate: {
-            x:[-175, -230, 0],
-            y:[-260,-200,-140,-80,-20,0],
-           
-            bounce: 0.4,
-            },
-        textanimate: {
-            x:[-175, -100, -40, -25, 0],
-            y:[-260,-200,-150]}
+        text: "COMPETE HEAD TO HEAD", 
+        img: form_team ,
+        
     },
     {
         text: "EARN MONEY FOR COMPETING", 
-        initial: {x:-250,y:0},
-        animate: {
-            x:[-175, -130, -100, -75, -40, 0, 100, 0], 
-            y:[-260,-200,-140,-80,-20,0],
-           
-            bounce: 0.4,
-            },
-        textanimate: {
-            x:[-175, -140,-175],
-            y:[-260,-200,-140,-80, -20, 0, 175]}
+        img: null,
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
-        initial: {x:-250,y:0},
-        animate: {
-            x:[-175, -230,0], 
-            y:[-260,-200,-140,-80,],
-           
-            bounce: 0.4,
-            },
-        textanimate: {
-            x:[-175, -100, -40, -25, 150],
-            y:[-260,-200,-140,-80,-20,0, 175]}
+        img:null,
 
     },
   
@@ -54,24 +29,32 @@ const DescriptionSplit = () => {
 
     return(
            <>
-            <div className='relative grid grid-cols-2'>
-                <TextScrollAnim />  
-                <div className='relative z-10 inset-0   justify-end'>
-                
-                    <Spacer></Spacer>
-                        
-                        <Canvas>
-                            <Environment preset='sunset' />
-                            <ambientLight intensity={0.3} />
-                            <pointLight position={[-1,3,1]}/>
-                            <PerspectiveCamera makeDefault fov={4} position={[1 ,1, 0.05]} />
-                           
-                           <OrbitControls enableZoom={false} enableRotate={false} />
-                           <ReloadAnim />  
-                        </Canvas>
-                </div> 
-                
+            <div className='relative h-[40vh]'>
+                <div className='absolute overflow-hidden  inset-0 justify-center mx-auto'>
+                        <b className='top-0'> <TextScrollAnim  displayText={0}/> </b>
+                        <Spacer></Spacer>
+                        <b className='bottom-0'><TextScrollAnim  displayText={1}/></b> 
+                        <Spacer></Spacer>
+                </div>      
+               <Spacer></Spacer>
+               
+               <div className='relative  top-20 bottom-50 h-[400px] max-w-[900px] justify-between mx-auto gap-2 grid grid-cols-3 grid-rows-2 col-8'>
+                { descItems.map((key, index) =>{
+                    return(
+                        <Card className='bg-gray-50 ' key={index}>
+                            <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                                <p className="text-tiny text-white/60 uppercase font-bold">What to watch</p>
+                                <h4 className="text-white font-medium text-large">Stream the Acme event</h4>
+                            </CardHeader>
+                            <img src={key.img} />
+                            
+                        </Card>
+                    )
+                })}
                     
+                </div>
+                <br></br>
+               
             </div>   
             </>
            

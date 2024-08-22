@@ -37,16 +37,16 @@ const DP = () =>{
 };
 const Indx = () => {
 
-    const MainSection = useRef();
     return (
         <> 
             <Suspense fallback={<p> Loading Environment...</p>} >
-                <DP /> 
-               
                 <Experience >
-                    <DP />
-                    <DescriptionSplit /> 
+                    <br></br>
+                    <div className="pt-4 mt-4"></div>
                     <section>
+                        <br></br>
+                        <Spacer></Spacer>
+                        <DescriptionSplit /> 
                         <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
                     </section>
                 </Experience>

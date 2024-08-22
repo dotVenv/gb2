@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { 
-    SponsorCards,
+    ACMELogo,
     WordRotate,
    } from "../../components";
 import { motion } from "framer-motion";
@@ -11,19 +11,18 @@ const MainSection = () => {
 
     return(
         <>
-        <section>
+            <div className='mt-4'>
                 <Spacer></Spacer>
-                <SponsorCards />
-                
+                <ACMELogo />
                 <br></br>
                 <Spacer></Spacer>
                 <WordRotate  
-                        className="text-3xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
-                        words={["REGISTER TODAY", "PLAY GAMES", "WIN MONEY"]}/>
-                        <Spacer></Spacer>
-                       
-               
-            </section>
+                    className="text-3xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
+                    words={["GAMERS-BOUNTY", "PLAY GAMES", "WIN MONEY"]}/>
+                <Spacer></Spacer>    
+            </div>
+            
+
         </>
     );
 

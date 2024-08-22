@@ -24,14 +24,17 @@ const Experience = ({children}) =>{
   
     return(
             <> 
-                <div className='relative bg-white'>
-                    <div className='absolute inset-0 z-10 mt-4 '>
-                        <MainSection />
-                        <Spacer></Spacer>
+                <div className=' bg-white'>
+                    <div className='absolute inset-0 z-10 mt-4 justify-center align-center mx-auto'>
+                        <section>
+                            <DP />
+                            <MainSection />
+                        </section>
+                        {children}
                     </div>
-                    <DP />
+                   
                     <div className=' h-[900px] inset-0 z-0 bg-light'  
-                    style={{'opacity': '70%', 'border': '4px solid light','borderImageSlice': '1'}}>
+                        style={{'opacity': '70%', 'border': '4px solid light','borderImageSlice': '1'}}>
                     
                         <Canvas className='bg-white'>
                         
@@ -46,7 +49,7 @@ const Experience = ({children}) =>{
                                     enableZoom={false}
                                     />
                         </Canvas>
-                        {children}
+                       
                     </div>
                     
                 </div>

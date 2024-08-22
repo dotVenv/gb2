@@ -9,7 +9,7 @@ export { default as TextRevealByWord } from './magicui/text-reveal';
 export { default as AnimatedGradientText } from './magicui/animated-gradient-text';
 export { default as OrbitingCircles } from './magicui/orbiting-circles';
 export { default as OrbCirlces } from './OrbitingCircles/orbcircles';
-export { default as SponsorCards } from './SponsorCards/sponsorcards';
+export { default as ACMELogo } from './ACMELogo/acme';
 export { default as EasySteps } from './EasySteps/easysteps';
 export { default as HyperText } from './magicui/hyper-text';
 export { default as DescriptionSplit } from './DescriptSplit/descriptsplit';

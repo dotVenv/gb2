@@ -11,8 +11,9 @@ import React, { useEffect, useRef } from 'react'
 import { useGLTF, useScroll, Html } from '@react-three/drei';;
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useFrame, useLoader, } from '@react-three/fiber';
-import SponsorCards from '../../SponsorCards/sponsorcards';
+import ACMELogo from '../../ACMELogo/acme';
 import DescriptionSplit from '../../DescriptSplit/descriptsplit';
+import AnimatedGradientText from '../../magicui/animated-gradient-text';
 
 const WatcherStatueModel = ({props}) => {
   const statueRef = useRef(null);
@@ -30,8 +31,9 @@ const WatcherStatueModel = ({props}) => {
     
     <group {...props} dispose={null} ref={statueRef}>
     <Html position={[0, 5, 0.5]}  transform  distanceFactor={1} style={{'opacity': '80%'}}>
-      
-         <SponsorCards />
+        <AnimatedGradientText>
+          <ACMELogo />
+         </AnimatedGradientText>
       
     </Html>
       <group position={[0, -2, 4]} rotation={[-2.2, 0, 0]} scale={1.2}>
