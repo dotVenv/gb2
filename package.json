@@ -30,6 +30,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "css-loader": "^7.1.2",
+    "embla-carousel-react": "^8.2.0",
     "file-loader": "^6.2.0",
     "flubber": "^0.4.2",
     "framer-motion": "^11.3.27",

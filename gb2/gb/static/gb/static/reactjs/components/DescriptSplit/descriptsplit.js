@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, frameData, } from "framer-motion";
 import { Card, CardBody,CardFooter,Spacer, CardHeader, Image, Button } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import form_team from '../../../imgs/pngs/form_team.png';
+import useEmblaCarousel from 'embla-carousel-react';
 
 const descItems = [
     {
         text: "COMPETE HEAD TO HEAD", 
         img: form_team ,
+        ref: null,
         
     },
     {
         text: "EARN MONEY FOR COMPETING", 
         img: null,
+        ref: null,
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
-        img:null,
+        ref: null
 
     },
   
@@ -30,15 +33,20 @@ const currentIndex = signal(null);
 
 const DescriptionSplit = () => {
 
+    const { scrollYProgress } = useScroll();
+    const [emblaRef] = useEmblaCarousel();
+  
+    
+    
+    descItems.map((key, index) => {
+        key.ref = useRef();
+    });
     const handleHover = (index) =>{
         currentIndex.value = index;
         return ({scale:1.2,rotateY:360})
     };
 
-    useEffect(() => {
-        console.log('CI updated to ' + currentIndex.value);
-    }, [currentIndex.value])
-    
+
     return(
            <>
             <div className='relative h-[40vh] justify-center mx-auto align-center'>
@@ -50,34 +58,15 @@ const DescriptionSplit = () => {
                 </div>      
                <Spacer></Spacer>
                
-               <div className='relative  top-20 bottom-50 h-[400px] gap-2 space-x-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 '>
-                { descItems.map((key, index) =>{
-                    return(
-                        <motion.div
-                            initial={{x:0,y:0}}
-                            whileHover={{scale:1.2,rotateY:360}}
-                            key={index} 
-                        >
-
-                            <Card 
-                                className='bg-gray-50 '
-                                radius='lg' 
-                                isHoverable 
-                                isBlurred
-                                >
-                                
-                                <img className="container-fluid image-container w-[250px] h-[250px]" src={key.img}  />
-                                
-                               {currentIndex.value == index 
-                                    ? <CardFooter> Hello Gamer </CardFooter>
-                                    
-                                    : undefined }
-                            </Card>
-                            
-                        </motion.div>
-                    )
-                })}
-                    
+               <div className='relative  justify-center align-center mx-auto col-8 top-20 bottom-50 h-[400px] gap-2 space-x-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1'>
+               
+               <div className="embla" ref={emblaRef}>
+                    <div className="embla__container">
+                        <div className="embla__slide">Slide 1</div>
+                        <div className="embla__slide">Slide 2</div>
+                        <div className="embla__slide">Slide 3</div>
+                    </div>
+                </div>
                 </div>
                 <br></br>
                
@@ -109,4 +98,37 @@ export default DescriptionSplit;
        </div>
        
        )
-}) */}
+}) 
+       
+ { descItems.map((key, index) =>{
+                    return(
+                        <motion.div
+                            initial={{x:0,y:0, opacity:0}}
+                            whileInView={{ opacity: 1 }}
+                            whileHover={{scale:1.2,rotateY:360}}
+                            key={index} 
+                            
+                        >
+
+                            <Card 
+                                
+                                ref={key.ref}
+                                className='bg-gray/10 '
+                                radius='lg' 
+                                isHoverable 
+                                isBlurred>
+                                
+                                    <img className=" w-[250px] h-[250px]" src={key.img}  />
+                                
+                               {currentIndex.value == index 
+                                    ? <CardFooter> Hello Gamer </CardFooter>
+                                    
+                                    : undefined 
+                                }
+                            </Card>
+                            
+                        </motion.div>
+                    )
+                })}
+                    
+                */}

@@ -47,7 +47,7 @@ const Indx = () => {
                         <br></br>
                         <Spacer></Spacer>
                         <DescriptionSplit /> 
-                        <TextRevealByWord className='justify-center align-center mx-auto flex text-align' text="The New Online E-sports, Powered by dotVenv" />
+                        <TextRevealByWord className='justify-center align-text-center mx-auto flex text-medium' text="The New Online E-sports, Powered by dotVenv" />
                     </section>
                 </Experience>
                 
