@@ -5,22 +5,25 @@ import { Card, CardBody,CardFooter,Spacer, CardHeader, Image, Button } from "@ne
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import form_team from '../../../imgs/pngs/form_team.png';
-import useEmblaCarousel from 'embla-carousel-react';
+import beargif from '../../../imgs/gifs/bear.gif';
+import medalgif from '../../../imgs/gifs/medal.gif';
+import moneygif from '../../../imgs/gifs/money.gif';
 
 const descItems = [
     {
         text: "COMPETE HEAD TO HEAD", 
-        img: form_team ,
+        img: beargif ,
         ref: null,
         
     },
     {
         text: "EARN MONEY FOR COMPETING", 
-        img: null,
+        img: moneygif,
         ref: null,
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
+        img: medalgif,
         ref: null
 
     },
@@ -34,9 +37,6 @@ const currentIndex = signal(null);
 const DescriptionSplit = () => {
 
     const { scrollYProgress } = useScroll();
-    const [emblaRef] = useEmblaCarousel();
-  
-    
     
     descItems.map((key, index) => {
         key.ref = useRef();
@@ -58,15 +58,34 @@ const DescriptionSplit = () => {
                 </div>      
                <Spacer></Spacer>
                
-               <div className='relative  justify-center align-center mx-auto col-8 top-20 bottom-50 h-[400px] gap-2 space-x-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1'>
+               <div className='h-[400px] grid sm:grid-cols-1 lg:grid-cols-3 justify-center align-center flex-col'>
+                { descItems.map((key, index) => {
+                    return(
+                        <motion.div
+                            className='col-7 justify-center align-center mx-auto'
+                           
+                            whileInView={{opacity:1}}
+                            whileHover={{scale:1.2, rotateY:360}}
+                            key={index}
+                            >
+                                <Card
+                                    isHoverable
+                                    isBlurred
+                                    radius="lg">
+                                        <CardHeader>
+                                            {key.text}
+                                        </CardHeader>
+                                        <img src={key.img} className="align-center justify-center mx-auto w-full h-full" style={{'width' : '175px', 'height': '175px'}} />
+                                        <CardFooter>
+                                            {key.text}
+                                        </CardFooter>
+                                </Card>
+                            
+                        </motion.div>
+                    )
+                })}
                
-               <div className="embla" ref={emblaRef}>
-                    <div className="embla__container">
-                        <div className="embla__slide">Slide 1</div>
-                        <div className="embla__slide">Slide 2</div>
-                        <div className="embla__slide">Slide 3</div>
-                    </div>
-                </div>
+               
                 </div>
                 <br></br>
                
