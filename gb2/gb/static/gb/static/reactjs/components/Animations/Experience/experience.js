@@ -30,7 +30,7 @@ const Experience = ({children}) =>{
                             <DP />
                             <MainSection />
                         </section>
-                        {children}
+                        
                     </div>
                    
                     <div className=' h-[900px] inset-0 z-0 bg-light'  
@@ -51,8 +51,9 @@ const Experience = ({children}) =>{
                         </Canvas>
                        
                     </div>
-                    
+                    {children}
                 </div>
+               
                 
             </>
     );

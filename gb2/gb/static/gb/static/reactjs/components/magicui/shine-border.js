@@ -12,8 +12,8 @@ import { cn } from '@nextui-org/react';
  * @param children contains react node elements.
  */
  const ShineBorder = ({className,children}) =>  {
-  var borderRadius = 9;
-  var borderWidth = 4;
+  var borderRadius = 3;
+  var borderWidth = 2;
   var duration = 25;
   var color = "#000000";
   return (
@@ -24,7 +24,7 @@ import { cn } from '@nextui-org/react';
         }
       }
       className={cn(
-        " relative  grid  min-h-[60px]  w-fit  min-w-[300px]  place-items-center  rounded-[--border-radius]  bg-white  p-3  text-black dark: bg-black dark: text-white",
+        " relative  grid  min-h-[60px]  w-fit  min-w-[300px]  place-items-center  rounded-[--border-radius] border-rounded-md  bg-white  p-3  text-black dark: bg-black dark: text-white",
         className
       )}>
       <div

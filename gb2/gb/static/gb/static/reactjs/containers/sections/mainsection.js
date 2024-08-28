@@ -21,9 +21,9 @@ const MainSection = () => {
                     words={["GAMERS-BOUNTY", "PLAY GAMES", "WIN MONEY"]}/>
                 <Spacer></Spacer>   
                 <br></br> 
-                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 mt-4">
+                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 mt-1">
                     <Spacer></Spacer>
-                    <br></br>
+                   
                 <div className="text-center text-black">
                     <h5 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-200/80 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-black dark:to-slate-900/10">
                         WHERE REAL GAMERS COME TO COMPETE!
@@ -39,8 +39,8 @@ const MainSection = () => {
                             <span> <i className="fa-solid fa-right-to-bracket"></i> Sign up now</span>
                             </AnimatedShinyText>
                         </div>
-                        </div>
                     </div>
+                </div>
             
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { cn } from "@nextui-org/react";
 const TextRevealByWord = ({
   text,
   className,
+  children
 }) =>  {
   const targetRef = useRef(null);
 
@@ -16,15 +17,15 @@ const TextRevealByWord = ({
   const words = text.split(" ");
 
   return (
-    (<div ref={targetRef} className={cn(" relative  z-0  h-[115vh]", className)}>
+    (<div ref={targetRef} className={cn(" relative  z-0  h-[103vh]", className)}>
       <div
         className={
-          "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-[1rem] py-[5rem]"
+          "sticky top-0 mx-auto h-[50%] max-w-4xl items-center align-center mx-auto bg-transparent px-[1rem] py-[2rem]"
         }>
         <p
           ref={targetRef}
           className={
-            "flex flex-wrap p-5 text-2xl font-bold text-black/20 dark:text-white/20 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl"
+            "flex flex-wrap p-5 text-3xl font-bold text-black/20 dark:text-white/20 md:p-8 md:text-3xl lg:p-10 lg:text-3xl xl:text-3xl"
           }>
           {words.map((word, i) => {
             const start = i / words.length;
@@ -36,7 +37,12 @@ const TextRevealByWord = ({
             );
           })}
         </p>
+        <br></br>
+      <div className='justify-center align-center mx-auto col-12'>
+        {children}
       </div>
+      </div>
+      
     </div>)
   );
 };

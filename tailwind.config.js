@@ -87,6 +87,7 @@ module.exports = {
     ripple: "ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite",
     "accordion-down": "accordion-down 0.2s ease-out",
     "accordion-up": "accordion-up 0.2s ease-out",
+    grid: "grid 15s linear infinite",
   },
   keyframes: {
     orbit: {
@@ -131,6 +132,10 @@ module.exports = {
           to: {
             "background-position": "0% 0%",
           },
+        },
+    grid: {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
         },
   },
   plugins: [nextui({

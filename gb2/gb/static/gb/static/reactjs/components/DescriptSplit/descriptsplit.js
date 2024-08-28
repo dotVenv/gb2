@@ -7,6 +7,7 @@ import AnimatedGradientText from "../magicui/animated-gradient-text";
 import beargif from '../../../imgs/gifs/bear.gif';
 import medalgif from '../../../imgs/gifs/medal.gif';
 import moneygif from '../../../imgs/gifs/money.gif';
+import ww_available from '../../../imgs/pngs/worldwide.png';
 const descItems = [
     {
         text: "COMPETE HEAD TO HEAD", 
@@ -23,7 +24,17 @@ const descItems = [
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
+        desc: "Those who finish in a top placement in multiple events will soon earn their rank to Bounty Hunter! With this status, you can earn eligible prizes along-side the prize pool for every tournament you enter.",
+        
         img: medalgif,
+        ref: null
+
+    },
+    {
+        text: "NOW WORLDWIDE & AND API DRIVEN", 
+        desc: "Overseas or not, have the option to search and connect to tournaments based in your region and payout to your currency. With the relaunch of GB, we've also done a complete API rework to allow automated game results.",
+        
+        img: ww_available,
         ref: null
 
     },
@@ -47,34 +58,37 @@ const DescriptionSplit = () => {
 
     return(
            <>
-            <div className='relative h-[40vh] justify-center mx-auto align-center'>
-                <div className='absolute overflow-hidden  inset-0 '>
-                    <b className='top-0'> <TextScrollAnim  displayText={0}/> </b>
+            <div className='relative lg:h-[400px] sm:h-[750px] justify-center mx-auto align-center'>
+                <div className='absolute h-[500px] overflow-hidden  inset-0  mt-3'>
+                    <b className='sticky top'> <TextScrollAnim  displayText={0}/> </b>
                     <Spacer></Spacer>
-                    <b className='bottom-0'><TextScrollAnim  displayText={1}/></b> 
+                    <b className='sticky bottom'><TextScrollAnim  displayText={1}/></b> 
                     <Spacer></Spacer>
                 </div>      
                <Spacer></Spacer>
                
-               <div className='h-[400px]  justify-center align-center mx-auto'>
-                    <div className='grid lg:grid-cols-2 sm:grid-cols-1 grid-rows-2  col-8 gap-4  justify-center align-center mx-auto text-black'>
-                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
+               <div className='lg:h-[400px]  sm:h-[750px] justify-center align-center mx-auto'>
+                    <div className='grid lg:grid-cols-2 sm:grid-cols-2 grid-rows-2  gap-4  justify-center align-center mx-auto text-black'>
+                        <AnimatedGradientText className='w-full h-full  col-9 grid grid-cols-1 bg-transparent'>
                             <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
                             <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
-                            <p className='text-small font-bold'> <i>{descItems[0].desc}</i> </p>
+                            <p className='text-small font-bold'> {descItems[0].desc} </p>
                         </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
+                        <AnimatedGradientText className='w-full h-full col-9  grid grid-cols-1 bg-transparent'>
                             <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
                             <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
 
-                            <p className='text-small font-bold'> <i>{descItems[1].desc}</i> </p>
+                            <p className='text-small font-bold'> {descItems[1].desc} </p>
                         </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1  bg-transparent'>
+                        <AnimatedGradientText className='w-full h-full col-9 grid grid-cols-1  bg-transparent'>
                             <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
                             <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
+                            <p className='text-small font-bold'> {descItems[2].desc} </p>
                         </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
-                            
+                        <AnimatedGradientText className='w-full h-full col-9  grid grid-cols-1 bg-transparent'>
+                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[3].img} /> 
+                            <p className='text-large font-bold'> <i>{descItems[3].text}</i>  </p> 
+                            <p className='text-small font-bold'> {descItems[3].desc} </p>
                         </AnimatedGradientText>
                     </div>
                 </div>

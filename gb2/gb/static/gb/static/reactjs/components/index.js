@@ -15,6 +15,7 @@ export { default as HyperText } from './magicui/hyper-text';
 export { default as DescriptionSplit } from './DescriptSplit/descriptsplit';
 export { default as ShimmerButton } from './magicui/shimmer-button';
 export { default as AnimatedShinyText } from './magicui/animated-shiny-text';
+export { default as RetroGrid } from './magicui/retro-grid';
 export { default as Experience } from './Animations/Experience/experience';
 export {  cn } from './ui/lib/utils';
 export { BorderBeam } from './magicui/border-beam';
