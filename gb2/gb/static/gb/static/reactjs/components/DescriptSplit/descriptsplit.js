@@ -10,13 +10,14 @@ import moneygif from '../../../imgs/gifs/money.gif';
 const descItems = [
     {
         text: "COMPETE HEAD TO HEAD", 
-        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indivual players and teams to allow lightening quick match connection.",
+        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams to allow lightening quick connection.",
         img: beargif ,
         ref: null,
         
     },
     {
-        text: "EARN MONEY FOR PLACING", 
+        text: "EARN MONEY FOR PLACING",
+        desc: "Tired of playing for fun? Sign up and each match can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance which they will be able to withdrawal at anytime via paypal,stripe, and others.", 
         img: moneygif,
         ref: null,
     },
@@ -65,6 +66,8 @@ const DescriptionSplit = () => {
                         <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
                             <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
                             <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+
+                            <p className='text-small font-bold'> <i>{descItems[1].desc}</i> </p>
                         </AnimatedGradientText>
                         <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1  bg-transparent'>
                             <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
