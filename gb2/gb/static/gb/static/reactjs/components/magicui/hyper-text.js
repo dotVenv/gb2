@@ -10,7 +10,7 @@ const getRandomInt = (max) => Math.floor(Math.random() * max);
 
 export default function HyperText({
   text,
-  duration = 800,
+  duration = 50,
 
   framerProps = {
     initial: { opacity: 0, y: -10 },
@@ -51,7 +51,7 @@ export default function HyperText({
         setTrigger(false);
         clearInterval(interval);
       }
-    }, duration / (text.length * 10));
+    }, duration / (text.length * 15));
     // Clean up interval on unmount
     return () => clearInterval(interval);
   }, [text, duration, trigger, animateOnLoad]);

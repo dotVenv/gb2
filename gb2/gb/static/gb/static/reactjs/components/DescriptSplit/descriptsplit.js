@@ -8,6 +8,9 @@ import form_team from '../../../imgs/pngs/form_team.png';
 import beargif from '../../../imgs/gifs/bear.gif';
 import medalgif from '../../../imgs/gifs/medal.gif';
 import moneygif from '../../../imgs/gifs/money.gif';
+import AnimatedGradientText from "../magicui/animated-gradient-text";
+import OrbCirlces from "../OrbitingCircles/orbcircles";
+import HyperText from "../magicui/hyper-text";
 
 const descItems = [
     {
@@ -41,25 +44,49 @@ const DescriptionSplit = () => {
     descItems.map((key, index) => {
         key.ref = useRef();
     });
-    const handleHover = (index) =>{
-        currentIndex.value = index;
-        return ({scale:1.2,rotateY:360})
-    };
-
+  
 
     return(
            <>
             <div className='relative h-[40vh] justify-center mx-auto align-center'>
                 <div className='absolute overflow-hidden  inset-0 '>
-                        <b className='top-0'> <TextScrollAnim  displayText={0}/> </b>
-                        <Spacer></Spacer>
-                        <b className='bottom-0'><TextScrollAnim  displayText={1}/></b> 
-                        <Spacer></Spacer>
+                    <b className='top-0'> <TextScrollAnim  displayText={0}/> </b>
+                    <Spacer></Spacer>
+                    <b className='bottom-0'><TextScrollAnim  displayText={1}/></b> 
+                    <Spacer></Spacer>
                 </div>      
                <Spacer></Spacer>
                
-               <div className='h-[400px] grid sm:grid-cols-1 lg:grid-cols-3 justify-center align-center flex-col'>
-                { descItems.map((key, index) => {
+               <div className='h-[400px]  justify-center align-center mx-auto'>
+                    <AnimatedGradientText className='w-full h-full justify-center align-center mx-auto col-8 shadow-2xl'>
+                        
+                        <div className='grid grid-cols-1  gap-1 col-12 gap-4 space-y-4 justify-center align-center mx-auto'>
+                            
+                            <div className='flex flex-cols gap-2 gap-x-2'>
+                            
+                            </div>
+
+                            <h3>
+                                Hello World
+                            </h3>
+                            <h3>
+                                Hello World
+                            </h3>
+                        </div>
+                    </AnimatedGradientText>
+                </div>
+                <br></br>
+               
+            </div>   
+            </>
+           
+   );
+
+};
+export default DescriptionSplit;
+
+
+{/*{ descItems.map((key, index) => {
                     return(
                         <motion.div
                             className='col-7 justify-center align-center mx-auto'
@@ -75,7 +102,7 @@ const DescriptionSplit = () => {
                                         <CardHeader>
                                             {key.text}
                                         </CardHeader>
-                                        <img src={key.img} className="align-center justify-center mx-auto w-full h-full" style={{'width' : '175px', 'height': '175px'}} />
+                                            <img src={key.img} className="align-center justify-center mx-auto w-full h-full" style={{'width' : '175px', 'height': '175px'}} />
                                         <CardFooter>
                                             {key.text}
                                         </CardFooter>
@@ -83,71 +110,4 @@ const DescriptionSplit = () => {
                             
                         </motion.div>
                     )
-                })}
-               
-               
-                </div>
-                <br></br>
-               
-            </div>   
-            </>
-           
-   );
-
-};
-export default DescriptionSplit;
-
-
-{/* items.map((key, index) => {
-    return(
-       
-       <div className=" grid lg:grid-cols-2  sm:grid-grid-cols-1 space-x-0 gap-x-0 justify-center align-center mx-auto" key={index}>
-           <h1 className='text-black  flex font-bold text-large'>{key.text}</h1>
-           <Card  
-               isBlurred 
-               className=' w-full col-12 items-center bg-transparent'
-               style={{'borderRadius': '20px'}}>
-               <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-               
-               </div>
-               
-           </Card> 
-           <br></br>  
-           <Spacer></Spacer>
-       </div>
-       
-       )
-}) 
-       
- { descItems.map((key, index) =>{
-                    return(
-                        <motion.div
-                            initial={{x:0,y:0, opacity:0}}
-                            whileInView={{ opacity: 1 }}
-                            whileHover={{scale:1.2,rotateY:360}}
-                            key={index} 
-                            
-                        >
-
-                            <Card 
-                                
-                                ref={key.ref}
-                                className='bg-gray/10 '
-                                radius='lg' 
-                                isHoverable 
-                                isBlurred>
-                                
-                                    <img className=" w-[250px] h-[250px]" src={key.img}  />
-                                
-                               {currentIndex.value == index 
-                                    ? <CardFooter> Hello Gamer </CardFooter>
-                                    
-                                    : undefined 
-                                }
-                            </Card>
-                            
-                        </motion.div>
-                    )
-                })}
-                    
-                */}
+                })}*/}
