@@ -1,26 +1,22 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { motion, useScroll, frameData, } from "framer-motion";
-import { Card, CardBody,CardFooter,Spacer, CardHeader, Image, Button } from "@nextui-org/react";
+import { Avatar, CardBody,CardFooter,Spacer,  } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
-import form_team from '../../../imgs/pngs/form_team.png';
+import AnimatedGradientText from "../magicui/animated-gradient-text";
 import beargif from '../../../imgs/gifs/bear.gif';
 import medalgif from '../../../imgs/gifs/medal.gif';
 import moneygif from '../../../imgs/gifs/money.gif';
-import AnimatedGradientText from "../magicui/animated-gradient-text";
-import OrbCirlces from "../OrbitingCircles/orbcircles";
-import HyperText from "../magicui/hyper-text";
-
 const descItems = [
     {
         text: "COMPETE HEAD TO HEAD", 
+        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indivual players and teams to allow lightening quick match connection.",
         img: beargif ,
         ref: null,
         
     },
     {
-        text: "EARN MONEY FOR COMPETING", 
+        text: "EARN MONEY FOR PLACING", 
         img: moneygif,
         ref: null,
     },
@@ -33,14 +29,16 @@ const descItems = [
   
 ]
 
-const currentIndex = signal(null);
-
-
+  
+const stats = [
+    { id: 1, name: 'Bounty Hunters', value: '44 million' },
+    { id: 2, name: 'Paid Out', value: '$119 trillion' },
+    { id: 3, name: 'Total Gamers', value: '46,000' },
+  ]
 
 const DescriptionSplit = () => {
 
-    const { scrollYProgress } = useScroll();
-    
+
     descItems.map((key, index) => {
         key.ref = useRef();
     });
@@ -58,22 +56,24 @@ const DescriptionSplit = () => {
                <Spacer></Spacer>
                
                <div className='h-[400px]  justify-center align-center mx-auto'>
-                    <AnimatedGradientText className='w-full h-full justify-center align-center mx-auto col-8 shadow-2xl'>
-                        
-                        <div className='grid grid-cols-1  gap-1 col-12 gap-4 space-y-4 justify-center align-center mx-auto'>
+                    <div className='grid lg:grid-cols-2 sm:grid-cols-1 grid-rows-2  col-8 gap-4  justify-center align-center mx-auto text-black'>
+                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
+                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
+                            <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
+                            <p className='text-small font-bold'> <i>{descItems[0].desc}</i> </p>
+                        </AnimatedGradientText>
+                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
+                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
+                            <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                        </AnimatedGradientText>
+                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1  bg-transparent'>
+                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
+                            <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
+                        </AnimatedGradientText>
+                        <AnimatedGradientText className='w-full h-full col-8 grid grid-cols-1 bg-transparent'>
                             
-                            <div className='flex flex-cols gap-2 gap-x-2'>
-                            
-                            </div>
-
-                            <h3>
-                                Hello World
-                            </h3>
-                            <h3>
-                                Hello World
-                            </h3>
-                        </div>
-                    </AnimatedGradientText>
+                        </AnimatedGradientText>
+                    </div>
                 </div>
                 <br></br>
                

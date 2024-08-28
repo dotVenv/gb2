@@ -36,7 +36,7 @@ const MainSection = () => {
                             )}
                         >
                             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                            <span> <i className="fa-solid fa-right-to-bracket"></i> Introducing Magic UI</span>
+                            <span> <i className="fa-solid fa-right-to-bracket"></i> Sign up now</span>
                             </AnimatedShinyText>
                         </div>
                         </div>

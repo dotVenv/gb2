@@ -1,7 +1,6 @@
 import React from 'react';
-import { cn } from '@nextui-org/react';
-
-const BorderBeam = ({ className}) => {
+import { cn } from '../ui/lib/utils';
+const BorderBeam = ({className}) => {
   var size = 200;
   var duration = 15;
   var anchor = 90;
