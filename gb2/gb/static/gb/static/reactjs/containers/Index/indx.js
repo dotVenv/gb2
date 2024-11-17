@@ -63,6 +63,7 @@ const DP = () =>{
         />
     );
 };
+
 const Indx = () => {
 
     return (
@@ -123,10 +124,8 @@ const Indx = () => {
                                         </CardBody>
                                 <BorderBeam />
                             </Card>
-          
                     </section>
                 </Experience>
-                
             </Suspense>
         </>
     );
