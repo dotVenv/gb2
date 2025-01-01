@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Avatar, CardBody,CardFooter,Spacer,  } from "@nextui-org/react";
+import { Avatar, CardBody,CardFooter,Spacer, Card, Button } from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
@@ -58,43 +58,66 @@ const DescriptionSplit = () => {
 
     return(
            <>
-            <div className='relative lg:h-[400px] sm:h-[750px] justify-center mx-auto align-center'>
-                <div className='absolute h-[500px] overflow-hidden  inset-0  mt-3'>
-                    <b className='sticky top'> <TextScrollAnim  displayText={0}/> </b>
-                    <Spacer></Spacer>
-                    <b className='sticky bottom'><TextScrollAnim  displayText={1}/></b> 
-                    <Spacer></Spacer>
-                </div>      
-               <Spacer></Spacer>
-               
-               <div className='lg:h-[400px]  sm:h-[750px] justify-center align-center mx-auto'>
-                    <div className='grid lg:grid-cols-2 sm:grid-cols-2 grid-rows-2  gap-4  justify-center align-center mx-auto text-black'>
+     
+          
+                <div className='relative lg:h-[400px] sm:h-[750px] justify-center mx-auto align-center'>
+                   
+                    <div className='absolute h-[500px] overflow-hidden  inset-0  mt-3'>
+                        <b className='sticky top'> <TextScrollAnim  displayText={0}/> </b>
+                        <Spacer></Spacer>
+                        <b className='sticky bottom'><TextScrollAnim  displayText={1}/></b> 
+                        <Spacer></Spacer>
+                    </div>      
+                <Spacer></Spacer>
+                
+                <div className='lg:h-[500px]  sm:h-[850px]'>
+                    <div className='flex  gap-4  text-black'>
+                        
                         <AnimatedGradientText className='w-full h-full  col-9 grid grid-cols-1 bg-transparent'>
-                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
-                            <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
-                            <p className='text-small font-bold'> {descItems[0].desc} </p>
-                        </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-9  grid grid-cols-1 bg-transparent'>
-                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
-                            <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                            <Spacer></Spacer>
+                            <div className='grid grid-cols-2 gap-4'>
+                                <div className='mb-4'>
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
+                                    <br></br>
+                                    <p className='text-small'> {descItems[0].desc} </p>
+                                </div>
+                                
+                                <div>
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                                    <br></br>
+                                    <p className='text-small'> {descItems[1].desc} </p>
+                                </div>
+                            </div>
 
-                            <p className='text-small font-bold'> {descItems[1].desc} </p>
+                            <br></br>
+                            <Spacer></Spacer>
+
+                            <div className='grid grid-cols-2 gap-4'>
+                                <div className='mb-4'>
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
+                                    <br></br>
+                                    <p className='text-small'> {descItems[2].desc} </p>
+                                </div>
+                                
+                                <div>
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[3].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[3].text}</i>  </p> 
+                                    <br></br>
+                                    <p className='text-small'> {descItems[3].desc} </p>
+                                </div>
+                                <Button variant='light' color='primary' className='border-rounded'> Sign up now </Button>
+                            </div>
                         </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-9 grid grid-cols-1  bg-transparent'>
-                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
-                            <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
-                            <p className='text-small font-bold'> {descItems[2].desc} </p>
-                        </AnimatedGradientText>
-                        <AnimatedGradientText className='w-full h-full col-9  grid grid-cols-1 bg-transparent'>
-                            <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[3].img} /> 
-                            <p className='text-large font-bold'> <i>{descItems[3].text}</i>  </p> 
-                            <p className='text-small font-bold'> {descItems[3].desc} </p>
-                        </AnimatedGradientText>
+                        
+                        <br></br>
+                      
                     </div>
+                    </div>
+                    <br></br>
                 </div>
-                <br></br>
-               
-            </div>   
             </>
            
    );
