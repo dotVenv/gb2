@@ -18,10 +18,11 @@ const MainSection = () => {
                 <Spacer></Spacer>
                 <WordRotate  
                     className="text-4xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
+                    style={{'fontSize:':'25px',}}
                     words={["GAMERS-BOUNTY", "PLAY GAMES", "WIN MONEY"]}/>
                 <Spacer></Spacer>   
                 <br></br> 
-                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 mt-1">
+                <div className="mx-auto max-w-2xl py-29 sm:py-48 lg:py-49 mt-1">
                     <Spacer></Spacer>
                    
                 <div className="text-center text-black">
@@ -36,7 +37,10 @@ const MainSection = () => {
                             )}
                         >
                             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                            <span> <i className="fa-solid fa-right-to-bracket"></i> Sign up now</span>
+                            <span style={{'color':'green'}}> <i className="fa-solid fa-right-to-bracket"></i> Sign in</span>
+                            </AnimatedShinyText>
+                            <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                            <span > <i className="fa-solid fa-right-to-bracket"></i> Sign up</span>
                             </AnimatedShinyText>
                         </div>
                     </div>

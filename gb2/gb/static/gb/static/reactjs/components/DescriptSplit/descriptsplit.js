@@ -78,16 +78,16 @@ const DescriptionSplit = () => {
                             <div className='grid grid-cols-2 gap-4'>
                                 <div className='mb-4'>
                                     <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
+                                    <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
                                     <br></br>
-                                    <p className='text-small'> {descItems[0].desc} </p>
+                                    <p className='text-small'> A new way of competing</p>
                                 </div>
                                 
                                 <div>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
                                     <br></br>
-                                    <p className='text-small'> {descItems[1].desc} </p>
+                                    <p className='text-small'> {descItems[0].desc} </p>
                                 </div>
                             </div>
 
@@ -96,20 +96,22 @@ const DescriptionSplit = () => {
 
                             <div className='grid grid-cols-2 gap-4'>
                                 <div className='mb-4'>
+                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
+                                    <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                                    <br></br>
+                                    <p className='text-small'> {descItems[1].desc} </p>
+                                </div>
+                                
+                                <div>
                                     <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
                                     <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
                                     <br></br>
                                     <p className='text-small'> {descItems[2].desc} </p>
                                 </div>
-                                
-                                <div>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[3].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[3].text}</i>  </p> 
-                                    <br></br>
-                                    <p className='text-small'> {descItems[3].desc} </p>
-                                </div>
-                                <Button variant='light' color='primary' className='border-rounded'> Sign up now </Button>
+                               
                             </div>
+                            <p> Join Now </p>
+                            <Button variant='flat' color='primary' size='sm' className='border-rounded col-2 justify-center align-center mx-auto'> Sign up now </Button>
                         </AnimatedGradientText>
                         
                         <br></br>
