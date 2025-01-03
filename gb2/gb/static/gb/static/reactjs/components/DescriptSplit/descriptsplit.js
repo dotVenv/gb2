@@ -77,10 +77,12 @@ const DescriptionSplit = () => {
                             <Spacer></Spacer>
                             <div className='grid grid-cols-2 gap-4'>
                                 <div className='mb-4'>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
-                                    <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
+                                    <img className='border-lg border-rounded-md radius-lg flex' style={{'height': '250px', 'width': '250px'}} src={descItems[0].img} /> 
+                                    
+                                {/*   <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
                                     <br></br>
-                                    <p className='text-small'> A new way of competing</p>
+                                    <p className='text-small'> A new way of competing</p> 
+                                */}
                                 </div>
                                 
                                 <div>
@@ -111,7 +113,7 @@ const DescriptionSplit = () => {
                                
                             </div>
                             <p> Join Now </p>
-                            <Button variant='flat' color='primary' size='sm' className='border-rounded col-2 justify-center align-center mx-auto'> Sign up now </Button>
+                            <Button variant='flat' color='secondary' size='sm' className='bg-rounded border-rounded-sm border-sm col-2 justify-center align-center mx-auto'> Sign up now </Button>
                         </AnimatedGradientText>
                         
                         <br></br>
