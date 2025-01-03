@@ -53,7 +53,7 @@ const EasySteps = () => {
                    
                     <div className="flex flex-col justify-center gap-2">
                     
-                    <Code size='sm' className='mr-4' variant='flat'>Tournament</Code>
+                    <Code size='sm' className='mr-4' variant='flat'>Platform</Code>
                     <Circle ref={div2Ref}>
                         <Icons.ps />
                     </Circle>
@@ -78,44 +78,52 @@ const EasySteps = () => {
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
-                toRef={div3Ref}
-                duration={3}
+                toRef={div2Ref}
+                duration={2.8}
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
-                toRef={div2Ref}
-                duration={4}
+                toRef={div3Ref}
+                duration={3.5}
+            />
+            <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div3Ref}
+                toRef={div1Ref}
+                duration={4.5}
+            />
+            <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div2Ref}
+                toRef={div1Ref}
+                duration={4.9}
             />
           
             <AnimatedBeam
                 containerRef={containerRef}
-                fromRef={div6Ref}
+                fromRef={div1Ref}
+                toRef={div6Ref}
+                duration={5.5}
+                reverse
+            />
+             <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div5Ref}
                 toRef={div7Ref}
-                duration={5}
+                duration={7.2}
                 reverse
             />
             
            
-            <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div5Ref}
-                toRef={div6Ref}
-                duration={7.2}
-            />
              <AnimatedBeam
                 containerRef={containerRef}
-                fromRef={div1Ref}
-                toRef={div6Ref}
-                duration={8.2}
+                fromRef={div6Ref}
+                toRef={div5Ref}
+                duration={6.8}
             />
 
-            <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div7Ref}
-                toRef={div5Ref}
-                duration={9.2}
-            />
+           
                 </div>
            
           

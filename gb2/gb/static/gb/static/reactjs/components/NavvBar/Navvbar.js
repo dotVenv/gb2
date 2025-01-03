@@ -25,13 +25,13 @@ const NavvBar = ({cpage}) => {
                     </NavbarItem>
                     <NavbarItem isActive={cpage == 'dotVenv' ? true : false }>
                     <Link color="foreground" href="#">
-                        dotVent
+                        dotVenv
                     </Link>
                     </NavbarItem>
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
                     <NavbarItem className="hidden lg:flex">
-                    <Link href="#">Login</Link>
+                    <Link href="#">Sign In</Link>
                     </NavbarItem>
                     <NavbarItem>
                     <Button as={Link} color="primary" href="#" variant="flat">
