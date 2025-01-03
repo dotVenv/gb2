@@ -5,13 +5,16 @@ import {
     AnimatedShinyText
    } from "../../components";
 import { motion } from "framer-motion";
-import { Spacer, Button, Code, Chip, cn} from "@nextui-org/react";
+import { Spacer, Button, Code, Chip, cn,} from "@nextui-org/react";
 
 const MainSection = () => {
 
     return(
         <>
             <div className='mt-4'>
+                <div className='flex align-center justify-center mx-auto'>
+                    <Code color="success">Welcome to the 2025 new esports.</Code>
+                </div>
                 <Spacer></Spacer>
                 <ACMELogo />
                 <br></br>
@@ -23,10 +26,8 @@ const MainSection = () => {
                 <Spacer></Spacer>   
                 <br></br> 
                 <div className="mx-auto max-w-2xl py-29 sm:py-48 lg:py-49 mt-1">
-                    <Spacer></Spacer>
-                   
                 <div className="text-center text-black">
-                    <h5 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-200/80 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-black dark:to-slate-900/10">
+                    <h5 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-200/80 bg-clip-text text-center text-2xl font-semibold leading-none text-transparent dark:from-black dark:to-slate-900/10">
                         WHERE REAL GAMERS COME TO COMPETE!
                     </h5>
                 

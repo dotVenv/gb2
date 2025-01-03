@@ -1,24 +1,25 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Avatar, CardBody,CardFooter,Spacer, Card, Button } from "@nextui-org/react";
+import { Spacer,Button} from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
 import beargif from '../../../imgs/gifs/bear.gif';
 import medalgif from '../../../imgs/gifs/medal.gif';
 import moneygif from '../../../imgs/gifs/money.gif';
+import gbAD from '../../../imgs/pngs/gb_ad.png';
 import ww_available from '../../../imgs/pngs/worldwide.png';
 const descItems = [
     {
-        text: "COMPETE HEAD TO HEAD", 
+        text: "COMPETE HEAD-TO-HEAD", 
         desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams to allow lightening quick connection.",
         img: beargif ,
         ref: null,
         
     },
     {
-        text: "EARN MONEY FOR PLACING",
-        desc: "Tired of playing for fun? Sign up and each match can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance which they will be able to withdrawal at anytime via paypal,stripe, and others.", 
+        text: "PLAY AND EARN MONEY",
+        desc: "Tired of playing for fun? Sign up and each match can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
         img: moneygif,
         ref: null,
     },
@@ -75,21 +76,29 @@ const DescriptionSplit = () => {
                         
                         <AnimatedGradientText className='w-full h-full  col-9 grid grid-cols-1 bg-transparent'>
                             <Spacer></Spacer>
-                            <div className='grid grid-cols-2 gap-4'>
-                                <div className='mb-4'>
-                                    <img className='border-lg border-rounded-md radius-lg flex' style={{'height': '250px', 'width': '250px'}} src={descItems[0].img} /> 
+                            <div className='grid lg:grid-cols-2 sm:grid-cols-1 gap-4'>
+                            <h6 className='text-large font-bold justify-center mx-auto align-center'> Earn Daily Rewards and More! </h6>
+                            <br></br>
+                                <div className='mb-4  justify-center align-center mx-auto'>
+                                   
+                               
+                                    <img className='border-lg border-rounded-md radius-lg' style={{'height': '325px', 'width': '450px'}} src={gbAD} /> 
                                     
-                                {/*   <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
+                                {/* 
+                                
+                                    <img className='border-lg border-rounded-md radius-lg' style={{'height': '150px', 'width': '150px'}} src={gbAD} /> 
+                                    <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
                                     <br></br>
                                     <p className='text-small'> A new way of competing</p> 
                                 */}
                                 </div>
                                 
-                                <div>
+                                <div className='mb-4 mt-4 pt-4'>
+                                    <Spacer></Spacer>
                                     <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[0].text}</i>  </p> 
+                                    <p className='text-large font-bold'> {descItems[0].text}  </p> 
                                     <br></br>
-                                    <p className='text-small'> {descItems[0].desc} </p>
+                                    <p className='text-small font-bold'><i>{descItems[0].desc}</i> </p>
                                 </div>
                             </div>
 
@@ -97,23 +106,32 @@ const DescriptionSplit = () => {
                             <Spacer></Spacer>
 
                             <div className='grid grid-cols-2 gap-4'>
+                               
                                 <div className='mb-4'>
                                     <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[1].text}</i>  </p> 
+                                    <p className='text-large font-bold'>{descItems[1].text}  </p> 
                                     <br></br>
-                                    <p className='text-small'> {descItems[1].desc} </p>
+                                    <p className='text-small font-bold'> <i>{descItems[1].desc}</i></p>
                                 </div>
                                 
                                 <div>
                                     <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
-                                    <p className='text-large font-bold'> <i>{descItems[2].text}</i>  </p> 
+                                    <p className='text-large font-bold'>{descItems[2].text}  </p> 
                                     <br></br>
-                                    <p className='text-small'> {descItems[2].desc} </p>
+                                    <p className='text-small font-bold'><i>{descItems[2].desc}</i></p>
                                 </div>
                                
                             </div>
-                            <p> Join Now </p>
-                            <Button variant='flat' color='secondary' size='sm' className='bg-rounded border-rounded-sm border-sm col-2 justify-center align-center mx-auto'> Sign up now </Button>
+                           
+                            <Button 
+                                variant='shadow' 
+                                color='default' 
+                                size='sm' 
+                                className='radius-md col-2 justify-center align-center mx-auto'
+                                onPress={(e) =>{ window.location.href='google.com'}}
+                                > 
+                                    Start Competing Now 
+                            </Button>
                         </AnimatedGradientText>
                         
                         <br></br>
