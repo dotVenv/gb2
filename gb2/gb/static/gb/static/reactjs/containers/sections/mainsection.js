@@ -4,7 +4,7 @@ import {
     WordRotate,
     AnimatedShinyText
    } from "../../components";
-   
+
 import { Spacer, Button, Code, Chip, cn,} from "@nextui-org/react";
 
 const MainSection = () => {
@@ -39,13 +39,14 @@ const MainSection = () => {
                             <span style={{'color':'green'}}> <i className="fa-solid fa-right-to-bracket"></i> Sign in</span>
                             </AnimatedShinyText>
                             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                            <span > <i className="fa-solid fa-right-to-bracket"></i> Sign up</span>
+                            <span > <i className="fa-solid fa-user-pen"></i> Sign up</span>
                             </AnimatedShinyText>
                         </div>
                     </div>
                 </div>
             
                 </div>
+                
             </div>
             
 

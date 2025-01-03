@@ -11,6 +11,7 @@ import {
     OurPartners,
     NavvBar,
     Footer,
+    PricingTable,
    
     } from "../../components";
 
@@ -53,7 +54,14 @@ const tourney_journey = [
  
 
 ]
-const CustomButton = ({children}) => {
+
+const stats = [
+    { id: 1, name: 'Players Registered', value: '72,000+' },
+    { id: 2, name: 'Total Paid Out', value: '$1,523,000+' },
+    { id: 3, name: 'Current Prize Pool', value: '$26,000+' },
+  ]
+
+const CustmBadge = ({children}) => {
 
     return (
 
@@ -83,6 +91,21 @@ const Indx = () => {
             <Suspense fallback={<p> Loading Esports Environment...</p>} >
                 <NavvBar cpage='home'/>
                 <Experience >
+                <div className="bg-white py-24 sm:py-32">
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+                    {stats.map((stat) => (
+                        <div key={stat.id} className="mx-auto flex max-w-xs flex-col gap-y-4">
+                        <dt className="text-base/7 text-gray-600">{stat.name}</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                            {stat.value}
+                        </dd>
+                        </div>
+                    ))}
+                    </dl>
+                </div>
+                </div>
+                    
                     <OurPartners />
                     <br></br>
                     <section className="mb-4 mt-2">
@@ -143,13 +166,16 @@ const Indx = () => {
                                         </Chip>
                                     ))}
                                 </div>
-                            
+                            <div className='align-center justify-center mx-auto flex'>
+                                <PricingTable />
+                            </div>
                             <div className='align-center justify-center mx-auto flex'>
                                 <img 
                                     style={{'height': '350px', 'width':'350px'}}
                                     src={gbAD}  />
                             </div>
                     </section>
+                    <br></br>
                     <div className='justify-center align-center mx-auto'>
                         <Spacer></Spacer>
                         <Footer />

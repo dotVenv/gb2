@@ -20,6 +20,7 @@ export { default as AnimatedShinyText } from './magicui/animated-shiny-text';
 export { default as RetroGrid } from './magicui/retro-grid';
 export { default as Experience } from './Animations/Experience/experience';
 export { default as OurPartners } from './Partners/Partners';
+export { default as PricingTable } from './PricingTable/PricingTable';
 export {  cn } from './ui/lib/utils';
 export { BorderBeam } from './magicui/border-beam';
 export { GridPattern } from './magicui/animated-grid-pattern';
