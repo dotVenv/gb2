@@ -1,5 +1,7 @@
 export { default as SimpleSteps } from './SimpleSteps/simplesteps';
 export { default as NaviBar } from './Navbar/navbar'; 
+export { default as NavvBar } from './NavvBar/Navvbar';
+export { default as Footer } from './Footer/Footer';
 export { default as NotiDrag } from './NotiDrag/notidrag';
 export { default as Ripple }  from './magicui/ripple';
 export { default as ShineBorder } from './magicui/shine-border';
@@ -17,6 +19,7 @@ export { default as ShimmerButton } from './magicui/shimmer-button';
 export { default as AnimatedShinyText } from './magicui/animated-shiny-text';
 export { default as RetroGrid } from './magicui/retro-grid';
 export { default as Experience } from './Animations/Experience/experience';
+export { default as OurPartners } from './Partners/Partners';
 export {  cn } from './ui/lib/utils';
 export { BorderBeam } from './magicui/border-beam';
 export { GridPattern } from './magicui/animated-grid-pattern';

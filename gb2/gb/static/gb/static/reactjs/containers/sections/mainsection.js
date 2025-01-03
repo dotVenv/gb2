@@ -4,7 +4,7 @@ import {
     WordRotate,
     AnimatedShinyText
    } from "../../components";
-import { motion } from "framer-motion";
+   
 import { Spacer, Button, Code, Chip, cn,} from "@nextui-org/react";
 
 const MainSection = () => {
@@ -12,9 +12,7 @@ const MainSection = () => {
     return(
         <>
             <div className='mt-4'>
-                <div className='flex align-center justify-center mx-auto'>
-                    <Code color="success">Welcome to the 2025 new esports.</Code>
-                </div>
+               
                 <Spacer></Spacer>
                 <ACMELogo />
                 <br></br>

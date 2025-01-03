@@ -8,10 +8,22 @@ import {
     DescriptionSplit,
     Experience,
     BorderBeam,
+    OurPartners,
+    NavvBar,
+    Footer,
    
     } from "../../components";
 
-import { cn,  Card, CardBody, CardHeader, CardFooter, Spacer, Button, Chip } from "@nextui-org/react";
+import gbAD from '../../../imgs/pngs/gb_ad.png';
+import { cn,  
+    Card, 
+    CardBody, 
+    CardHeader, 
+    CardFooter, 
+    Spacer, 
+    Button, 
+    Chip,
+  } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
 
@@ -69,7 +81,9 @@ const Indx = () => {
     return (
         <> 
             <Suspense fallback={<p> Loading Esports Environment...</p>} >
+                <NavvBar cpage='home'/>
                 <Experience >
+                    <OurPartners />
                     <br></br>
                     <section className="mb-4 mt-2">
                         <DP />
@@ -129,9 +143,19 @@ const Indx = () => {
                                         </Chip>
                                     ))}
                                 </div>
-                           
+                            
+                            <div className='align-center justify-center mx-auto flex'>
+                                <img 
+                                    style={{'height': '350px', 'width':'350px'}}
+                                    src={gbAD}  />
+                            </div>
                     </section>
+                    <div className='justify-center align-center mx-auto'>
+                        <Spacer></Spacer>
+                        <Footer />
+                    </div>
                 </Experience>
+               
             </Suspense>
         </>
     );

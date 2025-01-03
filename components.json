@@ -13,7 +13,7 @@
   "aliases": {
     "components": "@/gb2/gb/static/gb/static/reactjs/components/",
     "utils": "@/gb2/gb/static/gb/static/reactjs/components/ui/lib/utils",
-    "ui": "@/gb2/gb/static/gb/static/reactjs/components//ui",
-    "magicui": "@/gb2/gb/static/gb/static/reactjs/components//magicui"
+    "ui": "@/gb2/gb/static/gb/static/reactjs/components/ui",
+    "magicui": "@/gb2/gb/static/gb/static/reactjs/components/magicui"
   }
 }

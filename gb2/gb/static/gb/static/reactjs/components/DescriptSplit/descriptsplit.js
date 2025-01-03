@@ -25,15 +25,15 @@ const descItems = [
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
-        desc: "Those who finish in a top placement in multiple events will soon earn their rank to Bounty Hunter! With this status, you can earn eligible prizes along-side the prize pool for every tournament you enter.",
+        desc: "Win enough to earn the Bounty Hunter Badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
         
         img: medalgif,
         ref: null
 
     },
     {
-        text: "NOW WORLDWIDE & AND API DRIVEN", 
-        desc: "Overseas or not, have the option to search and connect to tournaments based in your region and payout to your currency. With the relaunch of GB, we've also done a complete API rework to allow automated game results.",
+        text: "PERFORMANCE AND SECURITY", 
+        desc: "Never worry about downtime or cyber threats, our best is always monitoring around-the-clock to ensure proper security.",
         
         img: ww_available,
         ref: null
@@ -75,63 +75,90 @@ const DescriptionSplit = () => {
                     <div className='flex  gap-4  text-black'>
                         
                         <AnimatedGradientText className='w-full h-full  col-9 grid grid-cols-1 bg-transparent'>
-                            <Spacer></Spacer>
-                            <div className='grid lg:grid-cols-2 sm:grid-cols-1 gap-4'>
-                            <h6 className='text-large font-bold justify-center mx-auto align-center'> Earn Daily Rewards and More! </h6>
-                            <br></br>
-                                <div className='mb-4  justify-center align-center mx-auto'>
-                                   
-                               
-                                    <img className='border-lg border-rounded-md radius-lg' style={{'height': '325px', 'width': '450px'}} src={gbAD} /> 
-                                    
-                                {/* 
-                                
-                                    <img className='border-lg border-rounded-md radius-lg' style={{'height': '150px', 'width': '150px'}} src={gbAD} /> 
-                                    <p className='text-large font-bold'> <i>A New way of gaming</i>  </p> 
-                                    <br></br>
-                                    <p className='text-small'> A new way of competing</p> 
-                                */}
+                        
+                            <div className="mx-auto max-w-2xl  lg:max-w-7xl ">
+                            
+                                <div className=" grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
+                                <div className="relative lg:row-span-2">
+                                    <div className=" inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+                                    <div className="relative flex h-[475px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                                    <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
+                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                            {descItems[0].text}
+                                        </p>
+                                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                                        {descItems[0].desc}
+                                        </p>
+                                    </div>
+                                      
+                                        <img
+                                            className="align-center justify-center mx-auto"
+                                            style={{'height': '250px', 'width': '275px'}}
+                                            src={descItems[0].img}
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
                                 </div>
-                                
-                                <div className='mb-4 mt-4 pt-4'>
-                                    <Spacer></Spacer>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[0].img} /> 
-                                    <p className='text-large font-bold'> {descItems[0].text}  </p> 
-                                    <br></br>
-                                    <p className='text-small font-bold'><i>{descItems[0].desc}</i> </p>
+                                <div className="relative max-lg:row-start-1">
+                                    <div className=" inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
+                                    <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+                                    <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[2].text}</p>
+                                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                                        {descItems[2].desc}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+                                        <img
+                                            style={{'width':'150px', 'height': '150px'}}
+                                        src={descItems[2].img}
+                                        alt=""
+                                        />
+                                    </div>
+                                    </div>
+                                    <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
                                 </div>
-                            </div>
-
-                            <br></br>
-                            <Spacer></Spacer>
-
-                            <div className='grid grid-cols-2 gap-4'>
-                               
-                                <div className='mb-4'>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[1].img} /> 
-                                    <p className='text-large font-bold'>{descItems[1].text}  </p> 
-                                    <br></br>
-                                    <p className='text-small font-bold'> <i>{descItems[1].desc}</i></p>
+                                <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+                                    <div className=" inset-px rounded-lg bg-white"></div>
+                                    <div className="relative flex h-[300px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+                                    <div className="px-8  sm:px-10 ">
+                                        <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[3].text}</p>
+                                        <p className="mt-1 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                                        {descItems[3].desc}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-3 lg:pb-1">
+                                        <img
+                                        className="h-[min(152px,40cqw)] object-cover"
+                                        src="https://tailwindui.com/plus/img/component-images/bento-03-security.png"
+                                        alt=""
+                                        />
+                                    </div>
+                                    </div>
+                                    <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5"></div>
                                 </div>
-                                
-                                <div>
-                                    <img className='border-lg  border-rounded-md radius-sm justify-start float-start flex' style={{'height': '75px', 'width': '75px'}} src={descItems[2].img} /> 
-                                    <p className='text-large font-bold'>{descItems[2].text}  </p> 
-                                    <br></br>
-                                    <p className='text-small font-bold'><i>{descItems[2].desc}</i></p>
+                                <div className="relative lg:row-span-2">
+                                    <div className=" inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
+                                    <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                                    <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
+                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                        {descItems[1].text}
+                                        </p>
+                                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                                        {descItems[1].desc}
+                                        </p>
+                                    </div>
+                                    <img 
+                                        className="align-center justify-center mx-auto"
+                                        style={{'height': '250px', 'width': '275px'}}
+                                        src={descItems[1].img} />
+                                    </div>
+                                    <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                                 </div>
-                               
+                                </div>
                             </div>
                            
-                            <Button 
-                                variant='shadow' 
-                                color='default' 
-                                size='sm' 
-                                className='radius-md col-2 justify-center align-center mx-auto'
-                                onPress={(e) =>{ window.location.href='google.com'}}
-                                > 
-                                    Start Competing Now 
-                            </Button>
                         </AnimatedGradientText>
                         
                         <br></br>
@@ -172,4 +199,29 @@ export default DescriptionSplit;
                             
                         </motion.div>
                     )
-                })}*/}
+                })}
+                    
+                   <div className="absolute inset-x-10 bottom-0 top-10 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
+                        <img
+                            className="size-full object-cover object-top"
+                            src={descItems[0].img}
+                            alt=""
+                        />
+                    </div>
+                      <div className="relative min-h-[30rem] w-full grow">
+                            <div className="absolute bottom-0 left-10 right-0 top-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">
+                            <div className="flex bg-gray-800/40 ring-1 ring-white/5">
+                                <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
+                                <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
+                                    NotificationSetting.jsx
+                                </div>
+                                <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                                </div>
+                            </div>
+                            <div className="px-6 pb-14 pt-6">* Your code example *</div>
+                            </div>
+                        </div>
+                                        
+                                        
+                                        
+                                        */}
