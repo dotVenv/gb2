@@ -5,4 +5,5 @@ uiviews = views.UIViews()
 
 urlpatterns = [
     path('', uiviews.index, name='index'),
+    path('about-us', uiviews.about_us, name='aboutus'),
 ]

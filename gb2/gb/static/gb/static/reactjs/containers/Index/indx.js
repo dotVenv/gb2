@@ -90,7 +90,7 @@ const Indx = () => {
         <> 
             <Suspense fallback={<p> Loading Esports Environment...</p>} >
                 <NavvBar cpage='home'/>
-                <Experience >
+                <Experience pagetype='main'>
                 <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
@@ -136,7 +136,7 @@ const Indx = () => {
                             <Card isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
                                 <CardHeader>
                                     <div className="mx-auto  lg:text-center">
-                                        <h2 className="text-base font-semibold leading-7 text-indigo-600">Start Competing Now</h2>
+                                        <h2 className="text-base font-semibold leading-7 text-indigo-600">Daily Tournaments 6pm-9pm EST.</h2>
                                         <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                                             Simply register and enter a tournament.
                                         </p>

@@ -8,3 +8,8 @@ class UIViews(TemplateView):
         
         context = {}
         return render(request, 'gb/templates/index.html', context=context)
+    
+    def about_us(self, request):
+        
+        context = {}
+        return render(request, 'gb/templates/index.html', context=context)

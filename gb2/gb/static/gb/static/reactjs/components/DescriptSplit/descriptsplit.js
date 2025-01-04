@@ -12,20 +12,20 @@ import ww_available from '../../../imgs/pngs/worldwide.png';
 const descItems = [
     {
         text: "COMPETE HEAD-TO-HEAD", 
-        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams to allow lightening quick connection.",
+        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams. Tournament run daily from 6pm-9pm EST.",
         img: beargif ,
         ref: null,
         
     },
     {
         text: "PLAY AND EARN MONEY",
-        desc: "Tired of playing for fun? Sign up and each match can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
+        desc: "Brnging esports to everyone. Sign up and for each tournament placed, can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
         img: moneygif,
         ref: null,
     },
     {
         text: "BECOME A BOUNTY HUNTER", 
-        desc: "Win enough to earn the Bounty Hunter Badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
+        desc: "Win enough to earn the Bounty-Hunter badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
         
         img: medalgif,
         ref: null
@@ -93,7 +93,7 @@ const DescriptionSplit = () => {
                                       
                                         <img
                                             className="align-center justify-center mx-auto"
-                                            style={{'height': '250px', 'width': '275px'}}
+                                            style={{'height': '225px', 'width': '250px'}}
                                             src={descItems[0].img}
                                             alt=""
                                         />

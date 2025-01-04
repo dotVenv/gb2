@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, PerspectiveCamera, ScrollControls, Html, useScroll } from "@react-three/drei";
-import MainSection from "../../../containers/sections/mainsection";
+import { MainSection } from "../../../containers";
 import WatcherStatueModel from "../Room/WatcherStatue";
 import DotPattern from "../../magicui/dot-pattern";
 import { Button, cn, Spacer } from "@nextui-org/react";
-
+import AboutInfo  from "../../AboutInfo/AboutInfo";
 const DP = () =>{
 
     return(
@@ -19,7 +19,7 @@ const DP = () =>{
 };
 
 
-const Experience = ({children}) =>{ 
+const Experience = ({children, pagetype}) =>{ 
     
   
     return(
@@ -28,7 +28,7 @@ const Experience = ({children}) =>{
                     <div className='absolute inset-0 z-10 mt-4 justify-center align-center mx-auto'>
                         <section>
                             <DP />
-                            <MainSection />
+                            { pagetype == 'main' ? <MainSection /> : pagetype == 'aboutus' ? <AboutInfo />  : undefined }
                         </section>
                         
                     </div>
