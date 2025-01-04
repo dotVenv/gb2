@@ -24,7 +24,7 @@ const NavvBar = ({cpage}) => {
                         </Link>
                     </NavbarItem>
                     <NavbarItem className='mt-2' isActive={cpage == 'FAQ' ? true : false }>
-                        <Link color="foreground" href="#">
+                        <Link color="foreground" href="/FAQ">
                             FAQ
                         </Link>
                     </NavbarItem>

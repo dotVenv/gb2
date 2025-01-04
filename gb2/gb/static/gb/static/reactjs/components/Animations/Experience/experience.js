@@ -7,6 +7,7 @@ import WatcherStatueModel from "../Room/WatcherStatue";
 import DotPattern from "../../magicui/dot-pattern";
 import { Button, cn, Spacer } from "@nextui-org/react";
 import AboutInfo  from "../../AboutInfo/AboutInfo";
+
 const DP = () =>{
 
     return(

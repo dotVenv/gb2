@@ -13,3 +13,9 @@ class UIViews(TemplateView):
         
         context = {}
         return render(request, 'gb/templates/index.html', context=context)
+    
+    def freq_asked(self, requert):
+        
+        context = {}
+        return render(request, 'gb/templates/index.html', context=context)
+        
