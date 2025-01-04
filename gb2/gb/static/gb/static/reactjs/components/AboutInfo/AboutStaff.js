@@ -3,7 +3,7 @@ import React from "react";
 const gb_staff = [
     {
       name: 'Greg G.',
-      role: 'Founder / CEO',
+      role: 'Founder / CEO / Lead Developer',
       imageUrl:
         'https://venv.pro/static/dv_dash/static/reactjs/output/images/ceo_img.png',
     },

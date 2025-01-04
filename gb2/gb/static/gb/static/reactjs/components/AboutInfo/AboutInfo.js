@@ -5,6 +5,7 @@ import AboutStaff from "./AboutStaff";
 import ACMELogo from "../ACMELogo/acme";
 import Footer from "../Footer/Footer";
 import { BorderBeam } from "../magicui/border-beam";
+import gb_banner from '../../../imgs/pngs/gb_ab.png';
 
 const AboutInfo = () => {
 
@@ -22,31 +23,72 @@ const AboutInfo = () => {
                 </div>
 
                     <Card className='flex justify-center align-center mx-auto col-8 bg-transparent '>
-                    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-                        <div class="mx-auto max-w-5xl">
-                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Product description</h2>
-                        <div class="my-8 xl:mb-16 xl:mt-12">
-                            <img class="w-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-showcase.svg" alt="" />
-                            <img class="hidden w-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-showcase-dark.svg" alt="" />
+                    <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+                        <div className="mx-auto max-w-5xl">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Product description</h2>
+                        <div className="my-8 xl:mb-16 xl:mt-12">
+                            <img className="w-full dark:hidden" src={gb_banner} alt="" />
+                            <img className="hidden w-full dark:block" src={gb_banner} alt="" />
                         </div>
-                        <div class="mx-auto max-w-2xl space-y-6">
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">The iMac "M1" 8-Core CPU/8-Core GPU/4 USB-C Shaped Ports (2021) model features a 5-nm Apple M1 processor with 8 cores (4 performance cores and 4 efficiency cores), an 8-core GPU, a 16-core Neural Engine, 8 GB of onboard RAM, and a 1 TB onboard SSD.</p>
+                        <div className="mx-auto max-w-2xl ">
+                           
+                                <p className='text-gray-600'>
+                                Gamers-Bounty, originally established in 2019 during the intial rise of the pandemic, 
+                                Greg thought of a way to bring compeitive gamers around the world a way to compete from home.
+                                </p>
+                        
 
-                            <p class="text-base font-semibold text-gray-900 dark:text-white">Key Features and Benefits:</p>
-                            <ul class="list-outside list-disc space-y-4 pl-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                            <li>
-                                <span class="font-semibold text-gray-900 dark:text-white"> Brilliant 4.5K Retina display: </span>
-                                see the big picture and all the detailsSee it all in sharp, glorious detail on the immersive 24-inch 4.5K Retina display. The P3 wide color gamut brings what you're watching to life in over a billion colors. Images shine with a brilliant 500 nits of brightness. Industry-leading anti-reflective coating delivers greater comfort and readability. And True Tone technology automatically adjusts the color temperature of your display to the ambient light of your
-                                environment, for a more natural viewing experience. So whether you're editing photos, working on presentations, or watching your favorite shows and movies, everything looks incredible on iMac.
-                            </li>
-                         
+                            <p className="text-base font-semibold text-black">Key Features and Benefits:</p>
+                            <ul role="list" className="mt-8 space-y-8 text-gray-600">
+                                <li className="flex gap-x-3">
+                                <i className="fa-solid fa-caret-right"></i>
+                                <span>
+                                    <strong className="font-semibold text-gray-900">For Gamers by Gamers.</strong> Lorem ipsum, dolor sit amet
+                                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
+                                    blanditiis ratione.
+                                </span>
+                                </li>
+                                <li className="flex gap-x-3">
+                                <i className="fa-solid fa-caret-right"></i>
+                                <span>
+                                    <strong className="font-semibold text-gray-900">Constant Updates</strong> Lorem ipsum, dolor sit amet
+                                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
+                                    blanditiis ratione.
+                                </span>
+                                </li>
+                                <li className="flex gap-x-3">
+                                <i className="fa-solid fa-caret-right"></i>
+                                <span>
+                                    <strong className="font-semibold text-gray-900">24/7 Customer Support</strong> Lorem ipsum, dolor sit amet
+                                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
+                                    blanditiis ratione.
+                                </span>
+                                </li>
+                                <li className="flex gap-x-3">
+                                <i className="fa-solid fa-caret-right"></i>
+                                <span>
+                                    <strong className="font-semibold text-gray-900">Powered by dotVenv</strong> Lorem ipsum, dolor sit amet
+                                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
+                                    blanditiis ratione.
+                                </span>
+                                </li>
+
                             </ul>
+                           
+                            <span className="font-semibold text-black"> The vision of GB: </span>
+                            <p className='text-base text-gray-600'>                            With majority of E-sports viewers being either casual or compeitive spectators in the competitions they're watching, it feels pretty limited on who's actually able to compete.
+                            Seeing multi-million dollar tournaments with the same teams competing not only struck an idea but provided a solution to a problem on how allow all gamers alike to compete for if they feel they can.
+                            A billion-dollar industry  shouldn't stop just at  events and such for gamers at a very limited capacity. If the a gamer has a skill, no need to fly out or grind a stream to get noticed. Now you can climb 
+                            the ranks in your favorite game and get noticed by top players and teams while earning money on the way.</p>
+
+
+                        
                         </div>
 
-                        <div class="mx-auto mb-6 max-w-3xl space-y-6 md:mb-12">
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Connectivity includes two Thunderbolt / USB 4 ports and two USB 3 ports (all with a USB-C connector), a 3.5 mm headphone jack conveniently mounted on the left edge of the display, Wi-Fi 6 (802.11ax), and Bluetooth 5.0.</p>
+                        <div className="mx-auto mb-6 max-w-3xl space-y-6 md:mb-12">
+                            <p className="text-base font-normal text-gray-600">For those gamers who find themselves competing daily, we want them to be able to possibly have a side or main hustle/income rather than playing ranked matches for fun. So we've relaunched with more powerful features, better performance, and security to ensure GB is the place for gamers to come.</p>
 
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">A-Grade/CR: iMacs are in 9/10 Cosmetic Condition and are 100% Fully Functional. iMacs will be shipped in generic packaging and will contain generic accessories. 90 Days Seller Warranty Included. iMacs may show signs of wear like scratches, scuffs and minor dents.</p>
+                            <p className="text-base font-normal text-gray-600">Have the option to go at it alone, or create/join a team compete with your org the choice is yours. WE here at Gamers-Bounty want to allow you to start where you want.</p>
                         </div>
                        
                         </div>
