@@ -19,8 +19,10 @@ const FAQ = () =>{
                 <div className='flex mt-4 px-4 justify-center align-center mx-auto'>
                     <br></br>
                     <Spacer></Spacer>
-                    <h2 className='text-black font-bold'> About Us </h2>
+                    <h2 className='text-black font-bold'> Frequently Asked Questions </h2>
                 </div>
+
+                
             </section>
 
         </>
