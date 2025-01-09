@@ -15,12 +15,12 @@ const MainSection = () => {
                
                 <Spacer></Spacer>
                 <ACMELogo />
-                <br></br>
+                <br></br> 
                 <Spacer></Spacer>
                 <WordRotate  
                     className="text-4xl  align-center  text-center justify-center font-bold text-black bg-transparent dark:text-white flex"
                     style={{'fontSize:':'25px',}}
-                    words={["GAMERS-BOUNTY", "PLAY GAMES", "WIN MONEY"]}/>
+                    words={["GAMERS-BOUNTY ✔️", "PLAY GAMES 🎮", "WIN MONEY 💰"]}/>
                 <Spacer></Spacer>   
                 <br></br> 
                 <div className="mx-auto max-w-2xl py-29 sm:py-48 lg:py-49 mt-1">
