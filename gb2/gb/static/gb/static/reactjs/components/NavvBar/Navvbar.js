@@ -13,7 +13,7 @@ const NavvBar = ({cpage}) => {
             <Navbar>
                             
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                    <NavbarItem className='mt-2' isActive={cpage == 'home' ? true : false }>
+                    <NavbarItem className='mt-2' isActive={cpage == '/' ? true : false }>
                         <Link color="foreground" href='/'>
                             Home
                         </Link>

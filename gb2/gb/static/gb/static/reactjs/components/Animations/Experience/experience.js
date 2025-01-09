@@ -6,8 +6,6 @@ import { MainSection } from "../../../containers";
 import WatcherStatueModel from "../Room/WatcherStatue";
 import DotPattern from "../../magicui/dot-pattern";
 import { Button, cn, Spacer } from "@nextui-org/react";
-import AboutInfo  from "../../AboutInfo/AboutInfo";
-
 const DP = () =>{
 
     return(
@@ -29,7 +27,7 @@ const Experience = ({children, pagetype}) =>{
                     <div className='absolute inset-0 z-10 mt-4 justify-center align-center mx-auto'>
                         <section>
                             <DP />
-                            { pagetype == 'main' ? <MainSection /> : pagetype == 'aboutus' ? <AboutInfo />  : undefined }
+                            {children}
                         </section>
                         
                     </div>
@@ -52,7 +50,6 @@ const Experience = ({children, pagetype}) =>{
                         </Canvas>
                        
                     </div>
-                    {children}
                 </div>
                
                 

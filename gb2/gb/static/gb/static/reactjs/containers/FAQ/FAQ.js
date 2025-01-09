@@ -3,6 +3,7 @@
 
 import React, {Suspense } from "react";
 import { Spacer } from "@nextui-org/react";
+import {FAQ} from "../../components/index";
 import { 
     Experience,
     Footer,
@@ -16,8 +17,8 @@ const FreqAsked = () => {
         <>
             <Suspense fallback={<p>Loading Esports Environment</p>}>
                 <NavvBar />
-                    <Experience pagetype={'FAQ'}>
-                    
+                    <Experience pagetype={'faq'}>
+                        <FAQ />
                     </Experience>
             </Suspense>
         </>

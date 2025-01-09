@@ -3,6 +3,7 @@
 
 import React, {Suspense } from "react";
 import { Spacer } from "@nextui-org/react";
+import {AboutInfo} from "../../components/index";
 import { 
     Experience,
     Footer,
@@ -18,7 +19,7 @@ const AboutUs = () => {
         <Suspense fallback={<p>Loading Esports Environment</p>}>
             <NavvBar />
                 <Experience pagetype={'aboutus'}>
-              
+                    <AboutInfo />
                 </Experience>
         </Suspense>
         </>
