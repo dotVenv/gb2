@@ -116,7 +116,7 @@ const Indx = () => {
                     </section>
 
                     <br></br>
-                    <section className="relative h-[105vh] mb-4 pb-4">
+                    <section className="relative h-[105vh] mt-3 pt-3">
                         <br></br>
                         <Spacer></Spacer>
                         <div>
