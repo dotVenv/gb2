@@ -1,13 +1,12 @@
-'use client';
+'use server';
 import React from "react";
 import { signal } from "@preact/signals-react";
 
 /* set initial data to check login buttons and redirects */
 
-class initialData {
+export class initialData {
 
     constructor(){
-
 
         this.initialPull = signal(null);
         this.uname = signal(null);
@@ -20,15 +19,15 @@ class initialData {
     setUser(uname, email){
         this.email.value = email;
         this.uname.value = uname;
+        this.setLoggedIn();
     };
 
     setLoggedIn(){
         this.loggedin.value = !this.loggedin.value;
-    }
+    };
 
-    setChecked(){
+    checkUser(){
         this.initialPull.value = true;
-    }
+        this.setUser();
+    };
 };
-
-export {initialData};

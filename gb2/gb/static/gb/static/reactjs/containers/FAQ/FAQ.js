@@ -1,9 +1,10 @@
 'use client'
 
 
-import React, {Suspense } from "react";
+import React, { Suspense, useContext } from "react";
 import { Spacer } from "@nextui-org/react";
-import {FAQ, Preloader, PromoBanner } from "../../components/index";
+import {FAQ, Preloader, PromoBanner } from "../../components";
+
 import { 
     Experience,
     Footer,
@@ -17,7 +18,9 @@ const FreqAsked = () => {
         <>
             <Suspense fallback={<Preloader />}>
                 <NavvBar />
+              
                 <PromoBanner />
+
                     <Experience pagetype={'faq'}>
                         <FAQ />
                     </Experience>
