@@ -28,7 +28,7 @@ import { cn,
   } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
-
+import quickintro from '../../../mp4/quickintro.mp4';
 
 const tourney_journey = [
     {
@@ -123,7 +123,7 @@ const Indx = () => {
                             <div>
                                 <TextRevealByWord className='justify-center align-center text-center mx-auto flex text-medium' text="The New E-sports, Powered by dotVenv">
                                     <Card className='h-[450px] w-full col-12'>
-                                        <iframe className='w-full h-full' src='https://www.youtube.com/embed/843nec-IvW0'></iframe>
+                                        <video className='w-full h-full' autoPlay loop muted><source  type='video/mp4' src={quickintro}></source></video>
                                     </Card>
                                 </TextRevealByWord>
                             </div>
@@ -162,7 +162,7 @@ const Indx = () => {
 
                                     <div className="justify-center mx-auto lg:flex sm:grid-cols-1 gap-y-2">
                                         {tourney_journey.map((feature) => (
-                                            <Chip variant='flat' size='md' color='success' className='font-bold text-small mb-2'>
+                                            <Chip variant='flat' size='md' color='success' key={feature.name} className='font-bold text-small mb-2'>
                                                 {feature.name}
                                             </Chip>
                                         ))}

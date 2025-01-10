@@ -2,13 +2,23 @@ import React from "react";
 
 import { Spacer, Form } from "@nextui-org/react";
 import Footer from "../Footer/Footer";
+import ACMELogo from "../ACMELogo/acme";
 
 const ContactForm = () => {
     const [action, setAction] = React.useState(null);
 
     return(
         <>
-        
+            <Spacer></Spacer>
+            <section className='mt-4 pt-4'>
+            <br></br>
+            <Spacer></Spacer>
+            <ACMELogo />
+            <div className='flex mt-4 px-4 justify-center align-center mx-auto'>
+                <br></br>
+                <Spacer></Spacer>
+                <h2 className='text-black font-bold'> About Us </h2>
+            </div>
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -106,7 +116,9 @@ const ContactForm = () => {
                 </div>
             </Form>
             </div>
+            </section>
           <Footer></Footer>
+        
         </>
     );
 };

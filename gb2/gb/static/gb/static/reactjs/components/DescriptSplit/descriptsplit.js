@@ -19,7 +19,7 @@ const descItems = [
     },
     {
         text: "PLAY AND EARN MONEY",
-        desc: "Brnging esports to everyone. Sign up and for each tournament placed, can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
+        desc: "Bringing esports to everyone. Sign up and for each tournament placed, can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
         img: moneygif,
         ref: null,
     },
