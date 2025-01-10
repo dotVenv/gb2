@@ -104,7 +104,7 @@ const LoginModal = ({ isLoginModalOpen, onLoginModalOpenChange, changeLoginModal
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" variant="flat" onPress={(e) =>{ changeLoginModal(e);}}>
+                    <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                     </Button>
                     <Button color="primary" onPress={onClose}>

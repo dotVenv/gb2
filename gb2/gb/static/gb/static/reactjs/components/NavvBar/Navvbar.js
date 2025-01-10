@@ -29,15 +29,9 @@ const NavvBar = ({cpage}) => {
     
     /* login modal */
 
-    const isLoginModalOpen = signal(false);
-    const {onLoginModalOpenChange} = useDisclosure();
+   
+    const {onLoginModalOpenChange, onLoginModalOpen,isLoginModalOpen} = useDisclosure();
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
-
-
-    const changeLoginModal = (e) =>{
-        isLoginModalOpen.value ? isLoginModalOpen.value = false : isLoginModalOpen.value = true;
-        setTriggerLoginModal(isLoginModalOpen.value);
-    };
 
      /* login modal */
     
@@ -75,7 +69,7 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
                     <NavbarItem className="hidden lg:flex">
-                    <Button  size='sm' variant='light' onPress={(e) => {changeLoginModal(e);}} >Sign In</Button>
+                    <Button  size='sm' variant='light' onPress={onLoginModalOpen} >Sign In</Button>
                     </NavbarItem>
                     <NavbarItem>
                     <Button  color="primary" size='sm'  variant="flat">
@@ -100,7 +94,7 @@ const NavvBar = ({cpage}) => {
                 ))}
             </NavbarMenu>
             </Navbar>
-            <LoginModal isLoginModalOpen={triggerLoginModal} onLoginModalOpenChange={onLoginModalOpenChange} changeLoginModal={changeLoginModal}/>
+            <LoginModal isLoginModalOpen={triggerLoginModal} onLoginModalOpenChange={onLoginModalOpenChange} />
         </>
     );
    
