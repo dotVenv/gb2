@@ -174,6 +174,12 @@ const Indx = () => {
                                         style={{'height': '350px', 'width':'350px'}}
                                         src={gbAD}  />
                                 </div>
+                            
+                        </section>
+                        <section>
+                            <div className='flex justify-center align-center mx-auto'>
+                                
+                            </div>
                         </section>
                         <br></br>
                         <div className='justify-center align-center mx-auto'>
