@@ -12,7 +12,9 @@ import {
     Input,
     Link,
     DatePicker,
-    Form
+    Form,
+    Divider,
+    Spacer,
   } from "@nextui-org/react";
   
 
@@ -109,7 +111,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         <Input
                             isRequired
                             label="Password"
-                            autoComplete="off"
+                            autocomplete="current-password"
                             placeholder="Enter your password"
                             type="password"
                             variant="bordered"
@@ -129,7 +131,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         <Input
                             isRequired
                             label="Repeat Password"
-                            autoComplete="off"
+                            autocomplete="current-password"
                             placeholder="Repeat your password"
                             type="password"
                             variant="bordered"
@@ -174,6 +176,26 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                     </Button>
                 </ModalFooter>
                 </Form>
+                <div className="flex items-center gap-4 py-2">
+                  <Divider className="flex-1" />
+                  <p className="shrink-0 text-tiny text-default-500">OR</p>
+                  <Divider className="flex-1" />
+                  </div>
+                  <Spacer></Spacer>
+                  <br></br>
+                  <div className="flex flex-col gap-2 mb-1">
+
+                    <Button
+                      startContent={<i className="fa-brands fa-google fa-xl"></i>}
+                      variant="bordered"
+                    >
+                      Sign up with Google
+                    </Button>
+                   
+                   <br></br>
+                   <Spacer></Spacer>
+                  </div>
+                 
                 </>
             )}
             </ModalContent>

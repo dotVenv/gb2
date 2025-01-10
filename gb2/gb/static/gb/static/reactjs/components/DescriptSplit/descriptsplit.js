@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Spacer,Button} from "@nextui-org/react";
+import { Spacer,Button, Card, CardBody} from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
@@ -82,21 +82,14 @@ const DescriptionSplit = () => {
                                 <div className="relative lg:row-span-2">
                                     <div className=" inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
                                     <div className="relative flex h-[475px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                                    <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                                            {descItems[0].text}
-                                        </p>
-                                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                                        {descItems[0].desc}
-                                        </p>
-                                    </div>
-                                      
-                                        <img
-                                            className="align-center justify-center mx-auto"
-                                            style={{'height': '225px', 'width': '250px'}}
-                                            src={descItems[0].img}
-                                            alt=""
-                                        />
+                                    <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Popular Tournaments</p>
+                                    <Spacer></Spacer>
+                                    <br></br>
+                                    <ul className='justify-center align-center mx-auto'>
+                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                    </ul>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
                                 </div>
@@ -123,15 +116,15 @@ const DescriptionSplit = () => {
                                     <div className=" inset-px rounded-lg bg-white"></div>
                                     <div className="relative flex h-[300px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
                                     <div className="px-8  sm:px-10 ">
-                                        <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[3].text}</p>
+                                        <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[0].text}</p>
                                         <p className="mt-1 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                                        {descItems[3].desc}
+                                        {descItems[0].desc}
                                         </p>
                                     </div>
                                     <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-3 lg:pb-1">
                                         <img
-                                        className="h-[min(152px,40cqw)] object-cover"
-                                        src="https://tailwindui.com/plus/img/component-images/bento-03-security.png"
+                                        className="h-[min(152px,40cqw)] object-cover justify-center align-center mx-auto"
+                                        src={descItems[0].img}
                                         alt=""
                                         />
                                     </div>
@@ -141,18 +134,14 @@ const DescriptionSplit = () => {
                                 <div className="relative lg:row-span-2">
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                                     <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
-                                    <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                                        {descItems[1].text}
-                                        </p>
-                                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                                        {descItems[1].desc}
-                                        </p>
-                                    </div>
-                                    <img 
-                                        className="align-center justify-center mx-auto"
-                                        style={{'height': '250px', 'width': '275px'}}
-                                        src={descItems[1].img} />
+                                    <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Top Competitors</p>
+                                    <Spacer></Spacer>
+                                    <br></br>
+                                    <ul className='justify-center align-center mx-auto'>
+                                        <li> <Card> <CardBody> Testing </CardBody></Card></li>
+                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                    </ul>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                                 </div>

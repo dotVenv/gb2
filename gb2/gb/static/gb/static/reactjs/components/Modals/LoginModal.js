@@ -12,7 +12,9 @@ import {
     Checkbox,
     Input,
     Link,
-    Form
+    Form,
+    Divider,
+    Spacer,
   } from "@nextui-org/react";
 
 
@@ -35,7 +37,12 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1">
+                      <h1 className="text-large font-medium">Sign in to your account</h1>
+                      <p className="text-small text-default-500">to continue to Gamers-Bounty</p>
+                  </div>
+                </ModalHeader>
                 <Form
                   className='col-12 w-full'
                   validationBehavior="native"
@@ -56,7 +63,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                         <i className="fa-solid fa-lock mb-1 pb-1"></i>
                         
                       }
-                      autocomplete="off"
+                      autocomplete="current-password"
                       label="Password"
                       placeholder="Enter your password"
                       type="password"
@@ -75,7 +82,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       </Link>
                       </div>
                   </ModalBody>
-                  <ModalFooter>
+                  <ModalFooter className='flex float-end'>
                       <Button color="danger" variant="light" onPress={onClose}>
                       Close
                       </Button>
@@ -84,6 +91,31 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       </Button>
                   </ModalFooter>
                 </Form>
+                <div className="flex items-center gap-4 py-2">
+                  <Divider className="flex-1" />
+                  <p className="shrink-0 text-tiny text-default-500">OR</p>
+                  <Divider className="flex-1" />
+                  </div>
+                  <Spacer></Spacer>
+                  <br></br>
+                  <div className="flex flex-col gap-2">
+
+                    <Button
+                      startContent={<i className="fa-brands fa-google fa-xl"></i>}
+                      variant="bordered"
+                    >
+                      Sign in with Google
+                    </Button>
+                   
+                  </div>
+                  <Spacer></Spacer>
+                  <br></br>
+                  <p className="text-center text-small">
+                    Need to create an account?&nbsp;
+                    <Link href="#" size="sm">
+                      Sign Up
+                    </Link>
+                  </p>
                 </>
             )}
             </ModalContent>
