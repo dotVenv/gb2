@@ -23,7 +23,10 @@ export { default as OurPartners } from './Partners/Partners';
 export { default as PricingTable } from './PricingTable/PricingTable';
 export { default as AboutInfo } from './AboutInfo/AboutInfo';
 export { default as AboutStaff } from './AboutInfo/AboutStaff';
+export { default as ContactForm } from './ContactUs/ContactUs';
 export { default as FAQ } from './FAQ/FAQ';
+
+
 export {  cn } from './ui/lib/utils';
 export { BorderBeam } from './magicui/border-beam';
 export { GridPattern } from './magicui/animated-grid-pattern';

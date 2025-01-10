@@ -19,3 +19,7 @@ class UIViews(TemplateView):
         context = {}
         return render(request, 'gb/templates/index.html', context=context)
         
+    def contact_us(self, request):
+        
+        context = {}
+        return render(request, 'gb/templates/index.html', context=context)

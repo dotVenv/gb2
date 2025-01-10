@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {NextUIProvider} from "@nextui-org/react";
-import { AboutUs, FreqAsked, Indx } from "../../containers";
+import { AboutUs, FreqAsked, Indx, ContactUs } from "../../containers";
 
 
 export default function App(){
@@ -19,6 +19,7 @@ export default function App(){
               <Route path='' element={<Indx />}/>
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/faq' element={<FreqAsked />} />
+              <Route path='/contact-us' element={<ContactUs />} />
             </Routes>
           </BrowserRouter>
         </NextUIProvider>
