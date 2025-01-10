@@ -2,7 +2,7 @@
 import React, { Suspense } from "react";
 
 import { Spacer,Form, Input, Button } from "@nextui-org/react";
-import { ContactForm, NavvBar, Experience, Preloader } from "../../components/index";
+import { ContactForm, NavvBar, Experience, Preloader, PromoBanner } from "../../components/index";
 
 
 const ContactUs = () => {
@@ -10,6 +10,7 @@ const ContactUs = () => {
         <>
             <Suspense fallback={<Preloader />}>
                 <NavvBar />
+                <PromoBanner />
                 <Experience pagetype={'contactus'}>
                     <ContactForm />
                 </Experience>

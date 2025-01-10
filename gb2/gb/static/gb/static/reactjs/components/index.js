@@ -26,6 +26,7 @@ export { default as AboutStaff } from './AboutInfo/AboutStaff';
 export { default as ContactForm } from './ContactUs/ContactUs';
 export { default as FAQ } from './FAQ/FAQ';
 export { default as Preloader } from './Preloader/Preloader';
+export { default as PromoBanner } from './PromoBanner/PromoBanner';
 
 
 export {  cn } from './ui/lib/utils';

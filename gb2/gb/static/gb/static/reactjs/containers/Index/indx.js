@@ -14,6 +14,7 @@ import {
     PricingTable,
     SimpleSteps,
     Preloader,
+    PromoBanner,
     } from "../../components";
 
 import gbAD from '../../../imgs/pngs/gb_ad.png';
@@ -91,6 +92,7 @@ const Indx = () => {
         <> 
             <Suspense fallback={<Preloader />} >
                 <NavvBar cpage='/'/>
+                <PromoBanner />
                 <Experience pagetype='main' style={{'overflowX': 'hidden'}}>
                     <div className="bg-white py-24 sm:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">

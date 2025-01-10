@@ -9,7 +9,7 @@ const tiers = [
       href: '#',
       priceMonthly: '$0',
       description: "The perfect plan if you are wanting to try competing without committing.",
-      features: ['(x5) Tournament Entries', 'Esports Profile', '24hr Payout', '24-hour support response time'],
+      features: ['(x5) Tournament Entries', 'Esports Profile', '24-hour support response time'],
       featured: false,
     },
     {
@@ -17,7 +17,7 @@ const tiers = [
       id: 'tier-official',
       href: '#',
       priceMonthly: '$14.99',
-      description: 'For gamers who have what it takes to compete against the top dogs.',
+      description: 'For gamers who have what it takes to compete!',
       features: [
         'Unlimited Tournament Entries',
         'Esports Profile',
@@ -91,7 +91,7 @@ const PricingTable = () => {
                         'text-5xl font-semibold tracking-tight',
                         )}
                     >
-                        {tier.priceMonthly}
+                        {tier.priceMonthly}  {tier.id === 'tier-official' ? <p className='font-bold text-small'><i> <del>$19.99 /month</del></i></p>: undefined }
                     </span>
                     <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/month</span>
                     </p>
