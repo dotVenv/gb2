@@ -91,7 +91,7 @@ const PricingTable = () => {
                         'text-5xl font-semibold tracking-tight',
                         )}
                     >
-                        {tier.priceMonthly}  {tier.id === 'tier-official' ? <p className='font-bold text-small'><i> <del>$19.99 /month</del></i></p>: undefined }
+                        {tier.priceMonthly}  {tier.id === 'tier-official' ? <del className='font-bold text-small'><i> $19.99 /month</i></del>: undefined }
                     </span>
                     <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/month</span>
                     </p>

@@ -12,7 +12,7 @@ const MainSection = () => {
     return(
         <>
             <div className='mt-4'>
-               
+               <br></br>
                 <Spacer></Spacer>
                 <ACMELogo />
                 <br></br> 

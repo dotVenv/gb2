@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -8,12 +8,17 @@ import {
     NavbarMenu,
     NavbarMenuItem,
     Link,
-    Button, } from "@nextui-org/react";
-import ACMELogo from "../ACMELogo/acme";
+    Button,
+    useDisclosure } from "@nextui-org/react";
+
+import { LoginModal, ACMELogo } from '../index';
 
 
 const NavvBar = ({cpage}) => {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const {isLoginModalOpen, onLoginModalOpen, onLoginModalOpenChange} = useDisclosure();
+    const [loginModal, loginModalOpen] = useState(false);
+    
 
     const menuItems = [
         "Home",
@@ -57,10 +62,10 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
                     <NavbarItem className="hidden lg:flex">
-                    <Link href="#">Sign In</Link>
+                    <a href='#' size='sm' onPress={(e) => { e.preventDefault(); onLoginModalOpen();}} >Sign In</a>
                     </NavbarItem>
                     <NavbarItem>
-                    <Button as={Link} color="primary" size='sm' href="#" variant="flat">
+                    <Button  color="primary" size='sm' href="#" variant="flat">
                         Sign Up
                     </Button>
                     </NavbarItem>
@@ -82,6 +87,7 @@ const NavvBar = ({cpage}) => {
                 ))}
             </NavbarMenu>
             </Navbar>
+            <LoginModal isLoginModalOpen={isLoginModalOpen} onLoginModalOpenChange={onLoginModalOpenChange}/>
         </>
     );
    

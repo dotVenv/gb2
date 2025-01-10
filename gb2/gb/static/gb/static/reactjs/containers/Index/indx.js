@@ -17,19 +17,17 @@ import {
     PromoBanner,
     } from "../../components";
 
-import gbAD from '../../../imgs/pngs/gb_ad.png';
 import { cn,  
     Card, 
-    CardBody, 
     CardHeader, 
-    CardFooter, 
     Spacer, 
     Button, 
     Chip,
   } from "@nextui-org/react";
-import { motion } from "framer-motion";
+
 
 import quickintro from '../../../mp4/quickintro.mp4';
+
 
 const tourney_journey = [
     {
@@ -63,17 +61,7 @@ const stats = [
     { id: 3, name: 'Current Prize Pool', value: '$26,000+' },
   ]
 
-const CustmBadge = ({children}) => {
 
-    return (
-
-    <>
-    <div className='row flex col-4'>
-        {children}
-        <Button size='sm' className='col-4'> This is our badge</Button>
-        </div>
-    </>)
-};
 
 const DP = () =>{
 
@@ -93,6 +81,7 @@ const Indx = () => {
             <Suspense fallback={<Preloader />} >
                 <NavvBar cpage='/'/>
                 <PromoBanner />
+               
                 <Experience pagetype='main' style={{'overflowX': 'hidden'}}>
                     <div className="bg-white py-24 sm:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
