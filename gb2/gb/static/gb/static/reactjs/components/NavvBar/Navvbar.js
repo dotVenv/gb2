@@ -12,7 +12,7 @@ import {
     useDisclosure } from "@nextui-org/react";
 
 import { signal } from "@preact/signals-react";
-import { LoginModal, ACMELogo } from '../index';
+import { LoginModal, SignUpModal, ACMELogo } from '../index';
 const menuItems = [
     "Home",
     "About Us",
@@ -22,20 +22,27 @@ const menuItems = [
   ];
 
 
+const isLoginModalOpen = signal(false);
+const isSignupModalOpen = signal(false);
 const NavvBar = ({cpage}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     /* login modal */
 
-   
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    
-    const [triggerLoginModal, setTriggerLoginModal] = useState(false);
+    const {isOpen, onOpen, onOpenChange} = useDisclosure(); 
+    const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
+    const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
+
 
     const handleLoginOpen = () => {
-        setTriggerLoginModal(!triggerLoginModal);
-        onOpen();
+        setTriggerLoginModal(!isLoginModalOpen.value);
+        triggerLoginModal ? onOpen() : undefined;
+     
+    };
+    const handleSignupOpen = () => {
+        setTriggerSignupModal(!isSignupModalOpen.value);
+        triggerSignUpModal ? onOpen() : undefined;
     };
      /* login modal */
     
@@ -76,7 +83,7 @@ const NavvBar = ({cpage}) => {
                     <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
                     </NavbarItem>
                     <NavbarItem>
-                    <Button  color="primary" size='sm'  variant="flat">
+                    <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
                         Sign Up
                     </Button>
                     </NavbarItem>
@@ -99,6 +106,7 @@ const NavvBar = ({cpage}) => {
             </NavbarMenu>
             </Navbar>
             { triggerLoginModal ? <LoginModal isOpen={isOpen} onOpenChange={onOpenChange} /> : undefined }
+            { triggerSignUpModal ? <SignUpModal isOpen={isOpen} onOpenChange={onOpenChange} /> : undefined }
         </>
     );
    
