@@ -11,22 +11,35 @@ import {
     Button,
     useDisclosure } from "@nextui-org/react";
 
+import { signal } from "@preact/signals-react";
 import { LoginModal, ACMELogo } from '../index';
+const menuItems = [
+    "Home",
+    "About Us",
+    "ContactUs",
+    "FAQ",
+    "dotVenv",
+  ];
+
 
 
 const NavvBar = ({cpage}) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {isLoginModalOpen, onLoginModalOpen, onLoginModalOpenChange} = useDisclosure();
-    const [loginModal, loginModalOpen] = useState(false);
-    
 
-    const menuItems = [
-        "Home",
-        "About Us",
-        "ContactUs",
-        "FAQ",
-        "dotVenv",
-      ];
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+    /* login modal */
+
+    const isLoginModalOpen = signal(false);
+    const {onLoginModalOpenChange} = useDisclosure();
+    const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
+
+
+    const changeLoginModal = (e) =>{
+        isLoginModalOpen.value ? isLoginModalOpen.value = false : isLoginModalOpen.value = true;
+        setTriggerLoginModal(isLoginModalOpen.value);
+    };
+
+     /* login modal */
     
     return (
         <>
@@ -62,10 +75,10 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
                     <NavbarItem className="hidden lg:flex">
-                    <a href='#' size='sm' onPress={(e) => { e.preventDefault(); onLoginModalOpen();}} >Sign In</a>
+                    <Button  size='sm' variant='light' onPress={(e) => {changeLoginModal(e);}} >Sign In</Button>
                     </NavbarItem>
                     <NavbarItem>
-                    <Button  color="primary" size='sm' href="#" variant="flat">
+                    <Button  color="primary" size='sm'  variant="flat">
                         Sign Up
                     </Button>
                     </NavbarItem>
@@ -87,7 +100,7 @@ const NavvBar = ({cpage}) => {
                 ))}
             </NavbarMenu>
             </Navbar>
-            <LoginModal isLoginModalOpen={isLoginModalOpen} onLoginModalOpenChange={onLoginModalOpenChange}/>
+            <LoginModal isLoginModalOpen={triggerLoginModal} onLoginModalOpenChange={onLoginModalOpenChange} changeLoginModal={changeLoginModal}/>
         </>
     );
    

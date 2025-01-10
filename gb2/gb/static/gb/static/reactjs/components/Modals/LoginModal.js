@@ -62,9 +62,9 @@ import {
   };
 
 
-const LoginModal = ({ isLoginModalOpen, onLoginModalOpenChange }) => {
+const LoginModal = ({ isLoginModalOpen, onLoginModalOpenChange, changeLoginModal }) => {
 
-
+    console.log(isLoginModalOpen);
     return(
         <>
         <Modal isOpen={isLoginModalOpen} placement="top-center" onOpenChange={onLoginModalOpenChange}>
@@ -104,7 +104,7 @@ const LoginModal = ({ isLoginModalOpen, onLoginModalOpenChange }) => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" variant="flat" onPress={onClose}>
+                    <Button color="danger" variant="flat" onPress={(e) =>{ changeLoginModal(e);}}>
                     Close
                     </Button>
                     <Button color="primary" onPress={onClose}>
