@@ -1,7 +1,8 @@
 import React from "react";
 import { Chip, Spacer } from "@nextui-org/react";
 import ACMELogo from "../ACMELogo/acme";
-
+import SSLBadge from '../../../imgs/pngs/ssl.png';
+import Stripe from '../../../imgs/pngs/stripe.png';
 const Footer = () => {
 
     return (
@@ -11,6 +12,10 @@ const Footer = () => {
             <div className="mx-auto  text-center align-center">
                 <ACMELogo />
                 <p className="my-6 text-gray-500 dark:text-gray-400">The #1 Online Esports Company.</p>
+                <div className='flex align-center justify-center mx-auto'>
+                    <img src={SSLBadge} style={{'height':'50px','width': '100px'}} />
+                    <img src={Stripe} style={{'height':'50px','width': '100px'}} />
+                </div>
                 <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
                     <li>
                         <a href="#" className="mr-4 hover:underline md:mr-6 ">About</a>

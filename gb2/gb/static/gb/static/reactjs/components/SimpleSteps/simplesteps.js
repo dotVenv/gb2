@@ -93,7 +93,7 @@ const SimpleSteps = () => {
                 <h2 className='font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
                 <Card 
                   isFooterBlurred
-                  className="flex h-[320px] w-[50px] col-3 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
+                  className="flex h-[320px] w-[50px] col-8 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
                       <CardBody className="items-center mx-auto flex">
                           <div
                               className={cn(

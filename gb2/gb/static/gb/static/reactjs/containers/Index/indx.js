@@ -91,7 +91,7 @@ const Indx = () => {
         <> 
             <Suspense fallback={<p> Loading Esports Environment...</p>} >
                 <NavvBar cpage='/'/>
-                <Experience pagetype='main'>
+                <Experience pagetype='main' style={{'overflowX': 'hidden'}}>
                     <div className="bg-white py-24 sm:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">

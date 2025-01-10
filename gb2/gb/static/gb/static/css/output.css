@@ -66,6 +66,7 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  overflow-x: hidden;
 }
 
 /*
@@ -5394,6 +5395,12 @@ video {
           mask: linear-gradient(transparent,transparent),linear-gradient(white,white);
 }
 
+@media (max-width: 800px) {
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
 .file\:cursor-pointer::file-selector-button {
   cursor: pointer;
 }
@@ -10173,6 +10180,14 @@ video {
     display: flex;
   }
 
+  .sm\:grid {
+    display: grid;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:h-\[750px\] {
     height: 750px;
   }
@@ -10391,6 +10406,10 @@ video {
 
   .lg\:max-w-none {
     max-width: none;
+  }
+
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-2 {
