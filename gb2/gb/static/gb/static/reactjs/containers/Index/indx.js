@@ -12,6 +12,7 @@ import {
     NavvBar,
     Footer,
     PricingTable,
+    SimpleSteps,
    
     } from "../../components";
 
@@ -169,17 +170,12 @@ const Indx = () => {
                                 <div className='align-center justify-center mx-auto flex'>
                                     <PricingTable />
                                 </div>
-                                <div className='align-center justify-center mx-auto flex'>
-                                    <img 
-                                        style={{'height': '350px', 'width':'350px'}}
-                                        src={gbAD}  />
-                                </div>
-                            
-                        </section>
-                        <section>
-                            <div className='flex justify-center align-center mx-auto'>
                                 
-                            </div>
+                        </section>
+                        <Spacer></Spacer>
+                        <br></br>
+                        <section>
+                            <SimpleSteps />
                         </section>
                         <br></br>
                         <div className='justify-center align-center mx-auto'>

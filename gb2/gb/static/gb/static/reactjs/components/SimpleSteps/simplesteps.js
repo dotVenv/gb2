@@ -14,30 +14,30 @@ const Item = {
    
   let notifications = [
     {
-      name: "Payment received",
-      description: "Magic UI",
+      name: "Payment added to wallet.",
+      description: "Gamers-Bounty",
       time: "15m ago",
    
-      icon: "💸",
+      icon: "💰",
       color: "#00C9A7",
     },
     {
-      name: "User signed up",
-      description: "Magic UI",
+      name: "New user signed up",
+      description: "Gamers-Bounty",
       time: "10m ago",
-      icon: "👤",
+      icon: "🖋️",
       color: "#FFB800",
     },
     {
-      name: "New message",
-      description: "Magic UI",
+      name: "New message recieved",
+      description: "Gamers-Bounty",
       time: "5m ago",
-      icon: "💬",
+      icon: "➕",
       color: "#FF3D71",
     },
     {
-      name: "New event",
-      description: "Magic UI",
+      name: "New Tournament Added",
+      description: "Gamers-Bounty",
       time: "2m ago",
       icon: "🗞️",
       color: "#1E86FF",
@@ -86,13 +86,11 @@ const SimpleSteps = () => {
    
    return (
         <>      
-            <ShineBorder
-                className="h-[410px] w-[375px] bg-background md:shadow-xl mr-4 justify-center align-center mx-auto flex-cols"
-                color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
-                    <h4 className='text-small font-bold'> <i>Competing made simple. </i> </h4>
+            
+                <h2 className=' font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
                 <Card 
                     isFooterBlurred
-                    className="md:shadow-xl ml-4 float-end  h-[320px] w-[375px] rounded-xl bg-zinc-900">
+                    className="flex h-[320px] w-[50px] col-3 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
                         <CardBody className="items-center mx-auto flex">
                             <div
                                 className={cn(
@@ -102,7 +100,7 @@ const SimpleSteps = () => {
                                 >
                                 <AnimatedList>
                                     {notifications.map((item, idx) => (
-                                    <Notification {...item} key={idx} />
+                                      <Notification {...item} key={idx} />
                                     ))}
                                 </AnimatedList>
                             </div>
@@ -113,8 +111,6 @@ const SimpleSteps = () => {
                         </CardFooter>
                         <BorderBeam />
                 </Card>
-            </ShineBorder> 
-            
             <br></br>
             <Spacer></Spacer>
         
