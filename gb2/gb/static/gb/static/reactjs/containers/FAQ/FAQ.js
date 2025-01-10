@@ -18,9 +18,7 @@ const FreqAsked = () => {
         <>
             <Suspense fallback={<Preloader />}>
                 <NavvBar />
-              
                 <PromoBanner />
-
                     <Experience pagetype={'faq'}>
                         <FAQ />
                     </Experience>
