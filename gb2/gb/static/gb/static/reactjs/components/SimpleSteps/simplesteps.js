@@ -81,35 +81,38 @@ const Notification = ({ name, description, icon, color, time }) => {
       </figure>
     );
   };
+
+
+
 const SimpleSteps = () => {
    
    
    return (
         <>      
             
-                <h2 className=' font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
+                <h2 className='font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
                 <Card 
-                    isFooterBlurred
-                    className="flex h-[320px] w-[50px] col-3 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
-                        <CardBody className="items-center mx-auto flex">
-                            <div
-                                className={cn(
-                                    "relative flex h-[500px] w-full flex-col p-6 overflow-hidden  bg-background md:shadow-xl",
-                                    "",
-                                )}
-                                >
-                                <AnimatedList>
-                                    {notifications.map((item, idx) => (
-                                      <Notification {...item} key={idx} />
-                                    ))}
-                                </AnimatedList>
-                            </div>
-                        </CardBody>
-                        <CardFooter
-                            className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                           
-                        </CardFooter>
-                        <BorderBeam />
+                  isFooterBlurred
+                  className="flex h-[320px] w-[50px] col-3 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
+                      <CardBody className="items-center mx-auto flex">
+                          <div
+                              className={cn(
+                                  "relative flex h-[500px] w-full flex-col p-6 overflow-hidden  bg-background md:shadow-xl",
+                                  "",
+                              )}
+                              >
+                              <AnimatedList>
+                                  {notifications.map((item, idx) => (
+                                    <Notification {...item} key={idx} />
+                                  ))}
+                              </AnimatedList>
+                          </div>
+                      </CardBody>
+                      <CardFooter
+                          className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                          
+                      </CardFooter>
+                      <BorderBeam />
                 </Card>
             <br></br>
             <Spacer></Spacer>
