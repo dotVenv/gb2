@@ -22,7 +22,6 @@ const menuItems = [
   ];
 
 
-
 const NavvBar = ({cpage}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,9 +29,14 @@ const NavvBar = ({cpage}) => {
     /* login modal */
 
    
-    const {onLoginModalOpenChange, onLoginModalOpen,isLoginModalOpen} = useDisclosure();
-    const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    
+    const [triggerLoginModal, setTriggerLoginModal] = useState(false);
 
+    const handleLoginOpen = () => {
+        setTriggerLoginModal(!triggerLoginModal);
+        onOpen();
+    };
      /* login modal */
     
     return (
@@ -69,7 +73,7 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
                     <NavbarItem className="hidden lg:flex">
-                    <Button  size='sm' variant='light' onPress={onLoginModalOpen} >Sign In</Button>
+                    <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
                     </NavbarItem>
                     <NavbarItem>
                     <Button  color="primary" size='sm'  variant="flat">
@@ -81,20 +85,20 @@ const NavvBar = ({cpage}) => {
                     {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
-                        className="w-full"
-                        color={
-                            index === cpage ? "danger" : "foreground"
-                        }
-                        href="#"
-                        size="lg"
-                        >
+                            className="w-full"
+                            color={
+                                index === cpage ? "danger" : "foreground"
+                            }
+                            href="#"
+                            size="lg"
+                            >
                         {item}
                         </Link>
                 </NavbarMenuItem>
                 ))}
             </NavbarMenu>
             </Navbar>
-            <LoginModal isLoginModalOpen={triggerLoginModal} onLoginModalOpenChange={onLoginModalOpenChange} />
+            { triggerLoginModal ? <LoginModal isOpen={isOpen} onOpenChange={onOpenChange} /> : undefined }
         </>
     );
    

@@ -62,12 +62,15 @@ import {
   };
 
 
-const LoginModal = ({ isLoginModalOpen, onLoginModalOpenChange, changeLoginModal }) => {
+const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
 
-    console.log(isLoginModalOpen);
+    console.log(isOpen);
     return(
         <>
-        <Modal isOpen={isLoginModalOpen} placement="top-center" onOpenChange={onLoginModalOpenChange}>
+        <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}
+          onClose={handleLoginOpen}>
+            
+          
             <ModalContent>
             {(onClose) => (
                 <>
