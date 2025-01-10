@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from . import helpers as hlp 
 
 # Create your views here.
 class UIViews(TemplateView):

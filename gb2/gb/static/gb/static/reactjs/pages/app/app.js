@@ -29,6 +29,6 @@ export default function App(){
   );
 };
 createRoot(document.getElementById('gbi_root')).render(
-  <main className='dark bg-zinc-300 text-white'>
+  <main className='dark bg-zinc-300 text-white' style={{'overflowX': 'hidden'}}>
     <App />
   </main>)
