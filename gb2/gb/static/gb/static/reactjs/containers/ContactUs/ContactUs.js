@@ -1,7 +1,7 @@
 
 import React, { Suspense } from "react";
 
-import { Spacer } from "@nextui-org/react";
+import { Spacer,Form, Input, Button } from "@nextui-org/react";
 import { ContactForm, NavvBar, Experience } from "../../components/index";
 
 
