@@ -29,7 +29,7 @@ const NavvBar = ({cpage}) => {
                         </Link>
                     </NavbarItem>
                     <NavbarItem className='mt-2' isActive={cpage == 'dotVenv' ? true : false }>
-                        <Link color="foreground" href="#">
+                        <Link color="foreground" href="https://venv.pro">
                             dotVenv
                         </Link>
                     </NavbarItem>

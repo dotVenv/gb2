@@ -57,6 +57,7 @@ const FAQ = () =>{
                 </div>
 
             </section>
+            <Footer></Footer>
         
         </>
     );
