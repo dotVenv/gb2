@@ -30,4 +30,8 @@ export class initialData {
         this.initialPull.value = true;
         this.setUser();
     };
+    setCookie(userResponse){
+        this.cookie_consent.value = userResponse;
+        return this.cookie_consent.value;
+    }
 };

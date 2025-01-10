@@ -29,6 +29,7 @@ export { default as Preloader } from './Preloader/Preloader';
 export { default as PromoBanner } from './PromoBanner/PromoBanner';
 export { default as LoginModal } from './Modals/LoginModal';
 export {default as SignUpModal } from './Modals/SignUpModal';
+export {default as CookieConsent } from './Modals/CookieModal';
 
 
 export {  cn } from './ui/lib/utils';

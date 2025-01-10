@@ -1,5 +1,5 @@
 'use client';
-import React, {Suspense, useRef} from "react";
+import React, {Suspense, useContext, useRef, useState} from "react";
 import TourneyJourney from "../sections/tourneyjourney";
 import { signal } from "@preact/signals-react";
 import { 
@@ -15,7 +15,7 @@ import {
     SimpleSteps,
     Preloader,
     PromoBanner,
-    LoginModal, SignUpModal,
+    CookieConsent,
     } from "../../components";
 
 import { cn,  
@@ -24,9 +24,9 @@ import { cn,
     Spacer, 
     Button, 
     Chip,
-    useDisclosure,
   } from "@nextui-org/react";
 
+import { UserContext } from '../../connector';
 
 import quickintro from '../../../mp4/quickintro.mp4';
 
@@ -82,6 +82,30 @@ const DP = () =>{
 
 const Indx = () => {
 
+
+    const usercontxt = useContext(UserContext);
+    const [updateCookie, setupdateCookie] = useState(null);
+    /* cookie consent */
+    const showCookieConsent = (userResponse) =>{
+        if (userResponse == 'accepted'){
+            usercontxt.cookie_consent.value == 'accepted'
+            ? updateCookie  == 'accepted'
+                ?  undefined 
+                : setupdateCookie(usercontxt.cookie_consent.value) 
+            : usercontxt.setCookie('accepted') 
+                ? setupdateCookie(usercontxt.cookie_consent.value) 
+                : undefined 
+
+        }else if (userResponse == 'rejected'){
+            usercontxt.setCookie('rejected');
+            setupdateCookie(usercontxt.cookie_consent.value) 
+        };
+       
+        
+        console.log(usercontxt.cookie_consent.value);        
+    };
+
+     /* cookie consent */
     return (
         <> 
             <Suspense fallback={<Preloader />} >
@@ -175,6 +199,7 @@ const Indx = () => {
                             <SimpleSteps />
                         </section>
                         <br></br>
+                        { updateCookie != null ? undefined : <CookieConsent showCookieConsent={showCookieConsent} /> }
                         <div className='justify-center align-center mx-auto'>
                             <Spacer></Spacer>
                             <Footer />
