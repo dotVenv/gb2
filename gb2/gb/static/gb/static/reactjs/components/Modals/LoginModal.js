@@ -64,7 +64,7 @@ import {
 
 const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
 
-    console.log(isOpen);
+
     return(
         <>
         <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}
@@ -107,10 +107,10 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" variant="flat" onPress={onClose}>
+                    <Button color="danger" variant="light" onPress={onClose}>
                     Close
                     </Button>
-                    <Button color="primary" onPress={onClose}>
+                    <Button variant='flat' color="primary" onPress={onClose}>
                     Sign in
                     </Button>
                 </ModalFooter>
