@@ -1,13 +1,41 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { 
     ACMELogo,
     WordRotate,
-    AnimatedShinyText
+    AnimatedShinyText,
+    LoginModal,
+    SignUpModal,
    } from "../../components";
 
-import { Spacer, Button, Code, Chip, cn,} from "@nextui-org/react";
+import { Spacer, Button, Code, Chip, cn, useDisclosure} from "@nextui-org/react";
+import { signal } from "@preact/signals-react";
+
+
+const isLoginModalOpen = signal(false);
+const isSignupModalOpen = signal(false);
 
 const MainSection = () => {
+
+
+     /* login & signup modal */
+
+     const {onOpenChange, onOpen} = useDisclosure(); 
+     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
+     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
+ 
+ 
+     const handleLoginOpen = () => {
+         isLoginModalOpen.value = !triggerLoginModal
+         setTriggerLoginModal(isLoginModalOpen.value);
+         triggerLoginModal ? onOpen() : undefined;
+      
+     };
+     const handleSignupOpen = () => {
+         isSignupModalOpen.value = !triggerSignUpModal
+         setTriggerSignupModal(isSignupModalOpen.value);
+         triggerSignUpModal ? onOpen() : undefined;
+     };
+      /* login login & signup modal  */
 
     return(
         <>
@@ -36,10 +64,10 @@ const MainSection = () => {
                             )}
                         >
                             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                            <span style={{'color':'green'}}> <i className="fa-solid fa-right-to-bracket"></i> Sign in</span>
+                            <span onClick={handleLoginOpen} style={{'color':'green'}}> <i className="fa-solid fa-right-to-bracket"></i> Sign in</span>
                             </AnimatedShinyText>
                             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                            <span > <i className="fa-solid fa-user-pen"></i> Sign up</span>
+                            <span onClick={handleSignupOpen} > <i className="fa-solid fa-user-pen"></i> Sign up</span>
                             </AnimatedShinyText>
                         </div>
                     </div>
@@ -48,7 +76,8 @@ const MainSection = () => {
                 </div>
                 
             </div>
-            
+            { triggerLoginModal ? <LoginModal isOpen={triggerLoginModal} onOpenChange={onOpenChange} handleLoginOpen={handleLoginOpen} /> 
+                : triggerSignUpModal ? <SignUpModal isOpen={triggerSignUpModal} onOpenChange={onOpenChange} handleSignupOpen={handleSignupOpen} /> : undefined }
 
         </>
     );

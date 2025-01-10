@@ -27,7 +27,7 @@ const signupdata = {
     tos: signal(false),
 }
 
-const SignUpModal =  ({ isOpen, onOpenChange, handleLoginOpen }) => {
+const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
 
     const [action, setAction] = useState(null);
     
@@ -61,7 +61,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleLoginOpen }) => {
     return(
         <>
         <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}
-          onClose={handleLoginOpen}>
+          onClose={handleSignupOpen}>
             
           
             <ModalContent>

@@ -24,27 +24,30 @@ const menuItems = [
 
 const isLoginModalOpen = signal(false);
 const isSignupModalOpen = signal(false);
+
 const NavvBar = ({cpage}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
-    /* login modal */
+    /* login & signup modal */
 
-    const {isOpen, onOpen, onOpenChange} = useDisclosure(); 
+    const {onOpenChange, onOpen} = useDisclosure(); 
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
 
 
     const handleLoginOpen = () => {
-        setTriggerLoginModal(!isLoginModalOpen.value);
+        isLoginModalOpen.value = !triggerLoginModal
+        setTriggerLoginModal(isLoginModalOpen.value);
         triggerLoginModal ? onOpen() : undefined;
      
     };
     const handleSignupOpen = () => {
-        setTriggerSignupModal(!isSignupModalOpen.value);
+        isSignupModalOpen.value = !triggerSignUpModal
+        setTriggerSignupModal(isSignupModalOpen.value);
         triggerSignUpModal ? onOpen() : undefined;
     };
-     /* login modal */
+     /* login login & signup modal  */
     
     return (
         <>
@@ -105,8 +108,9 @@ const NavvBar = ({cpage}) => {
                 ))}
             </NavbarMenu>
             </Navbar>
-            { triggerLoginModal ? <LoginModal isOpen={isOpen} onOpenChange={onOpenChange} /> : undefined }
-            { triggerSignUpModal ? <SignUpModal isOpen={isOpen} onOpenChange={onOpenChange} /> : undefined }
+            { triggerLoginModal ? <LoginModal isOpen={triggerLoginModal} onOpenChange={onOpenChange} handleLoginOpen={handleLoginOpen} /> 
+                : triggerSignUpModal ? <SignUpModal isOpen={triggerSignUpModal} onOpenChange={onOpenChange} handleSignupOpen={handleSignupOpen} /> : undefined }
+          
         </>
     );
    

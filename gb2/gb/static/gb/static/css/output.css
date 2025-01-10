@@ -931,6 +931,10 @@ video {
   float: inline-start;
 }
 
+.float-end {
+  float: inline-end;
+}
+
 .-m-2 {
   margin: -0.5rem;
 }
@@ -1717,6 +1721,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[100\%\] {
+  width: 100%;
 }
 
 .min-w-10 {

@@ -1,7 +1,7 @@
 'use client';
 import React, {Suspense, useRef} from "react";
 import TourneyJourney from "../sections/tourneyjourney";
-
+import { signal } from "@preact/signals-react";
 import { 
     DotPattern,
     TextRevealByWord, 
@@ -15,6 +15,7 @@ import {
     SimpleSteps,
     Preloader,
     PromoBanner,
+    LoginModal, SignUpModal,
     } from "../../components";
 
 import { cn,  
@@ -23,6 +24,7 @@ import { cn,
     Spacer, 
     Button, 
     Chip,
+    useDisclosure,
   } from "@nextui-org/react";
 
 
@@ -73,6 +75,10 @@ const DP = () =>{
         />
     );
 };
+
+
+
+
 
 const Indx = () => {
 
@@ -173,6 +179,7 @@ const Indx = () => {
                             <Spacer></Spacer>
                             <Footer />
                         </div>
+                       
                 </Experience>
                
             </Suspense>
