@@ -25,6 +25,7 @@ export { default as AboutInfo } from './AboutInfo/AboutInfo';
 export { default as AboutStaff } from './AboutInfo/AboutStaff';
 export { default as ContactForm } from './ContactUs/ContactUs';
 export { default as FAQ } from './FAQ/FAQ';
+export { default as Preloader } from './Preloader/Preloader';
 
 
 export {  cn } from './ui/lib/utils';

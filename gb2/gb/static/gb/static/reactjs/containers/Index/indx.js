@@ -13,7 +13,7 @@ import {
     Footer,
     PricingTable,
     SimpleSteps,
-   
+    Preloader,
     } from "../../components";
 
 import gbAD from '../../../imgs/pngs/gb_ad.png';
@@ -89,7 +89,7 @@ const Indx = () => {
 
     return (
         <> 
-            <Suspense fallback={<p> Loading Esports Environment...</p>} >
+            <Suspense fallback={<Preloader />} >
                 <NavvBar cpage='/'/>
                 <Experience pagetype='main' style={{'overflowX': 'hidden'}}>
                     <div className="bg-white py-24 sm:py-32">

@@ -18,10 +18,9 @@ const NavvBar = ({cpage}) => {
     const menuItems = [
         "Home",
         "About Us",
-        "FAQ",
         "ContactUs",
+        "FAQ",
         "dotVenv",
-        "Log Out",
       ];
     
     return (
@@ -72,7 +71,7 @@ const NavvBar = ({cpage}) => {
                         <Link
                         className="w-full"
                         color={
-                            index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                            index === cpage ? "danger" : "foreground"
                         }
                         href="#"
                         size="lg"

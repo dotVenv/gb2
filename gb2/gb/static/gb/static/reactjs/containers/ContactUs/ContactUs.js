@@ -2,13 +2,13 @@
 import React, { Suspense } from "react";
 
 import { Spacer,Form, Input, Button } from "@nextui-org/react";
-import { ContactForm, NavvBar, Experience } from "../../components/index";
+import { ContactForm, NavvBar, Experience, Preloader } from "../../components/index";
 
 
 const ContactUs = () => {
     return(
         <>
-            <Suspense fallback={<p>Loading Esports Environment</p>}>
+            <Suspense fallback={<Preloader />}>
                 <NavvBar />
                 <Experience pagetype={'contactus'}>
                     <ContactForm />
