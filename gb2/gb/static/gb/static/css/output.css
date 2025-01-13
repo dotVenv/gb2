@@ -1058,6 +1058,10 @@ video {
   margin-inline-start: -0.5rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-1\.5 {
   margin-bottom: 0.375rem;
 }
@@ -1140,10 +1144,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 
 .box-border {
@@ -1721,10 +1721,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[100\%\] {
-  width: 100%;
 }
 
 .min-w-10 {
@@ -2384,6 +2380,10 @@ video {
        column-gap: 2rem;
 }
 
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+
 .gap-y-1\.5 {
   row-gap: 0.375rem;
 }
@@ -2410,10 +2410,6 @@ video {
 
 .gap-y-6 {
   row-gap: 1.5rem;
-}
-
-.gap-y-1 {
-  row-gap: 0.25rem;
 }
 
 .space-x-0\.5 > :not([hidden]) ~ :not([hidden]) {
@@ -3810,10 +3806,6 @@ video {
 
 .pb-2 {
   padding-bottom: 0.5rem;
-}
-
-.pb-3 {
-  padding-bottom: 0.75rem;
 }
 
 .pb-4 {
@@ -5603,6 +5595,11 @@ video {
   height: 2.75rem;
 }
 
+.before\:h-2::before {
+  content: var(--tw-content);
+  height: 0.5rem;
+}
+
 .before\:h-2\.5::before {
   content: var(--tw-content);
   height: 0.625rem;
@@ -5611,11 +5608,6 @@ video {
 .before\:h-px::before {
   content: var(--tw-content);
   height: 1px;
-}
-
-.before\:h-2::before {
-  content: var(--tw-content);
-  height: 0.5rem;
 }
 
 .before\:w-0::before {
@@ -5628,6 +5620,11 @@ video {
   width: 2.75rem;
 }
 
+.before\:w-2::before {
+  content: var(--tw-content);
+  width: 0.5rem;
+}
+
 .before\:w-2\.5::before {
   content: var(--tw-content);
   width: 0.625rem;
@@ -5636,11 +5633,6 @@ video {
 .before\:w-6::before {
   content: var(--tw-content);
   width: 1.5rem;
-}
-
-.before\:w-2::before {
-  content: var(--tw-content);
-  width: 0.5rem;
 }
 
 .before\:-translate-x-full::before {
@@ -10372,10 +10364,6 @@ video {
     padding-bottom: 12rem;
   }
 
-  .sm\:pb-0 {
-    padding-bottom: 0px;
-  }
-
   .sm\:pt-10 {
     padding-top: 2.5rem;
   }
@@ -10449,16 +10437,16 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .md\:mb-12 {
     margin-bottom: 3rem;
   }
 
   .md\:mr-6 {
     margin-right: 1.5rem;
-  }
-
-  .md\:mb-0 {
-    margin-bottom: 0px;
   }
 
   .md\:flex-nowrap {
