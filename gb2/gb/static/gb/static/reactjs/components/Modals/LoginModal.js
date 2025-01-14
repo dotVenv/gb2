@@ -26,19 +26,21 @@ import { UserContext } from "../../connector";
 const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
 
     const usrcontext = useContext(UserContext);
-    const [unameValue, setunameValue]= useState();
-    const [pwdValue, setpwdValue] = useState();
+    const [unameValue, setunameValue]= useState('');
+    const [pwdValue, setpwdValue] = useState('');
     const [loginStatus, setloginStatus] = useState('idle');
 
     
 
      /* handle submission */
-    const onSubmit = async(e) => {
+    const onSubmitLogin = async(e) => {
 
       e.preventDefault();
       
+      console.log('submittin');
   
       let response = await usrcontext.loginUser(unameValue, pwdValue);
+      console.log(response);
       if (response){
         if (response != 200 ){
           setloginStatus('failed');
@@ -73,7 +75,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   className='col-12 w-full'
                   validationBehavior="native"
                   onReset={() => setAction("reset")}
-                  onSubmit={onSubmit}
+                  onSubmit={(e) => { onSubmitLogin(e);}}
                  >
                   <ModalBody className='col-12 w-full'>
                     <div className='justify-center align-center mx-auto'>

@@ -20,7 +20,5 @@ from django.urls import path, include,re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('metrics/', include('django_prometheus.urls')), 
-    re_path(r'^auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.jwt')),
     path('', include('gb.urls')),
 ]

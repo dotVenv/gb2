@@ -45,12 +45,17 @@ class UIViews(TemplateView):
         '''login function for the user'''
         
         #call helper login function
-        login_user = hlp.Current_Session(request=request)
-        if login_user.login():
-            user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
-            if user_auth is not None:
-                login(request, user_auth)
-                print(f'{request.user.is_authenticated}')
-                request.session.modified = True
-                return getres().res('200')
-        return getres().res('401')
+        if request.method == 'POST':
+            login_user = hlp.Current_Session(request=request)
+            if login_user.login():
+                user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
+                if user_auth is not None:
+                    login(request, user_auth)
+                    print(f'{request.user.is_authenticated}')
+                    request.session.modified = True
+                    return getres().res('200')
+                
+                
+            return getres().res('401')
+        else:
+            return getres().res('403')

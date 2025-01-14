@@ -38,6 +38,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     const [unameValue, setunameValue] = useState(signupdata.uname.value);
     const [passwordValue,setpasswordValue] = useState(signupdata.password.value);
     const [rpasswordValue,setrpasswordValue] = useState(signupdata.r_password.value);
+    const [errors, setErrors] = useState({});
     
 
     /* form values */
@@ -53,9 +54,56 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     }, [emailValue]);
     /* validate email */
 
+    /* validate password */
+    
+    
+        // Real-time password validation
+    const getPasswordError = (value) => {
+        if (value.length < 4) {
+            return "Password must be 4 characters or more";
+        }
+        if ((value.match(/[A-Z]/g) || []).length < 1) {
+            return "Password needs at least 1 uppercase letter";
+        }
+        if ((value.match(/[^a-z]/gi) || []).length < 1) {
+            return "Password needs at least 1 symbol";
+        }
+
+        return null;
+    };
+    /* validate password */
+
     /* handle submission */
     const onSubmit = (e) => {
-        e.preventDefault();           
+        
+        e.preventDefault();        
+
+            // Custom validation checks
+        const newErrors = {};
+
+        // Password validation
+        const passwordError = getPasswordError(passwordValue);
+
+        if (passwordError) {
+        newErrors.password = passwordError;
+        }
+
+        // Username validation
+        if (unameValue === "admin" || "test" || "user") {
+        newErrors.name = "Nice try! Choose a different username";
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+
+        return;
+        }
+
+        //submit data
+            
+        // Clear errors and submit
+        setErrors({});
+        
     };
      /* handle submission */
 
@@ -109,25 +157,21 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                                 }
                         />
                         <Input
+                            autocomplete="current-password"
                             isRequired
                             label="Password"
-                            autocomplete="current-password"
                             placeholder="Enter your password"
                             type="password"
                             variant="bordered"
                             value={passwordValue}
                             onValueChange={setpasswordValue}
-                            validate={(value) => {
-                                if (value.length < 7) {
-                                return "Password must be at least 7 characters long";
-                                }
-                        
-                                return null;
-                            }}
+                            errorMessage={getPasswordError(passwordValue)}
+                            isInvalid={getPasswordError(passwordValue) !== null}
                             endContent={
-                                    <i className="fa-solid fa-lock mb-1 pb-1"></i>
-                                }
-                        />
+                                <i className="fa-solid fa-lock mb-1 pb-1"></i>
+                                
+                            }
+                            />
                         <Input
                             isRequired
                             label="Repeat Password"
