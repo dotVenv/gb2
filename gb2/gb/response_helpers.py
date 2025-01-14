@@ -1,5 +1,12 @@
 #reponse helpers
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 
+
+
+
+#global variables
+ENCODER  = DjangoJSONEncoder
 
 class Response_Helpers():
     
@@ -13,8 +20,7 @@ class Response_Helpers():
             
         }
         
-    def get_code(self, err_code):
+    def res(self, err_code):
         '''return the json response based on the desired code'''
-        
-        
-        return 
+        msg = self.codes[err_code]
+        return JsonResponse(status=int(err_code), encoder=ENCODER, data={'message': msg})

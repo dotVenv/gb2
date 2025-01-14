@@ -1,15 +1,13 @@
 #django imports
 from django.contrib.auth import authenticate, login, logout 
-from django.core.serializers.json import DjangoJSONEncoder
-from django.http import JsonResponse
+
 
 #app imports 
 from gb_api import serializers, helpers
 from .forms import LoginForm 
 
 
-#global variables
-ENCODER  = DjangoJSONEncoder
+
 
 
 #handle the current session (unauth, all auth sessions redir to dashboard.)

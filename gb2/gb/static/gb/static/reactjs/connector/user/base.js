@@ -29,6 +29,7 @@ export class initialData {
             }
         }).then(function (response)  {
             const rstatus  = response.status;
+            console.log('response status is' + rstatus);
             if (rstatus == 200){
                 return rstatus;
             }else{

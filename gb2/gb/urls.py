@@ -10,5 +10,5 @@ urlpatterns = [
     path('contact-us', uiviews.contact_us, name='contactus'),
     
     #accs
-    path('login', uiviews.login, name='login')
+    path('login', uiviews.login_view, name='login')
 ]

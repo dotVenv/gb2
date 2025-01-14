@@ -33,12 +33,12 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
     
 
      /* handle submission */
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
 
       e.preventDefault();
       
   
-      let response = usrcontext.loginUser(unameValue, pwdValue);
+      let response = await usrcontext.loginUser(unameValue, pwdValue);
       if (response){
         if (response != 200 ){
           setloginStatus('failed');
@@ -85,7 +85,8 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                             title={loginStatus === 'failed' ? 'Invalid username or password, please try again.' : 'Login Successful'}
                             size='sm' 
                             radius='full'/>
-                        : undefined}
+                        : undefined
+                      }
                        
                     </div>
                       <Input
