@@ -176,25 +176,24 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                     </Button>
                 </ModalFooter>
                 </Form>
-                <div className="flex items-center gap-4 py-2">
-                  <Divider className="flex-1" />
-                  <p className="shrink-0 text-tiny text-default-500">OR</p>
-                  <Divider className="flex-1" />
-                  </div>
-                  <Spacer></Spacer>
-                  <br></br>
-                  <div className="flex flex-col gap-2 mb-1">
-
+                <div className="flex items-center gap-2">
+                    <Divider className="flex-1" />
+                    <p className="shrink-0 text-tiny text-default-500">OR</p>
+                    <Divider className="flex-1" />
+                </div>
+                
+                <div className="flex mx-auto justify-center align-center gap-2  pb-3 mb-3">
+                
                     <Button
-                      startContent={<i className="fa-brands fa-google fa-xl"></i>}
-                      variant="bordered"
+                    startContent={<i className="fa-brands fa-google fa-xl"></i>}
+                    variant="bordered"
+                    radius='full'
+                    size='sm'
                     >
-                      Sign up with Google
+                        Sign up with Google
                     </Button>
-                   
-                   <br></br>
-                   <Spacer></Spacer>
-                  </div>
+            
+                </div>
                  
                 </>
             )}

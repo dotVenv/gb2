@@ -79,6 +79,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                     <div className='justify-center align-center mx-auto'>
                      { loginStatus !== 'idle' 
                         ? <Alert
+                            className='text-small'
                             color={loginStatus === 'failed' ? 'danger' : 'success'}
                             variant='flat'
                             title={loginStatus === 'failed' ? 'Invalid username or password, please try again.' : 'Login Successful'}
@@ -89,14 +90,14 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                     </div>
                       <Input
                         label="Username"
-                     
+                        isRequired
                         placeholder="Enter your username"
                         variant="bordered"
                         value={unameValue}
                         onValueChange={setunameValue}
                         validate={(value) => { 
                           if (value == null || value ==  ''){
-                              return 'Please enter a valid username.';
+                              return 'Username cannot be empty.';
                           }else{
                             return null;
                           }}}
@@ -106,12 +107,19 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       />
                       <Input
                         autocomplete="current-password"
+                        isRequired
                         label="Password"
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"
                         value={pwdValue}
                         onValueChange={setpwdValue}
+                        validate={(value) => { 
+                          if (value == null || value ==  ''){
+                              return 'Password cannot be empty.';
+                          }else{
+                            return null;
+                          }}}
                         endContent={
                           <i className="fa-solid fa-lock mb-1 pb-1"></i>
                           
@@ -132,10 +140,10 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   </ModalBody>
                   <ModalFooter className='flex jutsify-end float-end mx-auto'>
                       <Button color="danger" variant="light" onPress={onClose}>
-                      Close
+                        Close
                       </Button>
                       <Button variant='flat' color="primary" type='submit'>
-                      Sign in
+                        Sign in
                       </Button>
                   </ModalFooter>
                 </Form>
@@ -146,11 +154,13 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   </div>
                   <Spacer></Spacer>
                   <br></br>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex mx-auto justify-center align-center gap-2">
 
                     <Button
                       startContent={<i className="fa-brands fa-google fa-xl"></i>}
                       variant="bordered"
+                      radius='full'
+                      size='sm'
                     >
                       Sign in with Google
                     </Button>
@@ -160,7 +170,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   <br></br>
                   <p className="text-center text-small">
                     Need to create an account?&nbsp;
-                    <Link href="#" size="sm">
+                    <Link href="#" size="sm" onPress={onClose}>
                       Sign Up
                     </Link>
                   </p>

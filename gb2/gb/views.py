@@ -13,7 +13,7 @@ class UIViews(TemplateView):
     def index(self, request):
         
         context = {}
-        
+        print(request.user.is_authenticated)
         
         return render(request, 'gb/templates/index.html', context=context)
     

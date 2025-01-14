@@ -42,8 +42,10 @@ class Current_Session():
             if validate_login.is_valid():
                 self.username = validate_login.cleaned_data['uname']
                 self.pwd = validate_login.cleaned_data['pwd']
-                user_auth = authenticate(self.request, username=self.username, password=self.password)
-                
-                return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'})
-                
+                user_auth = authenticate(self.request, username=self.username, password=self.pwd)
+                if user_auth is not None:
+                    login(self.request, user_auth)
+                    print('logged in')
+                    return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'})
+       
         return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
