@@ -5,6 +5,7 @@ from django.http import JsonResponse
 
 #app imports 
 from gb_api import serializers, helpers
+from .forms import LoginForm 
 
 
 #global variables
@@ -25,9 +26,24 @@ class Current_Session():
         '''login the current user'''
         
         if self.request.method == 'POST':
-            print('ready to validate login.')
-        return 
+            
+            #set the user info
+            self.username = self.request.POST.get('uname')
+            self.pwd = self.request.POST.get('pwd')
 
-    def set_data(self, uname, pwd, cookie):
-        '''validate the current data and set in class'''
-        
+            if not self.username or not self.pwd:
+                return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
+            
+            data = {'uname': self.username, 'pwd': self.pwd}
+            
+            #check if form is valid
+            validate_login = LoginForm(data)
+            
+            if validate_login.is_valid():
+                self.username = validate_login.cleaned_data['uname']
+                self.pwd = validate_login.cleaned_data['pwd']
+                user_auth = authenticate(self.request, username=self.username, password=self.password)
+                
+                return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'})
+                
+        return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
