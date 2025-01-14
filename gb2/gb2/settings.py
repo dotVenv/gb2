@@ -217,7 +217,7 @@ SESSION_TIMEOUT_REDIRECT = '/logout'
 SESSION_COOKIE_DOMAIN = '.example.com'
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
-#SESSION_ENGINE
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 PARENT_HOST = '.example.com'
 
 
@@ -242,10 +242,11 @@ CORS_ALLOW_CREDENTIALS = True
 REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         
     ),
     'DEFAULT_PERMISSION_CLASSES': [
@@ -263,7 +264,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": True,
+    "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
 
     "ALGORITHM": "HS256",
