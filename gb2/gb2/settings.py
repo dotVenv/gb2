@@ -60,8 +60,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django_hosts.middleware.HostsRequestMiddleware',
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,8 +71,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_hosts.middleware.HostsResponseMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 
@@ -195,7 +195,7 @@ PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 
 
 PRIVACY_POLICY_TOOLS = {
     'ENABLED': True,
-    'POLICY_PAGE_URL': '/help/privacy-policy',
+    'POLICY_PAGE_URL': '/privacy-policy',
     'POLICY_CONFIRM_URL': '/',
     #'IGNORE_URLS': ['9X2dx3bVD22b', ],
     'DEFAULT_POLICY': True
@@ -204,8 +204,11 @@ PRIVACY_POLICY_TOOLS = {
 
 #session settings
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
-SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = False
 SESSION_TIMEOUT_REDIRECT = '/logout'
+SESSION_COOKIE_DOMAIN = '.localhost'
+#SESSION_ENGINE
+PARENT_HOST = '.localhost'
 
 
 #Cors Settings

@@ -45,7 +45,7 @@ class Current_Session():
                 user_auth = authenticate(self.request, username=self.username, password=self.pwd)
                 if user_auth is not None:
                     login(self.request, user_auth)
-                    print('logged in')
-                    return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'})
+                    print(f'logged in - {self.request.user.is_authenticated}')
+                    return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'}), self.request
        
         return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})

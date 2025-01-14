@@ -27,16 +27,17 @@ export class initialData {
                  'X-CSRFTOKEN': GETCSRFToken(),
                  'Content-Type': 'multipart/form-data'
             }
-        }).then(function (response) {
-            console.log(response);
-            if (response == 200){
-                return 'success';
+        }).then(function (response)  {
+            const rstatus  = response.status;
+            if (rstatus == 200){
+                return rstatus;
             }else{
-                return 'failed'
+                return  rstatus
             }
 
         }).catch(function (response){
-            return 'failed';
+            const rstatus = response.status;
+            return rstatus;
         });
 
 

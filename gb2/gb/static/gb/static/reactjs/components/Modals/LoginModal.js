@@ -33,12 +33,12 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
     
 
      /* handle submission */
-    const onSubmit = async(e) => {
+    const onSubmit = (e) => {
 
       e.preventDefault();
       
   
-      let response = await usrcontext.loginUser(unameValue, pwdValue);
+      let response = usrcontext.loginUser(unameValue, pwdValue);
       if (response){
         if (response != 200 ){
           setloginStatus('failed');

@@ -13,7 +13,7 @@ class UIViews(TemplateView):
     def index(self, request):
         
         context = {}
-        print(request.user.is_authenticated)
+        print(f'auth status:{request.user.is_authenticated} -  anon status: {request.user.is_anonymous}')
         
         return render(request, 'gb/templates/index.html', context=context)
     
@@ -37,4 +37,6 @@ class UIViews(TemplateView):
         
         #call helper login function
         login_user = hlp.Current_Session(request=request).login()
-        return login_user
+        print(login_user)
+        request  = login_user[1]
+        return login_user[0]
