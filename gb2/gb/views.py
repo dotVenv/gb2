@@ -7,6 +7,12 @@ from django.http import JsonResponse
 #app imports 
 from . import helpers as hlp 
 
+
+#global variables
+ENCODER  = DjangoJSONEncoder
+SUCCESS = JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'}),
+UNAUTH = JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
+
 # Create your views here.
 class UIViews(TemplateView):
     
@@ -36,7 +42,11 @@ class UIViews(TemplateView):
         '''login function for the user'''
         
         #call helper login function
-        login_user = hlp.Current_Session(request=request).login()
-        print(login_user)
-        request  = login_user[1]
-        return login_user[0]
+        login_user = hlp.Current_Session(request=request)
+        if login_user.login():
+            user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
+            if user_auth is not None:
+                login(request, user_auth)
+                print(f'logged in')
+                return SUCCESS
+        return UNAUTH

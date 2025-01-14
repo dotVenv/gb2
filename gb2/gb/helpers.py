@@ -32,7 +32,7 @@ class Current_Session():
             self.pwd = self.request.POST.get('pwd')
 
             if not self.username or not self.pwd:
-                return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
+                return False
             
             data = {'uname': self.username, 'pwd': self.pwd}
             
@@ -42,10 +42,6 @@ class Current_Session():
             if validate_login.is_valid():
                 self.username = validate_login.cleaned_data['uname']
                 self.pwd = validate_login.cleaned_data['pwd']
-                user_auth = authenticate(self.request, username=self.username, password=self.pwd)
-                if user_auth is not None:
-                    login(self.request, user_auth)
-                    print(f'logged in - {self.request.user.is_authenticated}')
-                    return JsonResponse(status=200, encoder=ENCODER, data={'message': 'Successful'}), self.request
+                return True 
        
-        return JsonResponse(status=401, encoder=ENCODER, data={'message': 'Unauthorized'})
+        return False
