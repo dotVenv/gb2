@@ -28,15 +28,17 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
     const usrcontext = useContext(UserContext);
     const [unameValue, setunameValue]= useState();
     const [pwdValue, setpwdValue] = useState();
-    const [loginStatus, setloginStatus] = useState();
+    const [loginStatus, setloginStatus] = useState('idle');
 
     
 
      /* handle submission */
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
 
       e.preventDefault();
       
+  
+      await usrcontext.loginUser();
 
     };
    /* handle submission */
@@ -65,7 +67,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                  >
                   <ModalBody className='col-12 w-full'>
                     <div className='justify-center align-center mx-auto'>
-                     { loginStatus !== null 
+                     { loginStatus !== 'idle' 
                         ? <Alert
                             color={loginStatus === 'failed' ? 'danger' : 'success'}
                             variant='flat'
@@ -74,15 +76,20 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                             radius='full'/>
                         : undefined}
                        
-                
-
                     </div>
                       <Input
                         label="Username"
+                     
                         placeholder="Enter your username"
                         variant="bordered"
                         value={unameValue}
                         onValueChange={setunameValue}
+                        validate={(value) => { 
+                          if (value == null || value ==  ''){
+                              return 'Please enter a valid username.';
+                          }else{
+                            return null;
+                          }}}
                         endContent={
                           <i className="fa-solid fa-user mb-1 pb-1"></i>
                         }
@@ -113,7 +120,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       </Link>
                       </div>
                   </ModalBody>
-                  <ModalFooter className='flex float-end'>
+                  <ModalFooter className='flex jutsify-end float-end mx-auto'>
                       <Button color="danger" variant="light" onPress={onClose}>
                       Close
                       </Button>

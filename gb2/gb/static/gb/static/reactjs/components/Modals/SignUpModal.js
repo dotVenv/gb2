@@ -167,7 +167,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         </div>
                     
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter className='flex jutsify-end float-end mx-auto'> 
                     <Button color="danger" variant="light" onPress={onClose}>
                     Close
                     </Button>

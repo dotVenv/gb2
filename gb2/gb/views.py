@@ -8,6 +8,8 @@ class UIViews(TemplateView):
     def index(self, request):
         
         context = {}
+        
+        
         return render(request, 'gb/templates/index.html', context=context)
     
     def about_us(self, request):
@@ -24,3 +26,12 @@ class UIViews(TemplateView):
         
         context = {}
         return render(request, 'gb/templates/index.html', context=context)
+    
+    def login(self, request):
+        '''login function for the user'''
+        
+        #call helper login function
+        login_user = hlp.Current_Session(request=request).login()
+        if not login_user:
+            return False
+        return True
