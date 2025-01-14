@@ -1,6 +1,6 @@
 
 
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
     Modal,
     ModalContent,
@@ -15,16 +15,30 @@ import {
     Form,
     Divider,
     Spacer,
+    Alert,
   } from "@nextui-org/react";
+
+import { UserContext } from "../../connector";
+
+
 
 
 const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
 
+    const usrcontext = useContext(UserContext);
+    const [unameValue, setunameValue]= useState();
+    const [pwdValue, setpwdValue] = useState();
+    const [loginStatus, setloginStatus] = useState();
+
+    
 
      /* handle submission */
     const onSubmit = (e) => {
-      e.preventDefault();           
-      };
+
+      e.preventDefault();
+      
+
+    };
    /* handle submission */
 
    
@@ -50,24 +64,41 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   onSubmit={onSubmit}
                  >
                   <ModalBody className='col-12 w-full'>
+                    <div className='justify-center align-center mx-auto'>
+                     { loginStatus !== null 
+                        ? <Alert
+                            color={loginStatus === 'failed' ? 'danger' : 'success'}
+                            variant='flat'
+                            title={loginStatus === 'failed' ? 'Invalid username or password, please try again.' : 'Login Successful'}
+                            size='sm' 
+                            radius='full'/>
+                        : undefined}
+                       
+                
+
+                    </div>
                       <Input
-                      endContent={
-                        <i className="fa-solid fa-user mb-1 pb-1"></i>
-                      }
-                      label="Username"
-                      placeholder="Enter your username"
-                      variant="bordered"
+                        label="Username"
+                        placeholder="Enter your username"
+                        variant="bordered"
+                        value={unameValue}
+                        onValueChange={setunameValue}
+                        endContent={
+                          <i className="fa-solid fa-user mb-1 pb-1"></i>
+                        }
                       />
                       <Input
-                      endContent={
-                        <i className="fa-solid fa-lock mb-1 pb-1"></i>
-                        
-                      }
-                      autocomplete="current-password"
-                      label="Password"
-                      placeholder="Enter your password"
-                      type="password"
-                      variant="bordered"
+                        autocomplete="current-password"
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                        variant="bordered"
+                        value={pwdValue}
+                        onValueChange={setpwdValue}
+                        endContent={
+                          <i className="fa-solid fa-lock mb-1 pb-1"></i>
+                          
+                        }
                       />
                       <div className="flex py-2 px-1 justify-between">
                       <Checkbox

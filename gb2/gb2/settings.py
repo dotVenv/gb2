@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from corsheaders.defaults import default_methods
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -180,3 +182,37 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #PROMETHEUS_EXPORT_MIGRATIONS = os.getenv("PROMETHEUS_EXPORT_MIGRATIONS", True)
 PROMETHEUS_LATENCY_BUCKETS = (0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0, 25.0, 50.0, 75.0, float("inf"),)
 PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.5, 9.0, 12.0, 15.0, 20.0, 30.0, float("inf"))
+
+
+PRIVACY_POLICY_TOOLS = {
+    'ENABLED': True,
+    'POLICY_PAGE_URL': '/help/privacy-policy',
+    'POLICY_CONFIRM_URL': '/',
+    #'IGNORE_URLS': ['9X2dx3bVD22b', ],
+    'DEFAULT_POLICY': True
+}
+
+
+#session settings
+SESSION_EXPIRE_SECONDS = 3600  # 1 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = '/logout'
+
+
+#Cors Settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_METHODS = (
+    *default_methods,
+)
+CORS_ALLOW_PRIVATE_NETWORK: True
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "api-key",
+    "content-type",
+    "user-agent",
+    "x-requested-with",
+    'x-csrftoken',
+    
+)
+CORS_ALLOW_CREDENTIALS = True 
