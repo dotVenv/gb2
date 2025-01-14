@@ -100,6 +100,12 @@ TEMPLATES = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -172,9 +178,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-STATIC_URL = 'staticfiles/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = 'mediafiles/'
+MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type

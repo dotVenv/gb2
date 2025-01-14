@@ -1,5 +1,10 @@
+#djano imports
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
+
+#app imports 
 from . import helpers as hlp 
 
 # Create your views here.
@@ -32,6 +37,4 @@ class UIViews(TemplateView):
         
         #call helper login function
         login_user = hlp.Current_Session(request=request).login()
-        if not login_user:
-            return False
-        return True
+        return login_user
