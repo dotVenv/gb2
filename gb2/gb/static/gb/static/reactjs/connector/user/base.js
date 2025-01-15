@@ -18,35 +18,81 @@ export class initialData {
 
     async loginUser(uname,pwd){
 
-        await axios({
-            url:'/login',
-            method:'post',
-            data: { uname: uname, pwd: pwd},
-            timeout: 100,
-            headers: {
-                 'X-CSRFTOKEN': GETCSRFToken(),
-                 'Content-Type': 'multipart/form-data'
-            }
-        }).then(function (response)  {
-            const rstatus  = response.status;
-            console.log('response status is' + rstatus);
-            if (rstatus == 200){
-                return rstatus;
-            }else{
-                return  rstatus
-            }
+        const res_stat = signal(null);
 
-        }).catch(function (response){
-            const rstatus = response.status;
-            return rstatus;
-        });
+        try{
+            await axios({
+                url:'/login',
+                method:'post',
+                data: { uname: uname, pwd: pwd},
+                headers: {
+                    'X-CSRFTOKEN': GETCSRFToken(),
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response =>  {
+                const rstatus  = response.status;
+                if (rstatus){
+                    res_stat.value = rstatus;
+                };
 
-
+            }).catch(error =>  {
+                
+                if (error){
+                    console.log(error);
+                    res_stat.value = error;
+                };
+            });
+        }catch(e){     
+            return 500;
+        }
+        return res_stat.value;
     };
 
     setCookie(userResponse){
         this.cookie_consent.value = userResponse;
         return this.cookie_consent.value;
+    }
+
+    async initCheck() {
+
+
+        try{
+
+            await axios({
+                url: '/init',
+                method: 'get',
+                headers: {
+                    'X-CSRFTOKEN': GETCSRFToken(),
+                },
+    
+            }).then(response => {
+                
+                if (response.status == 200){
+                    this.initialPull.value == true;
+                    this.setLoggedIn(true);
+                }else{
+                    this.initialPull.value = true;
+                    his.setLoggedIn(false);
+                }
+    
+            }).catch(response => {
+                
+                if (response){
+                    this.initialPull = true;
+                    this.setLoggedIn(false);
+                }
+    
+            });
+        }catch(e){
+            console.log(e);
+            return null;
+        }
+        
+
+    };
+    setLoggedIn() {
+        this.loggedin.value = !this.loggedin.value;
+        console.log(this.loggedin.value);
     }
 };
  

@@ -12,7 +12,7 @@ class Response_Helpers():
     
     def __init__(self):
         self.codes = {
-            '200': 'OK',
+            '200': 'Successful',
             '401': 'Unauthorized',
             '403': 'Forbidden',
             '404': 'Not Found',

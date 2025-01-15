@@ -1,6 +1,6 @@
 
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, } from "react";
 import {
     Modal,
     ModalContent,
@@ -33,19 +33,21 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
     
 
      /* handle submission */
-    const onSubmitLogin = async(e) => {
+    async function onSubmitLogin (e)  {
 
       e.preventDefault();
-      
-      console.log('submittin');
-  
+    
       let response = await usrcontext.loginUser(unameValue, pwdValue);
-      console.log(response);
+
       if (response){
         if (response != 200 ){
           setloginStatus('failed');
           
-        }else{ setloginStatus('success')};
+        }else{ 
+          setloginStatus('success');
+          usrcontext.setLoggedIn(true);
+
+        };
   
       }else{
         setloginStatus('failed');

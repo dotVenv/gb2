@@ -212,14 +212,18 @@ PRIVACY_POLICY_TOOLS = {
 
 #session settings
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
-SESSION_EXPIRE_AFTER_LAST_ACTIVITY = False
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = False 
 SESSION_TIMEOUT_REDIRECT = '/logout'
-SESSION_COOKIE_DOMAIN = '.example.com'
+SESSION_COOKIE_DOMAIN = '.localhost'
+SET_COOKIE_NAME='GBCOOKIES'
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-PARENT_HOST = '.example.com'
-
+PARENT_HOST = '.localhost'
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 3600 # sec
 
 #Cors Settings
 CORS_ALLOW_ALL_ORIGINS = True
@@ -237,15 +241,13 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     
 )
-CORS_ALLOW_CREDENTIALS = True 
+#CORS_ALLOW_CREDENTIALS = True 
 
 REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         
     ),
