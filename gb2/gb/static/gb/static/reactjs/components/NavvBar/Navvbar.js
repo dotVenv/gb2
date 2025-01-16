@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -38,7 +38,13 @@ const NavvBar = ({cpage}) => {
     const {onOpenChange, onOpen} = useDisclosure(); 
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
+    const [isLoggedIn, setIsLoggedIn] = useState(usrcontext.loggedin.value);
 
+    useMemo(() => {
+        console.log('Navbar:  ' + usrcontext.uname.value, usrcontext.loggedin.value);
+        
+    }, [usrcontext.initialPull.value, usrcontext.loggedin.value ]);
+    
 
     const handleLoginOpen = () => {
         isLoginModalOpen.value = !triggerLoginModal
@@ -87,7 +93,7 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
 
-                    { usrcontext.loggedin.value !== true ? 
+                    { isLoggedIn !== true ? 
                     
                         <NavbarItem className="hidden lg:flex">
                             <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
@@ -97,7 +103,7 @@ const NavvBar = ({cpage}) => {
                     }
                         
                     <NavbarItem>
-                        { usrcontext.loggedin.value !== true ? 
+                        { isLoggedIn !== true ? 
                             <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
                                 Sign Up
                             </Button>

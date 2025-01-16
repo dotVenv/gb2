@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {NextUIProvider} from "@nextui-org/react";
@@ -11,16 +11,9 @@ export default function App(){
   console.log(
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
-
-  async function initPuller(){
-    const init_data =  await udata.initCheck();
-    if (init_data){
-      return
-    };
-  };
-  udata.initialPull.value ? undefined : initPuller();
+  
   return(
-    <React.StrictMode>
+      <React.StrictMode>
         <NextUIProvider>
           <UserContext.Provider value={udata}>
             <BrowserRouter>
@@ -42,10 +35,10 @@ export default function App(){
 
 };
 
-
-
-
 createRoot(document.getElementById('gbi_root')).render(
   <main className='dark bg-zinc-300 text-white' style={{'overflowX': 'hidden'}}>
     <App />
   </main>)
+  
+
+

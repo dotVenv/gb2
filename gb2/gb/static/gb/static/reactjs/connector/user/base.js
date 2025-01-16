@@ -14,7 +14,8 @@ export class initialData {
         this.loggedin = signal(false);
         this.cookie_consent = signal(false);
         this.uname = signal(null);
-        console.log(this.uname.value);
+        console.log('in base cls');
+        this.initialPull ? undefined : this.initCheck();
        
      
     };
@@ -72,6 +73,7 @@ export class initialData {
                 if (response.status == 200){
 
                     const responseMessage = response.data.message;
+                    console.log(responseMessage);
                     if (responseMessage.is_auth){
                         this.setLoggedIn();
                         this.uname.value = responseMessage.usr;
