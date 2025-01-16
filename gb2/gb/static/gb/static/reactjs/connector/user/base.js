@@ -9,10 +9,12 @@ export class initialData {
 
     constructor(){
 
-        this.initialPull = signal(false);
-        this.loggedin = signal(false);
+        this.loggedin = signal(document.getElementById('handsome').textContent);
+        console.log(this.loggedin.value);
         this.cookie_consent = signal(false);
-        this.uname = signal(null)
+        this.uname = signal(null);
+        this.loggedin.value ? this.uname.value = document.getElementById('handsomer').textContent : undefined;
+        console.log(this.uname.value);
      
     };
 
@@ -51,59 +53,9 @@ export class initialData {
     setCookie(userResponse){
         this.cookie_consent.value = userResponse;
         return this.cookie_consent.value;
-    }
-
-    async initCheck() {
-
-
-        try{
-
-            await axios({
-                url: '/initcheck',
-                method: 'get',
-                headers: {
-                    'X-CSRFTOKEN': GETCSRFToken(),
-                },
-    
-            }).then(response => {
-                console.log('getting response:');
-                if (response.status == 200){
-
-                    const responseMessage = response.data.message;
-                    console.log(responseMessage);
-                    if (responseMessage.is_auth){
-
-                        this.setLoggedIn();
-                        this.uname.value = responseMessage.usr;
-                    }else{
-                        this.uname.value = responseMessage.usr;
-                        this.loggedin.value ? this.setLoggedIn() : undefined;
-                        
-                    }
-                    this.initialPull.value = true;
-                    
-                }else{
-                    this.loggedin.value ? this.setLoggedIn() : undefined;
-                    this.initialPull.value = false;
-                }
-    
-            }).catch(response => {
-                
-                if (response){
-                    this.initialPull = true;
-                    this.loggedin.value ? this.setLoggedIn() : undefined;
-                }
-    
-            });
-        }catch(e){
-            console.log(e);
-            return null;
-        }
-        
-
     };
     setLoggedIn() {
         this.loggedin.value = !this.loggedin.value;
-    }
+    };
 };
  

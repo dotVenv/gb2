@@ -38,15 +38,11 @@ const NavvBar = ({cpage}) => {
     const {onOpenChange, onOpen} = useDisclosure(); 
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
-    const [isLoggedIn, setIsLoggedIn] = useState(usrcontext.loggedin.value);
-   
-    useEffect(() => {
-       
-        console.log('in nav \n ' + usrcontext.loggedin.value);
-    }, [usrcontext.initialPull.value, usrcontext.loggedin.value ]);
+    const [isLoggedIn, setisLoggedIn] = useState(usrcontext.loggedin.value);
     
+   
 
- 
+    console.log(isLoggedIn);
 
     const handleLoginOpen = () => {
         isLoginModalOpen.value = !triggerLoginModal
@@ -95,23 +91,32 @@ const NavvBar = ({cpage}) => {
                 </NavbarContent>
                 <Suspense fallback={<p> test </p>} >
                     <NavbarContent justify="end" className='mt-2'>
-                        { isLoggedIn !== true ? 
+                        { isLoggedIn ? 
                         
+                        <NavbarItem className="hidden lg:flex">
+                            <Button  size='sm' variant='light' onPress={location.href='/logout'} >Sign Out</Button>
+                        </NavbarItem>
+
+                            : 
                             <NavbarItem className="hidden lg:flex">
                                 <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
                             </NavbarItem>
-
-                            : undefined
                         }
                             
                         <NavbarItem>
-                            { isLoggedIn !== true ? 
+                            { isLoggedIn ? 
+                                <Button  color="secondary" 
+                                    size='sm'  
+                                    variant="flat"
+                                    onPress={(e) => { location.href='http://app.localhost:8000'}}
+                                >
+ 
+                                    Dashboard
+                                </Button>
+                                
+                                : 
                                 <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
                                     Sign Up
-                                </Button>
-                                : 
-                                <Button  color="secondary" size='sm'  variant="flat" onPress={location.href='/'}>
-                                    Dashboard
                                 </Button>
                             }
                             
