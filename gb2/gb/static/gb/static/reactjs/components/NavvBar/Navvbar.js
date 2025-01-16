@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -13,6 +13,7 @@ import {
 
 import { signal } from "@preact/signals-react";
 import { LoginModal, SignUpModal, ACMELogo } from '../index';
+import { UserContext } from "../../connector";
 const menuItems = [
     "Home",
     "About Us",
@@ -27,6 +28,9 @@ const isSignupModalOpen = signal(false);
 
 const NavvBar = ({cpage}) => {
 
+
+
+    const usrcontext = useContext(UserContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     /* login & signup modal */
@@ -82,14 +86,30 @@ const NavvBar = ({cpage}) => {
                     </NavbarItem>
                 </NavbarContent>
                 <NavbarContent justify="end" className='mt-2'>
-                    <NavbarItem className="hidden lg:flex">
-                    <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
-                    </NavbarItem>
+
+                    { usrcontext.loggedin.value !== true ? 
+                    
+                        <NavbarItem className="hidden lg:flex">
+                            <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
+                        </NavbarItem>
+
+                        : undefined
+                    }
+                        
                     <NavbarItem>
-                    <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
-                        Sign Up
-                    </Button>
+                        { usrcontext.loggedin.value !== true ? 
+                            <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
+                                Sign Up
+                            </Button>
+                            : 
+                            <Button  color="secondary" size='sm'  variant="flat" onPress={location.href='/'}>
+                                Dashboard
+                            </Button>
+                        }
+                        
                     </NavbarItem>
+
+                  
                 </NavbarContent>
                 <NavbarMenu>
                     {menuItems.map((item, index) => (

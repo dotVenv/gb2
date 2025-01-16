@@ -10,10 +10,14 @@ export class initialData {
 
     constructor(){
 
-        this.initialPull = signal({});
+        this.initialPull = signal(false);
         this.loggedin = signal(false);
         this.cookie_consent = signal(false);
-        
+        this.uname = signal(null);
+        console.log(this.uname.value);
+        this.initialPull ? undefined : this.initCheck();
+       
+     
     };
 
     async loginUser(uname,pwd,rememberUser){
@@ -58,7 +62,7 @@ export class initialData {
         try{
 
             await axios({
-                url: '/init',
+                url: '/initcheck',
                 method: 'get',
                 headers: {
                     'X-CSRFTOKEN': GETCSRFToken(),
@@ -67,18 +71,27 @@ export class initialData {
             }).then(response => {
                 
                 if (response.status == 200){
-                    this.initialPull.value == true;
-                    this.setLoggedIn(true);
-                }else{
+
+                    const responseMessage = response.data.message;
+                    if (responseMessage.is_auth){
+                        this.setLoggedIn();
+                        this.uname.value = responseMessage.usr;
+                    }else{
+                        this.loggedin.value ? this.setLoggedIn() : undefined;
+                        
+                    }
                     this.initialPull.value = true;
-                    his.setLoggedIn(false);
+                    
+                }else{
+                    this.loggedin.value ? this.setLoggedIn() : undefined;
+                    this.initialPull.value = true;
                 }
     
             }).catch(response => {
                 
                 if (response){
                     this.initialPull = true;
-                    this.setLoggedIn(false);
+                    this.loggedin.value ? this.setLoggedIn() : undefined;
                 }
     
             });
@@ -91,7 +104,6 @@ export class initialData {
     };
     setLoggedIn() {
         this.loggedin.value = !this.loggedin.value;
-        console.log(this.loggedin.value);
     }
 };
  

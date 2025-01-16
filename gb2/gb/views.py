@@ -69,10 +69,14 @@ class UIViews(TemplateView):
         #lgout.delete_cookie('cc')
         return redirect('index')
     
-    def init_check(self):
+    def init_check(self, request):
         '''check if the user is logged initally'''
         
         if request.user.is_authenticated:
             print('User is authenticated')
+            return getres().res('200', new_msg={'is_auth': True, 'usr':request.user.username})
         elif request.user.is_anonymous:
-            print('Unknown user')
+            print('is anonymous')
+            return getres().res('200', new_msg={'is_auth': False, 'usr':'Guest User'})
+            
+        return

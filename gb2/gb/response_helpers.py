@@ -20,7 +20,9 @@ class Response_Helpers():
             
         }
         
-    def res(self, err_code):
+    def res(self, err_code, new_msg=None):
         '''return the json response based on the desired code'''
         msg = self.codes[err_code]
+        if new_msg:
+            msg = new_msg
         return JsonResponse(status=int(err_code), encoder=ENCODER, data={'message': msg})

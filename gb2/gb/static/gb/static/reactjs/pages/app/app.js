@@ -12,11 +12,11 @@ export default function App(){
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
 
-  initcheck = udata.initCheck();
   return(
     <React.StrictMode>
         <NextUIProvider>
           <UserContext.Provider value={udata}>
+            
             <BrowserRouter>
               <Routes>
                 <Route path='' element={<Indx />}/>
@@ -32,6 +32,11 @@ export default function App(){
 
   );
 };
+
+
+//udata.initPull ? undefined : udata.initCheck();
+
+
 
 createRoot(document.getElementById('gbi_root')).render(
   <main className='dark bg-zinc-300 text-white' style={{'overflowX': 'hidden'}}>
