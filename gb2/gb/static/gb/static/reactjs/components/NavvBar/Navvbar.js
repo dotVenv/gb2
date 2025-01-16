@@ -25,12 +25,15 @@ const menuItems = [
 
 const isLoginModalOpen = signal(false);
 const isSignupModalOpen = signal(false);
+const isLogged = signal(false);
+
 
 const NavvBar = ({cpage}) => {
 
 
 
     const usrcontext = useContext(UserContext);
+    isLogged.value = usrcontext.loggedin.value;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     /* login & signup modal */
@@ -38,11 +41,14 @@ const NavvBar = ({cpage}) => {
     const {onOpenChange, onOpen} = useDisclosure(); 
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
-    const [isLoggedIn, setisLoggedIn] = useState(usrcontext.loggedin.value);
-    
-   
+    const [logUpdated, setLogUpdated] = useState(isLogged.value);
+     
 
-    console.log(isLoggedIn);
+    useEffect(() => {
+        isLogged.value = usrcontext.loggedin.value;
+        setLogUpdated(true);
+        console.log('isLogged.value is '+ isLogged.value);
+    }, [usrcontext.loggedin.value, isLogged.value]);
 
     const handleLoginOpen = () => {
         isLoginModalOpen.value = !triggerLoginModal
@@ -89,22 +95,20 @@ const NavvBar = ({cpage}) => {
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
-                <Suspense fallback={<p> test </p>} >
                     <NavbarContent justify="end" className='mt-2'>
-                        { isLoggedIn ? 
+                        { usrcontext.loggedin.value  ? 
                         
-                        <NavbarItem className="hidden lg:flex">
-                            <Button  size='sm' variant='light' onPress={location.href='/logout'} >Sign Out</Button>
-                        </NavbarItem>
-
+                            <NavbarItem className="hidden lg:flex">
+                                <Button  size='sm' variant='light' onPress={(e) => {location.href='/logout'}} >Sign Out</Button>
+                            </NavbarItem>
                             : 
                             <NavbarItem className="hidden lg:flex">
-                                <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
+                                <Button  size='sm' variant='light' onPress={(e) => {handleLoginOpen()}} >Sign In</Button>
                             </NavbarItem>
                         }
                             
                         <NavbarItem>
-                            { isLoggedIn ? 
+                            { usrcontext.loggedin.value  == true ? 
                                 <Button  color="secondary" 
                                     size='sm'  
                                     variant="flat"
@@ -115,7 +119,7 @@ const NavvBar = ({cpage}) => {
                                 </Button>
                                 
                                 : 
-                                <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
+                                <Button  color="primary" size='sm'  variant="flat" onPress={(e) => {handleSignupOpen()}}>
                                     Sign Up
                                 </Button>
                             }
@@ -124,7 +128,7 @@ const NavvBar = ({cpage}) => {
 
                     
                 </NavbarContent>
-                </Suspense>
+               
                 <NavbarMenu>
                     {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>

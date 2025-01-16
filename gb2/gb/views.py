@@ -1,5 +1,5 @@
 #djano imports
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout 
 import django.core.exceptions as dce
@@ -62,7 +62,7 @@ class UIViews(TemplateView):
         except dce.RequestAborted:
             return getres().res('401')
     
-    def logout_view(self):
+    def logout_view(self, request):
         '''logout and clear the cookie for the user'''
         
         lgout = logout(request)
