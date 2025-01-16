@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useContext, useEffect, useMemo, useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -39,12 +39,14 @@ const NavvBar = ({cpage}) => {
     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
     const [isLoggedIn, setIsLoggedIn] = useState(usrcontext.loggedin.value);
-
-    useMemo(() => {
-        console.log('Navbar:  ' + usrcontext.uname.value, usrcontext.loggedin.value);
-        
+   
+    useEffect(() => {
+       
+        console.log('in nav \n ' + usrcontext.loggedin.value);
     }, [usrcontext.initialPull.value, usrcontext.loggedin.value ]);
     
+
+ 
 
     const handleLoginOpen = () => {
         isLoginModalOpen.value = !triggerLoginModal
@@ -91,32 +93,33 @@ const NavvBar = ({cpage}) => {
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
-                <NavbarContent justify="end" className='mt-2'>
+                <Suspense fallback={<p> test </p>} >
+                    <NavbarContent justify="end" className='mt-2'>
+                        { isLoggedIn !== true ? 
+                        
+                            <NavbarItem className="hidden lg:flex">
+                                <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
+                            </NavbarItem>
 
-                    { isLoggedIn !== true ? 
-                    
-                        <NavbarItem className="hidden lg:flex">
-                            <Button  size='sm' variant='light' onPress={handleLoginOpen} >Sign In</Button>
+                            : undefined
+                        }
+                            
+                        <NavbarItem>
+                            { isLoggedIn !== true ? 
+                                <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
+                                    Sign Up
+                                </Button>
+                                : 
+                                <Button  color="secondary" size='sm'  variant="flat" onPress={location.href='/'}>
+                                    Dashboard
+                                </Button>
+                            }
+                            
                         </NavbarItem>
 
-                        : undefined
-                    }
-                        
-                    <NavbarItem>
-                        { isLoggedIn !== true ? 
-                            <Button  color="primary" size='sm'  variant="flat" onPress={handleSignupOpen}>
-                                Sign Up
-                            </Button>
-                            : 
-                            <Button  color="secondary" size='sm'  variant="flat" onPress={location.href='/'}>
-                                Dashboard
-                            </Button>
-                        }
-                        
-                    </NavbarItem>
-
-                  
+                    
                 </NavbarContent>
+                </Suspense>
                 <NavbarMenu>
                     {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>

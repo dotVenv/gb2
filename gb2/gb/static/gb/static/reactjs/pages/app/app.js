@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { UserContext, udata } from "../../connector";
+
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {NextUIProvider} from "@nextui-org/react";
 import { AboutUs, FreqAsked, Indx, ContactUs } from "../../containers";
-import { UserContext, udata } from "../../connector";
+
+
 
 
 export default function App(){
@@ -11,7 +14,8 @@ export default function App(){
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
   
-  return(
+
+    return(
       <React.StrictMode>
         <NextUIProvider>
           <UserContext.Provider value={udata}>
@@ -29,8 +33,7 @@ export default function App(){
   
     
   );
-  
-
+ 
 
 };
 

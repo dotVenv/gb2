@@ -12,10 +12,7 @@ export class initialData {
         this.initialPull = signal(false);
         this.loggedin = signal(false);
         this.cookie_consent = signal(false);
-        this.uname = signal(null);
-       
-        this.initialPull ? undefined : this.initCheck();
-       
+        this.uname = signal(null)
      
     };
 
@@ -69,7 +66,7 @@ export class initialData {
                 },
     
             }).then(response => {
-                console.log(response);
+                console.log('getting response:');
                 if (response.status == 200){
 
                     const responseMessage = response.data.message;
