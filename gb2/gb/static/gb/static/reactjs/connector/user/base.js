@@ -15,7 +15,6 @@ export class initialData {
         this.cookie_consent = signal(false);
         this.uname = signal(null);
         console.log(this.uname.value);
-        this.initialPull ? undefined : this.initCheck();
        
      
     };
@@ -77,6 +76,7 @@ export class initialData {
                         this.setLoggedIn();
                         this.uname.value = responseMessage.usr;
                     }else{
+                        this.uname.value = responseMessage.usr;
                         this.loggedin.value ? this.setLoggedIn() : undefined;
                         
                     }
@@ -84,7 +84,7 @@ export class initialData {
                     
                 }else{
                     this.loggedin.value ? this.setLoggedIn() : undefined;
-                    this.initialPull.value = true;
+                    this.initialPull.value = false;
                 }
     
             }).catch(response => {

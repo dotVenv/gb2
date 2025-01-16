@@ -11,12 +11,12 @@ export default function App(){
   console.log(
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
-
+  udata.initialPull.value ? undefined : udata.initCheck();
+  console.log(udata.uname.value);
   return(
     <React.StrictMode>
         <NextUIProvider>
           <UserContext.Provider value={udata}>
-            
             <BrowserRouter>
               <Routes>
                 <Route path='' element={<Indx />}/>
@@ -29,12 +29,13 @@ export default function App(){
         </NextUIProvider>
       </React.StrictMode>
   
-
+    
   );
+  
+
+
 };
 
-
-//udata.initPull ? undefined : udata.initCheck();
 
 
 
