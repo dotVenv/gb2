@@ -11,8 +11,14 @@ export default function App(){
   console.log(
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
-  udata.initialPull.value ? undefined : udata.initCheck();
-  console.log(udata.uname.value);
+
+  async function initPuller(){
+    const init_data =  await udata.initCheck();
+    if (init_data){
+      return
+    };
+  };
+  udata.initialPull.value ? undefined : initPuller();
   return(
     <React.StrictMode>
         <NextUIProvider>
