@@ -3,7 +3,6 @@ import React from "react";
 import { signal } from "@preact/signals-react";
 import axios from "axios";
 import { GETCSRFToken } from "./GETCsrftoken";
-
 /* set initial data to check login buttons and redirects */
 
 export class initialData {
@@ -14,7 +13,7 @@ export class initialData {
         this.loggedin = signal(false);
         this.cookie_consent = signal(false);
         this.uname = signal(null);
-        console.log('in base cls');
+       
         this.initialPull ? undefined : this.initCheck();
        
      
@@ -33,6 +32,7 @@ export class initialData {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response =>  {
+
                 const rstatus  = response.status;
                 if (rstatus){
                     res_stat.value = rstatus;
@@ -69,12 +69,13 @@ export class initialData {
                 },
     
             }).then(response => {
-                
+                console.log(response);
                 if (response.status == 200){
 
                     const responseMessage = response.data.message;
                     console.log(responseMessage);
                     if (responseMessage.is_auth){
+
                         this.setLoggedIn();
                         this.uname.value = responseMessage.usr;
                     }else{

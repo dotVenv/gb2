@@ -6,7 +6,6 @@ import { AboutUs, FreqAsked, Indx, ContactUs } from "../../containers";
 import { UserContext, udata } from "../../connector";
 
 
-
 export default function App(){
   console.log(
     'You must be ready to compete and get your game on. \n' ,
