@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout 
-
+import django.core.exceptions as dce
 
 #app imports 
 from . import helpers as hlp 
@@ -16,13 +16,8 @@ class UIViews(TemplateView):
     
     def index(self, request):
         
+        
         context = {}
-        auth_status = None
-        if not request.user.is_authenticated and request.user.is_anonymous:
-            auth_status = 'Anonymous User'
-        else:
-            auth_status = 'Authenticated User'
-        print(f'{ auth_status }')
         
         return render(request, 'gb/templates/index.html', context=context)
     
@@ -45,17 +40,39 @@ class UIViews(TemplateView):
         '''login function for the user'''
         
         #call helper login function
-        if request.method == 'POST':
-            login_user = hlp.Current_Session(request=request)
-            if login_user.login():
-                user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
-                if user_auth is not None:
-                    login(request, user_auth)
-                    print(f'{request.user.is_authenticated}')
-                    request.session.modified = True
-                    return getres().res('200')
+        try:
+            if request.method == 'POST':
                 
+                login_user = hlp.Current_Session(request=request)
                 
+                if login_user.login():
+                    user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
+                    if user_auth is not None:
+                        login(request, user_auth)
+                        login_user.setLoginCookie(request.POST.get('ru'))
+                            
+                        request.session.modified = True
+                    
+                        return getres().res('200')
+                    
+                    
+                return getres().res('401')
+            else:
+                return getres().res('403')
+        except dce.RequestAborted:
             return getres().res('401')
-        else:
-            return getres().res('403')
+    
+    def logout_view(self):
+        '''logout and clear the cookie for the user'''
+        
+        lgout = logout(request)
+        #lgout.delete_cookie('cc')
+        return redirect('index')
+    
+    def init_check(self):
+        '''check if the user is logged initally'''
+        
+        if request.user.is_authenticated:
+            print('User is authenticated')
+        elif request.user.is_anonymous:
+            print('Unknown user')

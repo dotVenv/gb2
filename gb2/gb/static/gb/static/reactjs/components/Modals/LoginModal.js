@@ -1,5 +1,4 @@
-
-
+'use client';
 import React, { useContext, useState, } from "react";
 import {
     Modal,
@@ -29,6 +28,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
     const [unameValue, setunameValue]= useState('');
     const [pwdValue, setpwdValue] = useState('');
     const [loginStatus, setloginStatus] = useState('idle');
+    const [rememberUser, setrememberUser] = useState(false);
 
     
 
@@ -37,7 +37,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
 
       e.preventDefault();
     
-      let response = await usrcontext.loginUser(unameValue, pwdValue);
+      let response = await usrcontext.loginUser(unameValue, pwdValue, rememberUser);
 
       if (response){
         if (response != 200 ){
@@ -132,6 +132,8 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       />
                       <div className="flex py-2 px-1 justify-between">
                       <Checkbox
+                          isSelected={rememberUser}
+                          onValueChange={setrememberUser}
                           classNames={{
                           label: "text-small",
                           }}

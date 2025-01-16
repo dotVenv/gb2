@@ -1,6 +1,6 @@
 #django imports
 from django.contrib.auth import authenticate, login, logout 
-
+from django.http import HttpResponse
 
 #app imports 
 from gb_api import serializers, helpers
@@ -43,3 +43,13 @@ class Current_Session():
                 return True 
        
         return False
+    
+    def setLoginCookie(self, rememberuser):
+        '''set the cookie for the current user if reponse is true'''
+        
+        if rememberuser:
+            cookie_login_res = HttpResponse(f'{self.username}_cookie')
+            cookie_login_res.set_cookie('cc', cookie_login_res)
+        
+        return 
+        

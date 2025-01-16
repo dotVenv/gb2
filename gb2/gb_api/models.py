@@ -8,4 +8,5 @@ class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     
     profile_pic = models.ImageField(default='profile_pics/default.png', blank=True, null=True, upload_to='profile_pics/')
     mfa_active = models.IntegerField(default=0)
+    remlock = models.CharField(max_length=255, null=True, blank=True)
     pass

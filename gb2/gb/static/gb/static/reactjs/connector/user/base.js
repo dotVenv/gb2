@@ -10,21 +10,20 @@ export class initialData {
 
     constructor(){
 
-        this.initialPull = signal(null);
+        this.initialPull = signal({});
         this.loggedin = signal(false);
-        this.cookie_consent = signal(null);
+        this.cookie_consent = signal(false);
         
     };
 
-    async loginUser(uname,pwd){
+    async loginUser(uname,pwd,rememberUser){
 
         const res_stat = signal(null);
-
         try{
             await axios({
                 url:'/login',
                 method:'post',
-                data: { uname: uname, pwd: pwd},
+                data: { uname: uname, pwd: pwd, ru:rememberUser, cc: this.cookie_consent.value},
                 headers: {
                     'X-CSRFTOKEN': GETCSRFToken(),
                     'Content-Type': 'multipart/form-data'

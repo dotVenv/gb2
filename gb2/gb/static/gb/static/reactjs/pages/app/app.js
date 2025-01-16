@@ -12,7 +12,7 @@ export default function App(){
     'You must be ready to compete and get your game on. \n' ,
     'Head over to the login, you won\'t find anything special here!');
 
-  
+  initcheck = udata.initCheck();
   return(
     <React.StrictMode>
         <NextUIProvider>
