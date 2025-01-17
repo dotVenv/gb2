@@ -1,19 +1,27 @@
 import React, { useContext, useState } from "react";
 
-import {Tabs, Tab, Card, CardBody, Switch, Spacer, Chip} from "@nextui-org/react";
+import {Tabs, Tab, Card, CardBody, Listbox,ListboxItem,Spacer, Chip} from "@nextui-org/react";
 import CookieConsent from "../Modals/CookieModal";
 import ACMELogo from "../ACMELogo/acme";
 import Footer from "../Footer/Footer";
 import { UserContext } from "../../connector";
 
-
 const faqTopics = [
-    {'topic':'Tournament Rules','data':[{'question':'In-Game Rules?','answer':'All rules apply.'}]},
+    {'topic':'Tournament Rules','data':[{'question':'In-Game Rules?','answer':'All rules apply.'},{'question':'Rule Violations', 'answer':'Any rule break may result in a ban'}]},
     {'topic':'Withdrawals','data':[{'question':'Withdrawal Limit?','answer':'No Withdrawal Limit.'}]},
     {'topic':'Refunds','data':[{'question':'Can i refund?','answer':'No refunds.'}]},
     {'topic':'Memberships','data':[{'question':'How to buy a memberhsip?','answer':'Simply buy.'}]},
     {'topic':'Affiliates','data':[{'question':'How to become affiliate?','answer':'Apply.'}]}
+    
 ]
+
+export const ListboxWrapper = ({children}) => (
+    <div className="w-[150px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100 justify-center border-rounded" radius='full'>
+      {children}
+    </div>
+  );
+
+  
 const FAQ = () =>{
 
 
@@ -21,6 +29,8 @@ const FAQ = () =>{
     /* cookie consent */
     const usrcontext = useContext(UserContext);
     const [updateCookie, setupdateCookie] = useState(usrcontext.cookie_consent.value);
+    const [selectedKeys, setSelectedKeys] = React.useState(new Set([" "]));
+    const selectedValue = React.useMemo(() => Array.from(selectedKeys).join(", "), [selectedKeys]);
 
     const showCookieConsent = (userResponse) =>{
         if (userResponse == 'accepted'){
@@ -40,6 +50,9 @@ const FAQ = () =>{
     };
 
         /* cookie consent */
+        
+
+        
 
     return (
         <>
@@ -58,23 +71,25 @@ const FAQ = () =>{
                 <div className="align-center justify-center col-8 mx-auto">
                     <Spacer></Spacer>
                     <h5 className="text-black font-bold text-center"> Topics </h5>
-                    <Tabs key='outertab' aria-label="Options" color='success' className='flex align-center justify-center mx-auto'>
+                    <Tabs radius='full' key='outertab' aria-label="Options" color='success' className='flex align-center justify-center mx-auto'>
                         { faqTopics.map((data) => (
                             <Tab key={data.topic} title={data.topic} radius='full'>
-                                {data.data.map((innerdata) => (
-                                    <Tabs key='innertab' aria-label="Options"  variant='bordered' radius='sm' className='flex align-center justify-center mx-auto'>
-                                        <Tab key={innerdata.question} title={innerdata.question}  className='text-black font-bold' >
-                                            <Card className='bg-transparent'>
-                                                <CardBody>
-                                                    <Chip variant='shadow' color='success' className='float-start' radius='lg'> {innerdata.question}</Chip>
-                                                    <br></br>
-                                                    <p className='font-bold text-black justify-center align-center mx-auto'> {innerdata.answer}</p>
-                                                </CardBody>
-                                            </Card>
-                                        </Tab>
-                                    </Tabs>
-                                ))}
-                                
+                                <ListboxWrapper>
+                                    <Listbox
+                                        disallowEmptySelection
+                                        aria-label="Single selection example"
+                                        selectedKeys={selectedKeys}
+                                        selectionMode="single"
+                                        variant="flat"
+                                        onSelectionChange={setSelectedKeys}
+                                    >
+                                        {data.data.map((innerdata) => (
+                                            <ListboxItem className='text-black font-bold' key={innerdata.answer}>{innerdata.question}</ListboxItem>
+                                        ))}
+                                    </Listbox>
+                                </ListboxWrapper>
+                                <p className="text-small text-black">Topic answer: <b><i>{selectedValue}</i></b></p>
+                            
                             </Tab>
                         ))}
                         
