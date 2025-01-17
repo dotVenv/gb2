@@ -60,7 +60,7 @@ const FAQ = () =>{
                     <h5 className="text-black font-bold text-center"> Topics </h5>
                     <Tabs key='outertab' aria-label="Options" color='success' className='flex align-center justify-center mx-auto'>
                         { faqTopics.map((data) => (
-                            <Tab key={data.topic} title={data.topic}>
+                            <Tab key={data.topic} title={data.topic} radius='full'>
                                 {data.data.map((innerdata) => (
                                     <Tabs key='innertab' aria-label="Options"  variant='bordered' radius='sm' className='flex align-center justify-center mx-auto'>
                                         <Tab key={innerdata.question} title={innerdata.question}  className='text-black font-bold' >
