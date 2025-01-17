@@ -1387,10 +1387,6 @@ video {
   height: 300px;
 }
 
-.h-\[320px\] {
-  height: 320px;
-}
-
 .h-\[450px\] {
   height: 450px;
 }
@@ -1462,10 +1458,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[200px\] {
-  height: 200px;
 }
 
 .max-h-\[20rem\] {
@@ -1669,8 +1661,8 @@ video {
   width: 400px;
 }
 
-.w-\[50px\] {
-  width: 50px;
+.w-\[475px\] {
+  width: 475px;
 }
 
 .w-\[72\.1875rem\] {
@@ -1725,34 +1717,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[250px\] {
-  width: 250px;
-}
-
-.w-\[1000px\] {
-  width: 1000px;
-}
-
-.w-\[100px\] {
-  width: 100px;
-}
-
-.w-\[300px\] {
-  width: 300px;
-}
-
-.w-\[450px\] {
-  width: 450px;
-}
-
-.w-\[500px\] {
-  width: 500px;
-}
-
-.w-\[475px\] {
-  width: 475px;
 }
 
 .min-w-10 {
@@ -2668,10 +2632,6 @@ video {
   border-radius: var(--nextui-radius-small);
 }
 
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
 .\!rounded-e-none {
   border-start-end-radius: 0px !important;
   border-end-end-radius: 0px !important;
@@ -3448,16 +3408,6 @@ video {
 .bg-zinc-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity));
-}
-
-.bg-zinc-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-}
-
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b {
@@ -5632,6 +5582,11 @@ video {
   height: 2.75rem;
 }
 
+.before\:h-2::before {
+  content: var(--tw-content);
+  height: 0.5rem;
+}
+
 .before\:h-2\.5::before {
   content: var(--tw-content);
   height: 0.625rem;
@@ -5640,11 +5595,6 @@ video {
 .before\:h-px::before {
   content: var(--tw-content);
   height: 1px;
-}
-
-.before\:h-2::before {
-  content: var(--tw-content);
-  height: 0.5rem;
 }
 
 .before\:w-0::before {
@@ -5657,6 +5607,11 @@ video {
   width: 2.75rem;
 }
 
+.before\:w-2::before {
+  content: var(--tw-content);
+  width: 0.5rem;
+}
+
 .before\:w-2\.5::before {
   content: var(--tw-content);
   width: 0.625rem;
@@ -5665,11 +5620,6 @@ video {
 .before\:w-6::before {
   content: var(--tw-content);
   width: 1.5rem;
-}
-
-.before\:w-2::before {
-  content: var(--tw-content);
-  width: 0.5rem;
 }
 
 .before\:-translate-x-full::before {

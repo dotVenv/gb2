@@ -1,35 +1,26 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Spacer,Button, Card, CardBody, User, Badge, Tooltip} from "@nextui-org/react";
+import { Spacer,Button, Card, CardBody, CardHeader, CardFooter, User, Badge, Tooltip, Image, Divider, Chip} from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
 import beargif from '../../../imgs/gifs/bear.gif';
 import medalgif from '../../../imgs/gifs/medal.gif';
-import moneygif from '../../../imgs/gifs/money.gif';
-import gbAD from '../../../imgs/pngs/gb_ad.png';
-import ww_available from '../../../imgs/pngs/worldwide.png';
-
+import batman_banner from '../../../imgs/pngs/batman_banner.png';
+import marvel_r from '../../../imgs/pngs/marvel_r.png';
 
 const descItems = [
-    {
-        text: "COMPETE HEAD-TO-HEAD", 
+    {text: "COMPETE HEAD-TO-HEAD", 
         desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams. Tournament run daily from 6pm-9pm EST.",
         img: beargif ,
-        ref: null,
-        
-    },
+        ref: null,},
     
-    {
-        text: "BECOME A BOUNTY HUNTER", 
+    {text: "BECOME A BOUNTY HUNTER", 
         desc: "Win enough to earn the Bounty-Hunter badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
-        
         img: medalgif,
-        ref: null
-
-    },
-  
+        ref: null},
 ]
+
 
   
 const stats = [
@@ -75,9 +66,42 @@ const DescriptionSplit = () => {
                                     <Spacer></Spacer>
                                     <br></br>
                                     <ul className='justify-center align-center mx-auto'>
-                                        <li> <Card> <CardBody></CardBody></Card></li>
-                                        <li> <Card> <CardBody></CardBody></Card></li>
-                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                        <li> 
+                                            <Card  
+                                                isFooterBlurred className=" col-9 py-0 justify-center align-center mx-auto"
+                                                isPressable shadow="sm" onPress={() => console.log("item pressed")}>
+                                                <CardBody className="overflow-visible ">
+                                                    <img
+                                                    alt="Card background"
+                                                    className="object-cover justify-center align-center mx-auto"
+                                                    radius='lg'
+                                                    shadow='sm'
+                                                    src={marvel_r}
+                                                    width='100%'
+                                                    height={250}
+                                                    />
+                                                </CardBody>
+                                                <CardFooter className=' grid grid-cols-1 text-small  gap-0 space-x-1'> 
+                                                    <b className="text-small font-bold"><i>Marvel Rivals</i> </b>
+                                                    <b className="text-tiny font-bold"><i>6v6 2s Tournament</i> </b>
+                                                    <br></br>
+                                                    <div className="flex gap-2 justify-center align-items-center mx-auto pb-2">
+                                                        <Chip radius='lg' size='sm' color='secondary'
+                                                            startContent={<i className="fa-solid fa-money-bills"></i>}>
+                                                            <b>$200</b>
+                                                        </Chip>
+                                                        <Divider orientation="vertical" />
+                                                        <Chip radius='lg' size='sm' color='secondary'
+                                                            startContent={<i className="fa-solid fa-people-group"></i>}>
+                                                            <b>0/75</b>
+                                                        </Chip>
+                                                    </div>
+                                                    <Spacer></Spacer>
+                                                    <p className='text-tiny text-gray-400'> <i>Click to view details </i> </p>
+                                                </CardFooter>
+                                            </Card>
+                                        </li>
+                                       
                                     </ul>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
@@ -128,26 +152,50 @@ const DescriptionSplit = () => {
                                     <br></br>
                                     <ul className='justify-center align-center mx-auto gap-3 space-y-3'>
                                         <li> 
-                                            <Card>
+                                            <Card  
+                                                isPressable shadow="sm" onPress={() => console.log("item pressed")}
+                                                className='justify-center mx-auto'>
                                                 <CardBody>
-                                                    <Tooltip className='text-white' content='@gdub is on a 4 tournaments win streak with 27 total wins!'>
-                                                    <Badge color='danger' content={<i className="fa-solid fa-fire"></i>}>
+                                                    <img src={batman_banner} style={{'height': '100px'}} className='object-cover' radius='full' />
+                                                    
+                                                    <Badge className='bg-transparent mr-4' showOutline={false}
+                                                        content={
+                                                            <>
+                                                                <span size='sm' >
+                                                                    <Tooltip className='text-white' content='@gdub is on a 4 tournaments win streak with 27 total wins!'>
+                                                                        <i className="fa-solid fa-fire"></i>
+                                                                    </Tooltip> 
+                                                                </span>
+                                                                <Spacer></Spacer>
+                                                                <span size='sm' >
+                                                                    <Tooltip className='text-white' content='@gdub has ranked up to a knight!'>
+                                                                        <i class="fa-solid fa-chess-knight"></i>
+                                                                    </Tooltip> 
+                                                                </span>
+                                                                <Spacer></Spacer>
+                                                                <span size='sm' >
+                                                                    <Tooltip className='text-white' content='@gdub currently competes Xbox!'>
+                                                                        <i class="fa-brands fa-xbox"></i>
+                                                                    </Tooltip> 
+                                                                </span>
+                                                                
+                                                               
+                                                            </>}>
+                                                    
                                                     <User
                                                         avatarProps={{
                                                             src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                                                             isBordered : true,
                                                             radius : 'md',
                                                         }}
-                                                        description="Tournaments Won: 27"
+                                                        description="Tournaments Won: 27 "
                                                         name="@gdub"
                                                     />
                                                     </Badge>
-                                                    </Tooltip>
                                                 </CardBody>
                                             </Card>
                                         </li>
-                                        <li> <Card> <CardBody></CardBody></Card></li>
-                                        <li> <Card> <CardBody></CardBody></Card></li>
+                                        
                                     </ul>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
