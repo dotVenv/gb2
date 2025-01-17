@@ -86,7 +86,9 @@ const Indx = () => {
     const usercontxt = useContext(UserContext);
     
     /* cookie consent */
-    const [updateCookie, setupdateCookie] = useState(null);
+    const [updateCookie, setupdateCookie] = useState(usercontxt.cookie_consent.value);
+
+
     const showCookieConsent = (userResponse) =>{
         if (userResponse == 'accepted'){
             usercontxt.cookie_consent.value == 'accepted'
@@ -102,8 +104,7 @@ const Indx = () => {
             setupdateCookie(usercontxt.cookie_consent.value);
         };
        
-        
-        console.log(usercontxt.cookie_consent.value);        
+    
     };
 
      /* cookie consent */

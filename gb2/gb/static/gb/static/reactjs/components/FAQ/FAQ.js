@@ -20,7 +20,8 @@ const FAQ = () =>{
     
     /* cookie consent */
     const usrcontext = useContext(UserContext);
-    const [updateCookie, setupdateCookie] = useState(null);
+    const [updateCookie, setupdateCookie] = useState(usrcontext.cookie_consent.value);
+
     const showCookieConsent = (userResponse) =>{
         if (userResponse == 'accepted'){
             usrcontext.cookie_consent.value == 'accepted'
@@ -36,8 +37,6 @@ const FAQ = () =>{
             setupdateCookie(usrcontext.cookie_consent.value);
         };
         
-        
-        console.log(usrcontext.cookie_consent.value);        
     };
 
         /* cookie consent */

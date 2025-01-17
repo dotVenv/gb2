@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 
 import { Card, Spacer } from "@nextui-org/react";
 import AboutStaff from "./AboutStaff";
@@ -6,9 +6,34 @@ import ACMELogo from "../ACMELogo/acme";
 import Footer from "../Footer/Footer";
 import { BorderBeam } from "../magicui/border-beam";
 import gb_banner from '../../../imgs/pngs/gb_ab.png';
+import { UserContext } from "../../connector";
+import CookieConsent from "../Modals/CookieModal";
 
 const AboutInfo = () => {
 
+
+     /* cookie consent */
+     const usrcontext = useContext(UserContext);
+     const [updateCookie, setupdateCookie] = useState(usrcontext.cookie_consent.value);
+ 
+     const showCookieConsent = (userResponse) =>{
+         if (userResponse == 'accepted'){
+             usrcontext.cookie_consent.value == 'accepted'
+             ? updateCookie  == 'accepted'
+                 ?  undefined 
+                 : setupdateCookie(usrcontext.cookie_consent.value) 
+             : usrcontext.setCookie('accepted') 
+                 ? setupdateCookie(usrcontext.cookie_consent.value) 
+                 : undefined 
+ 
+         }else if (userResponse == 'rejected'){
+             usrcontext.setCookie('rejected');
+             setupdateCookie(usrcontext.cookie_consent.value);
+         };
+         
+     };
+ 
+         /* cookie consent */
     return (
         <>
             <Spacer></Spacer>
@@ -99,6 +124,8 @@ const AboutInfo = () => {
                     <AboutStaff />
                 </div>
             </section>
+
+            { updateCookie != null ? undefined : <CookieConsent showCookieConsent={showCookieConsent} /> }
             <Footer></Footer>
             <br></br>
             

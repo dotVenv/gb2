@@ -15,6 +15,8 @@ export class initialData {
         this.cookie_consent = signal(false);
         this.uname = signal(null);
         this.loggedin.value ? this.uname.value = document.getElementById('handsomer').textContent : undefined;
+        //optionally send cookie response to the backend then store other data in db
+        localStorage.getItem('cc') == null ? undefined : this.cookie_consent.value = localStorage.getItem('cc');
      
     };
 
@@ -52,6 +54,7 @@ export class initialData {
 
     setCookie(userResponse){
         this.cookie_consent.value = userResponse;
+        localStorage.setItem('cc', userResponse);
         return this.cookie_consent.value;
     };
     setLoggedIn() {
