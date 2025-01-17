@@ -169,13 +169,13 @@ const DescriptionSplit = () => {
                                                                 <Spacer></Spacer>
                                                                 <span size='sm' >
                                                                     <Tooltip className='text-white' content='@gdub has ranked up to a knight!'>
-                                                                        <i class="fa-solid fa-chess-knight"></i>
+                                                                        <i className="fa-solid fa-chess-knight"></i>
                                                                     </Tooltip> 
                                                                 </span>
                                                                 <Spacer></Spacer>
                                                                 <span size='sm' >
                                                                     <Tooltip className='text-white' content='@gdub currently competes Xbox!'>
-                                                                        <i class="fa-brands fa-xbox"></i>
+                                                                        <i className="fa-brands fa-xbox"></i>
                                                                     </Tooltip> 
                                                                 </span>
                                                                 

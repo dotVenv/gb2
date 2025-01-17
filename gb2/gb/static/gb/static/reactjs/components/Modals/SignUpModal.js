@@ -1,6 +1,7 @@
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { signal } from "@preact/signals-react";
+import UserContext from '../../connector/index';
 import {
     Modal,
     ModalContent,
@@ -20,10 +21,6 @@ import {
 
 
 const signupdata = {
-    email: signal('@'),
-    uname: signal(''),
-    password: signal(''),
-    r_password: signal(''),
     pwd_match: signal(false),
     dob: signal(null),
     tos: signal(false),
@@ -31,13 +28,16 @@ const signupdata = {
 
 const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
 
+    
+    const usrcontext = useContext(UserContext);
     const [action, setAction] = useState(null);
+
     
     /* form values */
-    const [emailValue, setemailValue] = useState(signupdata.email.value);
-    const [unameValue, setunameValue] = useState(signupdata.uname.value);
-    const [passwordValue,setpasswordValue] = useState(signupdata.password.value);
-    const [rpasswordValue,setrpasswordValue] = useState(signupdata.r_password.value);
+    const [emailValue, setemailValue] = useState('@');
+    const [unameValue, setunameValue] = useState('');
+    const [passwordValue,setpasswordValue] = useState('');
+    const [rpasswordValue,setrpasswordValue] = useState('');
     const [errors, setErrors] = useState({});
     
 
@@ -95,12 +95,11 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
 
         if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
-
         return;
         }
 
         //submit data
-            
+        
         // Clear errors and submit
         setErrors({});
         
