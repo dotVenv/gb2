@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Spacer,Button, Card, CardBody} from "@nextui-org/react";
+import { Spacer,Button, Card, CardBody, User, Badge, Tooltip} from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
@@ -9,6 +9,8 @@ import medalgif from '../../../imgs/gifs/medal.gif';
 import moneygif from '../../../imgs/gifs/money.gif';
 import gbAD from '../../../imgs/pngs/gb_ad.png';
 import ww_available from '../../../imgs/pngs/worldwide.png';
+
+
 const descItems = [
     {
         text: "COMPETE HEAD-TO-HEAD", 
@@ -17,25 +19,12 @@ const descItems = [
         ref: null,
         
     },
-    {
-        text: "PLAY AND EARN MONEY",
-        desc: "Bringing esports to everyone. Sign up and for each tournament placed, can earn you progress towards a cashout. Top placing gamers will earn a credit to their balance.", 
-        img: moneygif,
-        ref: null,
-    },
+    
     {
         text: "BECOME A BOUNTY HUNTER", 
         desc: "Win enough to earn the Bounty-Hunter badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
         
         img: medalgif,
-        ref: null
-
-    },
-    {
-        text: "PERFORMANCE AND SECURITY", 
-        desc: "Never worry about downtime or cyber threats, our best is always monitoring around-the-clock to ensure proper security.",
-        
-        img: ww_available,
         ref: null
 
     },
@@ -97,15 +86,15 @@ const DescriptionSplit = () => {
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
                                     <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
                                     <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[2].text}</p>
+                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[1].text}</p>
                                         <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                                        {descItems[2].desc}
+                                        {descItems[1].desc}
                                         </p>
                                     </div>
                                     <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                                         <img
                                             style={{'width':'150px', 'height': '150px'}}
-                                        src={descItems[2].img}
+                                        src={descItems[1].img}
                                         alt=""
                                         />
                                     </div>
@@ -137,8 +126,26 @@ const DescriptionSplit = () => {
                                     <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Top Competitors</p>
                                     <Spacer></Spacer>
                                     <br></br>
-                                    <ul className='justify-center align-center mx-auto'>
-                                        <li> <Card> <CardBody> Testing </CardBody></Card></li>
+                                    <ul className='justify-center align-center mx-auto gap-3 space-y-3'>
+                                        <li> 
+                                            <Card>
+                                                <CardBody>
+                                                    <Tooltip className='text-white' content='@gdub is on a 4 tournaments win streak with 27 total wins!'>
+                                                    <Badge color='danger' content={<i className="fa-solid fa-fire"></i>}>
+                                                    <User
+                                                        avatarProps={{
+                                                            src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                                            isBordered : true,
+                                                            radius : 'md',
+                                                        }}
+                                                        description="Tournaments Won: 27"
+                                                        name="@gdub"
+                                                    />
+                                                    </Badge>
+                                                    </Tooltip>
+                                                </CardBody>
+                                            </Card>
+                                        </li>
                                         <li> <Card> <CardBody></CardBody></Card></li>
                                         <li> <Card> <CardBody></CardBody></Card></li>
                                     </ul>

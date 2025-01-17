@@ -102,6 +102,7 @@ const NavvBar = ({cpage, usrcontext}) => {
                                 ?   <Button  color="secondary" 
                                     size='sm'  
                                     variant="flat"
+                                    startContent={<i className="fa-solid fa-door-open"></i>}
                                     onPress={(e) => { location.href='http://app.localhost:8000'}}
                                     >
                                         Dashboard

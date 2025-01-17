@@ -110,14 +110,19 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
 
     return(
         <>
-        <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}
-          onClose={handleSignupOpen}>
+        <Modal 
+            isOpen={isOpen} 
+            placement="top-center" 
+            onOpenChange={onOpenChange}
+            size='md'
+            onClose={handleSignupOpen}
+            style={{'overflowY': 'scroll'}}>
             
           
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1">Sign Up</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1 text-white">Sign Up</ModalHeader>
                 <Form
                     validationBehavior="native"
                     onReset={() => setAction("reset")}
@@ -194,9 +199,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                                 
                                 }
                         />
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                            <DatePicker label={"Birth date"} variant='bordered' />
-                        </div>
+                        
                         <div className="flex py-2 px-1 justify-between">
                         <Checkbox
                             classNames={{
@@ -205,10 +208,23 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         >
                             Agree to terms and conditions.
                         </Checkbox>
-                        <Link color="primary" href="#" size="sm">
+                        <Link color="primary" href="#" onPress={handleSignupOpen} size="sm">
                             Have an account? Sign in here.
                         </Link>
                         </div>
+
+                        <div className="flex mx-auto justify-center align-center gap-2">
+                    
+                        <Button
+                            startContent={<i className="fa-brands fa-google fa-xl"></i>}
+                            variant="bordered"
+                            radius='full'
+                            size='sm'
+                        >
+                            Sign up with Google
+                        </Button>
+                        
+                    </div>
                     
                 </ModalBody>
                 <ModalFooter className='flex jutsify-end float-end mx-auto'> 
@@ -220,25 +236,8 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                     </Button>
                 </ModalFooter>
                 </Form>
-                <div className="flex items-center gap-2">
-                    <Divider className="flex-1" />
-                    <p className="shrink-0 text-tiny text-default-500">OR</p>
-                    <Divider className="flex-1" />
-                </div>
-                
-                <div className="flex mx-auto justify-center align-center gap-2  pb-3 mb-3">
-                
-                    <Button
-                    startContent={<i className="fa-brands fa-google fa-xl"></i>}
-                    variant="bordered"
-                    radius='full'
-                    size='sm'
-                    >
-                        Sign up with Google
-                    </Button>
+                    
             
-                </div>
-                 
                 </>
             )}
             </ModalContent>

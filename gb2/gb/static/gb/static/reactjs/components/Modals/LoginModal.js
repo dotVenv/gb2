@@ -154,13 +154,12 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       </Button>
                   </ModalFooter>
                 </Form>
-                <div className="flex items-center gap-4 py-2">
+                <div className="flex items-center gap-2 py-1">
                   <Divider className="flex-1" />
                   <p className="shrink-0 text-tiny text-default-500">OR</p>
                   <Divider className="flex-1" />
                   </div>
-                  <Spacer></Spacer>
-                  <br></br>
+                 
                   <div className="flex mx-auto justify-center align-center gap-2">
 
                     <Button

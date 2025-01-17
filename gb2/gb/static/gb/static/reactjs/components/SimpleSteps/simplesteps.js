@@ -90,27 +90,23 @@ const SimpleSteps = () => {
    return (
         <>      
             
-                <h2 className='font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
-                <Card 
-                  isFooterBlurred
-                  className="flex h-[320px] w-[50px] col-8 rounded-xl bg-zinc-900 mx-auto justify-center align-center">
-                      <CardBody className="items-center mx-auto flex">
-                          <div
-                              className={cn(
-                                  "relative flex h-[500px] w-full flex-col p-6 overflow-hidden  bg-background md:shadow-xl",
-                                  "",
-                              )}
-                              >
-                              <AnimatedList>
-                                  {notifications.map((item, idx) => (
-                                    <Notification {...item} key={idx} />
-                                  ))}
-                              </AnimatedList>
-                          </div>
-                      </CardBody>
-                     
-                      <BorderBeam />
-                </Card>
+          <h2 className='font-bold text-black justify-center text-center'> <i>Competing made simple. </i> </h2>
+          
+                    <div
+                        className={cn(
+                            "relative flex h-[250px] w-[475px] justify-center align-center mx-auto bg-white p-6 overflow-hidden  md:shadow-xl",
+                            "",
+                        )}
+                        >
+                        <AnimatedList>
+                            {notifications.map((item, idx) => (
+                              <Notification {...item} key={idx} />
+                            ))}
+                        </AnimatedList>
+                    </div>
+              
+                <BorderBeam />
+               
             <br></br>
             <Spacer></Spacer>
         

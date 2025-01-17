@@ -6,11 +6,11 @@ import razor_logo from '../../../imgs/pngs/partners/razor_logo.png';
 import rogueenegry_logo from '../../../imgs/pngs/partners/rogueenegry_logo.png';
 import vertagear_logo from '../../../imgs/pngs/partners/vertagear_logo.png';
 import phantom_logo  from '../../../imgs/pngs/partners/phantom_logo.png';
-import { CardBody,Card, CardFooter, Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/react";
 
 const PartnerList = [
     {partner: 'cdkeys', img: cdkeys_logo, style:{'height': '50px','width': '120px'}},
-    {partner: 'razor', img: razor_logo, style:{'height': '70px','width': '80px'}},
+    {partner: 'razer', img: razor_logo, style:{'height': '70px','width': '80px'}},
     {partner: 'rogue energy', img: rogueenegry_logo, style:{'height': '50px','width': '100px'}},
     {partner: 'vertagear', img: vertagear_logo, style:{'height': '80px','width': '80px'}},
     {partner: 'phantom wallet', img: phantom_logo, style:{'height': '80px','width': '80px'}},
