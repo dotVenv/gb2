@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import {Tabs, Tab, Card, CardBody, Switch, Spacer, Chip} from "@nextui-org/react";
-
+import CookieConsent from "../Modals/CookieModal";
 import ACMELogo from "../ACMELogo/acme";
 import Footer from "../Footer/Footer";
+import { UserContext } from "../../connector";
 
 
 const faqTopics = [
@@ -14,6 +15,32 @@ const faqTopics = [
     {'topic':'Affiliates','data':[{'question':'How to become affiliate?','answer':'Apply.'}]}
 ]
 const FAQ = () =>{
+
+
+    
+    /* cookie consent */
+    const usrcontext = useContext(UserContext);
+    const [updateCookie, setupdateCookie] = useState(null);
+    const showCookieConsent = (userResponse) =>{
+        if (userResponse == 'accepted'){
+            usrcontext.cookie_consent.value == 'accepted'
+            ? updateCookie  == 'accepted'
+                ?  undefined 
+                : setupdateCookie(usrcontext.cookie_consent.value) 
+            : usrcontext.setCookie('accepted') 
+                ? setupdateCookie(usrcontext.cookie_consent.value) 
+                : undefined 
+
+        }else if (userResponse == 'rejected'){
+            usrcontext.setCookie('rejected');
+            setupdateCookie(usrcontext.cookie_consent.value);
+        };
+        
+        
+        console.log(usrcontext.cookie_consent.value);        
+    };
+
+        /* cookie consent */
 
     return (
         <>
@@ -57,6 +84,7 @@ const FAQ = () =>{
                 </div>
 
             </section>
+            { updateCookie != null ? undefined : <CookieConsent showCookieConsent={showCookieConsent} /> }
             <Footer></Footer>
         
         </>

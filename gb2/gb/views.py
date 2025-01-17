@@ -49,7 +49,7 @@ class UIViews(TemplateView):
                     user_auth = authenticate(request, username=login_user.username, password=login_user.pwd)
                     if user_auth is not None:
                         login(request, user_auth)
-                        login_user.setLoginCookie(request.POST.get('ru'))
+                        #login_user.setLoginCookie(request.POST.get('ru'))
                             
                         request.session.modified = True
                     

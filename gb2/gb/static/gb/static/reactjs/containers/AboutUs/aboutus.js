@@ -1,7 +1,7 @@
 'use client'
 
 
-import React, {Suspense } from "react";
+import React, {Suspense, useContext } from "react";
 import { Spacer } from "@nextui-org/react";
 import {AboutInfo, Preloader, PromoBanner } from "../../components/index";
 import { 
@@ -9,15 +9,18 @@ import {
     Footer,
     NavvBar
     } from "../../components";
+import { UserContext } from "../../connector";
 
 
 
 const AboutUs = () => {
 
+    const usrcontext = useContext(UserContext);
+
     return (
         <>
         <Suspense fallback={<Preloader />}>
-            <NavvBar />
+            <NavvBar cpage='about-us' usrcontext={usrcontext} />
             <PromoBanner />
                 <Experience pagetype={'aboutus'}>
                     <AboutInfo />

@@ -10,14 +10,17 @@ import {
     Footer,
     NavvBar
     } from "../../components";
+import { UserContext } from "../../connector";
 
 
 const FreqAsked = () => {
 
+    const usrcontext = useContext(UserContext);
+
     return(
         <>
             <Suspense fallback={<Preloader />}>
-                <NavvBar />
+                <NavvBar cpage='FAQ' usrcontext={usrcontext} />
                 <PromoBanner />
                     <Experience pagetype={'faq'}>
                         <FAQ />

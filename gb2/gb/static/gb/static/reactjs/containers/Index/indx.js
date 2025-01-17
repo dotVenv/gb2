@@ -84,8 +84,9 @@ const Indx = () => {
 
 
     const usercontxt = useContext(UserContext);
-    const [updateCookie, setupdateCookie] = useState(null);
+    
     /* cookie consent */
+    const [updateCookie, setupdateCookie] = useState(null);
     const showCookieConsent = (userResponse) =>{
         if (userResponse == 'accepted'){
             usercontxt.cookie_consent.value == 'accepted'
@@ -98,7 +99,7 @@ const Indx = () => {
 
         }else if (userResponse == 'rejected'){
             usercontxt.setCookie('rejected');
-            setupdateCookie(usercontxt.cookie_consent.value) 
+            setupdateCookie(usercontxt.cookie_consent.value);
         };
        
         
@@ -106,10 +107,12 @@ const Indx = () => {
     };
 
      /* cookie consent */
+
+     
     return (
         <> 
             <Suspense fallback={<Preloader />} >
-                <NavvBar cpage='/'/>
+                <NavvBar cpage='/' usrcontext={usercontxt}/>
                 <PromoBanner />
                
                 <Experience pagetype='main' style={{'overflowX': 'hidden'}}>

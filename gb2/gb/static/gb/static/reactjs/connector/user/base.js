@@ -9,12 +9,12 @@ export class initialData {
 
     constructor(){
 
-        this.loggedin = signal(document.getElementById('handsome').textContent);
-        console.log(this.loggedin.value);
+        this.loggedin = signal((document.getElementById('handsome').textContent));
+        //convert string value to boolean
+        this.loggedin.value == 'true' ? this.loggedin.value = true : this.loggedin.value = false;
         this.cookie_consent = signal(false);
         this.uname = signal(null);
         this.loggedin.value ? this.uname.value = document.getElementById('handsomer').textContent : undefined;
-        console.log(this.uname.value);
      
     };
 
@@ -25,7 +25,7 @@ export class initialData {
             await axios({
                 url:'/login',
                 method:'post',
-                data: { uname: uname, pwd: pwd, ru:rememberUser, cc: this.cookie_consent.value},
+                data: { uname: uname, pwd: pwd, ru:rememberUser},
                 headers: {
                     'X-CSRFTOKEN': GETCSRFToken(),
                     'Content-Type': 'multipart/form-data'
