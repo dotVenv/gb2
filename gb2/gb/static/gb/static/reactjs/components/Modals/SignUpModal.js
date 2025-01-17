@@ -1,7 +1,8 @@
+'use client';
 
 import React, { useState, useMemo, useContext } from "react";
 import { signal } from "@preact/signals-react";
-import UserContext from '../../connector/index';
+import { UserContext } from '../../connector/index';
 import {
     Modal,
     ModalContent,
@@ -16,6 +17,7 @@ import {
     Form,
     Divider,
     Spacer,
+    Alert,
   } from "@nextui-org/react";
   
 
@@ -38,7 +40,8 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     const [unameValue, setunameValue] = useState('');
     const [passwordValue,setpasswordValue] = useState('');
     const [rpasswordValue,setrpasswordValue] = useState('');
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(null);
+    const [signupComplete, setsignupComplete] = useState(false);
     
 
     /* form values */
@@ -74,34 +77,41 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     /* validate password */
 
     /* handle submission */
-    const onSubmit = (e) => {
+    const onSubmitSignup = async(e) => {
         
         e.preventDefault();        
 
             // Custom validation checks
-        const newErrors = {};
+        console.log('client-side validation ');
 
         // Password validation
         const passwordError = getPasswordError(passwordValue);
+    
 
         if (passwordError) {
-        newErrors.password = passwordError;
-        }
+            setErrors(passwordError);
+            return;
+        };
 
         // Username validation
-        if (unameValue === "admin" || "test" || "user") {
-        newErrors.name = "Nice try! Choose a different username";
-        }
+        if (unameValue === "admin" || unameValue == "test" || unameValue == "user") {
+            setErrors("Nice try! Choose a different username");
+            return
+        };
 
-        if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
-        return;
-        }
+        if (passwordValue !== rpasswordValue){
+            setErrors('Passwords must match!');
+        };
+        
 
         //submit data
+        signup_reponse = await usrcontext.signupUser();
+        if (signup_reponse){
+            
+        }
         
         // Clear errors and submit
-        setErrors({});
+        setErrors(null);
         
     };
      /* handle submission */
@@ -125,16 +135,38 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                 <Form
                     validationBehavior="native"
                     onReset={() => setAction("reset")}
-                    onSubmit={onSubmit}
+                    onSubmit={(e) => {onSubmitSignup(e)}}
                     >
                 <ModalBody>
+                { errors !== null  
+                        ? <Alert
+                            className='text-small'
+                            color={'danger'}
+                            variant='flat'
+                            title={<p> {errors.name != null ? errors.name  : errors.password != null ? errors.password : undefined } </p>}
+                            size='sm' 
+                            radius='full'/>
+                        : 
+                    signupComplete ?
+                        <Alert
+                            className='text-small'
+                            hideIcon
+                            color={'success'}
+                            variant='flat'
+                            title={<p>Successfully signed up, redirecting to dashboard.</p>}
+                            size='sm' 
+                            radius='full'/>
+                        :
+                    undefined
+                    
+                      }
                         <Input
                             isRequired
                             label="Email"
                             errorMessage="Please enter a valid email"
                             placeholder="Enter your email"
                             variant="bordered"
-                            color={invalidEmail ? "danger" : "success"}
+                            color={invalidEmail ? "danger" : undefined }
                             isInvalid={invalidEmail}
                             value={emailValue}
                             onValueChange={setemailValue}
@@ -187,10 +219,10 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             onValueChange={setrpasswordValue}
                             validate={(value) => {
                                 if (value != passwordValue) {
-                                signupdata.pwd_match.value = false;
+                                    signupdata.pwd_match.value = false;
                                 return "Passwords must match!";
                                 }
-                                signupdata.pwd_match.value = true;
+                                    signupdata.pwd_match.value = true;
                                 return null;
                             }}
                             endContent={
@@ -228,10 +260,10 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                 </ModalBody>
                 <ModalFooter className='flex jutsify-end float-end mx-auto'> 
                     <Button color="danger" variant="light" onPress={onClose}>
-                    Close
+                        Close
                     </Button>
-                    <Button type='submit' variant='flat' color="success">
-                    Register 
+                    <Button type='submit' variant='flat' color="success" >
+                        Register 
                     </Button>
                 </ModalFooter>
                 </Form>

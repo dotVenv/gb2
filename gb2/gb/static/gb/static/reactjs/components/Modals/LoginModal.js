@@ -84,6 +84,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                      { loginStatus !== 'idle' 
                         ? <Alert
                             className='text-small'
+                            hideIcon={loginStatus === 'failed' ? false : true}
                             color={loginStatus === 'failed' ? 'danger' : 'success'}
                             variant='flat'
                             title={loginStatus === 'failed' ? 'Invalid username or password, please try again.' : 'Login Successful'}
