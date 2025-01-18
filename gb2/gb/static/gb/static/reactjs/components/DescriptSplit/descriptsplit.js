@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef } from "react";
 
-import { Spacer,Button, Card, CardBody, CardHeader, CardFooter, User, Badge, Tooltip, Image, Divider, Chip} from "@nextui-org/react";
+import { Spacer,Button, Card, CardBody, CardHeader, CardFooter, User, Badge, Tooltip, Image, Divider, Chip, ScrollShadow} from "@nextui-org/react";
 import TextScrollAnim from '../Animations/TextScroll';
 import { signal } from '@preact/signals-react';
 import AnimatedGradientText from "../magicui/animated-gradient-text";
@@ -61,11 +61,12 @@ const DescriptionSplit = () => {
                                 <div className=" grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
                                 <div className="relative lg:row-span-2">
                                     <div className=" inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
-                                    <div className="relative flex h-[475px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                                    <div className="relative flex flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                                     <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Popular Tournaments</p>
                                     <Spacer></Spacer>
                                     <br></br>
-                                    <ul className='justify-center align-center mx-auto px-8'>
+                                    <ScrollShadow className="h-[500px]" hideScrollBar>
+                                    <ul className='justify-center align-center mx-auto px-8  space-y-8'>
                                         <li> 
                                             <Card  
                                                 isFooterBlurred className=" py-0 justify-center align-center mx-auto"
@@ -100,56 +101,61 @@ const DescriptionSplit = () => {
                                                     <p className='text-tiny text-gray-400'> <i>Click to view details </i> </p>
                                                 </CardFooter>
                                             </Card>
+
                                         </li>
-                                       
+
+                                        
                                     </ul>
+                                    </ScrollShadow>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
                                 </div>
                                 <div className="relative max-lg:row-start-1">
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
-                                    <div className="relative flex h-[475px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                                    <div className="relative flex h-[300px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                                     <div className="px-8 pt-8 sm:px-10 sm:pt-10">
                                         <p className="mt-2 text-md font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[1].text}</p>
                                         <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {descItems[1].desc}
                                         </p>
                                     </div>
-                                    <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+                                    {/* <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                                         <img
-                                            style={{'width':'150px', 'height': '150px'}}
+                                            style={{'width':'100px', 'height': '100px'}}
                                         src={descItems[1].img}
                                         alt=""
                                         />
-                                    </div>
+                                    </div> */}
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
                                 </div>
                                 <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                                     <div className=" inset-px rounded-lg bg-white"></div>
-                                    <div className="relative flex h-[350px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+                                    <div className="relative flex h-[300px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
                                     <div className="px-8  sm:px-10 ">
                                         <p className=" text-md justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">{descItems[0].text}</p>
                                         <p className="mt-1 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {descItems[0].desc}
                                         </p>
                                     </div>
-                                    <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+                                    {/* <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                                         <img
-                                            style={{'width':'150px', 'height': '150px'}}
+                                            style={{'width':'100px', 'height': '100px'}}
                                         src={descItems[0].img}
                                         alt=""
                                         />
-                                    </div>
+                                    </div> */}
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5"></div>
                                 </div>
                                 <div className="relative lg:row-span-2">
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
-                                    <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                                    <div className="relative flex  flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
                                         <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Top Competitors</p>
                                     <Spacer></Spacer>
                                     <br></br>
+
+                                    <ScrollShadow className="h-[500px]" hideScrollBar>
                                     <ul className='px-8 justify-center align-center mx-auto gap-3 space-y-3'>
                                         <li> 
                                             <Card  
@@ -195,8 +201,9 @@ const DescriptionSplit = () => {
                                                 </CardBody>
                                             </Card>
                                         </li>
-                                        
                                     </ul>
+
+                                    </ScrollShadow>
                                     </div>
                                     <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                                 </div>

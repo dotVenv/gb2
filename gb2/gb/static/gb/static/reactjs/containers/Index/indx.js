@@ -142,9 +142,9 @@ const Indx = () => {
                         </section>
 
                         <br></br>
-                        <section className="relative h-[105vh] mt-3 pt-3">
-                            <br></br>
-                            <Spacer></Spacer>
+                        <section className="relative h-[105vh] mt-2  mb-4 pb-4">
+                          
+
                             <div>
                                 <TextRevealByWord className='justify-center align-center text-center mx-auto flex text-medium' text="The New E-sports, Powered by dotVenv">
                                     <Card className='h-[450px] w-full col-12'>
