@@ -264,38 +264,38 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         </Link>
                         </div>
 
-                        <div className="flex mx-auto justify-center align-center gap-2">
-                            <ButtonGroup className='gap-2 space-x-2'>
-
-                            
-                            <Button isIconOnly variant='bordered' radius='full' size='sm'>
-                               <i className="fa-brands fa-google fa-lg"></i>
-                            </Button>
-                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
-                                <i className="fa-brands fa-steam fa-lg"></i> 
-                            </Button>
-                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
-                                <i className="fa-brands fa-xbox fa-lg"></i>
-                            </Button>
-                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
-                                <i className="fa-brands fa-playstation fa-lg"></i>
-                            </Button>
-                            </ButtonGroup>
-                        
-                    </div>
-                    
+        
                 </ModalBody>
                 <ModalFooter className='flex jutsify-end float-end mx-auto'> 
                     <Button color="danger" variant="light" onPress={onClose}>
                         Close
                     </Button>
-                    <Button type='submit' variant='flat' color="success" >
+                    <Button type='submit' variant='flat' color="primary" >
                         Register 
                     </Button>
                 </ModalFooter>
                 </Form>
                     
-            
+               <div className="flex items-center gap-2 py-1">
+                    <Divider className="flex-1" />
+                    <p className="shrink-0 text-tiny text-default-500">OR</p>
+                    <Divider className="flex-1" />
+                </div>
+                
+                <div className="flex mx-auto justify-center align-center gap-2">
+
+                        <Button  
+                            variant='flat' 
+                            radius='full' 
+                            size='sm' 
+                            className='bg-gradient-to-r from-zinc-600 to-blue-500 text-white shadow-lg'
+                            startContent={<i className="fa-brands fa-google fa-lg"></i>}>
+                            Sign up with Google
+                        </Button>
+                    
+                </div>
+                    <Spacer></Spacer>
+                    <br></br>
                 </>
             )}
             </ModalContent>

@@ -95,6 +95,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                     </div>
                       <Input
                         label="Username"
+                        autocomplete='on'
                         isRequired
                         placeholder="Enter your username"
                         variant="bordered"
@@ -159,20 +160,20 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                   <Divider className="flex-1" />
                   <p className="shrink-0 text-tiny text-default-500">OR</p>
                   <Divider className="flex-1" />
-                  </div>
+                </div>
                  
-                  <div className="flex mx-auto justify-center align-center gap-2">
+                <div className="flex mx-auto justify-center align-center gap-2">
 
-                    <Button
-                      startContent={<i className="fa-brands fa-google fa-xl"></i>}
-                      variant="bordered"
-                      radius='full'
-                      size='sm'
-                    >
-                      Sign in with Google
-                    </Button>
+                      <Button  
+                          variant='flat' 
+                          radius='full' 
+                          size='sm' 
+                          className='bg-gradient-to-r from-zinc-600 to-blue-500 text-white shadow-lg'
+                          startContent={<i className="fa-brands fa-google fa-lg"></i>}>
+                          Sign in with Google
+                      </Button>
                    
-                  </div>
+                </div>
                   <Spacer></Spacer>
                   <br></br>
                   <p className="text-center text-small">
