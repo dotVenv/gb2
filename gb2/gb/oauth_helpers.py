@@ -63,7 +63,7 @@ class Google_Auth(OAuth_Connection):
         self.scope = ["openid",
             "https://www.googleapis.com/auth/userinfo.email",
             "https://www.googleapis.com/auth/userinfo.profile"]
-        self.redirect_uri = 'http://localhost:8000/oauth/google/google-callback'
+        self.redirect_uri = 'http://gamers-bounty-dev.com:8000/oauth/google/callback'
         self.token_uri = 'https://www.googleapis.com/oauth2/v4/token'
         self.auth_url = 'https://www.accounts.google.com/o/oauth2/v2/auth'
     

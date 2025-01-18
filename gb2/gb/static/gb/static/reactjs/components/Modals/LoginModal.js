@@ -46,6 +46,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
         }else{ 
           setloginStatus('success');
           usrcontext.setLoggedIn(true);
+          location.href = 'http://app.gamers-bounty-dev.com:8000';
 
         };
   

@@ -17,5 +17,5 @@ urlpatterns = [
     
     #oauth
     path('oauth/google/', uiviews.oauth_google, name='oauth_google'),
-    path('oauth/google/google-callback', uiviews.oauth_google_callback, name='oauth_google_callback')
+    path('oauth/google/callback', uiviews.oauth_google_callback, name='oauth_google_callback')
 ]

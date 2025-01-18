@@ -119,7 +119,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
             console.log('response returned');
             if (signup_reponse[0] == 'success'){
                 setsignupComplete(signup_reponse[1]);
-                window.location.href = 'http://app.localhost:8000';
+                //window.location.href = 'http://gamers-bounty-dev.com:8000';
                 
             }else if (signup_reponse[0] == 'failed'){
                 setErrors(signup_reponse[1]);
