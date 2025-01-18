@@ -1,7 +1,8 @@
-import { Chip } from "@nextui-org/react";
-import React from "react";
 
-
+import React, {useState} from "react";
+import { Button, Chip, useDisclosure } from "@nextui-org/react";
+import { signal } from "@preact/signals-react";
+import LoginModal from "../Modals/LoginModal";
 const tiers = [
     {
       name: 'Trial Competitor (7-Day Trial)',
@@ -39,9 +40,27 @@ const tiers = [
   }
 
 
+const isLoginModalOpen = signal(false);
+const isSignupModalOpen = signal(false);
   
 const PricingTable = () => {
 
+
+     /* login & signup modal */
+
+     const {onOpenChange, onOpen} = useDisclosure(); 
+     const [triggerLoginModal, setTriggerLoginModal] = useState(isLoginModalOpen.value);
+     const [triggerSignUpModal, setTriggerSignupModal] = useState(isSignupModalOpen.value);
+ 
+ 
+     const handleLoginOpen = () => {
+         isLoginModalOpen.value = !triggerLoginModal
+         setTriggerLoginModal(isLoginModalOpen.value);
+         triggerLoginModal ? onOpen() : undefined;
+      
+     };
+   
+      /* login login & signup modal  */
 
     return (
         <>
@@ -115,23 +134,25 @@ const PricingTable = () => {
                         </li>
                     ))}
                     </ul>
-                    <a
-                    href={tier.href}
-                    aria-describedby={tier.id}
-                    className={classNames(
-                        tier.featured
-                        ? 'bg-indigo-500 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
-                        : 'text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-indigo-600',
-                        'mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10',
-                    )}
+                    <Button
+                        onPress={handleLoginOpen}
+                        aria-describedby={tier.id}
+                        className={classNames(
+                            tier.featured
+                            ? 'bg-indigo-500 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
+                            : 'text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-indigo-600',
+                            'mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10',
+                        )}
                     >
                     Start Competing
-                    </a>
+                    </Button>
                 </div>
                 ))}
+                
             </div>
+            { triggerLoginModal ? <LoginModal isOpen={triggerLoginModal} onOpenChange={onOpenChange} handleLoginOpen={handleLoginOpen} /> : undefined }
             </div>
-
+            
         </>
     );
 };

@@ -193,7 +193,7 @@ const Indx = () => {
                                         ))}
                                     </div>
                                 <div className='align-center justify-center mx-auto flex'>
-                                    <PricingTable />
+                                    <PricingTable  />
                                 </div>
                                 
                         </section>

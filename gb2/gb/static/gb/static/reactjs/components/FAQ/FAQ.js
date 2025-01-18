@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import {Tabs, Tab, Card, CardBody, Listbox,ListboxItem,Spacer, Chip} from "@nextui-org/react";
+import {Tabs, Tab, Card, CardBody, Listbox,ListboxItem,Spacer, Chip, Alert} from "@nextui-org/react";
 import CookieConsent from "../Modals/CookieModal";
 import ACMELogo from "../ACMELogo/acme";
 import Footer from "../Footer/Footer";
@@ -16,7 +16,7 @@ const faqTopics = [
 ]
 
 export const ListboxWrapper = ({children}) => (
-    <div className="w-[150px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100 justify-center border-rounded" radius='full'>
+    <div className="w-full border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100 justify-center border-rounded" radius='full'>
       {children}
     </div>
   );
@@ -88,8 +88,12 @@ const FAQ = () =>{
                                         ))}
                                     </Listbox>
                                 </ListboxWrapper>
-                                <p className="text-small text-black">Topic answer: <b><i>{selectedValue}</i></b></p>
-                            
+                                <Alert 
+                                    variant='flat' 
+                                    color='secondary'  
+                                    title={<><p className="text-small text-black mt-2">Answer:</p> <b><i className='text-black'>{selectedValue}</i></b></>}>
+                                    
+                                </Alert>
                             </Tab>
                         ))}
                         

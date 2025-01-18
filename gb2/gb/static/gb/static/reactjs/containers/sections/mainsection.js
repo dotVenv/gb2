@@ -42,6 +42,7 @@ const MainSection = () => {
             <div className='mt-4'>
                <br></br>
                 <Spacer></Spacer>
+                <br></br>
                 <ACMELogo />
                 <br></br> 
                 <Spacer></Spacer>
