@@ -168,6 +168,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                           variant='flat' 
                           radius='full' 
                           size='sm' 
+                          onPress={(e) => {location.href='/oauth/google'}}
                           className='bg-gradient-to-r from-zinc-600 to-blue-500 text-white shadow-lg'
                           startContent={<i className="fa-brands fa-google fa-lg"></i>}>
                           Sign in with Google
