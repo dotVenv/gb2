@@ -65,10 +65,10 @@ const DescriptionSplit = () => {
                                     <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Popular Tournaments</p>
                                     <Spacer></Spacer>
                                     <br></br>
-                                    <ul className='justify-center align-center mx-auto'>
+                                    <ul className='justify-center align-center mx-auto px-8'>
                                         <li> 
                                             <Card  
-                                                isFooterBlurred className=" col-9 py-0 justify-center align-center mx-auto"
+                                                isFooterBlurred className=" py-0 justify-center align-center mx-auto"
                                                 isPressable shadow="sm" onPress={() => console.log("item pressed")}>
                                                 <CardBody className="overflow-visible ">
                                                     <img
@@ -108,9 +108,9 @@ const DescriptionSplit = () => {
                                 </div>
                                 <div className="relative max-lg:row-start-1">
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
-                                    <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+                                    <div className="relative flex h-[475px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                                     <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[1].text}</p>
+                                        <p className="mt-2 text-md font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[1].text}</p>
                                         <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {descItems[1].desc}
                                         </p>
@@ -127,16 +127,16 @@ const DescriptionSplit = () => {
                                 </div>
                                 <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                                     <div className=" inset-px rounded-lg bg-white"></div>
-                                    <div className="relative flex h-[300px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+                                    <div className="relative flex h-[350px] flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
                                     <div className="px-8  sm:px-10 ">
-                                        <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center">{descItems[0].text}</p>
+                                        <p className=" text-md justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">{descItems[0].text}</p>
                                         <p className="mt-1 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {descItems[0].desc}
                                         </p>
                                     </div>
-                                    <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-3 lg:pb-1">
+                                    <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                                         <img
-                                        className="h-[min(152px,40cqw)] object-cover justify-center align-center mx-auto"
+                                            style={{'width':'150px', 'height': '150px'}}
                                         src={descItems[0].img}
                                         alt=""
                                         />
@@ -147,14 +147,14 @@ const DescriptionSplit = () => {
                                 <div className="relative lg:row-span-2">
                                     <div className=" inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                                     <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
-                                    <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Top Competitors</p>
+                                        <p className=" text-lg justify-center align-center mx-auto font-medium tracking-tight text-gray-950 max-lg:text-center mt-3">Top Competitors</p>
                                     <Spacer></Spacer>
                                     <br></br>
-                                    <ul className='justify-center align-center mx-auto gap-3 space-y-3'>
+                                    <ul className='px-8 justify-center align-center mx-auto gap-3 space-y-3'>
                                         <li> 
                                             <Card  
                                                 isPressable shadow="sm" onPress={() => console.log("item pressed")}
-                                                className='justify-center mx-auto'>
+                                                className='justify-center align-center  mx-auto mr-4'>
                                                 <CardBody>
                                                     <img src={batman_banner} style={{'height': '100px'}} className='object-cover' radius='full' />
                                                     

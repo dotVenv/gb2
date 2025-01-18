@@ -9,11 +9,11 @@ import phantom_logo  from '../../../imgs/pngs/partners/phantom_logo.png';
 import { Chip } from "@nextui-org/react";
 
 const PartnerList = [
-    {partner: 'cdkeys ', img: cdkeys_logo, style:{'height': '80px','width': '100px'}},
-    {partner: 'razer ', img: razor_logo, style:{'height': '80px','width': '80px'}},
-    {partner: 'rogue energy ', img: rogueenegry_logo, style:{'height': '80px','width': '100px'}},
-    {partner: 'vertagear ', img: vertagear_logo, style:{'height': '80px','width': '80px'}},
-    {partner: 'phantom wallet ', img: phantom_logo, style:{'height': '80px','width': '80px'}},
+    {partner: 'cdkeys ', img: cdkeys_logo, style:{'height': '50px','width': '90px', 'opacity': '35%'}},
+    {partner: 'razer ', img: razor_logo, style:{'height': '50px','width': '65px','opacity': '35%'}},
+    {partner: 'rogue energy ', img: rogueenegry_logo, style:{'height': '50px','width': '100px','opacity': '35%'}},
+    {partner: 'vertagear ', img: vertagear_logo, style:{'height': '50px','width': '80px','opacity': '35%'}},
+    {partner: 'phantom wallet ', img: phantom_logo, style:{'height': '50px','width': '60px','opacity': '35%'}},
     
 
 ];
@@ -25,9 +25,9 @@ const OurPartners = () => {
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto ">
                 <h2 className="text-center text-lg/8 font-semibold text-gray-900">
-                   Partnered with top gaming and Esports companies:
+                   Partnered with TOP gaming and Esports companies:
                 </h2>
-                <div className="grid sm:grid-cols-1 lg:grid-cols-5 mx-auto mt-10 max-w-7xl justify-center items-center text-center align-center  lg:gap-x-12 sm:gap-y-4 ">
+                <div className="grid sm:grid-cols-1 lg:grid-cols-5 mx-auto mt-10 max-w-3xl justify-center items-center text-center align-center  lg:gap-x-5 sm:gap-y-4 ">
                     {PartnerList.map((prtner) => (
                         <div key={prtner.partner} className='lg:grid-cols-1 sm:grid-cols-1 mx-auto align-center justify-center '>
                             <div>   
