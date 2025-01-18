@@ -18,3 +18,10 @@ class Oauth(ExportModelOperationsMixin('Oauth'), models.Model):
     client_secret = models.CharField(max_length=255, blank=True, null=True)
     app = models.CharField(max_length=255, blank=True, null=True)
     
+    class Meta:
+        verbose_name_plural = 'Oauths'
+    
+    def __str__(self):
+        return f'{self.app} oauth'
+    
+    

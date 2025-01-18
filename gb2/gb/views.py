@@ -112,7 +112,26 @@ class UIViews(TemplateView):
     #oauth signup/login and callbacks
     def oauth_google(self, request):
         '''oauth signup for specified request'''
+        
+        #initiate oauth
+        oauth_google = Google_Auth(request)
+        oauth_google.init_auth()
+        if oauth_google.load_check == 'failed':
+            return getres().res('500', new_msg='something went wrong please try again later.')
+        return redirect(oauth_google.authorization_url)
+        
             
+        return
+    
+    def oauth_google_callback(self, request):
+        '''callback for google authentication'''
+        
+        #initial oauth
+        oauth_google = Google_Auth(request)
+        oauth_google.fetch_data()
+        if oauth_google.load_check == 'failed':
+            return getres().res('500', new_msg='something went wrong please try again later.')
+        
         return
         
     
