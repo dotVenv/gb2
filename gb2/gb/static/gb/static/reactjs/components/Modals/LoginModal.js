@@ -83,8 +83,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                     <div className='justify-center align-center mx-auto'>
                      { loginStatus !== 'idle' 
                         ? <Alert
-                            className='text-small'
-                            hideIcon={loginStatus === 'failed' ? false : true}
+                            className='text-tiny'
                             color={loginStatus === 'failed' ? 'danger' : 'success'}
                             variant='flat'
                             title={loginStatus === 'failed' ? 'Invalid username or password, please try again.' : 'Login Successful'}
@@ -133,9 +132,10 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       />
                       <div className="flex py-2 px-1 justify-between">
                       <Checkbox
-                          isSelected={rememberUser}
-                          onValueChange={setrememberUser}
-                          classNames={{
+                        isRequired
+                        isSelected={rememberUser}
+                        onValueChange={setrememberUser}
+                        classNames={{
                           label: "text-small",
                           }}
                       >

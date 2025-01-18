@@ -22,11 +22,7 @@ import {
   
 
 
-const signupdata = {
-    pwd_match: signal(false),
-    dob: signal(null),
-    tos: signal(false),
-}
+
 
 const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
 
@@ -40,11 +36,13 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     const [unameValue, setunameValue] = useState('');
     const [passwordValue,setpasswordValue] = useState('');
     const [rpasswordValue,setrpasswordValue] = useState('');
+    const [tosCheck, settosCheck] = useState(false);
+    const pwd_match = signal(false);
+    /* form values */
     const [errors, setErrors] = useState(null);
     const [signupComplete, setsignupComplete] = useState(false);
     
 
-    /* form values */
 
     /* validate email */
     const validateEmail = (evalue) => evalue.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
@@ -77,12 +75,12 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
     /* validate password */
 
     /* handle submission */
-    const onSubmitSignup = async(e) => {
+    async function onSubmitSignup(e) {
         
         e.preventDefault();        
 
-            // Custom validation checks
-        console.log('client-side validation ');
+        // Custom validation checks
+
 
         // Password validation
         const passwordError = getPasswordError(passwordValue);
@@ -103,12 +101,31 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
             setErrors('Passwords must match!');
         };
         
+        if (!tosCheck){
+            setErrors('You must agree to the terms and conditions!');
+        };
 
         //submit data
-        signup_reponse = await usrcontext.signupUser();
+        const signupdata = {
+            email: emailValue,
+            uname: unameValue,
+            pwd: passwordValue,
+            rpwd: rpasswordValue,
+            tos: tosCheck,
+        };
+        let signup_reponse = await usrcontext.signupUser(signupdata);
         if (signup_reponse){
+            console.log('response returned');
+            if (signup_reponse[0] == 'success'){
+                setsignupComplete(signup_reponse[1]);
+                window.location.href = 'http://app.localhost:8000';
+                
+            }else if (signup_reponse[0] == 'failed'){
+                setErrors(signup_reponse[1]);
+                return;
+            };
             
-        }
+        };
         
         // Clear errors and submit
         setErrors(null);
@@ -140,20 +157,19 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                 <ModalBody>
                 { errors !== null  
                         ? <Alert
-                            className='text-small'
+                            className='text-tiny'
                             color={'danger'}
                             variant='flat'
-                            title={<p> {errors.name != null ? errors.name  : errors.password != null ? errors.password : undefined } </p>}
+                            title={errors}
                             size='sm' 
                             radius='full'/>
                         : 
-                    signupComplete ?
+                    signupComplete !== false ?
                         <Alert
-                            className='text-small'
-                            hideIcon
+                            className='text-tiny'
                             color={'success'}
                             variant='flat'
-                            title={<p>Successfully signed up, redirecting to dashboard.</p>}
+                            title='Successfully signed up, you may now sign in.'
                             size='sm' 
                             radius='full'/>
                         :
@@ -219,10 +235,10 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             onValueChange={setrpasswordValue}
                             validate={(value) => {
                                 if (value != passwordValue) {
-                                    signupdata.pwd_match.value = false;
+                                    pwd_match.value = false;
                                 return "Passwords must match!";
                                 }
-                                    signupdata.pwd_match.value = true;
+                                    pwd_match.value = true;
                                 return null;
                             }}
                             endContent={
@@ -233,6 +249,9 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         
                         <div className="flex py-2 px-1 justify-between">
                         <Checkbox
+                            isRequired
+                            isSelected={tosCheck}
+                            onValueChange={settosCheck}
                             classNames={{
                             label: "text-small",
                             }}

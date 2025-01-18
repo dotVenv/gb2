@@ -52,6 +52,38 @@ export class initialData {
         return res_stat.value;
     };
 
+    async signupUser(signupdata){
+
+        const suRes = signal(null);
+        try{
+            await axios({
+                url: '/signup',
+                method: 'post',
+                data:signupdata,
+                headers:{
+                    'X-CSRFTOKEN': GETCSRFToken(),
+                    'Content-Type': 'multipart/form-data'
+                },
+    
+            }).then(response => {
+                if (response){
+                    suRes.value = ['success',response.data.message];
+                };
+               
+            }).catch(error => {
+                if (error){
+                    suRes.value = ['failed',error.response.data.message];
+                };
+            })
+
+        }catch(e){
+            return 500;
+        };
+
+
+    return suRes.value;
+    };
+
     setCookie(userResponse){
         this.cookie_consent.value = userResponse;
         localStorage.setItem('cc', userResponse);

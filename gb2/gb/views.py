@@ -39,7 +39,6 @@ class UIViews(TemplateView):
     def login_view(self, request):
         '''login function for the user'''
         
-        #call helper login function
         try:
             if request.method == 'POST':
                 
@@ -61,7 +60,32 @@ class UIViews(TemplateView):
                 return getres().res('403')
         except dce.RequestAborted:
             return getres().res('401')
+        
     
+    def signup_view(self, request):
+        '''signup the user with the given request data'''
+        
+        
+        try:
+            if request.method == 'POST':
+                signup = hlp.Current_Session(request=request)
+                submit_signup = signup.signup()
+                if submit_signup[0] is True:
+                    if signup.register_user():
+                        return getres().res('200',new_msg=submit_signup[1])
+                    else:
+                        return getres().res('401', 'Something went wrong please try again.')
+                return getres().res('401', new_msg=submit_signup[1])
+                
+                return getres().res('401', new_msg=submit_signup[1])
+            else:
+                return getres().res('403')
+        except dce.RequestAborted:
+            return getres().res('401')
+    
+    
+    
+        
     def logout_view(self, request):
         '''logout and clear the cookie for the user'''
         

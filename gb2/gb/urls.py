@@ -12,5 +12,6 @@ urlpatterns = [
     
     #accs
     path('login', uiviews.login_view, name='login'),
+    path('signup', uiviews.signup_view, name='signup'),
     path('logout', uiviews.logout_view, name='logout')
 ]
