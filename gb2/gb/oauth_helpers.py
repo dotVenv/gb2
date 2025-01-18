@@ -63,9 +63,9 @@ class Google_Auth(OAuth_Connection):
         self.scope = ["openid",
             "https://www.googleapis.com/auth/userinfo.email",
             "https://www.googleapis.com/auth/userinfo.profile"]
-        self.redirect_uri = 'http://localhost:8000/oauth/google/callback'
+        self.redirect_uri = 'http://localhost:8000/oauth/google/google-callback'
         self.token_uri = 'https://www.googleapis.com/oauth2/v4/token'
-        self.auth_url = 'https://www.accounts.google.com/o/oauth2/auth'
+        self.auth_url = 'https://www.accounts.google.com/o/oauth2/v2/auth'
     
     
     def init_auth(self):
@@ -85,7 +85,8 @@ class Google_Auth(OAuth_Connection):
         
         
    
-        
+    def fetch_data(self):
+        return None
         
     
 
