@@ -13,5 +13,8 @@ urlpatterns = [
     #accs
     path('login', uiviews.login_view, name='login'),
     path('signup', uiviews.signup_view, name='signup'),
-    path('logout', uiviews.logout_view, name='logout')
+    path('logout', uiviews.logout_view, name='logout'),
+    
+    #oauth
+    path('oauth/google/', uiviews.oauth_google_signup, name='google signup')
 ]

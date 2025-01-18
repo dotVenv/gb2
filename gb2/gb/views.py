@@ -4,9 +4,11 @@ from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout 
 import django.core.exceptions as dce
 
+
 #app imports 
 from . import helpers as hlp 
 from .response_helpers import Response_Helpers as getres
+from .oauth_helpers import Google_Auth 
 
 
 #global variables
@@ -104,3 +106,14 @@ class UIViews(TemplateView):
             return getres().res('200', new_msg={'is_auth': False, 'usr':'Guest User'})
             
         return
+    
+    
+    
+    #oauth signup/login and callbacks
+    def oauth_google_signup(self):
+        '''oauth signup for specified request'''
+        
+        
+        return
+        
+        

@@ -288,7 +288,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             variant='flat' 
                             radius='full' 
                             size='sm' 
-                            onPress={(e) => {location.href='/oauth/google'}}
+                            onPress={(e) => {location.href='/oauth/google/'}}
                             className='bg-gradient-to-r from-zinc-600 to-blue-500 text-white shadow-lg'
                             startContent={<i className="fa-brands fa-google fa-lg"></i>}>
                             Sign up with Google
