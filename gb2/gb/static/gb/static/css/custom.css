@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@media (max-width: 800px) {
-    html, body {
-      overflow: hidden;
-    }
-  }
+html, body {
+  overflow-x: hidden;
+}
