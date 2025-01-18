@@ -92,6 +92,14 @@ class Current_Session():
         with transaction.atomic():
             new_user = gbUser.objects.create_user(self.username, self.email, self.pwd)
             if new_user:
+                x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+                if x_forwarded_for:
+                    ip = x_forwarded_for.split(',')[0]
+                else:
+                    ip = self.request.META.get('REMOTE_ADDR')
+                if ip:
+                    new_user.ip_address = ip
+                    
                 new_user.save()
                 return True
             else:

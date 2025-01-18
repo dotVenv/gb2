@@ -8,6 +8,8 @@ class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     '''db table for users'''
     profile_pic = models.ImageField(default='profile_pics/default.png', blank=True, null=True, upload_to='profile_pics/')
     mfa_active = models.IntegerField(default=0)
+    ip_address = models.CharField(max_length=255, blank=True, null=True)
+    account_verified = models.BooleanField(default=False)
     pass
 
 
