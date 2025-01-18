@@ -110,10 +110,9 @@ class UIViews(TemplateView):
     
     
     #oauth signup/login and callbacks
-    def oauth_google_signup(self):
+    def oauth_google(self, request):
         '''oauth signup for specified request'''
-        
-        
+            
         return
         
-        
+    

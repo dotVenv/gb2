@@ -16,5 +16,5 @@ urlpatterns = [
     path('logout', uiviews.logout_view, name='logout'),
     
     #oauth
-    path('oauth/google/', uiviews.oauth_google_signup, name='google signup')
+    path('oauth/google/', uiviews.oauth_google, name='oauth google')
 ]
