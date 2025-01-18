@@ -44,8 +44,12 @@ INSTALLED_APPS = [
     
     'gb',
     'gb_api',
+    
+    
+    
     #'whitenoise.runserver_nostatic',
     'whitenoise',
+    'mail_templated',
     'django_hosts',
     'django_prometheus',
     'django.contrib.admin',
@@ -244,7 +248,7 @@ CORS_ALLOW_HEADERS = (
 #CORS_ALLOW_CREDENTIALS = True 
 
 REST_FRAMEWORK = {
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',

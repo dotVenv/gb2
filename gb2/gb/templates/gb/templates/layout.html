@@ -1,11 +1,12 @@
 {% load static %}
-
+{% block html %}
 <!DOCTYPE HTML>
     <html lang="en-US" dir="ltr">
         <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+            <meta name="x-apple-disable-message-reformatting">
+            <meta  name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0">
             <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
             <meta property="og:site_name" content="dotVenv" /> <!-- website name -->
             <meta property="og:site" content="https://www.gamers-bounty.com" /> <!-- website link -->
@@ -52,3 +53,4 @@
         <script src="{% static 'gb/static/css/home.bundle.js' %}" ></script>
     </html>
     
+{% endblock %}

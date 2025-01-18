@@ -178,7 +178,7 @@ const Indx = () => {
                                     <Spacer></Spacer>
                                     <br></br>
 
-                                    <div className="justify-center align-center mx-auto w-[400px] mt-4 ">
+                                    <div className="justify-center align-center mx-auto w-full mt-4 ">
                                         <h3 className='text-gray-900  ml-3 font-bold'> <i className='ml-3'> GB Tourney Journey </i>  - <i className='text-small'>Mileage.</i></h3>
                                         <TourneyJourney />
                                     </div>

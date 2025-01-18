@@ -1,3 +1,11 @@
+{% extends "mail_templated/base.tpl" %}
+{% load static %}
+{% block subject %}
+ {{ subject }}
+{% endblock %}
+
+{% block html %}
+
 <!--
 * This email was built using Tabular.
 * For more information, visit https://tabular.email
@@ -203,3 +211,4 @@ text-decoration: none
 </td></tr></table>
 </td></tr><tr><td><div class="t40" style="mso-line-height-rule:exactly;mso-line-height-alt:70px;line-height:70px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr></table></td></tr></table></div><div class="gmail-fix" style="display: none; white-space: nowrap; font: 15px courier; line-height: 0;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div></body>
 </html>
+{% endblock %}

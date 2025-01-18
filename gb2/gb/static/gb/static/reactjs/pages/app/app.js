@@ -38,7 +38,7 @@ export default function App(){
 };
 
 createRoot(document.getElementById('gbi_root')).render(
-  <main className='dark bg-zinc-300 text-white w-full overflow-hidden' >
+  <main className='dark bg-zinc-300 text-white w-full overflow-hidden w-full fluid' >
     <App />
   </main>)
   
