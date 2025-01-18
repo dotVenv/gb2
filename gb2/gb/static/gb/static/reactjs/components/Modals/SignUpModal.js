@@ -18,6 +18,7 @@ import {
     Divider,
     Spacer,
     Alert,
+    ButtonGroup,
   } from "@nextui-org/react";
   
 
@@ -264,15 +265,22 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                         </div>
 
                         <div className="flex mx-auto justify-center align-center gap-2">
-                    
-                        <Button
-                            startContent={<i className="fa-brands fa-google fa-xl"></i>}
-                            variant="bordered"
-                            radius='full'
-                            size='sm'
-                        >
-                            Sign up with Google
-                        </Button>
+                            <ButtonGroup className='gap-2 space-x-2'>
+
+                            
+                            <Button isIconOnly variant='bordered' radius='full' size='sm'>
+                               <i className="fa-brands fa-google fa-lg"></i>
+                            </Button>
+                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
+                                <i className="fa-brands fa-steam fa-lg"></i> 
+                            </Button>
+                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
+                                <i className="fa-brands fa-xbox fa-lg"></i>
+                            </Button>
+                            <Button variant='bordered' isIconOnly size='sm' radius='full'> 
+                                <i className="fa-brands fa-playstation fa-lg"></i>
+                            </Button>
+                            </ButtonGroup>
                         
                     </div>
                     
