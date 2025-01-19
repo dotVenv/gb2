@@ -99,6 +99,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                         autocomplete='on'
                         isRequired
                         placeholder="Enter your username"
+                        className='text-white'
                         variant="bordered"
                         value={unameValue}
                         onValueChange={setunameValue}
@@ -116,6 +117,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                         autocomplete="current-password"
                         isRequired
                         label="Password"
+                        className='text-white'
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"

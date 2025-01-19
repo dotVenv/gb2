@@ -43,11 +43,7 @@ const tourney_journey = [
         description:'',
         icon: null,
     },
-    {
-        name: 'Player vs Player Chat',
-        description:'',
-        icon: null,
-    },
+    
     {
         name: 'Same Day Payouts',
         description:'',
@@ -179,15 +175,15 @@ const Indx = () => {
                                     <br></br>
 
                                     <div className="justify-center align-center mx-auto w-full mt-4 ">
-                                        <h3 className='text-gray-900  ml-3 font-bold'> <i className='ml-3'> GB Tourney Journey </i>  - <i className='text-small'>Mileage.</i></h3>
+                                        <h3 className='text-gray-900 text-center  ml-3 font-bold'> <i className='ml-3'> GB Tourney Journey </i>  - <i className='text-small'>Mileage.</i></h3>
                                         <TourneyJourney />
                                     </div>
 
                                     <br></br>
 
-                                    <div className="justify-center mx-auto lg:flex sm:grid-cols-1 gap-y-2">
+                                    <div className="flex justify-center align-center mx-auto sm:grid-cols-1 gap-y-2 gap-x-2">
                                         {tourney_journey.map((feature) => (
-                                            <Chip variant='flat' size='md' color='success' key={feature.name} className='font-bold text-small mb-2'>
+                                            <Chip variant='dot' size='md' color='success' key={feature.name} className='font-bold text-small text-black mb-2'>
                                                 {feature.name}
                                             </Chip>
                                         ))}

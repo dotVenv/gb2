@@ -40,7 +40,7 @@ const Footer = () => {
                         <a href="#" className="mr-4 hover:underline md:mr-6">Contact</a>
                     </li>
                 </ul>
-                    <span className="my-6  text-gray-500 dark:text-gray-400">© 2021-2024 <a href="#" className="hover:underline">Gamers-Bounty Inc</a>. All Rights Reserved.</span>
+                    <span className="my-6  text-gray-500 dark:text-gray-400">© 2021-2025 <a href="#" className="hover:underline">Gamers-Bounty Inc</a>. All Rights Reserved.</span>
                     <p className="my-6 text-gray-500 dark:text-gray-400 text-small">
                         Gamers-Bounty or any child company of GB, are in no way endorsed by or affiliated with any company or parent company that events are played on. Any logos, or copyrighted information of these companies are soley their property.           
                     </p>
