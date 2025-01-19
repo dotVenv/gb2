@@ -1,0 +1,9 @@
+{% extends 'gb_app/templates/layout.html' %}
+{% load static %}
+{% load hosts %}
+{% block title %} Gamers-Bounty {% endblock %}
+{% block body %}
+
+        {% csrf_token %}       
+        <div id='gba_root'></div>
+{% endblock %}
