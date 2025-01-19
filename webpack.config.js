@@ -11,7 +11,11 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 module.exports = {
     mode: 'development',
-    entry:{home:'./gb2/gb/static/gb/static/reactjs/pages/index.js',},
+    entry:{
+      home:'./gb2/gb/static/gb/static/reactjs/pages/index.js',
+      app:'./gb2/gb_app/static/gb_app/static/reactjs/pages/index.js',
+
+    },
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, './gb2/gb/static/gb/static/css'),
@@ -19,7 +23,7 @@ module.exports = {
 
     devServer: {
         open: true,
-        host: 'localhost',
+        host: '127.0.0.1',
     },
     plugins: [    
         new MiniCssExtractPlugin(),

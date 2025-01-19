@@ -4,6 +4,6 @@ from . import views
 uiviews = views.UIViews()
 
 urlpatterns = [
-    path('', uiviews.index, name='dashboard'),
+    path('', uiviews.dashboard, name='dashboard'),
 
 ]

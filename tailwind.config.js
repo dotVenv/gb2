@@ -8,6 +8,7 @@ module.exports = {
   withTM,
   content: [
     "./gb2/gb/**/*.{js,ts,jsx,tsx,mdx,html}",
+    "./gb2/gb_app/**/*.{js,ts,jsx,tsx,mdx,html}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",

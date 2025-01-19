@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     
     'gb',
     'gb_api',
-    
+    'gb_app',
     
     
     #'whitenoise.runserver_nostatic',
