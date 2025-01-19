@@ -27,3 +27,19 @@ class Oauth(ExportModelOperationsMixin('Oauth'), models.Model):
         return f'{self.app} oauth'
     
     
+    
+class ContactRequest(ExportModelOperationsMixin('ContactRequest'), models.Model):
+    '''db table for holding each contact us filled and submitted'''
+    
+    fname = models.CharField(max_length=255, blank=True, null=True)
+    lname = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=255)
+    message = models.TextField()
+    status = models.CharField(max_length=15, default='unreplied',)
+    
+    class Meta:
+        verbose_name_plural = 'Contact Requests'
+        
+    def __str__(self):
+        return f'{self.email} - {self.status}'
+    

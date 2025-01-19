@@ -4,9 +4,10 @@ from django.http import HttpResponse
 from django.db import transaction
 
 #app imports 
+import json
 from gb_api import serializers, helpers
 from .forms import LoginForm, SignupForm
-from gb_api.models import gbUser
+from gb_api.models import gbUser, ContactRequest
 
 
 
@@ -108,10 +109,7 @@ class Current_Session():
             else:
                 return False
                 
-
-                
-            
-            
+       
     def setLoginCookie(self, rememberuser):
         '''set the cookie for the current user if reponse is true'''
         
@@ -121,4 +119,22 @@ class Current_Session():
         
         return 
         
+
+    def submit_contactus(self):
+        '''for forms filled from contact us, validate and then store in db for replies from admin dash'''
+    
+        data = json.dumps(self.request.POST)
+        data = json.loads(data)
+        if not data['email'] or not data['message']:
+            print('email or message is missing')
+            return False
         
+        new_contact_request = ContactRequest.objects.create(
+            fname=data['first-name'], lname=data['last-name'],email=data['email'], message=data['message']
+            )
+        
+        if new_contact_request:
+            new_contact_request.save()
+            return True
+        print('contact request not created/saved')
+        return False

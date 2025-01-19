@@ -6,7 +6,7 @@ from gb_api.email_helpers import *
 # Create your tests here.
 
 
-class TestLoginCase(TestCase):
+class LoginSignupTest(TestCase):
     '''test the login url which handles the request as well'''
     
     def setUp(self):
@@ -72,3 +72,5 @@ class EmailTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].from_email, new_email.email_host)
         self.assertEqual(mail.outbox[0].to, [new_email.email_data['recipient']])
+        
+        

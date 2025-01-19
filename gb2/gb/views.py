@@ -35,6 +35,15 @@ class UIViews(TemplateView):
         
     def contact_us(self, request):
         
+        
+        if request.method == 'POST':
+            contact_sub = hlp.Current_Session(request=request).submit_contactus()
+            if contact_sub is True:
+                return getres().res('200')
+            else:
+                return getres().res('500')
+            
+            
         context = {}
         return render(request, 'gb/templates/index.html', context=context)
     

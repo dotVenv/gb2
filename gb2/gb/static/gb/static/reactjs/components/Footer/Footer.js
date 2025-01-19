@@ -19,13 +19,13 @@ const Footer = () => {
                 </div>
                 <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6 ">About</a>
+                        <a href="about-us" className="mr-4 hover:underline md:mr-6 ">About Us</a>
                     </li>
                     <li>
                         <a href="/contact-us" className="mr-4 hover:underline md:mr-6">Contact Us</a>
                     </li>
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6 ">Tournaments</a>
+                        <a href="https://venv.pro" className="mr-4 hover:underline md:mr-6 ">dotVenv</a>
                     </li>
                     <li>
                         <a href="#" className="mr-4 hover:underline md:mr-6">Blog</a>
@@ -34,11 +34,9 @@ const Footer = () => {
                         <a href="#" className="mr-4 hover:underline md:mr-6">Affiliate Program</a>
                     </li>
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6">FAQs</a>
+                        <a href="/FAQ" className="mr-4 hover:underline md:mr-6">FAQs</a>
                     </li>
-                    <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6">Contact</a>
-                    </li>
+                   
                 </ul>
                     <span className="my-6  text-gray-500 dark:text-gray-400">© 2021-2025 <a href="#" className="hover:underline">Gamers-Bounty Inc</a>. All Rights Reserved.</span>
                     <p className="my-6 text-gray-500 dark:text-gray-400 text-small">

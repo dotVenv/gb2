@@ -125,10 +125,14 @@ const PricingTable = () => {
                     )}
                     >
                     {tier.features.map((feature) => (
-                        <li key={feature} className="flex gap-x-3">
+                        <li key={feature} className="flex gap-x-3 bg-transparent">
                         <Chip
+                            startContent={<i className="fa-regular fa-circle-check fa-xl"></i>}
+                            size='sm'
+                            radius='full'
+                            variant='flat'
                             aria-hidden="true"
-                            className={classNames(tier.featured ? 'text-indigo-400' : 'text-indigo-600', 'h-6 w-5 flex-none')}
+                            className={classNames(tier.featured ? 'text-indigo-400' : 'text-indigo-600')}
                         />
                         {feature}
                         </li>

@@ -84,6 +84,34 @@ export class initialData {
     return suRes.value;
     };
 
+
+    async contactus_submission(data){
+
+        try{
+            let contactRequest = await axios({
+                url: '/contact-us',
+                method: 'post',
+                data: data,
+                headers: {
+                    'X-CSRFTOKEN': GETCSRFToken(),
+                    'Content-Type': 'multipart/form-data'
+                },
+            }).then(response => {
+                return response.status;
+    
+            }).catch(error => {
+                return error.response.status;
+            });
+        
+        return contactRequest;
+
+        }catch(e){
+            console.log(e);
+            return 500
+        }
+        
+    };
+
     setCookie(userResponse){
         this.cookie_consent.value = userResponse;
         localStorage.setItem('cc', userResponse);

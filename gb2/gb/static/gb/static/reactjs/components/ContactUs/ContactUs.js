@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-
-import { Spacer, Form } from "@nextui-org/react";
+'use client';
+import React, { useContext, useState } from "react";
+import { Spacer, Form, Alert } from "@nextui-org/react";
 import Footer from "../Footer/Footer";
 import ACMELogo from "../ACMELogo/acme";
+import { complex } from "framer-motion";
+import { UserContext } from "../../connector";
 
 const ContactForm = () => {
 
 
+    const usrcontext = useContext(UserContext);
+
     const [action, setAction] = useState(null);
+    const [error, setError] = useState(null);
+    const [complete, setComplete] = useState(false);
+
 
     return(
         <>
@@ -19,7 +26,7 @@ const ContactForm = () => {
             <div className='flex mt-4 px-4 justify-center align-center mx-auto'>
                 <br></br>
                 <Spacer></Spacer>
-                <h2 className='text-black font-bold'> About Us </h2>
+                <h2 className='text-black font-bold'> We're ready to hear from you! </h2>
             </div>
             <div
                 aria-hidden="true"
@@ -35,18 +42,63 @@ const ContactForm = () => {
             </div>
             <div className="mx-auto max-w-2xl text-center">
                 <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contact Us</h2>
-                <p className="mt-2 text-lg/8 text-gray-600">Contact us via email and we will reach back out to you about your inquiry.</p>
+                <p className="mt-2 text-lg/8 text-gray-600">Contact us and we will reach back out to you via email about your inquiry within 48hrs.</p>
+            </div>
+            <div className='mx-auto flex justify-center align-center col-8'>
+                { error != null
+                    ?
+                    <Alert
+                        color='danger'
+
+                        variant='flat'
+                        className='text-black col-5'
+                        title={'Unable to send email:  ' + error}
+                        size='sm'
+                        />
+                    :
+                    complete ?
+                    <Alert
+                        color='success'
+                        variant='flat'
+                        className='text-black col-5'
+                        title={'Thanks for reaching out, we will reply within 48 hours!'}
+                        size='sm'
+                        />
+
+                    : undefined 
+                }
             </div>
             <div className='flex justify-center align-center items-center mx-auto'>
             <Form  
                 className="w-full max-w-xs flex flex-col gap-4 justify-center align-center"
                 validationBehavior="native"
                 onReset={() => setAction("reset")}
-                onSubmit={(e) => {
-                e.preventDefault();
-                let data = Object.fromEntries(new FormData(e.currentTarget));
-        
-                setAction(`submit ${JSON.stringify(data)}`);
+                onSubmit={async(e) => {
+                    e.preventDefault();
+                    let data = Object.fromEntries(new FormData(e.currentTarget));
+                    data = JSON.stringify(data);
+                    data = JSON.parse(data);
+                    if (!data.message || !data.email){
+                        setError(!data.message ? 'Message must be filled' : !data.email ? 'Email must be filled' : undefined)
+                        return
+                    };
+
+                    //send to backend
+
+                    let send_form = await usrcontext.contactus_submission(data);
+                    console.log('checking data');
+                    if (send_form){
+                        if (send_form == 200){
+                            if (error){
+                                setError(null)
+                            };
+                            setComplete(true);
+                        }else{
+                            setError('Unable to complete the submission, please try again later.');
+                        };
+                    };
+                    
+                    
                 }}>
             
                 <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
