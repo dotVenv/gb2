@@ -25,7 +25,7 @@ export default function App(){
 // </UserContext.Provider>
 
 createRoot(document.getElementById('gba_root')).render(
-    <main>
+    <main className='bg-white '> 
         <App />
     </main>
 );
