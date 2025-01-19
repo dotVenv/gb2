@@ -1,6 +1,8 @@
 from django.test import TestCase, Client
+from django.core import mail 
 
 from gb_api.models import *
+from gb_api.email_helpers import * 
 # Create your tests here.
 
 
@@ -53,4 +55,20 @@ class TestLoginCase(TestCase):
         res = c.post('/signup', {'email':'demo1@demo1.com', 'uname': 'demoUser1', 'pwd':'demoPass2!', 'rpwd':'demoPass2!', 'tos':True})
         self.assertEqual(res.status_code, 200)
         
+
+
+
+class EmailTest(TestCase):
+    '''email test case from django docs'''
+    
+    def test_send_email(self):
+        new_email = EmailHelper()
         
+        new_email.email_data['recipient'] = 'support@venv.pro'
+        new_email.email_data['link'] = 'http://gamers-bounty-dev.com:8000'
+        new_email.email_data['username'] = 'gdub'
+        new_email.email_host = 'mail.example.com'
+        new_email.verify_account()
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].from_email, new_email.email_host)
+        self.assertEqual(mail.outbox[0].to, [new_email.email_data['recipient']])

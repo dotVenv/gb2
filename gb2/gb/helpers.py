@@ -101,6 +101,7 @@ class Current_Session():
                     new_user.ip_address = ip
                     
                 new_user.save()
+                    
                 return True
             else:
                 return False
