@@ -1,6 +1,9 @@
 import React from "react";
+import { NextUIProvider } from "@nextui-org/react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 
+import { Dashboard } from '../../containers/index';
 
 export default function App(){
 
@@ -8,9 +11,9 @@ export default function App(){
         <React.StrictMode>
             <NextUIProvider>
                 <BrowserRouter>
-                <Routes>
-                    <Route path='' element={<Dashboard />}/>
-                </Routes>
+                    <Routes>
+                        <Route path='' element={<Dashboard />}/>
+                    </Routes>
                 </BrowserRouter>
             </NextUIProvider>
         </React.StrictMode>

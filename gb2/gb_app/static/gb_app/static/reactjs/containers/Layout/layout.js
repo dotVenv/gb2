@@ -1,11 +1,16 @@
 import React from "react";
 
 
-const Dashboard = () => {
+
+
+const Layout = ({ children }) => {
+
+
     return(
         <>
         
         </>
     );
 };
-export default Dashboard;
+
+export default Layout;

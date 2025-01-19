@@ -4,9 +4,11 @@ from django.views.generic import TemplateView
 
 # Create your views here.
 
-class UIViews(TemplateView):
+class APPViews(TemplateView):
     
     def dashboard(self, request):
+        
+        print('reaching dashboard ')
         
         context = {}
         return render(request, 'gb_app/templates/index.html', context)

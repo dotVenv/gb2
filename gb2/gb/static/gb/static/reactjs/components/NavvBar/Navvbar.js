@@ -22,7 +22,13 @@ const menuItems = [
     "dotVenv",
   ];
 
-
+const menuLinks = [
+    '/',
+    '/about-us',
+    '/contact-us',
+    '/FAQ',
+    'https://venv.pro',
+]
 const isLoginModalOpen = signal(false);
 const isSignupModalOpen = signal(false);
 
@@ -103,7 +109,7 @@ const NavvBar = ({cpage, usrcontext}) => {
                                     size='sm'  
                                     variant="flat"
                                     startContent={<i className="fa-solid fa-door-open"></i>}
-                                    onPress={(e) => { location.href='http://app.localhost:8000'}}
+                                    onPress={(e) => { location.href='http://app.gamers-bounty-dev.com:8000'}}
                                     >
                                         Dashboard
                                     </Button>
@@ -126,7 +132,7 @@ const NavvBar = ({cpage, usrcontext}) => {
                             color={
                                 index === cpage ? "danger" : "foreground"
                             }
-                            href="#"
+                            href={menuLinks[index]}
                             size="lg"
                             >
                         {item}

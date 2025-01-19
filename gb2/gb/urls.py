@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 uiviews = views.UIViews()
@@ -19,3 +21,6 @@ urlpatterns = [
     path('oauth/google/', uiviews.oauth_google, name='oauth_google'),
     path('oauth/google/callback', uiviews.oauth_google_callback, name='oauth_google_callback')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
