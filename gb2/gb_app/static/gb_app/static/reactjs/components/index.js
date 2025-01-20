@@ -6,3 +6,4 @@ export { default as BarRoutes } from './Sidebar/barroutes';
 export { default as VerifyEmailAlert } from './SetupSteps/verifyemail';
 export { default as CompleteProfileAlert } from './SetupSteps/completeprofile';
 export { default as PreferencesAlert } from './SetupSteps/preferences'; 
+export { default as Preloader } from './Preloader/Preloader';

@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from "react";
-import { CustomSidebar } from "../../components";
+import React, { Suspense, useState } from "react";
+import { CustomSidebar, Preloader } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer,
     Button,
@@ -19,6 +19,7 @@ const Layout = ({ children }) => {
    
     return(
         <>  
+            <Suspense fallback={<Preloader />} >
             <CustomSidebar  />
            
             { accountProgress !== '[4/4]' 
@@ -101,6 +102,8 @@ const Layout = ({ children }) => {
                     
                 </> 
             }
+            
+            </Suspense>
         </>
     );
 };
