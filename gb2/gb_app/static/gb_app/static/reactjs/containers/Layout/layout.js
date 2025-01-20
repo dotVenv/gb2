@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
             <CustomSidebar />
             <Card  className="mx-auto max-w-2xl justify-center align-center h-[5vh] sm:px-6 lg:px-8 mt-4 py-4 bg-gray-300">
               <div className='flex'>
-                <p className='float start mt-2 py-3 text-black'> Welcome User </p>
+                <p className='float start mt-2 py-3 text-black items-center'> Welcome User </p>
               </div> 
             </Card>
            
