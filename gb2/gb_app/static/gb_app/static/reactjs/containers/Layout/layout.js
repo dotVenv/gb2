@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { CustomSidebar } from "../../components";
-import { Spacer, Card, CardBody } from "@nextui-org/react";
+import { Spacer, Card, CardBody, Progress } from "@nextui-org/react";
 const Layout = ({ children }) => {
 
-
+    const [accountProgress, setAccountProgress] = useState('[1/4]');
     return(
         <>  
             <CustomSidebar />
-            <Card  className="mx-auto max-w-2xl justify-center align-center h-[5vh] sm:px-6 lg:px-8 mt-4 py-4 bg-gray-300">
-              <div className='flex'>
-                <p className='float start mt-2 py-3 text-black items-center'> Welcome User </p>
-              </div> 
+            <Card  className="mx-auto max-w-7xl justify-center align-center h-[15vh] col-9 sm:px-6 lg:px-8 mt-4 py-4 bg-gray-300">
+              
+               <p className='text-center text-black mx-auto'> Quick Account Overview </p>
+                <div className='flex gap-x-4'>
+
+                <Progress
+                        classNames={{
+                            base: "max-w-md ",
+                            track: "drop-shadow-md border border-default",
+                            indicator: "bg-gradient-to-r from-pink-500 to-yellow-500",
+                            label: "tracking-wider font-medium text-black",
+                            value: "text-black",
+                        
+
+                        }}
+                        label={"Account Setup Progress " + accountProgress }
+                        radius="sm"
+                        showValueLabel={true}
+                        size="sm"
+                        value={25}
+                        />
+                        <Spacer></Spacer>
+                        <Card className='bg-gray-700 opacity-50 h-[45px] align-center mx-auto text-center items-center overflow-y-hidden'>
+                            <CardBody>
+                                <p className='text-tiny '>Verify Account Email</p>
+                            </CardBody>
+                        </Card>
+                        
+                </div>
             </Card>
            
             
