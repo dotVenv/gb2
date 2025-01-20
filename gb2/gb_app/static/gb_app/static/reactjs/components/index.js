@@ -5,3 +5,4 @@ export { default as NotiDropdown } from './Sidebar/notidropdown';
 export { default as BarRoutes } from './Sidebar/barroutes';
 export { default as VerifyEmailAlert } from './SetupSteps/verifyemail';
 export { default as CompleteProfileAlert } from './SetupSteps/completeprofile';
+export { default as PreferencesAlert } from './SetupSteps/preferences'; 
