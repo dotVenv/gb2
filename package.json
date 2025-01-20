@@ -19,10 +19,11 @@
   "author": "dotVenv",
   "license": "MIT",
   "dependencies": {
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@internationalized/date": "^3.6.0",
     "@motionone/utils": "^10.18.0",
+    "@mui/material": "^6.4.0",
     "@nextui-org/react": "^2.6.11",
     "@preact/signals-react": "^2.2.0",
     "@react-aria/i18n": "^3.12.4",

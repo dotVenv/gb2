@@ -5,12 +5,7 @@ import { AccountSetup } from '../index';
 import { Spacer,
     Button,
     Card,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownTrigger,
-    Progress,
-    cn,} from "@nextui-org/react";
+    Alert,} from "@nextui-org/react";
 
 
 
@@ -18,6 +13,8 @@ const Layout = ({ children }) => {
 
     const [accountProgress, setAccountProgress] = useState('[4/4]');
     const [selectMembership, setSelectMembership] = useState('pass')
+    const [currentPage, setCurrentPage] = React.useState("song");
+
     const status = 'good';
    
     return(
@@ -28,9 +25,31 @@ const Layout = ({ children }) => {
                 ? <AccountSetup accountProgress={accountProgress}/>
                 :
                 <> 
-                <Card  className="mx-auto max-w-7xl justify-center align-center  col-9 sm:px-4 lg:px-3 mt-4 py-4 bg-gray-300">
-                    
-                </Card>
+                    <section className='mt-3 py-4'>
+                       
+                        <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
+                        
+                         <Alert
+                            color="success"
+                            description="Your account is looking good, there are no issues found."
+                            title="Account Status: OK"
+                            variant="faded"
+                        />
+
+                        {/* <Alert
+                            color="warning"
+                            description="You are not subscribed to a membership plan, please upgrade to unlock more features"
+                            endContent={
+                            <Button color="warning" size="sm" variant="flat">
+                                Upgrade
+                            </Button>
+                            }
+                            title="No active membership"
+                            variant="faded"
+                        /> */ }
+                        </div>
+                       
+                    </section>
                     <section className='mx-auto justify-center align-center col-10'>    
                     
                         <dl className="sm:grid flex flex-col  justify-center align-center mx-auto py-4 mt-4 grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-3">
@@ -75,11 +94,11 @@ const Layout = ({ children }) => {
                             </Card>    
                         </dl>
                     </section>
-                    
-                    
-                    <div className='justify-center align-center mx-auto'>
-                        {children}
+                    <div>
+                   
                     </div>
+                        {children}
+                    
                 </> 
             }
         </>
