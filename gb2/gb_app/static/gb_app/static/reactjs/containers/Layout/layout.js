@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CustomSidebar } from "../../components";
-import { Spacer, Card, CardBody, Progress } from "@nextui-org/react";
+import { Spacer, Card, CardBody, Progress, Button } from "@nextui-org/react";
 const Layout = ({ children }) => {
 
     const [accountProgress, setAccountProgress] = useState('[1/4]');
@@ -23,16 +23,21 @@ const Layout = ({ children }) => {
 
                         }}
                         label={"Account Setup Progress " + accountProgress }
-                        radius="sm"
+                        radius="full"
                         showValueLabel={true}
-                        size="sm"
+                        size="md"
                         value={25}
                         />
                         <Spacer></Spacer>
-                        <Card className='bg-gray-700 opacity-50 h-[45px] align-center mx-auto text-center items-center overflow-y-hidden'>
-                            <CardBody>
-                                <p className='text-tiny '>Verify Account Email</p>
-                            </CardBody>
+                        <Card className='bg-gray-700 opacity-50 h-[45px] w-[38vw] px-9 align-center mx-auto text-center items-center '>
+                           
+                                <div className='lg:flex sm:grid lg:grid-cols-3 sm:grid-cols-1 w-full gap-y-0 space-y-0' >
+                                    <i className="justify-start align-center items-center mx-auto mt-2 fa-regular fa-circle-check fa-xl" style={{'color': 'gray'}}></i>
+                                    <p className='text-tiny'><b> Next step: </b> Verify Account Email</p>
+                                    <Spacer></Spacer>
+                                    <Button size='sm' color='primary' variant='flat' radius='md' className='w-[15vh] h-[20px]'> Resend Email </Button>
+                                </div>
+                            
                         </Card>
                         
                 </div>
