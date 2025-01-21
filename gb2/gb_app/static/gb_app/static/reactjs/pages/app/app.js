@@ -8,17 +8,18 @@ import { ConnContext, Conn } from '../../connector/index';
 
 export default function App(){
 
+
     return(
         <React.StrictMode>
             <NextUIProvider>
                 <ConnContext.Provider value={Conn} >
-                    <RecoilRoot>
+                
                         <BrowserRouter>
                             <Routes>
                                 <Route path='' element={<Dashboard />}/>
                             </Routes>
                         </BrowserRouter>
-                    </RecoilRoot>
+                  
                 </ConnContext.Provider>
             </NextUIProvider>
         </React.StrictMode>

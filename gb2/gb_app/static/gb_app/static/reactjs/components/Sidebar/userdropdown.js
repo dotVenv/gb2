@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem,Avatar } from "@nextui-org/react";
+
+import { ConnContext } from "../../connector";
+import { signal } from "@preact/signals-react";
+
 
 const UserDropdown = () => {
 
+    const conn = useContext(ConnContext);
+    
     return(
         <>
         
@@ -11,10 +17,11 @@ const UserDropdown = () => {
             <Avatar
             
                 isBordered
+                alt='Profile Pic'
                 as="button"
                 className=" relative  float-end flex max-w-xs items-center rounded-full  transition-transformm bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                 color="secondary"
-                name="Jason Hughes"
+                name={conn.userInfo.value.uid}
                 size="sm"
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
@@ -39,7 +46,7 @@ const UserDropdown = () => {
              ],
          }}>
             <DropdownSection showDivider className='float start' >
-                <DropdownItem key="myprofile">My Profile</DropdownItem>
+                <DropdownItem key="myprofile" textValue={"My profile"}> My Profile {conn.userInfo.value.uid}</DropdownItem>
                 <DropdownItem key="mytournaments">My Entries</DropdownItem>
                 <DropdownItem key="account status" endContent={<i className="fa-solid fa-check items-center align-center mx-auto mr-4" style={{'color': 'green'}}></i>}>
                     Account Status
@@ -71,7 +78,7 @@ const UserDropdown = () => {
 
             <DropdownSection aria-label="Help & Feedback">
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout">Log Out</DropdownItem>
+            <DropdownItem key="logout" href='/logout'>Log Out</DropdownItem>
             </DropdownSection>
         </DropdownMenu>
         </Dropdown>

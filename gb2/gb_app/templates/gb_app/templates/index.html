@@ -4,6 +4,7 @@
 {% block title %} Gamers-Bounty {% endblock %}
 {% block body %}
 
-        {% csrf_token %}       
+        {% csrf_token %}
+        {{ request.user.id |json_script:'conn0'}}
         <div id='gba_root'></div>
 {% endblock %}
