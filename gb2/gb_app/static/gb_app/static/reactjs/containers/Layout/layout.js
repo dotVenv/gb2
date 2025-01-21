@@ -2,21 +2,14 @@
 import React, { Suspense, useState } from "react";
 import { CustomSidebar, Preloader } from "../../components";
 import { AccountSetup } from '../index';
-import { Spacer,
-    Button,
-    Card,
-    Alert,} from "@nextui-org/react";
+import { Spacer, Card, Alert} from "@nextui-org/react";
 
 
 
 const Layout = ({ children }) => {
 
     const [accountProgress, setAccountProgress] = useState('[4/4]');
-    const [selectMembership, setSelectMembership] = useState('pass')
-    const [currentPage, setCurrentPage] = React.useState("song");
 
-    const status = 'good';
-   
     return(
         <>  
             <Suspense fallback={<Preloader />} >
@@ -32,8 +25,8 @@ const Layout = ({ children }) => {
                         
                          <Alert
                             color="success"
-                            description="Your account is looking good, there are no issues found."
-                            title="Account Status: OK"
+                            description={<><i className='text-black'>Your account is looking good, there are no issues found.</i></>}
+                            title={<><i className='text-black'>Account Status: </i><b>OK</b></>}
                             variant="faded"
                         />
 
