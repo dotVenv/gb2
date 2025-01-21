@@ -3,8 +3,8 @@ import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Dashboard } from '../../containers/index';
-import { RecoilRoot } from 'recoil';
 import { ConnContext, Conn } from '../../connector/index';
+import { RecoilRoot } from "recoil";
 
 export default function App(){
 
@@ -12,15 +12,13 @@ export default function App(){
     return(
         <React.StrictMode>
             <NextUIProvider>
-                <ConnContext.Provider value={Conn} >
-                
+                    <RecoilRoot>
                         <BrowserRouter>
                             <Routes>
                                 <Route path='' element={<Dashboard />}/>
                             </Routes>
                         </BrowserRouter>
-                  
-                </ConnContext.Provider>
+                    </RecoilRoot>
             </NextUIProvider>
         </React.StrictMode>
     );

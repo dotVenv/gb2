@@ -3,12 +3,17 @@ import React, { Suspense, useState } from "react";
 import { CustomSidebar, Preloader } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert} from "@nextui-org/react";
-
-
+import { Conn } from "../../connector";
+import { effect } from "@preact/signals-react";
+import { useRecoilValue } from "recoil";
 
 const Layout = ({ children }) => {
 
     const [accountProgress, setAccountProgress] = useState('[4/4]');
+    
+    //recoiljs
+    //const userInfo = useRecoilValue(Conn.userInfo0);
+   
 
     return(
         <>  
