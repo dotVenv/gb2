@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+'use client';
 
+import React, { useContext, useState } from "react";
+import { useAtom } from 'jotai';
 import { 
     Button, 
     Tooltip,
     } from "@nextui-org/react";
 import { ACMELogo, UserDropdown, NotiDropdown, BarRoutes } from "../index";
+import { ConnContext } from "../../connector";
 
 const CustomSidebar = () => {
+
+
+    const cu = useContext(ConnContext);
+    const userInfo = useAtom(cu.userAtom);
+
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -47,7 +55,7 @@ const CustomSidebar = () => {
                     </div>
                 <div className="relative ml-3">
                     <div>
-                        <UserDropdown />
+                        { cu.setup_step < 4 ? <>  </> : <UserDropdown /> }
                     </div>
                 </div>
                 </div>

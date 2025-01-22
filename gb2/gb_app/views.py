@@ -7,6 +7,7 @@ from django.contrib.auth import  logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+from .user_helpers import *
 from gb.response_helpers import Response_Helpers as getres
 from django_hosts.resolvers import reverse 
 
@@ -14,7 +15,7 @@ from django_hosts.resolvers import reverse
 
         
 class APPViews(TemplateView):
-    
+   
     
     @method_decorator(login_required) 
     def dashboard(self, request):
@@ -26,14 +27,18 @@ class APPViews(TemplateView):
     @method_decorator(login_required)
     def user_defaults(self,request):
         '''fetch the details depending on the query passed in'''
+        
+        cu = UserHelper(request)
     
         if request.method == 'POST':
           
-            uid = int(request.POST.get('uid'))
-            if request.user.id == uid:
-                #TODO 
-                #fetch relevant user data
-                return getres().res('200')
+            if not cu.is_valid_req():
+                return getres().res('401')
+            
+            #if req is valid set/get the serialized user
+            cu.get_user()
+            if cu.setupchecks():
+                return getres().res('200', new_msg=cu.serialized)
         
         
         return getres().res('403')

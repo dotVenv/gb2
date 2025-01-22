@@ -26,16 +26,20 @@ const AccountSetup = ({accountProgress}) =>{
                         
 
                         }}
-                        label={"Account Setup Progress " + accountProgress }
+                        label={"Account Setup Progress " + "["+accountProgress+"/4]" }
                         radius="full"
                         showValueLabel={true}
                         size="md"
-                        value={25}
+                        value={accountProgress / 4 * 100}
                         />
                         <Spacer></Spacer>
                         
                         <div className="flex items-center justify-center lg:w-full sm:w-[25vh]">
-                             <VerifyEmailAlert /> 
+                            { accountProgress == 1 
+                                ? <VerifyEmailAlert /> 
+                                : undefined
+                            }
+
                             {/* <CompleteProfileAlert /> */}
                             {/*  <PreferencesAlert />    */}
                         </div>

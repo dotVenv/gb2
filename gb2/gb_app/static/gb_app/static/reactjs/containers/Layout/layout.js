@@ -10,13 +10,17 @@ import { useAtom, useSetAtom } from 'jotai';
 
 const Layout = ({ children }) => {
 
-    const [accountProgress, setAccountProgress] = useState('[4/4]');
+
+
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
 
-
+    const [accountProgress, setAccountProgress] = useState(userInfo.setup_step);
+    
+    
+   
     const onClicked = () => {
-        console.log(userInfo);
+        //undefined
     };
 
     
@@ -24,13 +28,13 @@ const Layout = ({ children }) => {
         <>  
             
             <CustomSidebar />
-           
-            { accountProgress !== '[4/4]' 
+            <Button onPress={onClicked}> Click Me</Button>
+            { accountProgress < 4
                 ? <AccountSetup accountProgress={accountProgress}/>
                 :
                 <> 
                     <section className='mt-3 py-4'>
-                       <Button onPress={onClicked}> Click Me</Button>
+                       
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
                         
                          <Alert

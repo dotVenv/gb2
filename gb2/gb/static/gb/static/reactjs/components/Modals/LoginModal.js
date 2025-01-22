@@ -136,7 +136,7 @@ const LoginModal = ({ isOpen, onOpenChange, handleLoginOpen }) => {
                       />
                       <div className="flex py-2 px-1 justify-between">
                       <Checkbox
-                        isRequired
+                      
                         isSelected={rememberUser}
                         onValueChange={setrememberUser}
                         classNames={{
