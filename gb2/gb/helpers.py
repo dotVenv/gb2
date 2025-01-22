@@ -104,7 +104,7 @@ class Current_Session():
                 new_user.save()
                 #send verification email here
                 #TODO
-                ##
+                
                 return True
             else:
                 return False
@@ -136,5 +136,4 @@ class Current_Session():
         if new_contact_request:
             new_contact_request.save()
             return True
-        print('contact request not created/saved')
         return False

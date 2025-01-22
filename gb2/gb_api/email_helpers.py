@@ -25,10 +25,17 @@ class EmailHelper():
         }
         
     
+    def send_verification_code(self):
+        '''resend a valid verification code to the user'''
+        
+        return
+    
+    
     def verify_account(self):
         '''send the verify account email to the user'''
         
         self.email_data['subject'] = 'Gamers-Bounty - Verify your account!'
+        self.email_data['verification_code'] = 313234
         
         new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
     
