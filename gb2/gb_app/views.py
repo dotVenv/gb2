@@ -20,8 +20,11 @@ class APPViews(TemplateView):
     @method_decorator(login_required) 
     def dashboard(self, request):
         '''return the dashboard view for the user'''
-    
-        context = {}
+
+        
+        context = {
+            'new_announc':'Thanks for joining us on our relaunch, we now have 1,000 active users!'
+            }
         return render(request, 'gb_app/templates/index.html', context)
     
     @method_decorator(login_required)

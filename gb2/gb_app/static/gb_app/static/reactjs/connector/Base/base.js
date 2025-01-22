@@ -7,6 +7,8 @@ class ConnectorBase extends CurrentUser{
 
     constructor(props){
         super(props);
+
+        this.newAnnouncment = JSON.parse(document.getElementById('newAnnounc').textContent);
     };
     
 };

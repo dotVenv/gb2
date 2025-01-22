@@ -1,10 +1,10 @@
 'use client';
 import React, { Suspense, useContext, useState } from "react";
-import { CustomSidebar, Preloader } from "../../components";
+import { CustomSidebar, AnnouncmentBanner } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 
 
@@ -23,8 +23,13 @@ const Layout = ({ children }) => {
     return(
         <>  
             
-            <CustomSidebar />
-            <Button onPress={onClicked}> Click Me</Button>
+            
+            <CustomSidebar userInfo={userInfo} />
+            {cu.newAnnouncment 
+                ? <AnnouncmentBanner newAnnouncment={cu.newAnnouncment} />
+                :  undefined
+                }
+           
             { accountProgress < 4
                 ? <AccountSetup accountProgress={accountProgress}/>
                 :

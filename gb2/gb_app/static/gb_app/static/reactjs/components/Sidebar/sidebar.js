@@ -1,24 +1,13 @@
 'use client';
 
 import React, { useContext, useState } from "react";
-import { useAtom } from 'jotai';
-import { 
-    Button, 
-    Tooltip,
-    } from "@nextui-org/react";
+import { Button, Tooltip } from "@nextui-org/react";
 import { ACMELogo, UserDropdown, NotiDropdown, BarRoutes } from "../index";
-import { ConnContext } from "../../connector";
 
-const CustomSidebar = () => {
+const CustomSidebar = ({userInfo}) => {
 
-
-    const cu = useContext(ConnContext);
-    const userInfo = useAtom(cu.userAtom);
-    console.log('setup step is:   '+ userInfo.setup_step);
     const [mobileMenu, setMobileMenu] = useState(false);
    
-
-
     return(
         <>
         
@@ -30,7 +19,7 @@ const CustomSidebar = () => {
                     <ACMELogo />    
                 </div>
                 <div className="hidden md:block">
-                    <BarRoutes />
+                    <BarRoutes userInfo={userInfo}/>
                 </div>
                 </div>
                 <div className=" md:block">
