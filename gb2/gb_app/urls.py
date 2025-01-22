@@ -7,8 +7,8 @@ appviews = views.APPViews()
 
 urlpatterns = [
     path('', appviews.dashboard, name='dashboard'),
-    
-    
+    path('user-defaults', appviews.user_defaults, name='user_defaults'),
+
     path('logout', appviews.logout_view, name='logout'),
 
 ]

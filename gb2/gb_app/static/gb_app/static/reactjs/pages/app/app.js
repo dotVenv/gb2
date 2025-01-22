@@ -1,10 +1,12 @@
-import React  from "react";
+import React, { Suspense } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Dashboard } from '../../containers/index';
 import { ConnContext, Conn } from '../../connector/index';
-import { RecoilRoot } from "recoil";
+import { Preloader } from "../../components";
+
+
 
 export default function App(){
 
@@ -12,13 +14,15 @@ export default function App(){
     return(
         <React.StrictMode>
             <NextUIProvider>
-                    <RecoilRoot>
+                <Suspense fallback={<Preloader />} >
+                    <ConnContext.Provider value={Conn}>
                         <BrowserRouter>
                             <Routes>
                                 <Route path='' element={<Dashboard />}/>
                             </Routes>
                         </BrowserRouter>
-                    </RecoilRoot>
+                    </ConnContext.Provider>
+                </Suspense>
             </NextUIProvider>
         </React.StrictMode>
     );

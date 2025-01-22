@@ -194,6 +194,7 @@ STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = BASE_DIR / "mediafiles"
+LOGIN_URL = 'http://www.gamers-bounty-dev.com:8000'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

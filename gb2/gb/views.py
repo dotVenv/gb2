@@ -17,7 +17,7 @@ from .oauth_helpers import Google_Auth
 class UIViews(TemplateView):
     
     def index(self, request):
-        
+    
         
         context = {}
         

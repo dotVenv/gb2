@@ -1,31 +1,36 @@
 'use client';
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useContext, useState } from "react";
 import { CustomSidebar, Preloader } from "../../components";
 import { AccountSetup } from '../index';
-import { Spacer, Card, Alert} from "@nextui-org/react";
-import { Conn } from "../../connector";
-import { effect } from "@preact/signals-react";
-import { useRecoilValue } from "recoil";
+import { Spacer, Card, Alert, Button} from "@nextui-org/react";
+import { ConnContext } from "../../connector";
+import { useAtom, useSetAtom } from 'jotai';
+
+
 
 const Layout = ({ children }) => {
 
     const [accountProgress, setAccountProgress] = useState('[4/4]');
-    
-    //recoiljs
-    //const userInfo = useRecoilValue(Conn.userInfo0);
-   
+    const cu = useContext(ConnContext);
+    const [userInfo] = useAtom(cu.userAtom);
 
+
+    const onClicked = () => {
+        console.log(userInfo);
+    };
+
+    
     return(
         <>  
-            <Suspense fallback={<Preloader />} >
-            <CustomSidebar  />
+            
+            <CustomSidebar />
            
             { accountProgress !== '[4/4]' 
                 ? <AccountSetup accountProgress={accountProgress}/>
                 :
                 <> 
                     <section className='mt-3 py-4'>
-                       
+                       <Button onPress={onClicked}> Click Me</Button>
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
                         
                          <Alert
@@ -101,7 +106,6 @@ const Layout = ({ children }) => {
                 </> 
             }
             
-            </Suspense>
         </>
     );
 };
