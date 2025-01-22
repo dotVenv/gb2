@@ -14,24 +14,9 @@ const CustomSidebar = () => {
 
     const cu = useContext(ConnContext);
     const userInfo = useAtom(cu.userAtom);
-
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    console.log('setup step is:   '+ userInfo.setup_step);
     const [mobileMenu, setMobileMenu] = useState(false);
-    const [userMenu, setUserMenu] = useState(false);
-
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
-    ];
+   
 
 
     return(
@@ -49,16 +34,19 @@ const CustomSidebar = () => {
                 </div>
                 </div>
                 <div className=" md:block">
-                <div className="ml-4 flex items-center md:ml-6">
-                    <div>
-                        <NotiDropdown />
-                    </div>
-                <div className="relative ml-3">
-                    <div>
-                        { cu.setup_step < 4 ? <>  </> : <UserDropdown /> }
-                    </div>
-                </div>
-                </div>
+                    { parseInt(userInfo.setup_step) < 4 ? undefined  :
+                    
+                        <div className="ml-4 flex items-center md:ml-6">
+                            <div>
+                                <NotiDropdown />
+                            </div>
+                            <div className="relative ml-3">
+                                <div>
+                                <UserDropdown /> 
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div className="-mr-2 flex md:hidden">
                 <Button onPress={(e) => {setMobileMenu(!mobileMenu)}}  type="button" className="relative float start inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">

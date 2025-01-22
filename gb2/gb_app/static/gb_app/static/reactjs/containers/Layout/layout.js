@@ -14,11 +14,7 @@ const Layout = ({ children }) => {
 
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
-
-    const [accountProgress, setAccountProgress] = useState(userInfo.setup_step);
-    
-    
-   
+    const accountProgress = userInfo.setup_step;   
     const onClicked = () => {
         //undefined
     };
