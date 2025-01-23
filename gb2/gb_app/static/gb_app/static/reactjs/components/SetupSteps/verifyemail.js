@@ -36,8 +36,8 @@ const VerifyEmailAlert = ({verificationInfo}) => {
                                 "data-[active=true]:ring-foreground",
                             ],
                             }}
-                            description={<p className='text-black'>"Enter the 4 digit code sent to your email"</p>}
-                            length={4}
+                            description={<p className='text-black'>"Enter the 6 digit code sent to your email"</p>}
+                            length={6}
                             radius="none"
                         />
                         </div>

@@ -51,12 +51,16 @@ class APPViews(TemplateView):
         
         cu = UserHelper(request)
         
+        
         if request.method == 'POST':
             
             if not cu.is_valid_req():
                 return getres().res('401')
             
-            return getres().res('200')
+            #fetch the user email verification
+            if cu.get_setupdata():
+                return getres().res('200', new_msg=cu.setup_data)
+        
         
         return getres().res('403')
     

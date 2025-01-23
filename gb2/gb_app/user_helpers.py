@@ -1,9 +1,11 @@
 #django imports
 import django.core.exceptions as dce
+from django.utils import timezone
 
 
 #app imports
-from gb_api.models import gbUser
+from gb_api.models import gbUser, EmailVerification
+import datetime
 
 class UserHelper():
     '''define a user helper to handle actions for the users profile'''
@@ -19,12 +21,12 @@ class UserHelper():
         
         #if passed in externally
       
-        self.uid = self.request.POST.get('uid')
+        self.uid = int(self.request.POST.get('uid'))
         
         if not self.uid:
             return None
         
-        if int(self.uid) != self.request.user.id:
+        if self.uid != self.request.user.id:
             return None
         
             
@@ -42,11 +44,11 @@ class UserHelper():
         
 
         self.serialized = {
-            "username": self.cu.username,
-            "mfa": self.cu.mfa_active,
+            "username": str(self.cu.username),
+            "mfa": bool(self.cu.mfa_active),
             "profile_pic": str(self.cu.profile_pic),
-            "fname": self.cu.first_name,
-            "lname": self.cu.last_name,
+            "fname": str(self.cu.first_name),
+            "lname": str(self.cu.last_name)
         }
         
         return True
@@ -61,6 +63,7 @@ class UserHelper():
         if self.__check_setupsteps():
             return True
         return False
+    
         
     def __check_setupsteps(self):
         '''checks which steps were complete and returns a value based on which step, (5 if completed)'''  
@@ -71,3 +74,31 @@ class UserHelper():
             
         return True
     
+    
+    def get_setupdata(self):
+        '''return the data for the current setup step '''
+        
+        
+        toget = str(self.request.POST.get('fetchStep'))
+        
+        match toget:
+            case 'email':
+                setupdata = EmailVerification.objects.get(user=self.request.user.id)
+                if not self.request.user.account_verified:
+                    self.setup_data = {
+                        'code': setupdata.code,
+                        'created_at': setupdata.created_at,
+                        'expires_at': setupdata.expires_at,
+                        'expired': setupdata.expired,
+                        'attempts': setupdata.attempts,
+                        
+                    }
+                    current_time = timezone.now()
+                    print(self.request.user.account_verified, self.setup_data['code'])
+               
+    
+    
+        return True
+        
+        
+        
