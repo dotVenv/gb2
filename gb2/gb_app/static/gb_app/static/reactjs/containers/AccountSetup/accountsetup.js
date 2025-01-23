@@ -13,7 +13,7 @@ const AccountSetup = ({accountProgress, cu }) =>{
 
     const [ stepsInfo ] = useAtom(cu.setupStepsAtom);   
 
-
+    
     return (
         <>
         

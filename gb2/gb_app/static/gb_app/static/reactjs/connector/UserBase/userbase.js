@@ -23,6 +23,7 @@ export default class CurrentUser{
                         data: { uid: this.uid },
                         headers: { 'X-CSRFTOKEN': GETCSRFToken(), 'Content-Type': 'multipart/form-data'}
                     }).then(resp => {
+                        resp.data.message.setup_step < 4 ? this.setupSteps('email') : undefined;
                         return resp.data.message;
                     }).catch(err => {
                         return err.response.data.message;
@@ -34,7 +35,7 @@ export default class CurrentUser{
 
     setupSteps(fetchStep){
 
-        const setupStepsRes = async () => {
+        this.setupStepsAtom = atom(async () => {
             
             let res =  await axios({
                     url: '/setup-steps',
@@ -55,8 +56,7 @@ export default class CurrentUser{
 
             return res;
 
-        };
-        this.setupStepsAtom = atom(setupStepsRes);
+        });
     };
     
 };

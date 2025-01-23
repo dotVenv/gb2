@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useContext, useState } from "react";
+import React, { Suspense, useContext, useMemo } from "react";
 import { CustomSidebar, AnnouncmentBanner } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
@@ -15,7 +15,9 @@ const Layout = ({ children }) => {
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
     const accountProgress = userInfo.setup_step;   
-    accountProgress == 1 ? cu.setupSteps('email') : undefined;
+
+
+
     const onClicked = () => {
         //undefined
     };

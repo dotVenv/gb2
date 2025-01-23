@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(gbUser)
 admin.site.register(Oauth)
 admin.site.register(ContactRequest)
+admin.site.register(EmailVerification)
