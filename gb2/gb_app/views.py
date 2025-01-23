@@ -42,10 +42,23 @@ class APPViews(TemplateView):
             cu.get_user()
             if cu.setupchecks():
                 return getres().res('200', new_msg=cu.serialized)
+    
+        return getres().res('403')
+    
+    #@method_decorator(login_required)
+    def setup_steps(self, request):
+        '''return the data for the specific setup step'''
         
+        cu = UserHelper(request)
+        
+        if request.method == 'POST':
+            
+            if not cu.is_valid_req():
+                return getres().res('401')
+            
+            return getres().res('200')
         
         return getres().res('403')
-        
     
     def logout_view(self, request):
         '''logout and clear the cookie for the user'''

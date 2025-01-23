@@ -1,12 +1,17 @@
 'use client';
+
 import React from "react";
 
 import { VerifyEmailAlert, CompleteProfileAlert, PreferencesAlert } from "../../components";
 import { Spacer, Card, CardBody, Progress} from "@nextui-org/react";
+import { useAtom } from 'jotai';
 
 
+const AccountSetup = ({accountProgress, cu }) =>{
 
-const AccountSetup = ({accountProgress}) =>{
+    
+
+    const [ stepsInfo ] = useAtom(cu.setupStepsAtom);   
 
 
     return (
@@ -36,7 +41,7 @@ const AccountSetup = ({accountProgress}) =>{
                         
                         <div className="flex items-center justify-center lg:w-full sm:w-[25vh]">
                             { accountProgress == 1 
-                                ? <VerifyEmailAlert /> 
+                                ? <VerifyEmailAlert verificationInfo={stepsInfo} /> 
                                 : undefined
                             }
 

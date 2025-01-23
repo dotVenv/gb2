@@ -1,9 +1,10 @@
 
-import React from "react";
+import React, { useContext} from "react";
 import { Button, Alert, InputOtp } from "@nextui-org/react";
 
-const VerifyEmailAlert = () => {
+const VerifyEmailAlert = ({verificationInfo}) => {
 
+    
     return(
         <>
         

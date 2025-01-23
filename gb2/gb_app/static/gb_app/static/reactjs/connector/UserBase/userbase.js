@@ -10,7 +10,6 @@ export default class CurrentUser{
     constructor(){
         this.setAtoms();
 
-
     };
 
 
@@ -29,8 +28,35 @@ export default class CurrentUser{
                         return err.response.data.message;
                     });
                     return res;
-            })
+            });
       
+    };
+
+    setupSteps(fetchStep){
+
+        const setupStepsRes = async () => {
+            
+            let res =  await axios({
+                    url: '/setup-steps',
+                    method: 'post',
+                    data: { uid: this.uid, fetchStep: fetchStep },
+                    headers: {
+                        'X-CSRFTOKEN': GETCSRFToken(),
+                        'Content-Type': 'multipart/form-data',
+                    }
+                }).then(resp => {
+
+                    return resp.data.message;
+
+                }).catch(err => {
+
+                    return err.response.data.message;
+                });
+
+            return res;
+
+        };
+        this.setupStepsAtom = atom(setupStepsRes);
     };
     
 };

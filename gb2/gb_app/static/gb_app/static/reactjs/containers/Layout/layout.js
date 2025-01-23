@@ -15,6 +15,7 @@ const Layout = ({ children }) => {
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
     const accountProgress = userInfo.setup_step;   
+    accountProgress == 1 ? cu.setupSteps('email') : undefined;
     const onClicked = () => {
         //undefined
     };
@@ -31,7 +32,7 @@ const Layout = ({ children }) => {
                 }
            
             { accountProgress < 4
-                ? <AccountSetup accountProgress={accountProgress}/>
+                ? <AccountSetup accountProgress={accountProgress} cu={cu} />
                 :
                 <> 
                     <section className='mt-3 py-4'>
