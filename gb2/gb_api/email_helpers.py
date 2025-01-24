@@ -3,6 +3,7 @@ from django.conf import settings
 
 #other imports
 from mail_templated import send_mail, EmailMessage
+from gb_api.models import EmailVerification
 
 
 class EmailHelper():
@@ -31,11 +32,20 @@ class EmailHelper():
         return
     
     
-    def verify_account(self):
+    def verify_account(self, test=False):
         '''send the verify account email to the user'''
         
         self.email_data['subject'] = 'Gamers-Bounty - Verify your account!'
-        self.email_data['verification_code'] = 313234
+        
+        email_data = None
+        if not test:
+            check_email = EmailVerification.object.filter(user=request.user.id)
+            if check_email.exists():
+                email_data = check_email
+        
+            
+        else:
+            self.email_data['verification_code'] = 313234
         
         new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
     

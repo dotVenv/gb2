@@ -31,6 +31,17 @@ const VerifyEmailAlert = ({cu, verificationInfo}) => {
 
     };
 
+
+    const requestNewCode = async() => {
+
+        let res = await cu.submitSetup('email-revalidate', null);
+        if (res){
+            console.log(res);
+        }else{
+            console.log('unable to get new code');
+        }
+    };
+
         // Random component
     const Completionist = () => <span>{verificationInfo.expired == 'True' ? 'Code expired, please resend a new code' : undefined }</span>;
 

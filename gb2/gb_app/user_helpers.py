@@ -5,6 +5,7 @@ from django.utils import timezone
 
 #app imports
 from gb_api.models import gbUser, EmailVerification
+from gb_api.email_helpers import EmailHelper
 import datetime
 
 class UserHelper():
@@ -96,7 +97,7 @@ class UserHelper():
             case 'email-submit':
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:
-                    
+                    setupdata.attempts = setupdata.attempts + 1
                     #if otp is expired
                     otpInput = str(self.request.POST.get('otpInput'))
                     if otpInput == 'expired':
@@ -113,10 +114,19 @@ class UserHelper():
                             setupdata.expired = True
                             setupdata.attempts = 0
                             setupdata.save()
-                            self.setup_data = {'step': 'profile update'}
+                            self.setup_data = {'step': 2}
                         return True
+                    
+                    setupdata.save()
                     print(f'otp attempt is {self.request.POST.get("otpInput")}' )
-                
+                    
+            case 'email-revalidate':
+                self.setup_data = {'step': 'revalidate'}
+                new_email = EmailHelper()
+                new_email.email_data['recipient'] = str(self.request.user.email)
+                new_email.email_data['username'] = str(self.request.user.username)
+                new_email.verify_account()             
+                return True 
                 
                
     
