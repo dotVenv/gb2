@@ -12,7 +12,7 @@ from gb.response_helpers import Response_Helpers as getres
 from django_hosts.resolvers import reverse 
 
 
-
+from cryptography.fernet import Fernet
         
 class APPViews(TemplateView):
    
@@ -25,11 +25,14 @@ class APPViews(TemplateView):
         context = {
             'new_announc':'Thanks for joining us on our relaunch, we now have 1,000 active users!'
             }
+        
+        
         return render(request, 'gb_app/templates/index.html', context)
     
     @method_decorator(login_required)
     def user_defaults(self,request):
         '''fetch the details depending on the query passed in'''
+
         
         cu = UserHelper(request)
     

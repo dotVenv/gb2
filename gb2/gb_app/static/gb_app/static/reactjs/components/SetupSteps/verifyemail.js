@@ -5,14 +5,16 @@ import { Button, Alert, InputOtp } from "@nextui-org/react";
 import Countdown from 'react-countdown';
 import { signal } from "@preact/signals-react";
 import { CustomToast } from  '../index';
+import { useAtom } from 'jotai';
 
 const isExpired = signal(false);
 
-const VerifyEmailAlert = ({cu, verificationInfo}) => {
+const VerifyEmailAlert = ({cu}) => {
 
     
     const [otpInput, setotpInput] = useState();
     const [expiredToast, setExpiredToast] = useState(isExpired.value);
+    const [verificationInfo] = useAtom(cu.setupStepsAtom);
 
     const verifyCode = async() => {
 
@@ -41,9 +43,6 @@ const VerifyEmailAlert = ({cu, verificationInfo}) => {
             console.log('unable to get new code');
         }
     };
-
-        // Random component
-    const Completionist = () => <span>{verificationInfo.expired == 'True' ? 'Code expired, please resend a new code' : undefined }</span>;
 
     // Renderer callback with condition
     const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -90,9 +89,9 @@ const VerifyEmailAlert = ({cu, verificationInfo}) => {
                                 "data-[active=true]:ring-foreground",
                             ],
                             }}
-                            description={<p className='text-white'>Enter the 4 digit code sent to your email</p>}
-                            length={4}
-                            minLength={4}
+                            description={<p className='text-white'>Enter the 6 digit code sent to your email</p>}
+                            length={6}
+                            minLength={6}
                             radius="none"
                             value={otpInput}
                             onValueChange={setotpInput}

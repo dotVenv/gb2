@@ -86,6 +86,7 @@ class UserHelper():
             case 'email':
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:
+                    print(setupdata.code)
                     self.setup_data = {
                         'created_at': setupdata.created_at,
                         'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=1),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
@@ -125,7 +126,7 @@ class UserHelper():
                 new_email = EmailHelper()
                 new_email.email_data['recipient'] = str(self.request.user.email)
                 new_email.email_data['username'] = str(self.request.user.username)
-                new_email.verify_account()             
+                new_email.verify_account(request=self.request)             
                 return True 
                 
                
