@@ -32,7 +32,7 @@ class EmailHelper():
     def __generate_email_code(self):
         '''generate a 4 digit code to send to the user'''
         
-        new_code = random.randint(111111,999999)
+        new_code = random.randint(1111,9999)
         print(new_code)
         return new_code
 
@@ -46,15 +46,16 @@ class EmailHelper():
         if not test:
             check_email = EmailVerification.objects.filter(user=request.user.id)
             if check_email.exists():
-                check_email.update(code=2310, created_at=timezone.now(), attempts=0, expired=False)
-                self.email_data['verification_code'] = check_email.code
+                self.email_data['verification_code'] = self.__generate_email_code()
+                check_email.update(code=self.email_data['verification_code'], created_at=timezone.now(), attempts=0, expired=False)
+                return
         
             else:
                 try:
-                    email_data = EmailVerification.objects.create(user=request.user.id, code=3201)
+                    self.email_data['verification_code'] = self.__generate_email_code()
+                    email_data = EmailVerification.objects.create(user=request.user.id, code=self.email_data['verification_code'])
                     if email_data:
                         email_data.save()
-                        self.email_data['verification_code'] = email_data.code
                 except dce.RequestAborted:
                     return 
                 
@@ -62,9 +63,10 @@ class EmailHelper():
                
             
         else:
-            self.email_data['verification_code'] = 313234
+            self.email_data['verification_code'] = self.__generate_email_code()
         
         #new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
     
-        
-        return
+        if new_email:
+            return True
+        return False    

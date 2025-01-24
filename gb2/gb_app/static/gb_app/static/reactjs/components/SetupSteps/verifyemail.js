@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useState} from "react";
+import React, { useMemo, useState} from "react";
 import { Button, Alert, InputOtp } from "@nextui-org/react";
 import Countdown from 'react-countdown';
 import { signal } from "@preact/signals-react";
@@ -8,10 +8,11 @@ import { CustomToast } from  '../index';
 import { useAtom } from 'jotai';
 
 const isExpired = signal(false);
+const submissionz = signal(0);
 
 const VerifyEmailAlert = ({cu}) => {
 
-    
+   
     const [otpInput, setotpInput] = useState();
     const [expiredToast, setExpiredToast] = useState(isExpired.value);
     const [verificationInfo] = useAtom(cu.setupStepsAtom);
@@ -21,6 +22,9 @@ const VerifyEmailAlert = ({cu}) => {
         if (isExpired.value == true){
 
             setExpiredToast(isExpired.value);
+            submissionz.value = 0;
+            console.log(submissionz.value);
+            
 
         }else{
             let res = await cu.submitSetup('email-submit', otpInput);
@@ -45,13 +49,17 @@ const VerifyEmailAlert = ({cu}) => {
     };
 
     // Renderer callback with condition
-    const renderer = ({ hours, minutes, seconds, completed }) => {
+   
+    const renderer = ({ completed }) => {
     if (completed) {
-        // Render a completed state
-        cu.submitSetup('email-submit', 'expired');
-        isExpired.value = true;
-        return <CustomToast sev='error' desc='Verification Code Expired.' />
-     
+        if (submissionz.value == 0){
+            // Render a completed state
+            console.log('submitting expired');
+            cu.submitSetup('email-submit', 'expired');
+            submissionz.value == 1;
+            isExpired.value = true;
+            return <CustomToast sev='error' desc='Verification Code Expired.' />
+        }
     } else {
         // Render a countdown
         return <span> </span>;
@@ -89,9 +97,9 @@ const VerifyEmailAlert = ({cu}) => {
                                 "data-[active=true]:ring-foreground",
                             ],
                             }}
-                            description={<p className='text-white'>Enter the 6 digit code sent to your email</p>}
-                            length={6}
-                            minLength={6}
+                            description={<p className='text-white'>Enter the 4 digit code sent to your email</p>}
+                            length={4}
+                            minLength={4}
                             radius="none"
                             value={otpInput}
                             onValueChange={setotpInput}

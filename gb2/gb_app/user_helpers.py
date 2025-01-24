@@ -70,8 +70,11 @@ class UserHelper():
         '''checks which steps were complete and returns a value based on which step, (5 if completed)'''  
         
         if self.cu:
-           if self.cu.account_verified is False:
-            self.serialized['setup_step'] = 1
+            if self.cu.account_verified is False:
+                self.serialized['setup_step'] = 1
+            elif not self.cu.first_name or not self.cu.last_name:
+                self.serialized['setup_step'] = 2
+        
             
         return True
     
@@ -86,10 +89,9 @@ class UserHelper():
             case 'email':
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:
-                    print(setupdata.code)
                     self.setup_data = {
                         'created_at': setupdata.created_at,
-                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=1),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
+                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
                         'expired': setupdata.expired,
                         'attempts': setupdata.attempts,
                         
@@ -104,18 +106,21 @@ class UserHelper():
                     if otpInput == 'expired':
                         setupdata.expired = True
                         setupdata.save()
-                        self.setup_data={'expired': 'true'}
+                        self.setup_data={'step': 'expired'}
                         return True
                     
                     #if otp is not expired
                     otpInput = int(otpInput)
                     if int(setupdata.code) == int(self.request.POST.get('otpInput')):
+                        cu = gbUser.objects.get(id=self.request.user.id)
+                        cu.account_verified = True
+                        cu.save()
                         #check for next step
                         if not self.request.user.first_name or not self.request.user.last_name:
                             setupdata.expired = True
                             setupdata.attempts = 0
                             setupdata.save()
-                            self.setup_data = {'step': 2}
+                            self.setup_data = {'step': 'passed'}
                         return True
                     
                     setupdata.save()

@@ -3,7 +3,7 @@ import { Spacer, Card, CardBody, Alert, Chip, RadioGroup, Radio, Button} from "@
 
 
 
-const PreferencesAlert = () => {
+const PreferencesAlert = ({cu}) => {
 
     return(
         <>

@@ -48,7 +48,7 @@ class APPViews(TemplateView):
     
         return getres().res('403')
     
-    #@method_decorator(login_required)
+    @method_decorator(login_required)
     def setup_steps(self, request):
         '''return the data for the specific setup step'''
         
@@ -56,6 +56,7 @@ class APPViews(TemplateView):
         
         
         if request.method == 'POST':
+            print(request.POST)
             
             if not cu.is_valid_req():
                 return getres().res('401')
