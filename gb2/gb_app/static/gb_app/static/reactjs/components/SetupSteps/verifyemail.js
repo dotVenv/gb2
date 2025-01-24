@@ -9,27 +9,38 @@ import { useAtom } from 'jotai';
 
 const isExpired = signal(false);
 const submissionz = signal(0);
+const toastData = signal({
+    toastType: '',
+    toastDesc: ''
+});
 
 const VerifyEmailAlert = ({cu}) => {
 
    
     const [otpInput, setotpInput] = useState();
-    const [expiredToast, setExpiredToast] = useState(isExpired.value);
+    const [toastAlert, settoastAlert] = useState(null);
     const [verificationInfo] = useAtom(cu.setupStepsAtom);
 
     const verifyCode = async() => {
 
         if (isExpired.value == true){
 
-            setExpiredToast(isExpired.value);
+            toastData.value.toastType = 'error';
+            toastData.value.toastDesc = 'Verification code expired';
             submissionz.value = 0;
-            console.log(submissionz.value);
+            settoastAlert(isExpired.value);
+            
             
 
         }else{
             let res = await cu.submitSetup('email-submit', otpInput);
             if (res){
-                console.log(res);
+                toastData.value.toastType = 'error';
+                toastData.value.toastDesc = 'Invalid verification code';
+
+                settoastAlert(toastData.value.toastDesc);
+                console.log(toastData.value.toastDesc );
+                
             }else{
                 console.log('unable to submit data');
             };
@@ -42,7 +53,10 @@ const VerifyEmailAlert = ({cu}) => {
 
         let res = await cu.submitSetup('email-revalidate', null);
         if (res){
-            console.log(res);
+            toastData.value.toastType = 'success';
+            toastData.value.toastDesc = 'Verification resent to your email';
+            settoastAlert(toastData.value.toastDesc);
+            
         }else{
             console.log('unable to get new code');
         }
@@ -56,9 +70,12 @@ const VerifyEmailAlert = ({cu}) => {
             // Render a completed state
             console.log('submitting expired');
             cu.submitSetup('email-submit', 'expired');
-            submissionz.value == 1;
+            submissionz.value ++;
             isExpired.value = true;
-            return <CustomToast sev='error' desc='Verification Code Expired.' />
+            toastData.value.toastType = 'error';
+            toastData.value.toastDesc = 'Verification code expired';
+         
+            return <CustomToast sev={toastData.value.toastType} desc={toastData.value.toastDesc} />
         }
     } else {
         // Render a countdown
@@ -119,7 +136,7 @@ const VerifyEmailAlert = ({cu}) => {
             title="Verify your email."
             variant="faded"
         />
-        {expiredToast ? <CustomToast sev='error' desc='Verification Code Expired' /> : undefined}
+        {toastAlert !== null ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.toastDesc} /> : undefined}
         </>
     );
 };

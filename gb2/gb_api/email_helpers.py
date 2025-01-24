@@ -48,6 +48,7 @@ class EmailHelper():
             if check_email.exists():
                 self.email_data['verification_code'] = self.__generate_email_code()
                 check_email.update(code=self.email_data['verification_code'], created_at=timezone.now(), attempts=0, expired=False)
+              
                 return
         
             else:

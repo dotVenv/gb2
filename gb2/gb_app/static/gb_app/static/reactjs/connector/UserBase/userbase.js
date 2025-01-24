@@ -59,18 +59,23 @@ export default class CurrentUser{
         });
     };
 
-    async submitSetup(fetchStep, otpInput){
+    async submitSetup(fetchStep, userInput){
 
         let res = await axios({
             url:'/setup-steps',
             method:'post',
-            data:{uid: this.uid, fetchStep: fetchStep, otpInput:otpInput},
+            data:{uid: this.uid, fetchStep: fetchStep, userInput:userInput},
             headers:{ 
                 'X-CSRFTOKEN': GETCSRFToken(),
                 'Content-Type': 'multipart/form-data'
             }
         }).then(resp => {
-            return resp.data.message;
+            if (fetchStep == 'email-submit' && userInput !== 'expired' && resp.data.message.otp !== 'invalid'){
+                location.reload();
+            }else{
+                return resp.data.message;
+            }
+           
         }).catch(resp => {
             return resp.data.message;
         });

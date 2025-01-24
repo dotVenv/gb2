@@ -102,7 +102,7 @@ class UserHelper():
                 if not self.request.user.account_verified:
                     setupdata.attempts = setupdata.attempts + 1
                     #if otp is expired
-                    otpInput = str(self.request.POST.get('otpInput'))
+                    otpInput = str(self.request.POST.get('userInput'))
                     if otpInput == 'expired':
                         setupdata.expired = True
                         setupdata.save()
@@ -111,7 +111,7 @@ class UserHelper():
                     
                     #if otp is not expired
                     otpInput = int(otpInput)
-                    if int(setupdata.code) == int(self.request.POST.get('otpInput')):
+                    if int(setupdata.code) == int(self.request.POST.get('userInput')):
                         cu = gbUser.objects.get(id=self.request.user.id)
                         cu.account_verified = True
                         cu.save()
@@ -123,8 +123,10 @@ class UserHelper():
                             self.setup_data = {'step': 'passed'}
                         return True
                     
+                    self.setup_data  = {'otp': 'invalid'}
                     setupdata.save()
-                    print(f'otp attempt is {self.request.POST.get("otpInput")}' )
+                    
+                    return True
                     
             case 'email-revalidate':
                 self.setup_data = {'step': 'revalidate'}
