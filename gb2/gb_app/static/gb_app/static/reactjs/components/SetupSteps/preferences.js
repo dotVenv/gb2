@@ -51,7 +51,7 @@ const PreferencesAlert = ({cu}) => {
                             
                             return(
                                 <Card isPressable  key={index} onPress={(e) => { preferenceData.value.console = key.name, setconsoleChoice(key.name);}} isBlurred className='col-5'>
-                                    <CardBody>
+                                    <CardBody className='flex gap-2'>
                                         { key.icon } {preferenceData.value.console == key.name ? <i className="fa-solid fa-check"></i>  : undefined }
                                     </CardBody>
                                 </Card> 
