@@ -41,7 +41,7 @@ const AccountSetup = ({accountProgress, cu }) =>{
                         
                         <div className="flex items-center justify-center lg:w-full sm:w-[25vh]">
                             { accountProgress == 1 
-                                ? <VerifyEmailAlert verificationInfo={stepsInfo} /> 
+                                ? <VerifyEmailAlert cu={cu} verificationInfo={stepsInfo} /> 
                                 : undefined
                             }
 

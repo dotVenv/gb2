@@ -93,6 +93,25 @@ class UserHelper():
                         
                     }
                     return True
+            case 'email-submit':
+                setupdata = EmailVerification.objects.get(user=self.request.user.id)
+                if not self.request.user.account_verified:
+                    
+                    #if otp is expired
+                    otpInput = str(self.request.POST.get('otpInput'))
+                    if otpInput == 'expired':
+                        return False
+                    
+                    #if otp is not expired
+                    otpInput = int(otpInput)
+                    if int(setupdata.code) == int(self.request.POST.get('otpInput')):
+                        #check for next step
+                        if not self.request.user.first_name or not self.request.user.last_name:
+                            self.setup_data = {'step': 'profile update'}
+                        return True
+                    print(f'otp attempt is {self.request.POST.get("otpInput")}' )
+                
+                
                
     
     

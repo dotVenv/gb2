@@ -58,5 +58,25 @@ export default class CurrentUser{
 
         });
     };
+
+    async submitSetup(fetchStep, otpInput){
+
+        let res = axios({
+            url:'/setup-steps',
+            method:'post',
+            data:{uid: this.uid, fetchStep: fetchStep, otpInput:otpInput},
+            headers:{ 
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(resp => {
+            return resp.data.message;
+        }).catch(resp => {
+            return resp.data.message;
+        });
+
+    return res;
+
+    };
     
 };

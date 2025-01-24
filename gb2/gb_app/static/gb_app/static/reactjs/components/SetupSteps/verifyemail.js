@@ -2,9 +2,24 @@
 import React, { useContext, useState} from "react";
 import { Button, Alert, InputOtp } from "@nextui-org/react";
 
-const VerifyEmailAlert = ({verificationInfo}) => {
+const VerifyEmailAlert = ({cu, verificationInfo}) => {
 
-    const [optInput, setoptInput] = useState();
+    const [otpInput, setotpInput] = useState();
+
+
+    console.log(otpInput);
+    console.log(verificationInfo.time_left, verificationInfo.created_at);
+
+    const verifyCode = async() => {
+
+        let res = await cu.submitSetup('email-submit', otpInput);
+        if (res){
+            console.log(res);
+        }else{
+            console.log('unable to submit data');
+        };
+
+    }
 
     return(
         <>
@@ -37,11 +52,16 @@ const VerifyEmailAlert = ({verificationInfo}) => {
                                 "data-[active=true]:ring-foreground",
                             ],
                             }}
-                            description={<p className='text-white'>Enter the 6 digit code sent to your email</p>}
-                            length={6}
+                            description={<p className='text-white'>Enter the 4 digit code sent to your email</p>}
+                            length={4}
+                            minLength={4}
                             radius="none"
+                            value={otpInput}
+                            onValueChange={setotpInput}
+                           
                         />
                         </div>
+                        <Button variant="shadow" color='secondary' size='sm' onPress={verifyCode}> Verify Code </Button>
             
                 </>}
             endContent={
