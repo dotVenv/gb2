@@ -1,10 +1,11 @@
 
-import React, { useContext} from "react";
+import React, { useContext, useState} from "react";
 import { Button, Alert, InputOtp } from "@nextui-org/react";
 
 const VerifyEmailAlert = ({verificationInfo}) => {
 
-    
+    const [optInput, setoptInput] = useState();
+
     return(
         <>
         
@@ -36,7 +37,7 @@ const VerifyEmailAlert = ({verificationInfo}) => {
                                 "data-[active=true]:ring-foreground",
                             ],
                             }}
-                            description={<p className='text-black'>"Enter the 6 digit code sent to your email"</p>}
+                            description={<p className='text-white'>Enter the 6 digit code sent to your email</p>}
                             length={6}
                             radius="none"
                         />

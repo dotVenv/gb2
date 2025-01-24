@@ -54,7 +54,6 @@ class EmailVerification(ExportModelOperationsMixin('EmailVerification'),models.M
     user = models.ForeignKey(gbUser, on_delete=models.CASCADE ,related_name='recipient')
     code = models.CharField(max_length=255,blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     expired = models.BooleanField(default=False)
     attempts = models.IntegerField(default=0)
     

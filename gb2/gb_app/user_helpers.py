@@ -86,19 +86,17 @@ class UserHelper():
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:
                     self.setup_data = {
-                        'code': setupdata.code,
                         'created_at': setupdata.created_at,
-                        'expires_at': setupdata.expires_at,
+                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
                         'expired': setupdata.expired,
                         'attempts': setupdata.attempts,
                         
                     }
-                    current_time = timezone.now()
-                    print(self.request.user.account_verified, self.setup_data['code'])
+                    return True
                
     
     
-        return True
+        return False
         
         
         
