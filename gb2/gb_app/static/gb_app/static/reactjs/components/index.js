@@ -8,6 +8,6 @@ export { default as CompleteProfileAlert } from './SetupSteps/completeprofile';
 export { default as PreferencesAlert } from './SetupSteps/preferences'; 
 export { default as Preloader } from './Preloader/Preloader';
 export { default as AnnouncmentBanner } from './AnnouncmentBanner/announcmentbanner';
-
+export { default as CustomToast } from './Toasts/toasts';
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge';

@@ -61,7 +61,7 @@ export default class CurrentUser{
 
     async submitSetup(fetchStep, otpInput){
 
-        let res = axios({
+        let res = await axios({
             url:'/setup-steps',
             method:'post',
             data:{uid: this.uid, fetchStep: fetchStep, otpInput:otpInput},

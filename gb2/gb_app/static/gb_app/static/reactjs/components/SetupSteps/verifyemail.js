@@ -1,25 +1,52 @@
+'use client';
 
 import React, { useContext, useState} from "react";
 import { Button, Alert, InputOtp } from "@nextui-org/react";
+import Countdown from 'react-countdown';
+import { signal } from "@preact/signals-react";
+import { CustomToast } from  '../index';
+
+const isExpired = signal(false);
 
 const VerifyEmailAlert = ({cu, verificationInfo}) => {
 
+    
     const [otpInput, setotpInput] = useState();
-
-
-    console.log(otpInput);
-    console.log(verificationInfo.time_left, verificationInfo.created_at);
+    const [expiredToast, setExpiredToast] = useState(isExpired.value);
 
     const verifyCode = async() => {
 
-        let res = await cu.submitSetup('email-submit', otpInput);
-        if (res){
-            console.log(res);
+        if (isExpired.value == true){
+
+            setExpiredToast(isExpired.value);
+
         }else{
-            console.log('unable to submit data');
+            let res = await cu.submitSetup('email-submit', otpInput);
+            if (res){
+                console.log(res);
+            }else{
+                console.log('unable to submit data');
+            };
         };
 
+    };
+
+        // Random component
+    const Completionist = () => <span>{verificationInfo.expired == 'True' ? 'Code expired, please resend a new code' : undefined }</span>;
+
+    // Renderer callback with condition
+    const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+        // Render a completed state
+        cu.submitSetup('email-submit', 'expired');
+        isExpired.value = true;
+        return <CustomToast sev='error' desc='Verification Code Expired.' />
+     
+    } else {
+        // Render a countdown
+        return <span> </span>;
     }
+    };
 
     return(
         <>
@@ -61,17 +88,20 @@ const VerifyEmailAlert = ({cu, verificationInfo}) => {
                            
                         />
                         </div>
-                        <Button variant="shadow" color='secondary' size='sm' onPress={verifyCode}> Verify Code </Button>
+                        <Button variant="shadow" color='secondary' size='sm' onPress={(e) => {verifyCode()}}> Verify Code </Button>
+                        <br></br>
+                        <Countdown renderer={renderer} className='justify-center align-center mx-auto' date={new Date(verificationInfo.time_left).toUTCString()} />
             
                 </>}
             endContent={
-            <Button color="warning" size="sm" variant="flat">
+            <Button color="warning" size="sm" variant="flat" onPress={(e) => {requestNewCode();}}>
                 Resend
             </Button>
             }
             title="Verify your email."
             variant="faded"
         />
+        {expiredToast ? <CustomToast sev='error' desc='Verification Code Expired' /> : undefined}
         </>
     );
 };

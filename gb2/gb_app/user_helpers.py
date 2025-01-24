@@ -87,7 +87,7 @@ class UserHelper():
                 if not self.request.user.account_verified:
                     self.setup_data = {
                         'created_at': setupdata.created_at,
-                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
+                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=1),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
                         'expired': setupdata.expired,
                         'attempts': setupdata.attempts,
                         
@@ -100,13 +100,19 @@ class UserHelper():
                     #if otp is expired
                     otpInput = str(self.request.POST.get('otpInput'))
                     if otpInput == 'expired':
-                        return False
+                        setupdata.expired = True
+                        setupdata.save()
+                        self.setup_data={'expired': 'true'}
+                        return True
                     
                     #if otp is not expired
                     otpInput = int(otpInput)
                     if int(setupdata.code) == int(self.request.POST.get('otpInput')):
                         #check for next step
                         if not self.request.user.first_name or not self.request.user.last_name:
+                            setupdata.expired = True
+                            setupdata.attempts = 0
+                            setupdata.save()
                             self.setup_data = {'step': 'profile update'}
                         return True
                     print(f'otp attempt is {self.request.POST.get("otpInput")}' )
