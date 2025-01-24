@@ -110,7 +110,8 @@ const Layout = ({ children }) => {
                    
                     </div>
                         {children}
-                    
+                    <Spacer></Spacer>
+                    <br></br>
                 </> 
             }
             

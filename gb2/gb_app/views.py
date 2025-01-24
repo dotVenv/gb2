@@ -56,7 +56,6 @@ class APPViews(TemplateView):
         
         
         if request.method == 'POST':
-            print(request.POST)
             
             if not cu.is_valid_req():
                 return getres().res('401')

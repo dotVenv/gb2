@@ -42,7 +42,10 @@ const VerifyEmailAlert = ({cu}) => {
                 console.log(toastData.value.toastDesc );
                 
             }else{
-                console.log('unable to submit data');
+                toastData.value.toastType = 'error';
+                toastData.value.toastDesc = 'Unable to complete request, please try again.';
+
+                settoastAlert(toastData.value.toastDesc);
             };
         };
 
@@ -56,9 +59,12 @@ const VerifyEmailAlert = ({cu}) => {
             toastData.value.toastType = 'success';
             toastData.value.toastDesc = 'Verification resent to your email';
             settoastAlert(toastData.value.toastDesc);
-            
+
         }else{
-            console.log('unable to get new code');
+            toastData.value.toastType = 'error';
+            toastData.value.toastDesc = 'Unable to complete request, please try again';
+            submit
+            settoastAlert(toastData.value.toastDesc);
         }
     };
 
