@@ -164,7 +164,7 @@ class UserHelper():
                 lname = str(self.request.POST.get('userInput[lastname]'))
                 state = str(self.request.POST.get('userInput[userstate]'))
                 consent = str(self.request.POST.get('userInput[consent_verif]'))
-                profile_pic = self.request.POST.get('userInput[profilepic]')
+                profile_pic = self.request.FILES.get('userInput[profilepic]')
                 print(fname, lname)
                 self.setup_data = {'step': 'passed'}
                 return True
