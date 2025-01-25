@@ -9,5 +9,6 @@ export { default as PreferencesAlert } from './SetupSteps/preferences';
 export { default as Preloader } from './Preloader/Preloader';
 export { default as AnnouncmentBanner } from './AnnouncmentBanner/announcmentbanner';
 export { default as CustomToast } from './Toasts/toasts';
+export { default as MembershipModal } from './Modals/membershipmodal';
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge';

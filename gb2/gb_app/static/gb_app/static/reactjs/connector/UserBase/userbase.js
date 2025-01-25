@@ -4,11 +4,13 @@ import { signal } from "@preact/signals-react";
 import { atom } from "jotai";
 import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
+import { AllMemberships } from '../index';
 
 export default class CurrentUser{
 
     constructor(){
         this.setAtoms();
+
 
     };
 
@@ -82,6 +84,16 @@ export default class CurrentUser{
 
     return res;
 
+    };
+
+    allMemberships(method){
+    
+        this.membershipOptionsAtom =   AllMemberships(method);
+        if (this.membershipOptionsAtom){
+            this.membershipOptionsAtom = atom(this.membershipOptionsAtom);
+        }else{
+            return false;
+        };
     };
     
 };

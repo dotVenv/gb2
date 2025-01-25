@@ -38,7 +38,7 @@ const CustomSidebar = ({userInfo}) => {
                     }
                 </div>
                 <div className="-mr-2 flex md:hidden">
-                <Button onPress={(e) => {setMobileMenu(!mobileMenu)}}  type="button" className="relative float start inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
+                <Button onPress={(e) => {setMobileMenu(!mobileMenu)}}  type="button" className="relative bg-purple-900 float start inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
                     <span className="absolute -inset-0.5"></span>
                     <span className="sr-only">Open main menu</span>
                     <svg className="block size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">

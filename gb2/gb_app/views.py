@@ -67,6 +67,14 @@ class APPViews(TemplateView):
         
         return getres().res('403')
     
+    def all_memberships(self, request):
+        '''return all memberships on get and save memberships on post'''
+        
+        if request.method == 'POST':
+            return getres().res('200')
+        
+        return getres().res('200')
+    
     def logout_view(self, request):
         '''logout and clear the cookie for the user'''
         

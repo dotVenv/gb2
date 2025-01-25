@@ -1,6 +1,7 @@
 'use client';
-import React, { Suspense, useContext, useMemo } from "react";
-import { CustomSidebar, AnnouncmentBanner } from "../../components";
+
+import React, { Suspense, useContext, useState } from "react";
+import { CustomSidebar, AnnouncmentBanner, MembershipModal } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
@@ -15,13 +16,12 @@ const Layout = ({ children }) => {
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
     const accountProgress = userInfo.setup_step;   
+    const [membershipModal, setmembershipModal] = useState();
 
-
-    const onClicked = () => {
-        //undefined
-    };
-
-    
+    const getMemberships = async() =>{
+        await cu.allMemberships('get');
+    }; 
+ 
     return(
         <>  
             
@@ -45,7 +45,13 @@ const Layout = ({ children }) => {
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 
                                         endContent={
-                                        <Button color="warning" size="sm" variant="shadow">
+                                        <Button color="warning" onPress={(e) => {
+
+                                                getMemberships();
+                                                setmembershipModal(true);
+                                                
+                                                
+                                                }}size="sm" variant="shadow">
                                             Upgrade
                                         </Button>
                                         }
@@ -121,6 +127,8 @@ const Layout = ({ children }) => {
                         {children}
                     <Spacer></Spacer>
                     <br></br>
+
+                    { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal} /> : undefined}
                 </> 
             }
             
