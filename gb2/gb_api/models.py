@@ -64,3 +64,56 @@ class EmailVerification(ExportModelOperationsMixin('EmailVerification'),models.M
     def __str__(self):
         return f'{self.user}, Expired:{self.expired}'
     
+
+
+
+def membership_desc():
+    '''default membership desc'''
+    return dict
+
+membership_options = [
+    ("free", "free"),
+    ("7day", "7day"),
+    ("monthly", "monthly"),
+]
+
+class Membership(models.Model):
+    '''store the membership data for each user'''
+    
+    name = models.CharField(choices=membership_options, max_length=20, default='free')
+    desc = models.JSONField(default=membership_desc())
+    price = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
+    created_at = models.DateTimeField(auto_now_add=True)
+    subscribers = models.ManyToManyField(gbUser, related_name='membership_subscriber')
+    
+    class Meta:
+        verbose_name_plural = 'Memberships'
+        
+    def __str__(self):
+        return f'{self.name} - {self.price}'
+
+
+server_options = [
+    ('US0-Chicago', 'US0-Chicago'),
+    ('US0-NewJersey', 'US0-NewJersey'),
+    ('US0-LosAngeles', 'US0-LosAngeles')
+]
+
+console_options = [
+    ('Xbox', 'Xbox'),
+    ('PS4', 'PS4'),
+    ('PC', 'PC')
+]
+class AccountPreference(models.Model):
+    '''store account preferences for the user'''
+    user = models.ForeignKey(gbUser, on_delete=models.CASCADE, related_name='user_pref')
+    membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='user_membership')
+    server = models.CharField(choices=server_options, max_length=50, blank=True, null=True)
+    console = models.CharField(choices=console_options, max_length=10, blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = 'Account Preferences'
+        
+    def __str__(self):
+        return f'{self.user} preferences'
+    

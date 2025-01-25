@@ -136,7 +136,11 @@ class UserHelper():
                 new_email.verify_account(request=self.request)             
                 return True 
                 
-               
+            
+            case 'preferences':
+                print('ready to update preferences')
+                self.setup_data = {'step': 'passed'}
+                return True
     
     
         return False
