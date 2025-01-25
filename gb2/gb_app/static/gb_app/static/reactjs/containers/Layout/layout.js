@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 
                                         endContent={
-                                        <Button color="warning" size="sm" variant="flat">
+                                        <Button color="warning" size="sm" variant="shadow">
                                             Upgrade
                                         </Button>
                                         }
