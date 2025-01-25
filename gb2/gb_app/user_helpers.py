@@ -159,8 +159,7 @@ class UserHelper():
                 return False
                 
             case 'profile_update':
-                print('ready to update profile')
-                print(self.request.POST)
+                
                 fname = str(self.request.POST.get('userInput[firstname]'))
                 lname = str(self.request.POST.get('userInput[lastname]'))
                 state = str(self.request.POST.get('userInput[userstate]'))
