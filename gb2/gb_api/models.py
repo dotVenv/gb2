@@ -107,7 +107,7 @@ console_options = [
 class AccountPreference(models.Model):
     '''store account preferences for the user'''
     user = models.ForeignKey(gbUser, on_delete=models.CASCADE, related_name='user_pref')
-    membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='user_membership')
+    membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='user_membership', null=True, blank=True)
     server = models.CharField(choices=server_options, max_length=50, blank=True, null=True)
     console = models.CharField(choices=console_options, max_length=10, blank=True, null=True)
     

@@ -50,6 +50,7 @@ const PreferencesAlert = ({cu}) => {
                     toastData.value.toastType = 'success';
                     toastData.value.desc = 'Preferences successfully saved';
                     setPrefResponse(true);
+                    location.reload();
                 }else{
                     toastData.value.toastType = 'error';
                     toastData.value.desc = 'Unable to update preferences';

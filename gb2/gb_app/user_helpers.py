@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 #app imports
-from gb_api.models import gbUser, EmailVerification
+from gb_api.models import gbUser, EmailVerification, AccountPreference
 from gb_api.email_helpers import EmailHelper
 import datetime
 
@@ -70,10 +70,13 @@ class UserHelper():
         '''checks which steps were complete and returns a value based on which step, (5 if completed)'''  
         
         if self.cu:
+            acc_pref = AccountPreference.objects.filter(user=self.cu.id)
             if self.cu.account_verified is False:
                 self.serialized['setup_step'] = 1
-            elif not self.cu.first_name or not self.cu.last_name:
+            elif not acc_pref.exists():
                 self.serialized['setup_step'] = 2
+            elif not self.cu.first_name or not self.cu.last_name:
+                self.serialized['setup_step'] = 3
         
             
         return True
@@ -139,8 +142,21 @@ class UserHelper():
             
             case 'preferences':
                 print('ready to update preferences')
-                self.setup_data = {'step': 'passed'}
-                return True
+                console = str(self.request.POST.get('userInput[console]'))
+                server = str(self.request.POST.get('userInput[server]'))
+                if not console or not server:
+                    return False
+                self.get_user()
+                if self.cu:
+                    acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, console=console)
+                    if acc_pref:
+                        acc_pref.save()
+                        self.setup_data = {'step': 'passed'}
+                        return True
+                   
+                self.setup_data =  {'step': 'failed'}
+                return False
+                
     
     
         return False
