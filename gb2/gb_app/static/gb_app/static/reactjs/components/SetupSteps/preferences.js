@@ -15,7 +15,7 @@ const preferenceData = signal({
 
 const consoleOptions = [
     {name: 'Xbox', icon:    <i className="fa-brands fa-xbox fa-xl object-cover"></i>},
-    {name: 'PS4', icon: <i className="fa-brands fa-playstation fa-xl object-cover"></i>},
+    {name: 'PSN', icon: <i className="fa-brands fa-playstation fa-xl object-cover"></i>},
     {name: 'PC', icon:  <i className="fa-solid fa-computer fa-xl object-cover"></i>},
     
 ]

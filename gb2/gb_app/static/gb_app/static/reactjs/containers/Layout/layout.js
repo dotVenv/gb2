@@ -17,7 +17,6 @@ const Layout = ({ children }) => {
     const accountProgress = userInfo.setup_step;   
 
 
-
     const onClicked = () => {
         //undefined
     };
@@ -40,25 +39,27 @@ const Layout = ({ children }) => {
                     <section className='mt-3 py-4'>
                        
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
-                        
-                         <Alert
-                            color="success"
-                            description={<><i className='text-black'>Your account is looking good, there are no issues found.</i></>}
-                            title={<><i className='text-black'>Account Status: </i><b>OK</b></>}
-                            variant="faded"
-                        />
+                        { userInfo.membership == null 
+                            ?    <Alert
+                                        color="warning"
+                                        description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 
-                        {/* <Alert
-                            color="warning"
-                            description="You are not subscribed to a membership plan, please upgrade to unlock more features"
-                            endContent={
-                            <Button color="warning" size="sm" variant="flat">
-                                Upgrade
-                            </Button>
-                            }
-                            title="No active membership"
-                            variant="faded"
-                        /> */ }
+                                        endContent={
+                                        <Button color="warning" size="sm" variant="flat">
+                                            Upgrade
+                                        </Button>
+                                        }
+                                        title={<i className='text-black'>No active membership</i>}
+                                        variant="faded"
+                                    />
+                            :   <Alert
+                                    color="success"
+                                    description={<><i className='text-black'>Your account is looking good, there are no issues found.</i></>}
+                                    title={<><i className='text-black'>Account Status: </i><b>OK</b></>}
+                                    variant="faded"
+                                /> 
+                        }
+                    
                         </div>
                        
                     </section>
@@ -70,7 +71,7 @@ const Layout = ({ children }) => {
                                 <div className="flex">
                                     <div className="flex flex-col gap-y-2">
                                     <dt className="text-small font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
-                                    <dd className="text-2xl font-semibold text-default-700">N/A</dd>
+                                    <dd className="text-2xl font-semibold text-default-700">{ userInfo.memberhsip == null ? "N/A" : userInfo.memberhsip }</dd>
                                 </div>
                                     
                                 </div>
@@ -90,13 +91,21 @@ const Layout = ({ children }) => {
                                         <dt className="float start text-small font-medium text-default-500">Preferences <i className="fa-solid fa-user-gear"></i></dt>
                                         <div className='flex'>
                                             <div className='grid grid-cols-1'>
-                                                <dd className="text-2xl font-semibold text-default-700"><i className="fa-solid fa-computer"></i></dd>
-                                                <span className='text-tiny'><b> PC </b></span>
+                                                <dd className="text-2xl font-semibold text-default-700">{ 
+                                                    userInfo.console == 'PC' 
+                                                        ? <i className="fa-solid fa-computer"></i>
+                                                        : userInfo.console == 'Xbox' 
+                                                            ? <i className='fa-solid fa-xbox'></i>
+                                                            : userInfo.console = 'PSN'
+                                                                ? <i className='fa-solid fa-playstation'></i>
+                                                                : undefined
+                                                    }</dd>
+                                                <span className='text-tiny'><b> { userInfo.console } </b></span>
                                             </div>
                                             <Spacer></Spacer>
                                             <div className='grid grid-cols-1 end justify-end mx-auto'>
                                                 <dd className="text-2xl font-semibold text-default-700"><i className="fa-solid fa-server"></i></dd>
-                                                <span className='text-tiny'> <b> US0-Chicago </b></span>
+                                                <span className='text-tiny'> <b> { userInfo.server } </b></span>
                                             </div>
                                         </div>
                                     

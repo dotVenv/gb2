@@ -3,6 +3,8 @@ import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
 
 const Dashboard = () => {
+    
+    
     return(
         <>
             <Layout>

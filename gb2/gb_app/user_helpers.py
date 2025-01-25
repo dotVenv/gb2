@@ -39,6 +39,7 @@ class UserHelper():
         
         try:
             self.cu = gbUser.objects.get(id=self.uid)
+            self.cu_ap = AccountPreference.objects.get(user=self.cu)
             
         except dce.ObjectDoesNotExist:
             return None
@@ -49,9 +50,19 @@ class UserHelper():
             "mfa": bool(self.cu.mfa_active),
             "profile_pic": str(self.cu.profile_pic),
             "fname": str(self.cu.first_name),
-            "lname": str(self.cu.last_name)
+            "lname": str(self.cu.last_name),
+        
         }
         
+        
+        if self.cu_ap:
+           
+            self.serialized['server'] = self.cu_ap.server
+            self.serialized['console'] = self.cu_ap.console
+            self.serialized['memberhip'] = self.cu_ap.membership
+    
+        
+
         return True
         
         

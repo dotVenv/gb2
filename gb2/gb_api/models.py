@@ -102,7 +102,7 @@ server_options = [
 
 console_options = [
     ('Xbox', 'Xbox'),
-    ('PS4', 'PS4'),
+    ('PSN', 'PSN'),
     ('PC', 'PC')
 ]
 class AccountPreference(models.Model):
