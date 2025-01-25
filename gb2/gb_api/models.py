@@ -10,7 +10,8 @@ class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     mfa_active = models.BooleanField(default=False)
     ip_address = models.CharField(max_length=255, blank=True, null=True)
     account_verified = models.BooleanField(default=False)
-    is_locked = models.BooleanField(default=False)
+    age_consent = models.BooleanField(default=False)
+    state = models.CharField(max_length=75, blank=True, null=True)
     is_banned = models.BooleanField(default=False)
     
     pass

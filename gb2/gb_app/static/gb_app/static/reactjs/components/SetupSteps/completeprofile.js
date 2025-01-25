@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Button, Alert, Form, Input,  Select, SelectItem, Checkbox} from "@nextui-org/react";
 
-const CompleteProfileAlert = () => {
+const CompleteProfileAlert = ({cu}) => {
     
 
-    const [isSelected, setIsSelected] = React.useState(false);
+    const [isSelected, setIsSelected] = useState(false);
+    const [chosenState, setchosenState] = useState();
     
     return(
         <>
@@ -19,11 +20,18 @@ const CompleteProfileAlert = () => {
                             className="w-full max-w-xs flex flex-col gap-4"
                             validationBehavior="native"
                             
-                            onSubmit={(e) => {
+                            onSubmit={async(e) => {
                                 e.preventDefault();
                                 let data = Object.fromEntries(new FormData(e.currentTarget));
 
-                                setAction(`submit ${JSON.stringify(data)}`);
+                                let res = await cu.submitSetup('profile_update', data);
+                                if (res){
+                                    console.log('ready');
+                                }else{
+                                    console.log('unable to update profile');
+                                };
+
+                               
                             }}
                             >
                             <div className='flex gap-2' >
@@ -50,17 +58,20 @@ const CompleteProfileAlert = () => {
                             </div>
                             <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
                             <div className="flex flex-col gap-2">
-                                <Checkbox isSelected={isSelected} onValueChange={setIsSelected}  size='sm' className="text-tiny">
+                                <Checkbox isSelected={isSelected} name='consent_verif' onValueChange={setIsSelected} isRequired size='sm' className="text-tiny">
                                     I confirm I am over the age of consent in my state.
                                 </Checkbox>
                                 
                             </div>
                             </div>
                             <Select
+                                isRequired
                                 className="max-w-xs"
                                 items={allStates}
                                 label="Choose state"
                                 placeholder="Select a state"
+                                name='userstate'
+                                onSelectionChange={setchosenState}
                                 >
                                 {(allStates) => <SelectItem className="text-white" key={allStates.code}>{allStates.name}</SelectItem>}
                             </Select>

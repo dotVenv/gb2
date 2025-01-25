@@ -141,7 +141,7 @@ class UserHelper():
                 
             
             case 'preferences':
-                print('ready to update preferences')
+                
                 console = str(self.request.POST.get('userInput[console]'))
                 server = str(self.request.POST.get('userInput[server]'))
                 if not console or not server:
@@ -157,7 +157,17 @@ class UserHelper():
                 self.setup_data =  {'step': 'failed'}
                 return False
                 
-    
+            case 'profile_update':
+                print('ready to update profile')
+                print(self.request.POST)
+                fname = str(self.request.POST.get('userInput[firstname]'))
+                lname = str(self.request.POST.get('userInput[lastname]'))
+                state = str(self.request.POST.get('userInput[userstate]'))
+                consent = str(self.request.POST.get('userInput[consent_verif]'))
+                profile_pic = self.request.POST.get('userInput[profilepic]')
+                print(fname, lname)
+                self.setup_data = {'step': 'passed'}
+                return True
     
         return False
         

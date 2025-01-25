@@ -41,8 +41,11 @@ const AccountSetup = ({accountProgress, cu }) =>{
                                 ? <VerifyEmailAlert cu={cu} /> 
                                 : accountProgress == 2 
                                     ? <PreferencesAlert cu={cu} />
-                                    : undefined
+                                    : accountProgress == 3 
+                                        ? <CompleteProfileAlert cu={cu} />
+                                        : undefined 
                             }
+                            
 
                             {/* <CompleteProfileAlert /> */}
                             {/*  <PreferencesAlert />    */}
