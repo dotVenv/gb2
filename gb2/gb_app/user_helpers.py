@@ -77,7 +77,8 @@ class UserHelper():
                 self.serialized['setup_step'] = 2
             elif not self.cu.first_name or not self.cu.last_name:
                 self.serialized['setup_step'] = 3
-        
+            else:
+                self.serialized['setup_step'] = 4
             
         return True
     
@@ -165,9 +166,20 @@ class UserHelper():
                 state = str(self.request.POST.get('userInput[userstate]'))
                 consent = str(self.request.POST.get('userInput[consent_verif]'))
                 profile_pic = self.request.FILES.get('userInput[profilepic]')
-                print(fname, lname)
-                self.setup_data = {'step': 'passed'}
-                return True
+                
+                cu = gbUser.objects.get(id=self.request.user.id)
+                if cu:
+                    if not consent or not state:
+                        self.setup_data = {'step': 'failed'}
+                        return False
+                    if profile_pic is not None:
+                        cu.profile_pic = profile_pic
+                    cu.first_name = fname
+                    cu.last_name = lname
+                    cu.state = state
+                    cu.save()
+                    self.setup_data = {'step': 'passed'}
+                    return True
     
         return False
         

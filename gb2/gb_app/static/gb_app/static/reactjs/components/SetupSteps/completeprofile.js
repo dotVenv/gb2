@@ -1,10 +1,22 @@
+'use client';
+
 import React, { useState } from "react";
 import { Button, Alert, Form, Input,  Select, SelectItem, Checkbox} from "@nextui-org/react";
+import { signal } from '@preact/signals-react';
+import { CustomToast } from '../index';
+
+
+
+
+const toastData = signal({
+    toastType: '',
+    desc: '',
+});
 
 const CompleteProfileAlert = ({cu}) => {
     
 
-    const [isSelected, setIsSelected] = useState(false);
+    const [isSelected, setIsSelected] = useState(true);
     const [chosenState, setchosenState] = useState();
     
     return(
@@ -23,12 +35,17 @@ const CompleteProfileAlert = ({cu}) => {
                             onSubmit={async(e) => {
                                 e.preventDefault();
                                 let data = Object.fromEntries(new FormData(e.currentTarget));
-
                                 let res = await cu.submitSetup('profile_update', data);
-                                if (res){
-                                    console.log('ready');
+                                if (res.step == 'passed'){
+                                    toastData.value.toastType = 'success';
+                                    toastData.value.desc = 'Successfully updated profile';
+                                    setupdateSubmited(true); 
+                                    location.reload();
                                 }else{
-                                    console.log('unable to update profile');
+
+                                    toastData.value.toastType = 'error';
+                                    toastData.value.desc = 'Unable to update profile';
+                                    setupdateSubmited(true); 
                                 };
 
                                
@@ -58,7 +75,7 @@ const CompleteProfileAlert = ({cu}) => {
                             </div>
                             <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
                             <div className="flex flex-col gap-2">
-                                <Checkbox isSelected={isSelected} name='consent_verif' onValueChange={setIsSelected} isRequired size='sm' className="text-tiny">
+                                <Checkbox value={isSelected} isSelected={true} name='consent_verif' onValueChange={setIsSelected} isRequired size='sm' className="text-tiny">
                                     I confirm I am over the age of consent in my state.
                                 </Checkbox>
                                 
@@ -90,7 +107,7 @@ const CompleteProfileAlert = ({cu}) => {
                             </div>
                             
                             </Form>
-                            
+                            { updateSubmitted ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
                     </>
                     }
                 variant='flat'/>
