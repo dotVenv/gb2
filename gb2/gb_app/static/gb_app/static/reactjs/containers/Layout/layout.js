@@ -1,13 +1,18 @@
 'use client';
 
 import React, { Suspense, useContext, useState } from "react";
-import { CustomSidebar, AnnouncmentBanner, MembershipModal } from "../../components";
+import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from 'jotai';
+import { signal } from "@preact/signals-react";
 
 
+const toastData = signal({
+    toastType: '',
+    desc: '',
+});
 
 const Layout = ({ children }) => {
 
@@ -17,10 +22,9 @@ const Layout = ({ children }) => {
     const [userInfo] = useAtom(cu.userAtom);
     const accountProgress = userInfo.setup_step;   
     const [membershipModal, setmembershipModal] = useState();
+    const [newToastAlert, setNewToastAlert] = useState();
 
-    const getMemberships = async() =>{
-        await cu.allMemberships('get');
-    }; 
+
  
     return(
         <>  
@@ -45,12 +49,17 @@ const Layout = ({ children }) => {
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 
                                         endContent={
-                                        <Button color="warning" onPress={(e) => {
-
-                                                getMemberships();
-                                                setmembershipModal(true);
+                                        <Button color="warning" onPress={async(e) => {
                                                 
-                                                
+                                                let res = await cu.allMemberships('get');
+                                                if (res){
+                                                    setmembershipModal(true);
+                                                }else{
+                                                    toastData.value.desc = 'Unable to view memberships'
+                                                    toastData.value.toastType = 'error';
+                                                    setNewToastAlert();
+                                                }
+                                               
                                                 }}size="sm" variant="shadow">
                                             Upgrade
                                         </Button>
@@ -128,7 +137,8 @@ const Layout = ({ children }) => {
                     <Spacer></Spacer>
                     <br></br>
 
-                    { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal} /> : undefined}
+                    { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
+                    { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
                 </> 
             }
             

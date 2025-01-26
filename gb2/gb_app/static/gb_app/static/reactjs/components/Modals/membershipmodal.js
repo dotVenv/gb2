@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState } from "react";
-import { signal } from "@preact/signals-react";
-import { useAtom } from "jotai";
+import React, { useState, useMemo } from "react";
+import { Spacer,Chip } from "@nextui-org/react";
 import {
     Modal,
     ModalContent,
@@ -17,44 +16,48 @@ import {
     CardHeader,
   } from "@nextui-org/react";
   
-const getMI = async(cu) => {
-    let res = await cu.allMemberships('get');
-    if (res){
-        return res;
-    };
-};
 
-const MembershipModal = ({cu, setModal, isModalOpen}) => {
+const MembershipModal = ({cu, setModal, isModalOpen }) => {
 
-    const [membershipOptions] = useAtom(cu.membershipOptionsAtom);
+    const memInfo = useMemo(() => cu.membershipOptionsAtom, [cu.membershipOptionsAtom]);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+  
     return(
         <>
-        <Modal size='md' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'> Choose your memberhsip  <span className='text-tiny text-white'> Powered by <i className="fa-brands fa-cc-stripe fa-md"></i></span></i></ModalHeader>
                 <ModalBody>
                     <div className='grid lg:grid-cols-3 sm:grid-cols-1 gap-2'>
-                        <Card className=''>
-                            <CardHeader>
-                                <i> <b> Free </b> </i>
-                            </CardHeader>
-                            <CardBody>
-                                <ul>
-                                    <li> 1</li>
-                                    <li> 2 </li>
-                                </ul>
-                            </CardBody>
-                        </Card>
-                        <Card className=''>
-                            T2
-                        </Card>
-                        <Card className=''>
-                            T3
-                        </Card>
+                        { memInfo.map((key, index) => {
+                            return(<Card isPressable className='bg-gradient-to-tr from-[#FFB457] to-[#FF705B]' key={index} >
+                                <CardHeader>
+                                    <i className='text-small '> <b> 
+                                        {key.name.toLowerCase() == 'free' 
+                                            ? 'Free' 
+                                            : key.name.toLowerCase() == '7day' 
+                                                ? 'Trial Competitor'
+                                                : key.name.toLowerCase() == 'monthly'
+                                                    ? 'Official Competitor'
+                                                    : undefined
+                                    } </b> {key.name.toLowerCase() == '7day' ? <span className='text-tiny'>7-day(s)</span>: undefined } <br></br>${key.price} </i>
+                                </CardHeader>
+                                <CardBody>
+                                    {key.name.toLowerCase() == '7day' ? <><Chip className=' text-tiny p-3' size='sm' variant='flat' color='warning'>$14.99 after 7 days</Chip><Spacer></Spacer></> : undefined }
+                                    <p className='text-small'> Details: </p>
+                                    <ul>
+                                       { key.details.map((ket, vet) => {
+                                            return(<li key={vet} className='text-tiny'> <i className="fa-solid fa-circle-check"></i> { ket} </li>)
+                                        })}
+                                    </ul>
+                                </CardBody>
+                            </Card>)
+                            
+                        })}
+                       
                   </div>
                 </ModalBody>
                 <ModalFooter>

@@ -86,13 +86,14 @@ export default class CurrentUser{
 
     };
 
-    allMemberships(method){
-    
-        this.membershipOptionsAtom =   AllMemberships(method);
-        if (this.membershipOptionsAtom){
-            this.membershipOptionsAtom = atom(this.membershipOptionsAtom);
+    async allMemberships(method){
+        
+        this.membershipOptionsAtom =  await AllMemberships(method);
+        if (this.membershipOptionsAtom != null || this.membershipOptionsAtom != undefined){
+            //this.membershipOptionsAtom = atom(this.membershipOptionsAtom);
+            return true;
         }else{
-            return false;
+            return null;
         };
     };
     

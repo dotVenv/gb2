@@ -70,7 +70,7 @@ class EmailVerification(ExportModelOperationsMixin('EmailVerification'),models.M
 
 def membership_desc():
     '''default membership desc'''
-    return dict
+    return list
 
 membership_options = [
     ("free", "free"),
@@ -85,7 +85,7 @@ class Membership(models.Model):
     desc = models.JSONField(default=membership_desc())
     price = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
     created_at = models.DateTimeField(auto_now_add=True)
-    subscribers = models.ManyToManyField(gbUser, related_name='membership_subscriber')
+    subscribers = models.ManyToManyField(gbUser, related_name='membership_subscriber', blank=True)
     
     class Meta:
         verbose_name_plural = 'Memberships'
