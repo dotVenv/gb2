@@ -7,7 +7,7 @@ import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from 'jotai';
 import { signal } from "@preact/signals-react";
-
+import { motion } from "framer-motion";
 
 const toastData = signal({
     toastType: '',
@@ -40,6 +40,7 @@ const Layout = ({ children }) => {
                 ? <AccountSetup accountProgress={accountProgress} cu={cu} />
                 :
                 <> 
+                
                     <section className='mt-3 py-4'>
                        
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
@@ -131,9 +132,10 @@ const Layout = ({ children }) => {
                         </dl>
                     </section>
                     <div>
-                   
+                    {children}
                     </div>
-                        {children}
+                                                    
+                       
                     <Spacer></Spacer>
                     <br></br>
 
