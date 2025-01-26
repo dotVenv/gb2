@@ -18,7 +18,7 @@ const Dashboard = () => {
                     }}
                     separator="/">
                     <BreadcrumbItem key="dashboard" isCurrent>
-                        <span className='text-black'>Dashboard</span>
+                        <span>Dashboard</span>
                     </BreadcrumbItem>
                 
                 </Breadcrumbs>
