@@ -12,7 +12,7 @@ import { TournamentCard, DailyRewards, Globe, MagicCard } from "../../components
 
 const Dashboard = () => {
     const [checked, setChecked] = useState(false);
-    const [userGoalValue, setUserGoalValue] = useState(0);
+    const [userGoalValue, setUserGoalValue] = useState(25);
 
     const handleChange = () => {
       setChecked((prev) => !prev);
@@ -43,9 +43,9 @@ const Dashboard = () => {
                                     className=" bg-gray-100 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
                                     >
                                 <Spacer></Spacer>
-                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> 
+                                <Chip variant='flat' color='secondary' className='flex sm:text-small text-center mt-3 text-black justify-center align-center mx-auto'> 
                                     <i> Daily Reward <i className="fa-solid fa-gift"></i> </i>
-                                </h6>
+                                </Chip>
                                 <Spacer></Spacer>
                                 <br></br>
                                    <DailyRewards />
@@ -59,16 +59,15 @@ const Dashboard = () => {
                                 
                             </Card>
                             <Card className='h-95 bg-transparent shadow-2xl p-4'>
-                            <Chip color="success" className=' mt-4 py-3' variant="flat">
-                            <Progress
-                                aria-label="Downloading..."
-                                className="max-w-md"
-                                color="success"
-                                showValueLabel={true}
-                                size="md"
-                                value={userGoalValue}
-                                />
-                            </Chip> 
+                           
+                                <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-1 justify-center align-center mx-auto">
+                                    <Chip className='flex-cols' color='success' variant='flat' size='sm' startContent={<i className='fa fa-circle fa-2xs' style={{'color':'green'}}></i>}>
+                                        <i className='text-tiny'><b>200 </b>Users Onlines</i>
+                                    </Chip>
+                                    <Chip color='success' variant='flat' size='sm' startContent={<i className='fa fa-circle fa-2xs' style={{'color':'green'}}></i>}>
+                                        <i className='text-tiny'>All services good.</i>
+                                    </Chip>
+                                </div>
                             </Card>
                             </div>
                         </div>
