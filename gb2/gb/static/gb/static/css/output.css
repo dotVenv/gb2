@@ -871,6 +871,10 @@ video {
   top: var(--navbar-height);
 }
 
+.bottom-1 {
+  bottom: 0.25rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -1424,6 +1428,10 @@ video {
   height: 300px;
 }
 
+.h-\[35vh\] {
+  height: 35vh;
+}
+
 .h-\[450px\] {
   height: 450px;
 }
@@ -1491,14 +1499,6 @@ video {
 
 .h-\[15vh\] {
   height: 15vh;
-}
-
-.h-\[25vh\] {
-  height: 25vh;
-}
-
-.h-\[35vh\] {
-  height: 35vh;
 }
 
 .max-h-\[20rem\] {
@@ -1760,6 +1760,14 @@ video {
   width: 100vw;
 }
 
+.w-\[calc\(100\%_-_8px\)\] {
+  width: calc(100% - 8px);
+}
+
+.w-\[15vw\] {
+  width: 15vw;
+}
+
 .min-w-10 {
   min-width: 2.5rem;
 }
@@ -1836,6 +1844,10 @@ video {
 .min-w-min {
   min-width: -moz-min-content;
   min-width: min-content;
+}
+
+.min-w-\[0\] {
+  min-width: 0;
 }
 
 .max-w-2xl {
@@ -2473,6 +2485,12 @@ video {
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2489,12 +2507,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-}
-
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
@@ -3102,6 +3114,10 @@ video {
   border-color: rgb(255 255 255 / 0.1);
 }
 
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+
 .border-x-transparent {
   border-left-color: transparent;
   border-right-color: transparent;
@@ -3409,6 +3425,10 @@ video {
   background-color: hsl(var(--nextui-primary) / 0.2);
 }
 
+.bg-purple-800\/40 {
+  background-color: rgb(48 16 80 / 0.4);
+}
+
 .bg-purple-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 8 40 / var(--tw-bg-opacity));
@@ -3501,8 +3521,8 @@ video {
   background-color: rgb(212 212 216 / var(--tw-bg-opacity));
 }
 
-.bg-purple-800\/40 {
-  background-color: rgb(48 16 80 / 0.4);
+.bg-black\/20 {
+  background-color: rgb(0 0 0 / 0.2);
 }
 
 .bg-gradient-to-b {
@@ -3644,12 +3664,12 @@ video {
   --tw-gradient-to: #f5a524 var(--tw-gradient-to-position);
 }
 
-.to-zinc-200 {
-  --tw-gradient-to: #e4e4e7 var(--tw-gradient-to-position);
-}
-
 .to-zinc-800 {
   --tw-gradient-to: #27272a var(--tw-gradient-to-position);
+}
+
+.to-zinc-900 {
+  --tw-gradient-to: #18181B var(--tw-gradient-to-position);
 }
 
 .to-90\% {
@@ -4373,6 +4393,11 @@ video {
   color: rgb(3 7 18 / var(--tw-text-opacity));
 }
 
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(23 201 100 / var(--tw-text-opacity));
+}
+
 .text-indigo-400 {
   --tw-text-opacity: 1;
   color: rgb(129 140 248 / var(--tw-text-opacity));
@@ -4422,6 +4447,11 @@ video {
 
 .text-primary\/80 {
   color: hsl(var(--nextui-primary) / 0.8);
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(243 18 96 / var(--tw-text-opacity));
 }
 
 .text-secondary {
@@ -4530,14 +4560,8 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(23 201 100 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(243 18 96 / var(--tw-text-opacity));
+.text-white\/80 {
+  color: rgb(255 255 255 / 0.8);
 }
 
 .underline {
@@ -5850,6 +5874,11 @@ html, body {
   border-radius: calc(var(--radius) - 4px);
 }
 
+.before\:rounded-xl::before {
+  content: var(--tw-content);
+  border-radius: 0.75rem;
+}
+
 .before\:border-2::before {
   content: var(--tw-content);
   border-width: 2px;
@@ -5957,6 +5986,11 @@ html, body {
 .before\:bg-warning\/20::before {
   content: var(--tw-content);
   background-color: hsl(var(--nextui-warning) / 0.2);
+}
+
+.before\:bg-white\/10::before {
+  content: var(--tw-content);
+  background-color: rgb(255 255 255 / 0.1);
 }
 
 .before\:bg-gradient-to-r::before {
@@ -10521,14 +10555,6 @@ html, body {
 
   .sm\:h-\[850px\] {
     height: 850px;
-  }
-
-  .sm\:h-\[25vh\] {
-    height: 25vh;
-  }
-
-  .sm\:h-\[35vh\] {
-    height: 35vh;
   }
 
   .sm\:w-\[25vh\] {

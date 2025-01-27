@@ -10,5 +10,9 @@ export { default as Preloader } from './Preloader/Preloader';
 export { default as AnnouncmentBanner } from './AnnouncmentBanner/announcmentbanner';
 export { default as CustomToast } from './Toasts/toasts';
 export { default as MembershipModal } from './Modals/membershipmodal';
+export { default as DailyRewards } from './Carousels/dailyrewards';
+export { default as TournamentCard } from './Tournaments/tournamentcard';
+export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';
+export { DotButton, useDotButton } from './Carousels/carouseldots';
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge';
