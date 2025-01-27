@@ -13,7 +13,7 @@ const StickyOptions  = () => {
                 key="holder"
                 title={
                     <div className="flex items-center space-x-2 fa-xl">
-                    <i className="fa-solid fa-rectangle-xmark"></i>
+                        <i className="fa-solid fa-slash  fa-sm"></i>
                 
                     </div>
                 }
@@ -41,7 +41,7 @@ const StickyOptions  = () => {
                 key="current tournament"
                     title={
                         <div className="flex items-center space-x-2 fa-xl">
-                        <i class="fa-solid fa-hand-fist"></i>
+                        <i className="fa-solid fa-hand-fist"></i>
                         </div>
                     }
                 />

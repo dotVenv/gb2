@@ -2,9 +2,9 @@
 
 import React, {useState,} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Card,  Spacer } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
 import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { TournamentCard, DailyRewards } from "../../components";
+import { TournamentCard, DailyRewards, Globe, MagicCard } from "../../components";
 
 
 
@@ -12,6 +12,7 @@ import { TournamentCard, DailyRewards } from "../../components";
 
 const Dashboard = () => {
     const [checked, setChecked] = useState(false);
+    const [userGoalValue, setUserGoalValue] = useState(0);
 
     const handleChange = () => {
       setChecked((prev) => !prev);
@@ -38,17 +39,38 @@ const Dashboard = () => {
                     <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                         <div className="grid grid-cols-2 gap-4 mb-4">
                             
-                            <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-70 p-4 ">
+                            <MagicCard 
+                                    className=" bg-gray-100 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
+                                    >
                                 <Spacer></Spacer>
-                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> <i> Daily Reward <i className="fa-solid fa-gift"></i> </i></h6>
+                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> 
+                                    <i> Daily Reward <i className="fa-solid fa-gift"></i> </i>
+                                </h6>
                                 <Spacer></Spacer>
                                 <br></br>
                                    <DailyRewards />
+                            </MagicCard>
+                            <div className='grid grid-cols-1 gap-1'>
+                            <Card className="shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-75 p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
+                                <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-5xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+                                    Connected
+                                </span>
+                                <Globe className="top-10 border-none justify-center align-center mx-auto" />
+                                
+                            </Card>
+                            <Card className='h-95 bg-transparent shadow-2xl p-4'>
+                            <Chip color="success" className=' mt-4 py-3' variant="flat">
+                            <Progress
+                                aria-label="Downloading..."
+                                className="max-w-md"
+                                color="success"
+                                showValueLabel={true}
+                                size="md"
+                                value={userGoalValue}
+                                />
+                            </Chip> 
+                            </Card>
                             </div>
-                            <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72">
-
-                            </div>
-                        
                         </div>
 
                         <div className="border-2 border-dashed rounded-lg border-rounded border-gray-300 dark:border-gray-600 h-96 mb-4 p-4">

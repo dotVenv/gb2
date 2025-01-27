@@ -13,6 +13,8 @@ export { default as MembershipModal } from './Modals/membershipmodal';
 export { default as DailyRewards } from './Carousels/dailyrewards';
 export { default as TournamentCard } from './Tournaments/tournamentcard';
 export { default as StickyOptions } from './StickyOptions/stickyoptions';
+export { Globe } from './Magicui/globe';
+export { MagicCard } from './Magicui/magic-card';
 export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';
 export { DotButton, useDotButton } from './Carousels/carouseldots';
 

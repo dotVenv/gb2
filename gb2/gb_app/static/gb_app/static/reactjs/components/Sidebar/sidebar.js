@@ -11,7 +11,7 @@ const CustomSidebar = ({userInfo}) => {
     return(
         <>
         
-        <nav className="justify-center align-center mx-auto bg-gradient-to-r from-purple-900 to-zinc-800 shadow border-rounded rounded-large ">
+        <nav className="justify-center align-center mx-auto bg-gradient-to-r from-purple-900 to-zinc-800 shadow ">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-20 items-center justify-between">
                 <div className="flex items-center">
