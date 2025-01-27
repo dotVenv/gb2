@@ -40,7 +40,7 @@ const Dashboard = () => {
                             
                             <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-70 p-4 ">
                                 <Spacer></Spacer>
-                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> <i> Daily Reward </i></h6>
+                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> <i> Daily Reward <i className="fa-solid fa-gift"></i> </i></h6>
                                 <Spacer></Spacer>
                                 <br></br>
                                    <DailyRewards />

@@ -34,9 +34,9 @@ const DailyRewards = () => {
     return(
         <>
        <ScrollShadow hideScrollBar size={30} >
-        <div className="embla w-full h-full overflow-y-hidden p-4" >
+        <div className="embla object-cover overflow-y-hidden" >
                 <div className="embla__viewport" ref={emblaRef}>
-                    <div className="embla__container  gap-4">
+                    <div className="embla__container  gap-4 ">
                         <div className="embla__slide">
                            
                            <Card isFooterBlurred  className="border-none " radius="lg">

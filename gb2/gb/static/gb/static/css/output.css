@@ -1497,6 +1497,14 @@ video {
   height: 100vh;
 }
 
+.h-\[50vh\] {
+  height: 50vh;
+}
+
+.h-\[50px\] {
+  height: 50px;
+}
+
 .max-h-\[20rem\] {
   max-height: 20rem;
 }
@@ -1758,6 +1766,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[50vw\] {
+  width: 50vw;
 }
 
 .min-w-10 {
@@ -2459,6 +2471,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {

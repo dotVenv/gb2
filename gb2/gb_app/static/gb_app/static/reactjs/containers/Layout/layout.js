@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Suspense, useContext, useState } from "react";
-import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast } from "../../components";
+import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
@@ -40,7 +40,10 @@ const Layout = ({ children }) => {
                 ? <AccountSetup accountProgress={accountProgress} cu={cu} />
                 :
                 <> 
-                
+                <Spacer></Spacer>
+                <div className=' fixed top-35 left-15'>
+                    <StickyOptions />
+                </div>
                     <section className='mt-3 py-4'>
                        
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
@@ -130,10 +133,12 @@ const Layout = ({ children }) => {
                                 </div>
                             </Card>    
                         </dl>
+                       
                     </section>
-                    <div>
-                    {children}
-                    </div>
+                        <div>
+                       
+                        {children}
+                        </div>
                                                     
                        
                     <Spacer></Spacer>
@@ -141,6 +146,8 @@ const Layout = ({ children }) => {
 
                     { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
                     { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
+
+                   
                 </> 
             }
             
