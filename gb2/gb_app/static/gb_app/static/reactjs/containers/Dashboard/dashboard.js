@@ -61,12 +61,7 @@ const Dashboard = () => {
                             <Card className='h-95 bg-transparent shadow-2xl p-4'>
                            
                                 <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-1 justify-center align-center mx-auto">
-                                    <Chip className='flex-cols' color='success' variant='flat' size='sm' startContent={<i className='fa fa-circle fa-2xs' style={{'color':'green'}}></i>}>
-                                        <i className='text-tiny'><b>200 </b>Users Onlines</i>
-                                    </Chip>
-                                    <Chip color='success' variant='flat' size='sm' startContent={<i className='fa fa-circle fa-2xs' style={{'color':'green'}}></i>}>
-                                        <i className='text-tiny'>All services good.</i>
-                                    </Chip>
+                                    
                                 </div>
                             </Card>
                             </div>

@@ -85,7 +85,7 @@ const Layout = ({ children }) => {
                     <section className='mx-auto justify-center align-center col-10'>    
                     
                         <dl className="sm:grid flex flex-col  justify-center align-center mx-auto py-4 mt-4 grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-3">
-                            <Card isBlurred isPressable className=" p-3 border border-transparent dark:border-default-100 bg-background/60 dark:bg-gray-900/80">
+                            <Card isBlurred isPressable className=" p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-purple-800 to-zinc-800dark:bg-gray-900/80">
                                 
                                 <div className="flex">
                                     <div className="flex flex-col gap-y-2">
@@ -95,7 +95,7 @@ const Layout = ({ children }) => {
                                     
                                 </div>
                             </Card>
-                            <Card isBlurred isPressable className="p-3 border border-transparent dark:border-default-100 bg-background/60 dark:bg-gray-900/80">
+                            <Card isBlurred isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-purple-800 to-zinc-800dark:bg-gray-900/80">
                                 <div className="flex">
                                     <div className="flex flex-col gap-y-2">
                                     <dt className="text-small font-medium text-default-500">Active Entries <i className="fa-solid fa-ticket-simple"></i></dt>
@@ -104,7 +104,7 @@ const Layout = ({ children }) => {
                                     
                                 </div>
                             </Card>
-                            <Card isBlurred isPressable className="p-3 border border-transparent dark:border-default-100 bg-background/60 dark:bg-gray-900/80">
+                            <Card isBlurred isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-purple-800 to-zinc-800dark:bg-gray-900/80">
                                 <div className="flex">
                                     <div className="flex flex-col gap-y-2">
                                         <dt className="float start text-small font-medium text-default-500">Preferences <i className="fa-solid fa-user-gear"></i></dt>
