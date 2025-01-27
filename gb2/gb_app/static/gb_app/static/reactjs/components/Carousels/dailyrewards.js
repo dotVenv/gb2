@@ -33,19 +33,17 @@ const DailyRewards = () => {
       
     return(
         <>
-       <ScrollShadow hideScrollBar size={75}>
-        <div className="embla w-full h-full overflow-y" >
+       <ScrollShadow hideScrollBar size={30} >
+        <div className="embla w-full h-full overflow-y-hidden p-4" >
                 <div className="embla__viewport" ref={emblaRef}>
-                    <div className="embla__container  gap-4 flex justify-center align-center mx-auto">
-                        <div className="embla__slide w-full h-full">
+                    <div className="embla__container  gap-4">
+                        <div className="embla__slide">
                            
-                           <Card isFooterBlurred className="border-none " radius="lg">
+                           <Card isFooterBlurred  className="border-none " radius="lg">
                                 <img
                                     alt="Woman listing to music"
                                     className="object-cover"
-                                    height={200}
                                     src="https://heroui.com/images/hero-card.jpeg"
-                                    width={200}
                                 />
                                 <CardFooter className=" fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                                     <p className="text-tiny text-white/80">PSN Plus 1 Month.</p>
@@ -56,19 +54,17 @@ const DailyRewards = () => {
                                         size="sm"
                                         variant="flat"
                                         >
-                                        Claimed
+                                        Claim (25 Left)
                                     </Button>
                                 </CardFooter>
                                 </Card>
                         </div>
-                        <div className="embla__slide w-full h-full">
-                            <Card isFooterBlurred className="border-none" radius="lg">
+                        <div className="embla__slide  w-full h-full ">
+                            <Card isFooterBlurred  isDisabled className="border-none" radius="lg">
                                 <img
                                     alt="Woman listing to music"
                                     className="object-cover"
-                                    height={200}
                                     src="https://heroui.com/images/hero-card.jpeg"
-                                    width={200}
                                 />
                                 <CardFooter className=" fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                                     <p className="text-tiny text-white/80">PSN Plus 1 Month.</p>
@@ -79,19 +75,17 @@ const DailyRewards = () => {
                                         size="sm"
                                         variant="flat"
                                         >
-                                        Claimed
+                                        Locked (19 Left)
                                     </Button>
                                 </CardFooter>
                                 </Card>
                         </div>
                         <div className="embla__slide w-full h-full">
-                            <Card isFooterBlurred className="border-none" radius="lg">
+                            <Card isFooterBlurred isDisabled className="border-none" radius="lg">
                                     <img
                                         alt="Woman listing to music"
                                         className="object-cover"
-                                        height={200}
                                         src="https://heroui.com/images/hero-card.jpeg"
-                                        width={200}
                                     />
                                     <CardFooter className=" fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                                         <p className="text-tiny text-white/80">PSN Plus 1 Month.</p>
@@ -102,7 +96,7 @@ const DailyRewards = () => {
                                             size="sm"
                                             variant="flat"
                                             >
-                                            Claimed
+                                            Passed (41 Left)
                                         </Button>
                                     </CardFooter>
                                 </Card>
@@ -114,20 +108,9 @@ const DailyRewards = () => {
                 <div className="embla__controls">
                     <div className="embla__buttons  ">
                     <PrevButton  onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-                    <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+                  
                     </div>
 
-                    <div className="embla__dots">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                        key={index}
-                        onClick={() => onDotButtonClick(index)}
-                        className={'embla__dot'.concat(
-                            index === selectedIndex ? ' embla__dot--selected' : ''
-                        )}
-                        />
-                    ))}
-                    </div>
                 </div>
             </div>
             </ScrollShadow>
@@ -136,3 +119,4 @@ const DailyRewards = () => {
 };
 
 export default DailyRewards;
+

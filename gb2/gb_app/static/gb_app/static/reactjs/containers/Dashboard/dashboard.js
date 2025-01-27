@@ -38,9 +38,11 @@ const Dashboard = () => {
                     <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                         <div className="grid grid-cols-2 gap-4 mb-4">
                             
-                            <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-70 ">
+                            <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-70 p-4 ">
                                 <Spacer></Spacer>
-                                <h6 className=' text-center mt-1 text-black justify-center align-center mx-auto'> <i> Daily Reward </i></h6>
+                                <h6 className=' text-center mt-3 text-black justify-center align-center mx-auto'> <i> Daily Reward </i></h6>
+                                <Spacer></Spacer>
+                                <br></br>
                                    <DailyRewards />
                             </div>
                             <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72">
