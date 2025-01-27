@@ -6,14 +6,13 @@ import { Tabs, Tab } from "@nextui-org/react";
 const StickyOptions  = () => {
     return(
         <>
-            <div className="flex w-full flex-col">
-            <Tabs aria-label="Options" isVertical={true} className='justify-center align-center mx-auto' color="secondary" variant="bordered">
-            
+            <Tabs aria-label="Options" className="w-full" isVertical={false} color="secondary" variant="bordered">
+        
             <Tab
                 key="holder"
                 title={
-                    <div className="flex items-center space-x-2 fa-xl">
-                        <i className="fa-solid fa-slash  fa-sm"></i>
+                    <div className="flex items-center space-x-2">
+                        <i className="fa-solid fa-slash  fa-xs"></i>
                 
                     </div>
                 }
@@ -21,7 +20,7 @@ const StickyOptions  = () => {
                 <Tab
                     key="community chat"
                     title={
-                        <div className="flex items-center space-x-2 fa-xl">
+                        <div className="flex items-center space-x-2 ">
                         <i className="fa-solid fa-message"></i>
                     
                         </div>
@@ -40,13 +39,13 @@ const StickyOptions  = () => {
                 <Tab
                 key="current tournament"
                     title={
-                        <div className="flex items-center space-x-2 fa-xl">
+                        <div className="flex items-center space-x-2">
                         <i className="fa-solid fa-hand-fist"></i>
                         </div>
                     }
                 />
             </Tabs>
-        </div>
+        
         </>
     );
 };

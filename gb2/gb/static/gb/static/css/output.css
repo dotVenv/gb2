@@ -708,6 +708,22 @@ video {
   inset: 1px;
 }
 
+.inset-10 {
+  inset: 2.5rem;
+}
+
+.inset-4 {
+  inset: 1rem;
+}
+
+.inset-20 {
+  inset: 5rem;
+}
+
+.inset-60 {
+  inset: 15rem;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -873,6 +889,30 @@ video {
 
 .top-\[var\(--navbar-height\)\] {
   top: var(--navbar-height);
+}
+
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
+.left-5 {
+  left: 1.25rem;
+}
+
+.left-80 {
+  left: 20rem;
+}
+
+.left-60 {
+  left: 15rem;
+}
+
+.bottom-7 {
+  bottom: 1.75rem;
 }
 
 .isolate {
@@ -1762,6 +1802,14 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[15\%\] {
+  width: 15%;
+}
+
+.w-\[15vw\] {
+  width: 15vw;
 }
 
 .min-w-10 {
@@ -10826,14 +10874,14 @@ html, body {
     line-height: 1.75rem;
   }
 
-  .sm\:text-xl\/8 {
-    font-size: 1.25rem;
-    line-height: 2rem;
-  }
-
   .sm\:text-small {
     font-size: var(--nextui-font-size-small);
     line-height: var(--nextui-line-height-small);
+  }
+
+  .sm\:text-xl\/8 {
+    font-size: 1.25rem;
+    line-height: 2rem;
   }
 
   .sm\:\[--scale-enter\:100\%\] {

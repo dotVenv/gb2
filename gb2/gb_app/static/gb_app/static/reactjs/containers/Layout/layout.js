@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
                 :
                 <> 
                 <Spacer></Spacer>
-                <div className=' fixed top-35 left-15'>
+                <div className='fixed z-1 left-50 bottom-7 w-full flex align-center justify-center mx-auto '>
                     <StickyOptions />
                 </div>
                     <section className='mt-3 py-4'>
