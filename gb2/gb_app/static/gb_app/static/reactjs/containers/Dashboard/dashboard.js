@@ -4,15 +4,13 @@ import React, {useState,} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
 import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { TournamentCard, DailyRewards, Globe, MagicCard, RankingStepper, } from "../../components";
-
-
+import { DailyRewards, Globe, MagicCard, RankingStepper, } from "../../components";
 
 
 
 const Dashboard = () => {
     const [checked, setChecked] = useState(false);
-    const [userGoalValue, setUserGoalValue] = useState(25);
+
 
     const handleChange = () => {
       setChecked((prev) => !prev);
@@ -37,7 +35,7 @@ const Dashboard = () => {
                 
                 </Breadcrumbs>
                     <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                             
                             <MagicCard 
                                     className="p-7 px-4  bg-gray-50 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"

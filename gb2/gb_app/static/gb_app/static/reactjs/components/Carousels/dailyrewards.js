@@ -45,7 +45,7 @@ const DailyRewards = () => {
                                     className="object-cover"
                                     src="https://heroui.com/images/hero-card.jpeg"
                                 />
-                                <CardFooter className=" fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                                <CardFooter className="grid grid-cols-1 fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                                     <p className="text-tiny text-white/80">PSN Plus 1 Month.</p>
                                     <Button
                                         className="text-tiny text-white bg-black/20"
