@@ -4,7 +4,7 @@ import React, {useState,} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
 import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { TournamentCard, DailyRewards, Globe, MagicCard } from "../../components";
+import { TournamentCard, DailyRewards, Globe, MagicCard, RankingStepper, } from "../../components";
 
 
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
                         <div className="grid grid-cols-2 gap-4 mb-4">
                             
                             <MagicCard 
-                                    className=" bg-gray-100 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
+                                    className=" bg-gray-50 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
                                     >
                                 <Spacer></Spacer>
                                 <Chip variant='flat' color='secondary' className='flex sm:text-small text-center mt-3 text-black justify-center align-center mx-auto'> 
@@ -51,23 +51,22 @@ const Dashboard = () => {
                                    <DailyRewards />
                             </MagicCard>
                             <div className='grid grid-cols-1 gap-1'>
-                            <Card className="shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-75 p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
+                            <Card className=" bg-gray-50 shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-85 p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
                                 <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-5xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
                                     Connected
                                 </span>
                                 <Globe className="top-10 border-none justify-center align-center mx-auto" />
-                                
                             </Card>
-                            <Card className='h-95 bg-transparent shadow-2xl p-4'>
-                           
-                                <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-1 justify-center align-center mx-auto">
-                                    
-                                </div>
+                            <Card className='h-85 bg-gray-50 shadow-2xl p-4 items-center'>
+                                <Spacer></Spacer>
+                                <RankingStepper />
+                                
                             </Card>
                             </div>
                         </div>
 
-                        <div className="border-2 border-dashed rounded-lg border-rounded border-gray-300 dark:border-gray-600 h-96 mb-4 p-4">
+                        <div className="border-2 border-dashed rounde
+                                d-lg border-rounded border-gray-300 dark:border-gray-600 h-96 mb-4 p-4">
                         <FormControlLabel
                             control={<Switch checked={checked} onChange={handleChange} />}
                             label="Show Recent Matches"
