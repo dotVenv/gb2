@@ -40,7 +40,7 @@ const Dashboard = () => {
                         <div className="grid grid-cols-2 gap-4 mb-4">
                             
                             <MagicCard 
-                                    className=" bg-gray-50 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
+                                    className="p-7 px-4  bg-gray-50 border-gray-50 dark:border-gray-600 h-70 p-4 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl shadow-2xl"
                                     >
                                 <Spacer></Spacer>
                                 <Chip variant='flat' color='secondary' className='flex sm:text-small text-center mt-3 text-black justify-center align-center mx-auto'> 
@@ -51,13 +51,13 @@ const Dashboard = () => {
                                    <DailyRewards />
                             </MagicCard>
                             <div className='grid grid-cols-1 gap-1'>
-                            <Card className=" bg-gray-50 shadow bg-gray-50 border-gray-50 dark:border-gray-600  lg:h-[45vh] p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
+                            <Card className=" bg-gray-50 shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-[200px] p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
                                 <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/80 bg-clip-text text-center text-5xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
                                     Connected
                                 </span>
-                                <Globe className="top-10 border-none justify-center align-center mx-auto" />
+                                <Globe className="top-0 border-none justify-center align-center mx-auto" />
                             </Card>
-                            <Card className='h-[45] bg-gray-50 shadow-2xl p-4 items-center'>
+                            <Card className='h-[300px] bg-gray-50 shadow-2xl p-4 items-center'>
                              
                                 <RankingStepper />
                             </Card>
