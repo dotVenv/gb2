@@ -76,7 +76,7 @@ const ExtraPlayerStats = () => {
                         </PieChart>
                 </div>
                 
-                <Card className='bg-transparent col-6  justify-center align-center mx-auto p-2'>
+                <Card className='bg-gray-100 col-6  justify-center align-center mx-auto p-2'>
                     <p className='justify-center align-center mx-auto text-black text-tiny'> Favorite </p>
                     <h4 className='justify-center align-center mx-auto text-black font-semibold'> PC </h4>
                 </Card>
@@ -89,7 +89,7 @@ const ExtraPlayerStats = () => {
                         color='success' 
                         variant='flat' 
                         className='justify-center align-center mx-auto'
-                        startContent={<i className="fa-solid fa-gamepad"></i>}
+                        startContent={<i className="fa-solid fa-gamepad fa-sm"></i>}
                         > <span className='text-black text-center justify-center align-center mx-auto '> Marvel Rivals </span>
                     </Chip>
 

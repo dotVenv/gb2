@@ -23,7 +23,7 @@ const GamesPlayedStat = () => {
             <Spacer></Spacer>
             <div className='w-full mt-4'>
                 <div className='-p-4 bg-transparent justify-center align-center mx-auto col-9'>
-                     <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Visual Trend</i> </p>
+                     <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Weekly Trend</i> </p>
                     <ScrollShadow orientation="horizontal" hideScrollBar size={45}>
                         <div className='flex max-w-md overflow-y-hidden justify-center align-center mx-auto'>
                             <LineChart 

@@ -2,20 +2,14 @@
 
 import React, {useState,} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
-import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, TournamentCard, ExtraPlayerStats, } from "../../components";
+import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
+
+import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, } from "../../components";
 
 
 
 const Dashboard = () => {
-    const [checked, setChecked] = useState(false);
-
-
-    const handleChange = () => {
-      setChecked((prev) => !prev);
-    };
-  
+    
 
     return(
         <>
@@ -62,24 +56,8 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        <div className="border-2 border-dashed rounded-lg border-rounded border-gray-300 dark:border-gray-600 h-full mb-4 p-4">
-                            <FormControlLabel
-                                control={<Switch checked={checked} onChange={handleChange} />}
-                                label="Show Recent Matches"
-                                />
-                                <Box sx={{ display: 'flex' }}>
-                                <Grow in={checked}><Card><p> Hello World </p></Card></Grow>
-                                {/* Conditionally applies the timeout prop to change the entry speed. */}
-                                <Grow
-                                    in={checked}
-                                    style={{ transformOrigin: '0 0 0' }}
-                                    {...(checked ? { timeout: 1000 } : {})}
-                                >
-                                <Card><p> Hello World Again</p></Card>
-                                </Grow>
-                                </Box>
-                            
-                            <br></br>
+                        <MagicCard className="shadow-2xl  h-full mb-4 p-4">
+                            <MostRecentMatches />
                             <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 '>
                                 <div>
                                     <GamesPlayedStat />
@@ -87,12 +65,53 @@ const Dashboard = () => {
                                 <div>
                                     <ExtraPlayerStats />
                                 </div>
-                             
+                            
                             </div>
-                        </div>
-                        
+                        </MagicCard>
+                        <MagicCard className="shadow-2xl  h-full mb-4 p-4">
+                            <p className='text-center justify-center align-center mx-auto'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>
+                            <div className='lg:w-[350px] sm:w-[350px] grid grid-cols-2 gap-4  justify-center align-center mx-auto'>
+                             
+                                <Card className='bg-transparent' isFooterBlurred>
+                                    <CardBody>
+                                    <Image
+                                        removeWrapperMerch
+                                        alt="Card background"
+                                        className="z-0 w-full h-full object-cover"
+                                        src="https://heroui.com/images/card-example-2.jpeg"
+                                        />
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                    </CardFooter>
+                                </Card>
+                                <Card className='bg-transparent' isFooterBlurred>
+                                    <CardBody>
+                                    <Image
+                                        removeWrapper
+                                        alt="Card background"
+                                        className="z-0 w-full h-full object-cover"
+                                        src="https://heroui.com/images/card-example-2.jpeg"
+                                        />
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                    </CardFooter>
+                                </Card>
+                                
+                                <div>
+                                    
+
+                                </div>
+                            
+                            </div>
+                        </MagicCard>
+                
                     </div>
                 </section>
+                <footer className='col-9 justify-center align-center mx-auto'>
+                    <p className='mx-auto text-small left-0'>Copyright &#169; 2025 <b> Gamers-Bounty Inc </b></p>
+                </footer>
             </Layout>
         </>
     );
