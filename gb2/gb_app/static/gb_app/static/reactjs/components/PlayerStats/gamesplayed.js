@@ -22,10 +22,10 @@ const GamesPlayedStat = () => {
             </div>    
             <Spacer></Spacer>
             <div className='w-full mt-4'>
-                <Card className='-p-4 bg-transparent justify-center align-center mx-auto col-9'>
-                    <CardHeader> <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Visual Trend</i> </p></CardHeader>
+                <div className='-p-4 bg-transparent justify-center align-center mx-auto col-9'>
+                     <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Visual Trend</i> </p>
                     <ScrollShadow orientation="horizontal" hideScrollBar size={45}>
-                        <CardBody className='flex max-w-md overflow-y-hidden justify-center align-center mx-auto'>
+                        <div className='flex max-w-md overflow-y-hidden justify-center align-center mx-auto'>
                             <LineChart 
                                 className='justify-center align-center mx-auto' width={250} height={200} data={data}
                                 margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -38,9 +38,9 @@ const GamesPlayedStat = () => {
                                 <Tooltip />
                             </LineChart>
                            
-                        </CardBody>
+                        </div>
                         </ScrollShadow>
-                </Card>
+                </div>
             </div>
             
         </>

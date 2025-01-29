@@ -4,7 +4,7 @@ import React, {useState,} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
 import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, TournamentCard, } from "../../components";
+import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, TournamentCard, ExtraPlayerStats, } from "../../components";
 
 
 
@@ -85,7 +85,7 @@ const Dashboard = () => {
                                     <GamesPlayedStat />
                                 </div>
                                 <div>
-                                    <GamesPlayedStat />
+                                    <ExtraPlayerStats />
                                 </div>
                              
                             </div>
