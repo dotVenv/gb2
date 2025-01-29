@@ -4,7 +4,7 @@ import React, {useState,} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  Spacer, Chip, Progress } from "@nextui-org/react";
 import { Box, Switch, Paper, Grow, FormControlLabel} from "@mui/material";
-import { DailyRewards, Globe, MagicCard, RankingStepper, } from "../../components";
+import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, TournamentCard, } from "../../components";
 
 
 
@@ -62,23 +62,33 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        <div className="border-2 border-dashed rounde
-                                d-lg border-rounded border-gray-300 dark:border-gray-600 h-96 mb-4 p-4">
-                        <FormControlLabel
-                            control={<Switch checked={checked} onChange={handleChange} />}
-                            label="Show Recent Matches"
-                            />
-                            <Box sx={{ display: 'flex' }}>
-                            <Grow in={checked}><Card><p> Hello World </p></Card></Grow>
-                            {/* Conditionally applies the timeout prop to change the entry speed. */}
-                            <Grow
-                                in={checked}
-                                style={{ transformOrigin: '0 0 0' }}
-                                {...(checked ? { timeout: 1000 } : {})}
-                            >
-                              <Card><p> Hello World Again</p></Card>
-                            </Grow>
-                            </Box>
+                        <div className="border-2 border-dashed rounded-lg border-rounded border-gray-300 dark:border-gray-600 h-full mb-4 p-4">
+                            <FormControlLabel
+                                control={<Switch checked={checked} onChange={handleChange} />}
+                                label="Show Recent Matches"
+                                />
+                                <Box sx={{ display: 'flex' }}>
+                                <Grow in={checked}><Card><p> Hello World </p></Card></Grow>
+                                {/* Conditionally applies the timeout prop to change the entry speed. */}
+                                <Grow
+                                    in={checked}
+                                    style={{ transformOrigin: '0 0 0' }}
+                                    {...(checked ? { timeout: 1000 } : {})}
+                                >
+                                <Card><p> Hello World Again</p></Card>
+                                </Grow>
+                                </Box>
+                            
+                            <br></br>
+                            <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 '>
+                                <div>
+                                    <GamesPlayedStat />
+                                </div>
+                                <div>
+                                    <GamesPlayedStat />
+                                </div>
+                             
+                            </div>
                         </div>
                         
                     </div>

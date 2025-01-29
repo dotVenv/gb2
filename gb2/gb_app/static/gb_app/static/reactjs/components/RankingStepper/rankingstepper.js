@@ -10,7 +10,7 @@ const RankingStepper = () => {
     
     return(
             <>
-                <span class="flex w-full items-center p-4">
+                <span className="flex w-full items-center p-4">
                     <Progress
                         label={<span className='text-black text-tiny'><b>{rankProgress}pts</b> out of <b>100pts</b></span> }
                         
@@ -21,14 +21,14 @@ const RankingStepper = () => {
                         value={rankProgress}
                         />
                 </span>
-                <div class="grid grid-cols-3  mx-auto mt-3 gap-0">
-                    <span class="flex w-full items-center ">
+                <div className="grid grid-cols-3  mx-auto mt-3 gap-0">
+                    <span className="flex w-full items-center ">
                         <img src={LRank1}  className='sm:h-[75px] sm:w-[75px] lg:w-[145px] lg:h-[145px]' alt='low rank one' />
                     </span>
                     <span className='justify-center align-center mx-auto lg:mt-4 lg:py-7 h-15 w-15'>
                         <i className="fa-solid fa-circle-arrow-right fa-4xl" style={{'color': '#B19F7C'}}></i>
                     </span>
-                    <span class="flex items-center w-full">    
+                    <span className="flex items-center w-full">    
                         <img src={LRank2} className='sm:h-[75px] sm:w-[75px] lg:w-[145px] lg:h-[145px]' alt='low rank two' />
                     </span>
                 </div>

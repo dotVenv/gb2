@@ -14,6 +14,7 @@ export { default as DailyRewards } from './Carousels/dailyrewards';
 export { default as TournamentCard } from './Tournaments/tournamentcard';
 export { default as StickyOptions } from './StickyOptions/stickyoptions';
 export { default as RankingStepper } from './RankingStepper/rankingstepper';
+export { default as GamesPlayedStat } from './PlayerStats/gamesplayed';
 export { Globe } from './Magicui/globe';
 export { MagicCard } from './Magicui/magic-card';
 export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';

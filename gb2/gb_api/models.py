@@ -65,9 +65,7 @@ class EmailVerification(ExportModelOperationsMixin('EmailVerification'),models.M
     def __str__(self):
         return f'{self.user}, Expired:{self.expired}'
     
-
-
-
+    
 def membership_desc():
     '''default membership desc'''
     return list
@@ -105,6 +103,7 @@ console_options = [
     ('PSN', 'PSN'),
     ('PC', 'PC')
 ]
+
 class AccountPreference(models.Model):
     '''store account preferences for the user'''
     user = models.ForeignKey(gbUser, on_delete=models.CASCADE, related_name='user_pref')
