@@ -68,9 +68,14 @@ const Dashboard = () => {
                             
                             </div>
                         </MagicCard>
-                        <MagicCard className="shadow-2xl  h-full mb-4 p-4">
+                        <MagicCard className=" shadow-2xl  h-full mb-4 p-4">
+
+                            <div className='w-full'>
+                                <p clasName='text-center mt-3 py-2 justify-center align-center mx-auto'> Popular Tournaments </p>
+
+                            </div>
                             <p className='text-center justify-center align-center mx-auto'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>
-                            <div className='lg:w-[350px] sm:w-[350px] grid grid-cols-2 gap-4  justify-center align-center mx-auto'>
+                            <div className='flex gap-4  justify-center align-center mx-auto'>
                              
                                 <Card className='bg-transparent' isFooterBlurred>
                                     <CardBody>
