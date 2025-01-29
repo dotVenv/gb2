@@ -1,8 +1,8 @@
 'use client';
 
 import React from "react";
-import { Card, CardBody, CardHeader, ScrollShadow, Spacer } from "@nextui-org/react";
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { Card, Chip, Spacer } from "@nextui-org/react";
+import { PieChart, Pie, Legend, Tooltip,  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,} from 'recharts';
 
 
 const platformData = [
@@ -12,6 +12,39 @@ const platformData = [
    
   ];
   
+
+const tourneyCategoryData = [
+    {
+      subject: 'Marvel Rivals',
+      A: 120,
+      fullMark: 150,
+    },
+    {
+      subject: 'NBA 2K',
+      A: 98,
+      fullMark: 150,
+    },
+    {
+      subject: 'Madden 25',
+      A: 86,
+      fullMark: 150,
+    },
+    {
+      subject: 'UFC Undisputed',
+      A: 99,
+      fullMark: 150,
+    },
+    {
+      subject: 'Fortnite',
+      A: 85,
+      fullMark: 150,
+    },
+    {
+      subject: 'WoW',
+      A: 65,
+      fullMark: 150,
+    },
+  ];
 
 const ExtraPlayerStats = () => {
 
@@ -50,14 +83,17 @@ const ExtraPlayerStats = () => {
             </div>    
             <Spacer></Spacer>
             <div className='w-full mt-4'>
-                <Card className='-p-4 bg-transparent justify-center align-center mx-auto col-9'>
-                    <CardHeader> <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Visual Trend</i> </p></CardHeader>
-                    <ScrollShadow orientation="horizontal" hideScrollBar size={45}>
-                        <CardBody className='flex max-w-md overflow-y-hidden justify-center align-center mx-auto'>
-                           
-                           
-                        </CardBody>
-                        </ScrollShadow>
+                <Card className='p-4  bg-transparent h-15 justify-center align-center mx-auto col-9'>
+                    <p className='text-black text-center justify-center align-center mx-auto font-semibold text-tiny'> <i>Favorite Tournament Category</i> </p>
+                    <Chip 
+                        color='success' 
+                        variant='flat' 
+                        className='justify-center align-center mx-auto'
+                        startContent={<i className="fa-solid fa-gamepad"></i>}
+                        > <span className='text-black text-center justify-center align-center mx-auto '> Marvel Rivals </span>
+                    </Chip>
+
+                        
                 </Card>
             </div>
             
