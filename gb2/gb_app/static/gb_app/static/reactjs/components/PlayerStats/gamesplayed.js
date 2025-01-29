@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Card, CardBody, CardHeader, ScrollShadow, Spacer } from "@nextui-org/react";
-import { LineChart, Line } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 const GamesPlayedStat = () => {
 
@@ -22,14 +22,22 @@ const GamesPlayedStat = () => {
             </div>    
             <Spacer></Spacer>
             <div className='w-full mt-4'>
-                
                 <Card className='-p-4 bg-transparent justify-center align-center mx-auto col-9'>
-                    <CardHeader> <p className='text-black text-center justify-center align-center mx-auto'> Your W/L Trend </p></CardHeader>
+                    <CardHeader> <p className='text-black text-center justify-center align-center mx-auto'> <i>W/L Visual Trend</i> </p></CardHeader>
                     <ScrollShadow hideScrollBar size={45}>
                         <CardBody className='flex max-w-md overflow-y-hidden justify-center align-center mx-auto'>
-                            <LineChart className='justify-center align-center mx-auto' width={250} height={200} data={data}>
-                                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                            <LineChart 
+                                className='justify-center align-center mx-auto' width={250} height={200} data={data}
+                                margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                                    
+                                <Line type="monotone" dataKey="wins" stroke="#8884d8" />
+                                <Line type="monotone" dataKey="loss" stroke="#FF0000" />
+                                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
                             </LineChart>
+                           
                         </CardBody>
                         </ScrollShadow>
                 </Card>
@@ -46,46 +54,46 @@ export default GamesPlayedStat;
 
 const data = [
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: 'Monday',
+      wins: 17,
+      loss: 8,
+      amt: 9,
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: 'Tuesday',
+      wins:21,
+      loss: 13,
+      amt: 7,
     },
     {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: 'Wednesday',
+      wins: 4,
+      loss: 15,
+      amt: -1,
     },
     {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: 'Thursday',
+      wins: 11,
+      loss: 11,
+      amt: 0,
     },
     {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: 'Friday',
+      wins: 19,
+      loss: 4,
+      amt: 16,
     },
     {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: 'Saturday',
+      wins: 10,
+      loss: 10,
+      amt: 0,
     },
     {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: 'Sunday',
+      uv: 14,
+      pv: 15,
+      amt: -1,
     },
   ];
   
