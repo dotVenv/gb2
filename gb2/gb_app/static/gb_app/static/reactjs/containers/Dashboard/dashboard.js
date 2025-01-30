@@ -68,21 +68,20 @@ const Dashboard = () => {
                             
                             </div>
                         </MagicCard>
-                        <MagicCard className=" shadow-2xl  h-full mb-4 p-4">
+                        <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
 
-                            <div className='w-full'>
-                                <p clasName='text-center mt-3 py-2 justify-center align-center mx-auto'> Popular Tournaments </p>
+                            <p clasName='text-center mt-3 py-2 justify-center align-center mx-auto text-black'> Popular Tournaments </p>
 
-                            </div>
-                            <p className='text-center justify-center align-center mx-auto'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>
-                            <div className='flex gap-4  justify-center align-center mx-auto'>
-                             
-                                <Card className='bg-transparent' isFooterBlurred>
+                            <hr></hr>
+
+                            <p className='text-center justify-center align-center mx-auto text-black'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>
+                            <div className=' grid grid-cols-2 gap-4  justify-center align-center mx-auto'>
+                            <Card className='bg-transparent' isFooterBlurred>
                                     <CardBody>
                                     <Image
                                         removeWrapperMerch
                                         alt="Card background"
-                                        className="z-0 w-full h-full object-cover"
+                                        className="z-0 w-[150px] h-[150px] object-cover"
                                         src="https://heroui.com/images/card-example-2.jpeg"
                                         />
                                     </CardBody>
@@ -95,7 +94,7 @@ const Dashboard = () => {
                                     <Image
                                         removeWrapper
                                         alt="Card background"
-                                        className="z-0 w-full h-full object-cover"
+                                        className="z-0 w-[150px] h-[150px] object-cover"
                                         src="https://heroui.com/images/card-example-2.jpeg"
                                         />
                                     </CardBody>
@@ -103,14 +102,8 @@ const Dashboard = () => {
                                         <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
                                     </CardFooter>
                                 </Card>
-                                
-                                <div>
-                                    
-
-                                </div>
-                            
                             </div>
-                        </MagicCard>
+                        </Card>
                 
                     </div>
                 </section>
