@@ -1424,6 +1424,10 @@ video {
   height: 105vh;
 }
 
+.h-\[150px\] {
+  height: 150px;
+}
+
 .h-\[200px\] {
   height: 200px;
 }
@@ -1507,10 +1511,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[150px\] {
-  height: 150px;
 }
 
 .max-h-\[20rem\] {
@@ -1698,6 +1698,10 @@ video {
   width: 2.25rem;
 }
 
+.w-\[150px\] {
+  width: 150px;
+}
+
 .w-\[200px\] {
   width: 200px;
 }
@@ -1774,10 +1778,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[150px\] {
-  width: 150px;
 }
 
 .min-w-10 {

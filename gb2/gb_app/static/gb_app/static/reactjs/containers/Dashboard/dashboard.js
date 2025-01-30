@@ -58,7 +58,7 @@ const Dashboard = () => {
 
                         <MagicCard className="shadow-2xl  h-full mb-4 p-4">
                             <MostRecentMatches />
-                            <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 '>
+                            <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 justify-center align-center mx-auto '>
                                 <div>
                                     <GamesPlayedStat />
                                 </div>
@@ -70,7 +70,10 @@ const Dashboard = () => {
                         </MagicCard>
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
 
-                            <p clasName='text-center mt-3 py-2 justify-center align-center mx-auto text-black'> Popular Tournaments </p>
+                            <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
+                            <div>
+
+                            </div>
 
                             <hr></hr>
 

@@ -74,7 +74,7 @@ const CustomSidebar = ({userInfo}) => {
                 
                 <Tooltip content="All time rankings" className="text-white" placement='bottom' showArrow={true}>
                     <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                        <i className="fa-solid fa-list-ol fa-xl"></i>
+                        <i className="fa-solid fa-ranking-star fa-xl"></i>
                     </a>
                 </Tooltip>
                 <Tooltip content="Tournament Rules" className="text-white" placement='bottom' showArrow={true}>
