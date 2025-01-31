@@ -11,7 +11,7 @@ const CustomSidebar = ({userInfo}) => {
     return(
         <>
         
-        <nav className="justify-center align-center mx-auto bg-gradient-to-r from-purple-900 to-zinc-800 shadow-2xl">
+        <nav className="justify-center align-center mx-auto bg-gradient-to-r from-zinc-800 to-gray-300 shadow-2xl">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-20 items-center justify-between">
                 <div className="flex items-center">
@@ -37,16 +37,10 @@ const CustomSidebar = ({userInfo}) => {
                         </div>
                     }
                 </div>
-                <div className="-mr-2 flex md:hidden">
-                <Button onPress={(e) => {setMobileMenu(!mobileMenu)}}  type="button" className="relative bg-purple-900 float start inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
-                    <span className="absolute -inset-0.5"></span>
-                    <span className="sr-only">Open main menu</span>
-                    <svg className="block size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <svg className="hidden size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
+                <div className="mr-2 flex md:hidden lg:hidden">
+                <Button onPress={(e) => {setMobileMenu(!mobileMenu)}}  radius='lg'  variant='flat' color='default' isIconOnly
+                    className="relative inline-flex items-center rounded-large p-2 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
+                        <i className="fa-solid fa-bars"></i>
                 </Button>
                 </div>
             </div>

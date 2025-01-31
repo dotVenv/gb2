@@ -1,54 +1,44 @@
 'use client';
 
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, Button, Image } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, Button, Image, ButtonGroup } from "@nextui-org/react";
 
 
-
+import marvel_r from '../../../imgs/pngs/marvel_r.png';
+    
 const TournamentCard = () => {
 
     return(
         <>
-        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent">
-          
-           
-        <CardHeader>
-            <div className="flex items-center justify-center mx-auto gap-1">
-                <div className="flex items-center">
-                    <svg className="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
-                    <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                    <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
-                </div>
-                <Button isIconOnly variant='flat' color='secondary' data-tooltip-target="tooltip-quick-look-3" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <i className="fa-solid fa-eye"></i>
-                </Button>
-            
-                <Button isIconOnly  variant='flat' color='secondary'  data-tooltip-target="tooltip-add-to-favorites-3" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span className="sr-only"> Add to Favorites </span>
-                <i className="fa-regular fa-heart"></i>
-            </Button>
-            </div>
-        </CardHeader>
-          <CardBody>
+        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-none w-[300px] h-[300px]" radius='lg'>
+       
             <img 
-                className="object-cover"
-                 src="https://heroui.com/images/hero-card.jpeg" alt='tournament thumbnail' />
-          </CardBody>
-          <CardFooter>
-            <div className="flex gap-2 justify-center align-items-center mx-auto pb-2">
-                <Chip radius='lg' size='sm' color='secondary'
+                className="object-cover h-full"
+                 src={marvel_r} alt='tournament thumbnail' 
+            />
+          
+          <CardFooter className="p-2 grid grid-cols-1 fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+            <span className='text-black justify-center align-center mx-auto'> <b>Marvel Rivals 2s</b></span>
+            <div className="flex gap-2 justify-center align-items-center mx-auto pb-2 mt-3">
+                <Chip radius='lg' size='md' variant='flat' color='default'
                     startContent={<i className="fa-solid fa-money-bills"></i>}>
                     <b>$200</b>
                 </Chip>
                 <Divider orientation="vertical" />
-                <Chip radius='lg' size='sm' color='secondary'
+                <Chip radius='lg' size='md' variant='flat' color='default'
                     startContent={<i className="fa-solid fa-people-group"></i>}>
                     <b>0/75</b>
                 </Chip>
             </div>
+            <div className="flex justify-center align-center mx-auto">
+                <i className="fa-solid fa-star" style={{'color': 'yellow'}}></i>
+                <br></br>
+                <p className="text-black ms-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                <Spacer></Spacer>
+                
+            </div>
+            <Button radius='lg' variant='shadow' color='secondary' size='sm' className='justify-center align-center mx-auto'> View Details </Button>
+           
         </CardFooter>
         </Card>
       

@@ -1,15 +1,17 @@
 'use client';
 
-import React, {useState,} from "react";
+import React, {useState,useContext} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
-
 import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, TournamentCard, } from "../../components";
-
+import { useAtom } from "jotai";
+import { ConnContext } from "../../connector";
 
 
 const Dashboard = () => {
     
+    const cu = useContext(ConnContext);
+    const [userInfo] = useAtom(cu.userAtom);
 
     return(
         <>
@@ -55,6 +57,72 @@ const Dashboard = () => {
                             </Card>
                             </div>
                         </div>
+                        
+                        
+                        <div className="grid grid-cols-3 mx-auto gap-0">
+
+                            <Card className='mx-auto bg-zinc-400 w-full items-center bg-transparent'>
+                                <CardBody>
+                                   
+                                        <div className="flex flex-col gap-y-2">
+                                            <dl>
+                                                <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
+                                                <dd className="text-2xl font-semibold text-black">{ userInfo.memberhsip == null ? "N/A" : userInfo.memberhsip }</dd>
+                                            </dl>
+                                        </div> 
+                                    
+                                </CardBody>
+                            </Card>
+
+                            <Card className=' mx-auto bg-zinc-400  w-full items-center bg-transparent'>
+                                <CardBody>
+                              
+                                    <div className="flex flex-col gap-y-2">
+                                        <dl>
+                                            <dt className="text-small text-black font-medium text-default-500">Entries <i className="fa-solid fa-ticket-simple"></i></dt>
+                                            <dd className="text-2xl text-black"><b>0</b> <span className='text-tiny text-black'> active</span></dd>
+                                        </dl>
+                                    </div> 
+                              
+                                </CardBody>
+                            </Card>
+
+                            <Card className='mx-auto bg-zinc-400 w-full items-center bg-transparent'>
+                                <CardBody>
+                                   
+                                        <div className="flex flex-col gap-y-2">
+                                            <dl>
+                                            <div className="flex flex-col gap-y-2">
+                                            <dt className="float start text-small text-black font-medium ">Preferences <i className="fa-solid fa-user-gear"></i></dt>
+                                            <div className='flex'>
+                                                <div className='grid grid-cols-1 float-start justify-start'>
+                                                    <dd className="text-2xl font-semibold text-black">{ 
+                                                        userInfo.console == 'PC' 
+                                                            ? <i className="fa-solid fa-computer"></i>
+                                                            : userInfo.console == 'Xbox' 
+                                                                ? <i className='fa-solid fa-xbox'></i>
+                                                                : userInfo.console = 'PSN'
+                                                                    ? <i className='fa-solid fa-playstation'></i>
+                                                                    : undefined
+                                                        }</dd>
+                                                    <span className='text-tiny text-black'><b> { userInfo.console } </b></span>
+                                                </div>
+                                                <Spacer></Spacer>
+                                                <div className='grid grid-cols-1 end justify-end mx-auto float-end justify-end'>
+                                                    <dd className="text-2xl font-semibold text-black"><i className="fa-solid fa-server"></i></dd>
+                                                    <span className='text-tiny text-black'> <b> { userInfo.server } </b></span>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                    
+                                        </dl>
+                                    </div> 
+                                  
+                                </CardBody>
+                            </Card>
+
+                        </div>
 
                         <MagicCard className="shadow-2xl  h-full mb-4 p-4">
                             <MostRecentMatches />
@@ -71,9 +139,9 @@ const Dashboard = () => {
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
 
                             <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
-                            <div>
-                                <TournamentCard />
-                            </div>
+                            
+                            <TournamentCard />
+                            
 
                             <hr></hr>
 
