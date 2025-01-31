@@ -4,7 +4,7 @@ import React, {useState,} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
 
-import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, } from "../../components";
+import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, TournamentCard, } from "../../components";
 
 
 
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
                             <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
                             <div>
-
+                                <TournamentCard />
                             </div>
 
                             <hr></hr>

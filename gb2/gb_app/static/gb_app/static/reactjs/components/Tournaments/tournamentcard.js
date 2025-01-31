@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Card, CardBody, CardFooter, Chip, Divider, Spacer } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, Button, Image } from "@nextui-org/react";
 
 
 
@@ -9,40 +9,49 @@ const TournamentCard = () => {
 
     return(
         <>
-        <Card  
-                isFooterBlurred className=" p-4 justify-center align-center mx-auto bg-gradient-to-r from-gray-800 to-zinc-900"
-                isPressable shadow="sm" onPress={() => console.log("item pressed")}>
-                <CardBody >
-                    <img
-                    alt="Card background"
-                    className="object-cover justify-center align-center mx-auto"
-                    radius='lg'
-                    shadow='sm'
-                    src='#'
-                    width='100%'
-                    height={250}
-                    />
-                </CardBody>
-                <CardFooter className=' grid grid-cols-1 text-small  gap-0 space-x-1'> 
-                    <b className="text-small font-bold"><i>Marvel Rivals</i> </b>
-                    <b className="text-tiny font-bold"><i>6v6 2s Tournament</i> </b>
-                    <br></br>
-                    <div className="flex gap-2 justify-center align-items-center mx-auto pb-2">
-                        <Chip radius='lg' size='sm' color='secondary'
-                            startContent={<i className="fa-solid fa-money-bills"></i>}>
-                            <b>$200</b>
-                        </Chip>
-                        <Divider orientation="vertical" />
-                        <Chip radius='lg' size='sm' color='secondary'
-                            startContent={<i className="fa-solid fa-people-group"></i>}>
-                            <b>0/75</b>
-                        </Chip>
-                    </div>
-                    <Spacer></Spacer>
-                    <p className='text-tiny text-gray-400'> <i>Click to view details </i> </p>
-                </CardFooter>
-            </Card>
-        
+        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent">
+          
+           
+        <CardHeader>
+            <div className="flex items-center justify-center mx-auto gap-1">
+                <div className="flex items-center">
+                    <svg className="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                    <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                    <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                </div>
+                <Button isIconOnly variant='flat' color='secondary' data-tooltip-target="tooltip-quick-look-3" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <i className="fa-solid fa-eye"></i>
+                </Button>
+            
+                <Button isIconOnly  variant='flat' color='secondary'  data-tooltip-target="tooltip-add-to-favorites-3" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <span className="sr-only"> Add to Favorites </span>
+                <i className="fa-regular fa-heart"></i>
+            </Button>
+            </div>
+        </CardHeader>
+          <CardBody>
+            <img 
+                className="object-cover"
+                 src="https://heroui.com/images/hero-card.jpeg" alt='tournament thumbnail' />
+          </CardBody>
+          <CardFooter>
+            <div className="flex gap-2 justify-center align-items-center mx-auto pb-2">
+                <Chip radius='lg' size='sm' color='secondary'
+                    startContent={<i className="fa-solid fa-money-bills"></i>}>
+                    <b>$200</b>
+                </Chip>
+                <Divider orientation="vertical" />
+                <Chip radius='lg' size='sm' color='secondary'
+                    startContent={<i className="fa-solid fa-people-group"></i>}>
+                    <b>0/75</b>
+                </Chip>
+            </div>
+        </CardFooter>
+        </Card>
+      
         </>
     );
 };
