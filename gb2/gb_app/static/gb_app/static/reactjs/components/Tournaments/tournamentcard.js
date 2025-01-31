@@ -18,7 +18,7 @@ const TournamentCard = () => {
             />
           
           <CardFooter className="p-2 grid grid-cols-1 fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-            <span className='text-black justify-center align-center mx-auto'> <b>Marvel Rivals 2s</b></span>
+            <span className='justify-center align-center mx-auto'> <b className='text-gray-100'>Marvel Rivals 2s</b> <i className='fa-solid fa-computer'></i></span>
             <div className="flex gap-2 justify-center align-items-center mx-auto pb-2 mt-3">
                 <Chip radius='lg' size='md' variant='flat' color='default'
                     startContent={<i className="fa-solid fa-money-bills"></i>}>
@@ -33,7 +33,7 @@ const TournamentCard = () => {
             <div className="flex justify-center align-center mx-auto">
                 <i className="fa-solid fa-star" style={{'color': 'yellow'}}></i>
                 <br></br>
-                <p className="text-black ms-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                <p className="ms-2 text-sm font-bold text-gray-100">4.95</p>
                 <Spacer></Spacer>
                 
             </div>
