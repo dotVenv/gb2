@@ -21,6 +21,7 @@ export { default as MostRecentMatches } from './PlayerStats/recentmatches';
 export { default as PopularTournaments } from './Carousels/populartournaments';
 
 
+export { SparklesText } from './Magicui/sparkles-text';
 export { Dock, DockIcon, dockVariants } from './Magicui/dock';
 export{ ShineBorder } from './Magicui/shine-border';
 export { Globe } from './Magicui/globe';

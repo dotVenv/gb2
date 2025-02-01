@@ -12,6 +12,7 @@ const RankingStepper = () => {
             <>
                 <span className="flex w-full items-center p-4">
                     <Progress
+                        isStriped
                         label={<span className='text-black text-tiny'><b>{rankProgress}pts</b> out of <b>100pts</b></span> }
                         
                         className="max-w-lg"

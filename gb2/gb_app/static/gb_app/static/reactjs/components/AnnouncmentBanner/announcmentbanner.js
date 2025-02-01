@@ -5,6 +5,11 @@ import React from "react";
 const AnnouncmentBanner = ({newAnnouncment}) =>{
 
 
+    if (!newAnnouncment){
+      return(<></>);
+    }else{
+
+    
     return(
         <div className="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
         <div
@@ -46,5 +51,6 @@ const AnnouncmentBanner = ({newAnnouncment}) =>{
         </div>
       </div>
     );
+  };
 };
 export default AnnouncmentBanner;

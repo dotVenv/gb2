@@ -32,10 +32,10 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
                 <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'> Choose your memberhsip  <span className='text-tiny text-white'> Powered by <i className="fa-brands fa-cc-stripe fa-md"></i></span></i></ModalHeader>
                 <ModalBody >
                     <div className="flex flex-col px-4">
-                    <Tabs variant='bordered' className='text-black' color='primary' aria-label="Membership Options" >
+                    <Tabs variant='flat' className='text-black' color='primary' aria-label="Membership Options" >
                         { memInfo.map((key, index) => {
                             return(
-                                    <Tab className='text-black' key={index} title={key.name.toLowerCase() == 'free' 
+                                    <Tab className='text-white' key={index} title={key.name.toLowerCase() == 'free' 
                                                     ? 'Free '
                                                     : key.name.toLowerCase() == '7day' 
                                                         ? 'Trial '
@@ -71,7 +71,7 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
                                             </CardBody>
                                             <CardFooter>
                                                 <Button variant='flat' color='secondary' isDisabled={key.name.toLowerCase() =='free' ? true : false } startContent={<i className="fa-solid fa-cart-plus"></i>}>
-                                                    Subscribe
+                                                    { key.name.toLowerCase() == 'free' ? undefined : 'Subscribe'}
                                                 </Button>
                                             </CardFooter>
                                         </Card>

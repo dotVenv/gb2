@@ -31,7 +31,7 @@ const PopularTournaments = () => {
         
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
-                <div className="embla__container gap-1 ">
+                <div className="embla__container1 gap-1 ">
                 {slides.map((index) => (
                     <div className="embla__slide" key={index}>
                         <TournamentCard />

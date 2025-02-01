@@ -3,7 +3,6 @@
 import React, {useState,useContext} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
-import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, TournamentCard, PopularTournaments, } from "../../components";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 
@@ -31,7 +30,7 @@ const MyProfile = () => {
                 </Breadcrumbs>
                 </section>
             
-            <section>
+            <section className='h-full'>
 
                 
             </section>

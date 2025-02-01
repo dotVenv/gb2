@@ -155,7 +155,9 @@ const Layout = ({ children }) => {
                    
                 </> 
             }
-            
+            <footer className='col-9 justify-center align-center mx-auto'>
+                <p className='mx-auto text-small left-0'>Copyright &#169; 2025 <b> Gamers-Bounty Inc </b></p>
+            </footer>
         </>
     );
 };

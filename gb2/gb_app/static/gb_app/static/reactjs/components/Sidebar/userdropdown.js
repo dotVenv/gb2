@@ -23,18 +23,18 @@ const UserDropdown = ({ userInfo }) => {
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
         </DropdownTrigger>
-        <DropdownMenu aria-label="User Dropdown"  className='p-2 mx-auto text-gray-400' radius='lg'  variant="faded"
+        <DropdownMenu aria-label="User Dropdown"   className='p-2 mx-auto text-gray-400' radius='lg'  variant="faded"
             disabledKeys={["profile"]}
            
            >
-            <DropdownItem key="profile" className="h-14 gap-0 mt-3  p-3">
+            <DropdownItem key="profile" textValue={'signed in'} className="h-14 gap-0 mt-3  p-3">
             <p className="font-bold">Signed in @{ userInfo.username }</p>
           </DropdownItem>
-          <DropdownItem key="settings" onPress={(e) => {location.href='/myprofile' }}  color='success'>My Profile</DropdownItem>
-          <DropdownItem key="team_settings" onPress={(e) => {location.href='/entries' }}  color='success'>My Entries ({ userInfo.entries })</DropdownItem>
-          <DropdownItem key="team_settings" onPress={(e) => {location.href='/myteam' }}  color='success'>My Team</DropdownItem>
-          <DropdownItem onPress={(e) => {location.href='/help' }} key="help_and_feedback" color='warning'>Help & Feedback</DropdownItem>
-          <DropdownItem key="logout" href='/logout' color="danger">
+          <DropdownItem textValue={'myprofile'} key="myprofile" onPress={(e) => {location.href='/myprofile' }}  color='success'>My Profile</DropdownItem>
+          <DropdownItem textValue={'entries'} key="entries" onPress={(e) => {location.href='/entries' }}  color='success'>My Entries ({ userInfo.entries })</DropdownItem>
+          <DropdownItem textValue={'myteam'} key="myteam" onPress={(e) => {location.href='/myteam' }}  color='success'>My Team</DropdownItem>
+          <DropdownItem textValue={'help'} onPress={(e) => {location.href='/help' }} key="help_and_feedback" color='warning'>Help & Feedback</DropdownItem>
+          <DropdownItem textValue={'logout'} key="logout" href='/logout' color="danger">
             Log Out
           </DropdownItem>
         </DropdownMenu>

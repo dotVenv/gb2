@@ -11,7 +11,8 @@ import { GamesPlayedStat,
         MostRecentMatches, 
         ExtraPlayerStats,
         PopularTournaments, 
-        ShineBorder} from "../../components";
+        ShineBorder,
+        SparklesText} from "../../components";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 
@@ -74,27 +75,21 @@ const Dashboard = () => {
                            
                             <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                                
-                                   
-                                        <div className="flex flex-col gap-y-2">
-                                            <dl>
-                                                <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
-                                                <dd className="text-2xl font-semibold text-black">{ userInfo.membership.toUpperCase() }</dd>
-                                            </dl>
-                                        </div> 
-                                    
-                               
+                                <div className="flex flex-col gap-y-2">
+                                    <dl>
+                                        <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
+                                        <dd className="text-2xl font-semibold text-black">{ userInfo.membership.toUpperCase() }</dd>
+                                    </dl>
+                                </div> 
                             </ShineBorder>
                             <ShineBorder className=' mx-auto bg-zinc-400  w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
-                              
-                                    <div className="flex flex-col gap-y-2">
-                                        <dl>
-                                            <dt className="text-small text-black font-medium text-default-500">Entries <i className="fa-solid fa-ticket-simple"></i></dt>
-                                            <dd className="text-2xl text-black"><b>{userInfo.entries}</b> <span className='text-tiny text-black'> active</span></dd>
-                                        </dl>
-                                    </div> 
-                              
+                                <div className="flex flex-col gap-y-2">
+                                    <dl>
+                                        <dt className="text-small text-black font-medium text-default-500">Entries <i className="fa-solid fa-ticket-simple"></i></dt>
+                                        <dd className="text-2xl text-black"><b>{userInfo.entries}</b> <span className='text-tiny text-black'> active</span></dd>
+                                    </dl>
+                                </div> 
                             </ShineBorder>
-                           
                            
                             <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                                
@@ -147,7 +142,7 @@ const Dashboard = () => {
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
                             
                             <div className='flex'>
-                                <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
+                                <p className='text-center mt-4 justify-center align-center  mx-auto text-black'> <SparklesText text='Popular Tournaments' /> <i className="fa-solid fa-star"></i> </p>
                                 <Spacer></Spacer>
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
@@ -189,9 +184,7 @@ const Dashboard = () => {
                 
                     </div>
                 </section>
-                <footer className='col-9 justify-center align-center mx-auto'>
-                    <p className='mx-auto text-small left-0'>Copyright &#169; 2025 <b> Gamers-Bounty Inc </b></p>
-                </footer>
+              
             </Layout>
         </>
     );

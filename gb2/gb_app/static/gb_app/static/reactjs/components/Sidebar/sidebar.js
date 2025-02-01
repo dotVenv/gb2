@@ -7,7 +7,7 @@ import { signal } from "@preact/signals-react";
 
 
 const uri_endpoint = signal(window.location.pathname.split('/')[1]);
-console.log(uri_endpoint.value.length);
+
 
 
 const CustomSidebar = ({userInfo}) => {
@@ -34,7 +34,7 @@ const CustomSidebar = ({userInfo}) => {
                         <div className="ml-4 flex items-center md:ml-6">
                             <div className='mr-2 '>
                                 <Chip variant='flat' className='text-black' startContent={ <i className="fa-solid fa-wallet fa-lg" style={{'color': 'black'}}></i> } color='secondary'size='md' radius='md'>
-                                    ${userInfo.balance}
+                                    $<b className='font-bold'>{userInfo.balance}</b>
                                 </Chip>
                                 <Spacer></Spacer>
                             </div>
