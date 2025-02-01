@@ -3606,6 +3606,14 @@ video {
   background-color: rgb(48 16 80 / var(--tw-bg-opacity));
 }
 
+.bg-zinc-800\/50 {
+  background-color: rgb(39 39 42 / 0.5);
+}
+
+.bg-zinc-800\/80 {
+  background-color: rgb(39 39 42 / 0.8);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -4696,6 +4704,11 @@ video {
 .text-zinc-400 {
   --tw-text-opacity: 1;
   color: rgb(161 161 170 / var(--tw-text-opacity));
+}
+
+.text-default {
+  --tw-text-opacity: 1;
+  color: hsl(var(--nextui-default) / var(--nextui-default-opacity, var(--tw-text-opacity)));
 }
 
 .underline {
