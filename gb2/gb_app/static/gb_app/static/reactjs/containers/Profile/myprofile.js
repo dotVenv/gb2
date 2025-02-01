@@ -24,8 +24,8 @@ const MyProfile = () => {
                         separator: "px-2",
                     }}
                     separator="/">
-                    <BreadcrumbItem key="dashboard" isCurrent>
-                        <span>Dashboard</span>
+                    <BreadcrumbItem key="myprofile" isCurrent>
+                        <span>My Profile</span>
                     </BreadcrumbItem>
                 
                 </Breadcrumbs>
