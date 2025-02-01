@@ -5,12 +5,9 @@ from django.db import transaction
 
 #app imports 
 import json
-from gb_api import serializers, helpers
+from gb_api import serializers, helpers, email_helpers
 from .forms import LoginForm, SignupForm
-from gb_api.models import gbUser, ContactRequest
-
-
-
+from gb_api.models import gbUser, ContactRequest, AccountPreference
 
 
 #handle the current session (unauth, all auth sessions redir to dashboard.)
@@ -100,10 +97,16 @@ class Current_Session():
                     ip = self.request.META.get('REMOTE_ADDR')
                 if ip:
                     new_user.ip_address = ip
-                    
+                
                 new_user.save()
                 #send verification email here
                 #TODO
+                
+                new_email = email_helpers.EmailHelper()
+                new_email.email_data['recipient'] = str(self.request.user.email)
+                new_email.email_data['username'] = str(self.request.user.username)
+                new_email.verify_account(request=self.request)     
+                
                 
                 return True
             else:

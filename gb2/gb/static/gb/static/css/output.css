@@ -871,6 +871,10 @@ video {
   top: var(--navbar-height);
 }
 
+.left-5 {
+  left: 1.25rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -3591,6 +3595,11 @@ video {
 .bg-zinc-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
+.bg-purple-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(48 16 80 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b {

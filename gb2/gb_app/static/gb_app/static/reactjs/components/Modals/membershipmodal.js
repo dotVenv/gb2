@@ -25,7 +25,7 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
 
     return(
         <>
-        <Modal backdrop='blur' className='bg-purple-800/40' size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal backdrop='blur' className='bg-transparent' size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
@@ -70,7 +70,7 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
                                                 </ul>
                                             </CardBody>
                                             <CardFooter>
-                                                <Button variant='flat' color='secondary' startContent={<i className="fa-solid fa-cart-plus"></i>}>
+                                                <Button variant='flat' color='secondary' isDisabled={key.name.toLowerCase() =='free' ? true : false } startContent={<i className="fa-solid fa-cart-plus"></i>}>
                                                     Subscribe
                                                 </Button>
                                             </CardFooter>

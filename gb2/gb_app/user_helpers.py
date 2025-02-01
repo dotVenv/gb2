@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 #app imports
-from gb_api.models import gbUser, EmailVerification, AccountPreference
+from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership
 from gb_api.email_helpers import EmailHelper
 import datetime
 
@@ -14,6 +14,7 @@ class UserHelper():
     def __init__(self, request):
         '''initialize the User helper class'''
         self.request = request
+        self.serialized = {}
         self.response = {}
         
 
@@ -56,10 +57,17 @@ class UserHelper():
         
         
         if self.cu_ap:
-           
-            self.serialized['server'] = self.cu_ap.server
-            self.serialized['platform'] = self.cu_ap.platform.name
-            self.serialized['memberhip'] = self.cu_ap.membership
+            
+            if not self.cu_ap.server:
+                self.serialized['server'] = None
+            else:
+                self.serialized['server'] = self.cu_ap.server
+            
+            if not self.cu_ap.platform:
+                self.serialized['platform'] = None
+            else:
+                self.serialized['platform'] = self.cu_ap.platform.name
+            self.serialized['membership'] = self.cu_ap.membership.name
     
         
 
@@ -81,16 +89,21 @@ class UserHelper():
         '''checks which steps were complete and returns a value based on which step, (5 if completed)'''  
         
         if self.cu:
-            acc_pref = AccountPreference.objects.filter(user=self.cu.id)
+            
             if self.cu.account_verified is False:
                 self.serialized['setup_step'] = 1
-            elif not acc_pref.exists():
-                self.serialized['setup_step'] = 2
-            elif not self.cu.first_name or not self.cu.last_name:
-                self.serialized['setup_step'] = 3
-            else:
-                self.serialized['setup_step'] = 4
-            
+                    
+            acc_pref = AccountPreference.objects.filter(user=self.cu.id)
+            if acc_pref.exists():
+        
+                if not self.cu.first_name or not self.cu.last_name:
+                    self.serialized['setup_step'] = 3
+                else:
+                    self.serialized['setup_step'] = 4
+                    
+            if not acc_pref.exists():
+                    self.serialized['setup_step'] = 2
+           
         return True
     
     
@@ -160,7 +173,7 @@ class UserHelper():
                     return False
                 self.get_user()
                 if self.cu:
-                    acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, console=console)
+                    acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'))
                     if acc_pref:
                         acc_pref.save()
                         self.setup_data = {'step': 'passed'}

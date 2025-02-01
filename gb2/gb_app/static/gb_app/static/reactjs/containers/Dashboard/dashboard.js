@@ -68,7 +68,7 @@ const Dashboard = () => {
                                         <div className="flex flex-col gap-y-2">
                                             <dl>
                                                 <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
-                                                <dd className="text-2xl font-semibold text-black">{ userInfo.memberhsip == null ? "N/A" : userInfo.memberhsip }</dd>
+                                                <dd className="text-2xl font-semibold text-black">{ userInfo.membership.toUpperCase() }</dd>
                                             </dl>
                                         </div> 
                                     

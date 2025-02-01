@@ -42,12 +42,12 @@ const Layout = ({ children }) => {
                 <> 
                 <Spacer></Spacer>
                 <div className='sticky-bottom z-index-1 left-25 bottom-1 w-full flex align-center justify-center mx-auto '>
-                    <StickyOptions />
+                    {membershipModal ? undefined : <StickyOptions /> }
                 </div>
                     <section className='mt-3 py-4'>
                        
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
-                        { userInfo.membership == null 
+                        { accountProgress < 4 ? undefined : userInfo.membership == null || userInfo.membership == 'free'
                             ?    <Alert
                                         color="warning"
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}

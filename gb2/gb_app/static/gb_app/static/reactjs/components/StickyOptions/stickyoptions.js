@@ -6,9 +6,10 @@ import { Tabs, Tab } from "@nextui-org/react";
 const StickyOptions  = () => {
     return(
         <>
-            <Tabs aria-label="Options" className='fixed  justify-center align-center mx-autoleft-25 bottom-10 ' isVertical={false} color="secondary" variant="bordered">
+            <Tabs aria-label="Options" className='fixed  justify-center align-center mx-auto left-0 right-0 bottom-10 ' radius="lg" isVertical={false} variant="bordered">
         
             <Tab
+                className='bg-purple-800'
                 key="holder"
                 title={
                     <div className="flex items-center space-x-2">
