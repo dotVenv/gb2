@@ -61,7 +61,7 @@ const ExtraPlayerStats = () => {
                     </p> 
                     <i className='text-tiny text-black'>(by platform)</i>
                 </span>
-                    <PieChart width={275} height={250}>
+                    <PieChart className='z-index-2' width={275} height={250}>
                         <Pie
                             dataKey="value"
                             isAnimationActive={false}

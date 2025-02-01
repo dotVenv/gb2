@@ -21,7 +21,7 @@ const RankingStepper = () => {
                         value={rankProgress}
                         />
                 </span>
-                <div className="grid grid-cols-3  mx-auto mt-3 gap-0">
+                <div className="grid grid-cols-3  mx-auto mt-3 gap-0 space-x-0">
                     <span className="flex w-full items-center ">
                         <img src={LRank1}  className='sm:h-[75px] sm:w-[75px] lg:w-[145px] lg:h-[145px]' alt='low rank one' />
                     </span>

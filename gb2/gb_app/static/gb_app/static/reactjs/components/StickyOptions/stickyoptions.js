@@ -6,7 +6,7 @@ import { Tabs, Tab } from "@nextui-org/react";
 const StickyOptions  = () => {
     return(
         <>
-            <Tabs aria-label="Options" className="w-full" isVertical={false} color="secondary" variant="bordered">
+            <Tabs aria-label="Options" className='fixed  left-25 bottom-1 ' isVertical={false} color="secondary" variant="bordered">
         
             <Tab
                 key="holder"
