@@ -1,12 +1,14 @@
 'use client';
 
-import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, Button, Image, ButtonGroup } from "@nextui-org/react";
-
-
+import React, { useState } from "react";
+import { Button, Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, } from "@nextui-org/react";
+import { TournamentDrawer } from '../../components';
 import marvel_r from '../../../imgs/pngs/marvel_r.png';
     
 const TournamentCard = () => {
+
+    const [isOpen, setisOpen] = useState(false);
+    
 
     return(
         <>
@@ -37,10 +39,13 @@ const TournamentCard = () => {
                 <Spacer></Spacer>
                 
             </div>
-            <Button radius='lg' variant='shadow' color='secondary' size='sm' className='justify-center align-center mx-auto'> View Details </Button>
+            <Button onPress={(e) => { setisOpen(!isOpen)}} radius='lg' variant='shadow' color='secondary' size='sm' className='justify-center align-center mx-auto'> View Details </Button>
            
         </CardFooter>
         </Card>
+
+
+        {isOpen ? <TournamentDrawer isOpen={isOpen} setisOpen={setisOpen} /> : undefined }
       
         </>
     );

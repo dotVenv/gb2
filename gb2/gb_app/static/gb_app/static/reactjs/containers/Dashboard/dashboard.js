@@ -45,7 +45,7 @@ const Dashboard = () => {
                                    <DailyRewards />
                             </MagicCard>
                             <div className='grid grid-cols-1 gap-1'>
-                            <Card className=" bg-gray-50 shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-[200px] p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
+                            <Card className="bg-gray-50 shadow bg-gray-50 border-gray-50 dark:border-gray-600 h-[200px] p-1 cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl">
                                 <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/80 bg-clip-text text-center text-5xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
                                     Connected
                                 </span>
@@ -148,17 +148,17 @@ const Dashboard = () => {
                             <p className='text-center justify-center align-center mx-auto text-black'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>
                             <div className=' grid grid-cols-2 gap-4  justify-center align-center mx-auto'>
                             <Card className='bg-transparent' isFooterBlurred>
-                                    <CardBody>
+                                <CardBody>
                                     <Image
-                                        removeWrapperMerch
+                                        removeWrapper
                                         alt="Card background"
                                         className="z-0 w-[150px] h-[150px] object-cover"
                                         src="https://heroui.com/images/card-example-2.jpeg"
                                         />
-                                    </CardBody>
-                                    <CardFooter>
-                                        <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
-                                    </CardFooter>
+                                </CardBody>
+                                <CardFooter>
+                                    <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                </CardFooter>
                                 </Card>
                                 <Card className='bg-transparent' isFooterBlurred>
                                     <CardBody>

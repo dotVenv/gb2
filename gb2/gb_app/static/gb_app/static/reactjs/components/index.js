@@ -12,6 +12,7 @@ export { default as CustomToast } from './Toasts/toasts';
 export { default as MembershipModal } from './Modals/membershipmodal';
 export { default as DailyRewards } from './Carousels/dailyrewards';
 export { default as TournamentCard } from './Tournaments/tournamentcard';
+export { default as TournamentDrawer } from './Tournaments/tournamentdrawer';
 export { default as StickyOptions } from './StickyOptions/stickyoptions';
 export { default as RankingStepper } from './RankingStepper/rankingstepper';
 export { default as GamesPlayedStat } from './PlayerStats/gamesplayed';
