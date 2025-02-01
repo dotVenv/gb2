@@ -36,8 +36,8 @@ const MostRecentMatches = () => {
                 <Grow in={checked} {...(checked ? { timeout: 500 } : {})} >
                   
                 <Table aria-label="Recent matches" className='bg-zinc-100 text-white'>
-                    <TableHeader className='text-white'>
-                        <TableColumn>Opponent</TableColumn>
+                    <TableHeader className='flex-col text-white gap-2'>
+                        <TableColumn>OPPONENT</TableColumn>
                         <TableColumn>POSITION</TableColumn>
                         <TableColumn>POINTS</TableColumn>
                         <TableColumn>STATUS</TableColumn>
@@ -49,8 +49,8 @@ const MostRecentMatches = () => {
                                 avatarProps={{
                                     src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                                 }}
-                                description="Product Designer"
-                                name="Jane Doe"
+                                description="@OppononeName"
+                                name="Opoonent name"
                                 />
                         </TableCell>
                         <TableCell style={{'color': 'orange'}}>7th</TableCell>

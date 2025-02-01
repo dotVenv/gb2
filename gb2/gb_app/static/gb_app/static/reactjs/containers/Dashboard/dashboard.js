@@ -137,9 +137,12 @@ const Dashboard = () => {
                             </div>
                         </MagicCard>
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
-
-                            <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
                             
+                            <div className='flex'>
+                                <p className='text-center mt-4 justify-center align-center mx-auto text-black'> Popular Tournaments <i className="fa-solid fa-star"></i> </p>
+                                <Spacer></Spacer>
+                                <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
+                            </div>
                             <PopularTournaments />
                             
 
