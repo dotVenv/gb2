@@ -109,7 +109,7 @@ class AccountPreference(models.Model):
     user = models.ForeignKey(gbUser, on_delete=models.CASCADE, related_name='user_pref')
     membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='user_membership', null=True, blank=True)
     server = models.CharField(choices=server_options, max_length=50, blank=True, null=True)
-    console = models.CharField(choices=console_options, max_length=10, blank=True, null=True)
+    platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.CASCADE, related_name='user_platform')
     
     class Meta:
         verbose_name_plural = 'Account Preferences'
@@ -117,3 +117,21 @@ class AccountPreference(models.Model):
     def __str__(self):
         return f'{self.user} preferences'
     
+
+platform_choices = [
+    ('Xbox', 'Xbox'),
+    ('PSN', 'PSN'),
+    ('PC', 'PC'),
+]
+
+class Platform(models.Model):
+    '''store the platform option for avilable on the site'''
+    
+    name = models.CharField(max_length=15, choices=platform_choices)
+    
+    class Meta:
+        verbose_name_plural = 'Platforms'
+        
+        
+    def __str__(self):
+        return f'{self.name}'

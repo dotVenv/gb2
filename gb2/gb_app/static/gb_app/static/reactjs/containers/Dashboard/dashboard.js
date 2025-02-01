@@ -13,6 +13,7 @@ const Dashboard = () => {
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
 
+
     return(
         <>
             <Layout>
@@ -97,15 +98,15 @@ const Dashboard = () => {
                                             <div className='flex'>
                                                 <div className='grid grid-cols-1 float-start justify-start'>
                                                     <dd className="text-2xl font-semibold text-black">{ 
-                                                        userInfo.console == 'PC' 
+                                                        userInfo.platform == 'PC' 
                                                             ? <i className="fa-solid fa-computer"></i>
-                                                            : userInfo.console == 'Xbox' 
+                                                            : userInfo.platform == 'Xbox' 
                                                                 ? <i className='fa-solid fa-xbox'></i>
-                                                                : userInfo.console = 'PSN'
+                                                                : userInfo.platform = 'PSN'
                                                                     ? <i className='fa-solid fa-playstation'></i>
                                                                     : undefined
                                                         }</dd>
-                                                    <span className='text-tiny text-black'><b> { userInfo.console } </b></span>
+                                                    <span className='text-tiny text-black'><b> { userInfo.platform } </b></span>
                                                 </div>
                                                 <Spacer></Spacer>
                                                 <div className='grid grid-cols-1 end justify-end mx-auto float-end justify-end'>

@@ -58,7 +58,7 @@ class UserHelper():
         if self.cu_ap:
            
             self.serialized['server'] = self.cu_ap.server
-            self.serialized['console'] = self.cu_ap.console
+            self.serialized['platform'] = self.cu_ap.platform.name
             self.serialized['memberhip'] = self.cu_ap.membership
     
         
