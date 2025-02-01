@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Suspense, useContext, useState } from "react";
-import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions } from "../../components";
+import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions} from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
@@ -43,6 +43,7 @@ const Layout = ({ children }) => {
                 <Spacer></Spacer>
                 <div className='sticky-bottom z-index-1 left-25 bottom-1 w-full flex align-center justify-center mx-auto '>
                     {membershipModal ? undefined : <StickyOptions /> }
+                    
                 </div>
                     <section className='mt-3 py-4'>
                        
@@ -50,6 +51,7 @@ const Layout = ({ children }) => {
                         { accountProgress < 4 ? undefined :  userInfo.membership == 'free'
                             ?    <Alert
                                         color="warning"
+                                        variant='bordered'
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 
                                         endContent={
@@ -69,7 +71,7 @@ const Layout = ({ children }) => {
                                         </Button>
                                         }
                                         title={<i className='text-black'>No active membership</i>}
-                                        variant="faded"
+                                    
                                     />
                             :   <Alert
                                     color="success"

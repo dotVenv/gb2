@@ -70,8 +70,8 @@ const Dashboard = () => {
                         </div>
                         
                     
-                        <div className="grid grid-cols-3 mx-auto gap-0">
-
+                        <div className="grid lg:grid-cols-3 sm:grid-cols-1 mx-auto gap-0">
+                           
                             <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                                
                                    
@@ -84,7 +84,6 @@ const Dashboard = () => {
                                     
                                
                             </ShineBorder>
-
                             <ShineBorder className=' mx-auto bg-zinc-400  w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                               
                                     <div className="flex flex-col gap-y-2">
@@ -95,7 +94,8 @@ const Dashboard = () => {
                                     </div> 
                               
                             </ShineBorder>
-
+                           
+                           
                             <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                                
                                         <div className="flex flex-col gap-y-2">
@@ -128,6 +128,7 @@ const Dashboard = () => {
                                     </div> 
                                   
                             </ShineBorder>
+
 
                         </div>
                        
@@ -167,7 +168,7 @@ const Dashboard = () => {
                                         />
                                 </CardBody>
                                 <CardFooter>
-                                    <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                    <Button variant='bordered' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
                                 </CardFooter>
                                 </Card>
                                 <Card className='bg-transparent' isFooterBlurred>
@@ -180,7 +181,7 @@ const Dashboard = () => {
                                         />
                                     </CardBody>
                                     <CardFooter>
-                                        <Button variant='flat' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                        <Button variant='bordered' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
                                     </CardFooter>
                                 </Card>
                             </div>

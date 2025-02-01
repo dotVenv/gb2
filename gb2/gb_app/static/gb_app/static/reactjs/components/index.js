@@ -20,6 +20,8 @@ export { default as ExtraPlayerStats } from './PlayerStats/extrastats';
 export { default as MostRecentMatches } from './PlayerStats/recentmatches';
 export { default as PopularTournaments } from './Carousels/populartournaments';
 
+
+export { Dock, DockIcon, dockVariants } from './Magicui/dock';
 export{ ShineBorder } from './Magicui/shine-border';
 export { Globe } from './Magicui/globe';
 export { MagicCard } from './Magicui/magic-card';

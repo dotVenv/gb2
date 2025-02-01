@@ -156,39 +156,37 @@ const Indx = () => {
                             <DP />
                             <Spacer></Spacer>
                             
-                                <ShineBorder isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
-                                    <Card isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
-                                    <CardHeader>
+                                <ShineBorder isBlurred className='p-3 justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
+                                   
                                         <div className="mx-auto  lg:text-center">
                                             <h2 className="text-base font-semibold leading-7 text-indigo-600">Daily Tournaments 6pm-9pm EST.</h2>
                                             <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                                                 Simply register and enter a tournament.
                                             </p>
                                             <p className="mt-6 text-tiny leading-2 text-gray-600">
-                                                US Gamers must reside in <i> a valid state that allows online gaming competitions. </i>
+                                                US Gamers must reside in <i> a valid state. </i>
                                             </p>
                                         </div>
-                                    </CardHeader>
                                     
-                                    </Card >
                                 </ShineBorder>
                                     <br></br>
                                     <Spacer></Spacer>
                                     <br></br>
 
                                     <div className="justify-center align-center mx-auto w-full mt-4 ">
-                                        <h3 className='text-gray-900 text-center  ml-3 font-bold'> <i className='ml-3'> GB Tourney Journey </i>  - <i className='text-small'>Mileage.</i></h3>
+                                        <h3 className='flex text-gray-900 text-center justify-center align-center max-auto  ml-3 font-bold'> <i className='ml-3'> GB Tourney Journey </i>  - <i className='text-small'>Mileage.</i></h3>
                                         <TourneyJourney />
                                     </div>
 
                                     <br></br>
-
-                                    <div className="flex justify-center align-center mx-auto sm:grid-cols-1 gap-y-2 gap-x-2">
-                                        {tourney_journey.map((feature) => (
-                                            <Chip variant='dot' size='md' color='success' key={feature.name} className='font-bold text-small text-black mb-2'>
-                                                {feature.name}
-                                            </Chip>
-                                        ))}
+                                    <div className='flex items-center justify-center align-center mx-auto col-8'>
+                                        <span className="grid justify-center align-center mx-auto w-full lg:grid-cols-3 sm:grid-cols-1 space-0 gap-0">
+                                            {tourney_journey.map((feature) => (
+                                                <Chip variant='dot' size='md' color='success' key={feature.name} className='justify-center align-center mx-auto font-bold text-small text-black mb-2'>
+                                                    {feature.name}
+                                                </Chip>
+                                            ))}
+                                        </span>
                                     </div>
                                 <div className='align-center justify-center mx-auto flex'>
                                     <PricingTable  />

@@ -3297,11 +3297,6 @@ video {
   background-color: hsl(var(--nextui-background) / 0.8);
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-black\/10 {
   background-color: rgb(0 0 0 / 0.1);
 }
@@ -5953,11 +5948,6 @@ html, body {
 .before\:hidden::before {
   content: var(--tw-content);
   display: none;
-}
-
-.before\:aspect-square::before {
-  content: var(--tw-content);
-  aspect-ratio: 1 / 1;
 }
 
 .before\:size-full::before {
@@ -10250,11 +10240,6 @@ html, body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .motion-safe\:before\:animate-\[shine-pulse_var\(--shine-pulse-duration\)_infinite_linear\]::before {
-    content: var(--tw-content);
-    animation: shine-pulse var(--shine-pulse-duration) infinite linear;
-  }
-
   @keyframes shine {
     0% {
       content: var(--tw-content);
