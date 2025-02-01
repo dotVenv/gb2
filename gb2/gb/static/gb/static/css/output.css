@@ -871,6 +871,14 @@ video {
   top: var(--navbar-height);
 }
 
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
+.left-20 {
+  left: 5rem;
+}
+
 .isolate {
   isolation: isolate;
 }
