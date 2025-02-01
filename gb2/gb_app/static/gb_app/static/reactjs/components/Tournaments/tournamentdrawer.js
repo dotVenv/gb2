@@ -34,10 +34,10 @@ const TournamentDrawer = ({isOpen, setisOpen}) => {
           {(onClose) => (
             <>
               <DrawerHeader className="absolute top-0 inset-x-0 z-50 flex flex-row gap-2 px-2 py-2 border-b border-default-200/50 justify-between bg-content1/50 backdrop-saturate-150 backdrop-blur-lg">
-                <Tooltip content="Close">
+                <Tooltip className='text-white' content="Close">
                   <Button
                     isIconOnly
-                    className="text-default-400"
+                    className="text-white"
                     size="sm"
                     variant="light"
                     onPress={(e) => {setisOpen(!isOpen)}}

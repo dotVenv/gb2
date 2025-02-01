@@ -39,7 +39,7 @@ export const PrevButton = (props) => {
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className="embla__button embla__button--prev bg-transparent text-black"
       type="button"
       {...restProps}
     >
@@ -59,7 +59,7 @@ export const NextButton = (props) => {
 
   return (
     <button
-      className="embla__button embla__button--next bg-dark"
+      className="embla__button embla__button--next bg-transparent text-black"
       color='black'
       type="button"
       {...restProps}

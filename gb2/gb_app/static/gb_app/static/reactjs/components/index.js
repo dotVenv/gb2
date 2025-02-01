@@ -18,10 +18,11 @@ export { default as RankingStepper } from './RankingStepper/rankingstepper';
 export { default as GamesPlayedStat } from './PlayerStats/gamesplayed';
 export { default as ExtraPlayerStats } from './PlayerStats/extrastats';
 export { default as MostRecentMatches } from './PlayerStats/recentmatches';
+export { default as PopularTournaments } from './Carousels/populartournaments';
 export { Globe } from './Magicui/globe';
 export { MagicCard } from './Magicui/magic-card';
 export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';
-export { DotButton, useDotButton } from './Carousels/carouseldots';
+
 
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge';

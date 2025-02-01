@@ -12,8 +12,8 @@ const TournamentCard = () => {
 
     return(
         <>
-        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-none w-[300px] h-[300px]" radius='lg'>
-       
+        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-no w-full h-[300px]" radius='lg'>
+
             <img 
                 className="object-cover h-full"
                  src={marvel_r} alt='tournament thumbnail' 
