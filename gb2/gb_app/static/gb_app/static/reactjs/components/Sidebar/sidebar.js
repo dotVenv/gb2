@@ -37,7 +37,7 @@ const CustomSidebar = ({userInfo}) => {
                             </div>
                             <div className="relative ml-3">
                                 <div>
-                                <UserDropdown /> 
+                                <UserDropdown userInfo={userInfo} /> 
                                 </div>
                             </div>
                         </div>
