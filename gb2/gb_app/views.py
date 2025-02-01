@@ -5,12 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import  logout 
 from django.contrib.auth.mixins import LoginRequiredMixin
+import django.core.exceptions as dce
 
 # Create your views here.
 from .user_helpers import *
 from gb.response_helpers import Response_Helpers as getres
 from django_hosts.resolvers import reverse 
-from gb_api.models import Membership
+from gb_api.models import Membership, Announc
 
 from cryptography.fernet import Fernet
         
@@ -21,13 +22,31 @@ class APPViews(TemplateView):
     def dashboard(self, request):
         '''return the dashboard view for the user'''
 
-        
-        context = {
-            'new_announc':'Thanks for joining us on our relaunch, we now have 1,000 active users!'
-            }
-        
+
+        context = {}
+        context['announcment'] = "No announcment"
+        try:
+           
+            latest_announcment = Announc.objects.filter(active=True).order_by('id')[:0]
+           
+            if latest_announcment.exists():
+                for val in latest_announcment.values(): context['announcment'] = val
+
+                    
+        except dce.ObjectDoesNotExist:
+            context['announcment'] = "No announcment"
+            pass
         
         return render(request, 'gb_app/templates/index.html', context)
+    
+    @method_decorator(login_required)
+    def myprofile(self, request):
+        '''return the myprofile view for the user'''
+        
+        context = {}
+        return render(request, 'gb_app/templates/index.html', context=context)
+    
+    
     
     @method_decorator(login_required)
     def user_defaults(self,request):

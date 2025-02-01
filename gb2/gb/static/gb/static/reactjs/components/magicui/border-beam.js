@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '../ui/lib/utils';
+import { cn } from '@nextui-org/react';
 const BorderBeam = ({className}) => {
   var size = 200;
   var duration = 15;

@@ -6,6 +6,8 @@
 
         {% csrf_token %}
         {{ request.user.id |json_script:'conn0'}}
-        {{ new_announc |json_script:'newAnnounc'}}
+      
+        {{ announcment |json_script:'newAnnounc'}}
+        
         <div id='gba_root'></div>
 {% endblock %}

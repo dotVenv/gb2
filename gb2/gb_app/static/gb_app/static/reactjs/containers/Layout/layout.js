@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
             
             
             <CustomSidebar userInfo={userInfo} />
-            {cu.newAnnouncment 
+            {cu.newAnnouncment.toLowerCase() !== 'no announcment'
                 ? <AnnouncmentBanner newAnnouncment={cu.newAnnouncment} />
                 :  undefined
                 }

@@ -3,8 +3,7 @@ export { default as NaviBar } from './Navbar/navbar';
 export { default as NavvBar } from './NavvBar/Navvbar';
 export { default as Footer } from './Footer/Footer';
 export { default as NotiDrag } from './NotiDrag/notidrag';
-export { default as Ripple }  from './magicui/ripple';
-export { default as ShineBorder } from './magicui/shine-border';
+
 export { default as WordRotate } from './magicui/word-rotate';
 export { default as AnimatedList } from './magicui/animated-list';
 export { default as TextRevealByWord } from './magicui/text-reveal';
@@ -37,3 +36,5 @@ export { BorderBeam } from './magicui/border-beam';
 export { GridPattern } from './magicui/animated-grid-pattern';
 export { DotPattern } from './magicui/dot-pattern';
 export { AnimatedBeam } from './magicui/animated-beam';
+export {  default as Ripple }  from './magicui/ripple';
+export {  ShineBorder } from './magicui/shine-border';

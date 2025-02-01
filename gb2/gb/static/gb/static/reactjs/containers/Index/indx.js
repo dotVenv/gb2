@@ -16,6 +16,7 @@ import {
     Preloader,
     PromoBanner,
     CookieConsent,
+    ShineBorder,
     } from "../../components";
 
 import { cn,  
@@ -155,7 +156,8 @@ const Indx = () => {
                             <DP />
                             <Spacer></Spacer>
                             
-                                <Card isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
+                                <ShineBorder isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
+                                    <Card isBlurred className='justify-center align-center mx-auto flex-cols col-7 bg-white h-[250px] w-[200px] mb-4'>
                                     <CardHeader>
                                         <div className="mx-auto  lg:text-center">
                                             <h2 className="text-base font-semibold leading-7 text-indigo-600">Daily Tournaments 6pm-9pm EST.</h2>
@@ -168,8 +170,8 @@ const Indx = () => {
                                         </div>
                                     </CardHeader>
                                     
-                                    <BorderBeam />
-                                </Card>
+                                    </Card >
+                                </ShineBorder>
                                     <br></br>
                                     <Spacer></Spacer>
                                     <br></br>

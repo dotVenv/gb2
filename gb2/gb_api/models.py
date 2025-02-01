@@ -229,3 +229,17 @@ class Wallet(ExportModelOperationsMixin('Wallet'),models.Model):
         
     
     
+class Announc(ExportModelOperationsMixin('Announc'),models.Model):
+    '''store a new announcment sitewide'''
+    
+    title = models.CharField(max_length=255, null=True, blank=True)
+    created_by = models.ForeignKey('gbUser', on_delete=models.PROTECT, related_name='announcer')
+    created_at = models.DateTimeField(auto_now_add=True)
+    desc = models.TextField(null=True, blank=True)
+    active = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name_plural = 'Announcments'
+    
+    def __str__(self):
+        return f'{self.title} - {self.created_by.username}'

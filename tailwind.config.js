@@ -12,76 +12,90 @@ module.exports = {
     "./gb2/gb_app/static/gb_app/static/**/*.{js,ts,jsx,tsx,mdx,html}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: ["class", "class"],
   theme: {
-    extend: {
-      border: "hsl(var(--border))",
-      input: "hsl(var(--input))",
-      ring: "hsl(var(--ring))",
-      background: "hsl(var(--background))",
-      foreground: "hsl(var(--foreground))",
-      primary: {
-        DEFAULT: "hsl(var(--primary))",
-        foreground: "hsl(var(--primary-foreground))",
-      },
-      secondary: {
-        DEFAULT: "hsl(var(--secondary))",
-        foreground: "hsl(var(--secondary-foreground))",
-      },
-      destructive: {
-        DEFAULT: "hsl(var(--destructive))",
-        foreground: "hsl(var(--destructive-foreground))",
-      },
-      muted: {
-        DEFAULT: "hsl(var(--muted))",
-        foreground: "hsl(var(--muted-foreground))",
-      },
-      accent: {
-        DEFAULT: "hsl(var(--accent))",
-        foreground: "hsl(var(--accent-foreground))",
-      },
-      popover: {
-        DEFAULT: "hsl(var(--popover))",
-        foreground: "hsl(var(--popover-foreground))",
-      },
-      card: {
-        DEFAULT: "hsl(var(--card))",
-        foreground: "hsl(var(--card-foreground))",
-      },
- 
-    borderRadius: {
-      lg: "var(--radius)",
-      md: "calc(var(--radius) - 2px)",
-      sm: "calc(var(--radius) - 4px)",
-    },
-      colors: {
-        white: "#FFFFFF",
-        black: "#000000",
-        blue: {
-          50: "#e6f1fe",
-          100: "#cce3fd",
-          200: "#99c7fb",
-          300: "#66aaf9",
-          400: "#338ef7",
-          500: "#006FEE",
-          600: "#005bc4",
-          700: "#004493",
-          800: "#002e62",
-          900: "#001731",
-        },
-        zinc:{
-          400: "#A1A1AA",
-          500: "#71717A",
-          600: "#52525B",
-          900: "#18181B",
-        },
-        purple:{
-          800: "#301050",
-          900: "#180828",
-        }
-        // .. rest of the colors
-      },
-    },
+  	extend: {
+  		border: 'hsl(var(--border))',
+  		input: 'hsl(var(--input))',
+  		ring: 'hsl(var(--ring))',
+  		background: 'hsl(var(--background))',
+  		foreground: 'hsl(var(--foreground))',
+  		primary: {
+  			DEFAULT: 'hsl(var(--primary))',
+  			foreground: 'hsl(var(--primary-foreground))'
+  		},
+  		secondary: {
+  			DEFAULT: 'hsl(var(--secondary))',
+  			foreground: 'hsl(var(--secondary-foreground))'
+  		},
+  		destructive: {
+  			DEFAULT: 'hsl(var(--destructive))',
+  			foreground: 'hsl(var(--destructive-foreground))'
+  		},
+  		muted: {
+  			DEFAULT: 'hsl(var(--muted))',
+  			foreground: 'hsl(var(--muted-foreground))'
+  		},
+  		accent: {
+  			DEFAULT: 'hsl(var(--accent))',
+  			foreground: 'hsl(var(--accent-foreground))'
+  		},
+  		popover: {
+  			DEFAULT: 'hsl(var(--popover))',
+  			foreground: 'hsl(var(--popover-foreground))'
+  		},
+  		card: {
+  			DEFAULT: 'hsl(var(--card))',
+  			foreground: 'hsl(var(--card-foreground))'
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		colors: {
+  			white: '#FFFFFF',
+  			black: '#000000',
+  			blue: {
+  				'50': '#e6f1fe',
+  				'100': '#cce3fd',
+  				'200': '#99c7fb',
+  				'300': '#66aaf9',
+  				'400': '#338ef7',
+  				'500': '#006FEE',
+  				'600': '#005bc4',
+  				'700': '#004493',
+  				'800': '#002e62',
+  				'900': '#001731'
+  			},
+  			zinc: {
+  				'400': '#A1A1AA',
+  				'500': '#71717A',
+  				'600': '#52525B',
+  				'900': '#18181B'
+  			},
+  			purple: {
+  				'800': '#301050',
+  				'900': '#180828'
+  			}
+  		},
+  		animation: {
+  			shine: 'shine var(--duration) infinite linear'
+  		},
+  		keyframes: {
+  			shine: {
+  				'0%': {
+  					'background-position': '0% 0%'
+  				},
+  				'50%': {
+  					'background-position': '100% 100%'
+  				},
+  				to: {
+  					'background-position': '0% 0%'
+  				}
+  			}
+  		}
+  	}
   },
   animation: {
     orbit: "orbit calc(var(--duration)*1s) linear infinite",

@@ -1,6 +1,6 @@
 "use client";
-import React from 'react';
-import { cn } from '@nextui-org/react';
+import React from "react";
+import { cn } from "@nextui-org/react";
 /**
  * @name Shine Border
  * @description It is an animated background border effect component with easy to use and configurable props.
@@ -11,11 +11,14 @@ import { cn } from '@nextui-org/react';
  * @param className defines the class name to be applied to the component
  * @param children contains react node elements.
  */
- const ShineBorder = ({className,children}) =>  {
-  var borderRadius = 3;
-  var borderWidth = 2;
-  var duration = 25;
-  var color = "#000000";
+export function ShineBorder({
+  borderRadius = 8,
+  borderWidth = 1,
+  duration = 14,
+  color = "#000000",
+  className,
+  children
+}) {
   return (
     (<div
       style={
@@ -24,7 +27,7 @@ import { cn } from '@nextui-org/react';
         }
       }
       className={cn(
-        " relative  grid  min-h-[60px]  w-fit  min-w-[300px]  place-items-center  rounded-[--border-radius] border-rounded-md  bg-white  p-3  text-black dark: bg-black dark: text-white",
+        " relative  min-h-[60px]  w-fit  min-w-[300px]  place-items-center  rounded-[--border-radius]  bg-white  p-3  text-black ",
         className
       )}>
       <div
@@ -32,15 +35,13 @@ import { cn } from '@nextui-org/react';
           {
             "--border-width": `${borderWidth}px`,
             "--border-radius": `${borderRadius}px`,
-            "--shine-pulse-duration": `${duration}s`,
+            "--duration": `${duration}s`,
             "--mask-linear-gradient": `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
             "--background-radial-gradient": `radial-gradient(transparent,transparent, ${color instanceof Array ? color.join(",") : color},transparent,transparent)`
           }
         }
-        className={`before:bg-shine-size before:absolute before:inset-0 before:aspect-square before:size-full before:rounded-[--border-radius] before:p-[--border-width] before:will-change-[background-position] before:content-[""] before:![-webkit-mask-composite:xor] before:![mask-composite:exclude] before:[background-image:--background-radial-gradient] before:[background-size:300%_300%] before:[mask:--mask-linear-gradient] motion-safe:before:animate-[shine-pulse_var(--shine-pulse-duration)_infinite_linear]`}></div>
+        className={`before:bg-shine-size pointer-events-none before:absolute before:inset-0 before:size-full before:rounded-[--border-radius] before:p-[--border-width] before:will-change-[background-position] before:content-[""] before:![-webkit-mask-composite:xor] before:![mask-composite:exclude] before:[background-image:--background-radial-gradient] before:[background-size:300%_300%] before:[mask:--mask-linear-gradient] motion-safe:before:animate-shine`}></div>
       {children}
     </div>)
   );
 }
-
-export default ShineBorder;

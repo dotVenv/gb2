@@ -3,7 +3,15 @@
 import React, {useState,useContext} from "react";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
-import { GamesPlayedStat, DailyRewards, Globe, MagicCard, RankingStepper, MostRecentMatches, ExtraPlayerStats, TournamentCard, PopularTournaments, } from "../../components";
+import { GamesPlayedStat, 
+        DailyRewards, 
+        Globe, 
+        MagicCard, 
+        RankingStepper, 
+        MostRecentMatches, 
+        ExtraPlayerStats,
+        PopularTournaments, 
+        ShineBorder} from "../../components";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 
@@ -31,6 +39,8 @@ const Dashboard = () => {
                     </BreadcrumbItem>
                 
                 </Breadcrumbs>
+                </section>
+                <section className='h-full'>
                     <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                         <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                             
@@ -59,11 +69,11 @@ const Dashboard = () => {
                             </div>
                         </div>
                         
-                        
+                    
                         <div className="grid grid-cols-3 mx-auto gap-0">
 
-                            <Card className='mx-auto bg-zinc-400 w-full items-center bg-transparent'>
-                                <CardBody>
+                            <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
+                               
                                    
                                         <div className="flex flex-col gap-y-2">
                                             <dl>
@@ -72,11 +82,10 @@ const Dashboard = () => {
                                             </dl>
                                         </div> 
                                     
-                                </CardBody>
-                            </Card>
+                               
+                            </ShineBorder>
 
-                            <Card className=' mx-auto bg-zinc-400  w-full items-center bg-transparent'>
-                                <CardBody>
+                            <ShineBorder className=' mx-auto bg-zinc-400  w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                               
                                     <div className="flex flex-col gap-y-2">
                                         <dl>
@@ -85,12 +94,10 @@ const Dashboard = () => {
                                         </dl>
                                     </div> 
                               
-                                </CardBody>
-                            </Card>
+                            </ShineBorder>
 
-                            <Card className='mx-auto bg-zinc-400 w-full items-center bg-transparent'>
-                                <CardBody>
-                                   
+                            <ShineBorder className='mx-auto bg-zinc-400 w-full items-center bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
+                               
                                         <div className="flex flex-col gap-y-2">
                                             <dl>
                                             <div className="flex flex-col gap-y-2">
@@ -120,11 +127,10 @@ const Dashboard = () => {
                                         </dl>
                                     </div> 
                                   
-                                </CardBody>
-                            </Card>
+                            </ShineBorder>
 
                         </div>
-
+                       
                         <MagicCard className="shadow-2xl  h-full mb-4 p-4">
                             <MostRecentMatches />
                             <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 justify-center align-center mx-auto '>
