@@ -81,7 +81,7 @@ const Dashboard = () => {
                                     <div className="flex flex-col gap-y-2">
                                         <dl>
                                             <dt className="text-small text-black font-medium text-default-500">Entries <i className="fa-solid fa-ticket-simple"></i></dt>
-                                            <dd className="text-2xl text-black"><b>0</b> <span className='text-tiny text-black'> active</span></dd>
+                                            <dd className="text-2xl text-black"><b>{userInfo.entries}</b> <span className='text-tiny text-black'> active</span></dd>
                                         </dl>
                                     </div> 
                               

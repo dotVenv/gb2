@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 #app imports
-from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership
+from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet
 from gb_api.email_helpers import EmailHelper
 import datetime
 
@@ -38,12 +38,13 @@ class UserHelper():
     def get_user(self):
         '''get the user data to return to the view'''
         
+        self.cu_ap = None
         try:
             self.cu = gbUser.objects.get(id=self.uid)
             self.cu_ap = AccountPreference.objects.get(user=self.cu)
             
         except dce.ObjectDoesNotExist:
-            return None
+            pass
         
 
         self.serialized = {
@@ -56,6 +57,7 @@ class UserHelper():
         }
         
         
+        self.serialized['membership'] = 'none '
         if self.cu_ap:
             
             if not self.cu_ap.server:
@@ -67,7 +69,11 @@ class UserHelper():
                 self.serialized['platform'] = None
             else:
                 self.serialized['platform'] = self.cu_ap.platform.name
+            
+            self.serialized['balance'] = self.cu_ap.wallet.balance
+            self.serialized['entries'] = self.cu_ap.entries
             self.serialized['membership'] = self.cu_ap.membership.name
+            
     
         
 
@@ -92,17 +98,19 @@ class UserHelper():
             
             if self.cu.account_verified is False:
                 self.serialized['setup_step'] = 1
-                    
-            acc_pref = AccountPreference.objects.filter(user=self.cu.id)
-            if acc_pref.exists():
-        
-                if not self.cu.first_name or not self.cu.last_name:
-                    self.serialized['setup_step'] = 3
-                else:
-                    self.serialized['setup_step'] = 4
-                    
-            if not acc_pref.exists():
-                    self.serialized['setup_step'] = 2
+                
+                
+            else:        
+                acc_pref = AccountPreference.objects.filter(user=self.cu.id)
+                if acc_pref.exists():
+            
+                    if not self.cu.first_name or not self.cu.last_name:
+                        self.serialized['setup_step'] = 3
+                    else:
+                        self.serialized['setup_step'] = 4
+                        
+                if not acc_pref.exists():
+                        self.serialized['setup_step'] = 2
            
         return True
     
@@ -166,18 +174,22 @@ class UserHelper():
                 
             
             case 'preferences':
-                
                 console = str(self.request.POST.get('userInput[console]'))
                 server = str(self.request.POST.get('userInput[server]'))
                 if not console or not server:
                     return False
                 self.get_user()
                 if self.cu:
-                    acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'))
-                    if acc_pref:
-                        acc_pref.save()
-                        self.setup_data = {'step': 'passed'}
-                        return True
+                    acc_pref = AccountPreference.objects.filter(user=self.cu)
+                    if not acc_pref:
+                        new_wallet = Wallet.objects.create()
+                        if new_wallet:
+                            new_wallet.save()
+                            acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'), wallet=new_wallet)
+                            if acc_pref:
+                                acc_pref.save()
+                                self.setup_data = {'step': 'passed'}
+                                return True
                    
                 self.setup_data =  {'step': 'failed'}
                 return False

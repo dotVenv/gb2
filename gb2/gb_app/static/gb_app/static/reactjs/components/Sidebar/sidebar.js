@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext, useState } from "react";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Button, Tooltip, Chip, Spacer } from "@nextui-org/react";
 import { ACMELogo, UserDropdown, NotiDropdown, BarRoutes } from "../index";
 
 const CustomSidebar = ({userInfo}) => {
@@ -26,6 +26,12 @@ const CustomSidebar = ({userInfo}) => {
                     { parseInt(userInfo.setup_step) < 4 ? undefined  :
                     
                         <div className="ml-4 flex items-center md:ml-6">
+                            <div className='mr-2 '>
+                                <Chip variant='flat' className='text-black' startContent={ <i className="fa-solid fa-wallet fa-lg" style={{'color': 'black'}}></i> } color='secondary'size='md' radius='md'>
+                                    ${userInfo.balance}
+                                </Chip>
+                                <Spacer></Spacer>
+                            </div>
                             <div>
                                 <NotiDropdown />
                             </div>

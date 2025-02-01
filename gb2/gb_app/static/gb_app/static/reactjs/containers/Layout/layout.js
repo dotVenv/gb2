@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
     const accountProgress = userInfo.setup_step;   
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
-
+ 
 
  
     return(
@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
                     <section className='mt-3 py-4'>
                        
                         <div className="flex items-center w-[50px] mx-auto  justify-center align-center  col-9">
-                        { accountProgress < 4 ? undefined : userInfo.membership == null || userInfo.membership == 'free'
+                        { accountProgress < 4 ? undefined :  userInfo.membership == 'free'
                             ?    <Alert
                                         color="warning"
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}

@@ -18,6 +18,7 @@ const CompleteProfileAlert = ({cu}) => {
 
     const [isSelected, setIsSelected] = useState(true);
     const [chosenState, setchosenState] = useState();
+    const [updateSubmitted, setupdateSubmited] = useState();
     
     return(
         <>

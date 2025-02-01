@@ -9,7 +9,6 @@ const StickyOptions  = () => {
             <Tabs aria-label="Options" className='fixed  justify-center align-center mx-auto left-0 right-0 bottom-10 ' radius="lg" isVertical={false} variant="bordered">
         
             <Tab
-                className='bg-purple-800'
                 key="holder"
                 title={
                     <div className="flex items-center space-x-2">

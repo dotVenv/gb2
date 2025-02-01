@@ -99,9 +99,7 @@ class Current_Session():
                     new_user.ip_address = ip
                 
                 new_user.save()
-                #send verification email here
-                #TODO
-                
+                #send verification email here                
                 new_email = email_helpers.EmailHelper()
                 new_email.email_data['recipient'] = str(self.request.user.email)
                 new_email.email_data['username'] = str(self.request.user.username)

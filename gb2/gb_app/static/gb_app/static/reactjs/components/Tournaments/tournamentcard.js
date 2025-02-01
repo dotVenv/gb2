@@ -35,7 +35,7 @@ const TournamentCard = () => {
             <div className="flex justify-center align-center mx-auto">
                 <i className="fa-solid fa-star" style={{'color': 'yellow'}}></i>
                 <br></br>
-                <p className="ms-2 text-sm font-bold text-gray-100">4.95</p>
+                <p className="ms-2 text-sm font-bold text-gray-100">495</p>
                 <Spacer></Spacer>
                 
             </div>

@@ -76,7 +76,7 @@ membership_options = [
     ("monthly", "monthly"),
 ]
 
-class Membership(models.Model):
+class Membership(ExportModelOperationsMixin('Membership'),models.Model):
     '''store the membership data for each user'''
     
     name = models.CharField(choices=membership_options, max_length=20, default='free')
@@ -104,12 +104,15 @@ console_options = [
     ('PC', 'PC')
 ]
 
-class AccountPreference(models.Model):
+class AccountPreference(ExportModelOperationsMixin('AccountPreference'),models.Model):
     '''store account preferences for the user'''
     user = models.ForeignKey(gbUser, on_delete=models.CASCADE, related_name='user_pref')
     membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='user_membership', null=True, blank=True)
     server = models.CharField(choices=server_options, max_length=50, blank=True, null=True)
     platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.CASCADE, related_name='user_platform')
+    wallet = models.ForeignKey('Wallet', blank=True, null=True, on_delete=models.CASCADE, related_name='user_wallet')
+    fl = models.ManyToManyField('AccountPreference', related_name='friends_list')
+    entries = models.IntegerField(default=0)
     
     class Meta:
         verbose_name_plural = 'Account Preferences'
@@ -124,10 +127,12 @@ platform_choices = [
     ('PC', 'PC'),
 ]
 
-class Platform(models.Model):
+class Platform(ExportModelOperationsMixin('Platform'),models.Model):
     '''store the platform option for avilable on the site'''
     
     name = models.CharField(max_length=15, choices=platform_choices)
+    tournaments = models.ManyToManyField('Tournament', related_name='platform_tournaments')
+    
     
     class Meta:
         verbose_name_plural = 'Platforms'
@@ -135,3 +140,92 @@ class Platform(models.Model):
         
     def __str__(self):
         return f'{self.name}'
+
+
+game_options = [
+    ('rivals', 'rivals'),
+    ('nba2k', 'nba2k'),
+    ('madden', 'madden'),
+    ('fortnite', 'fortnite'),
+    ('cod', 'cod')
+]
+
+mode_options = [
+    ('tourney', 'tourney'),
+    ('elim', 'elim'),
+]
+
+def rules():
+    '''return a default list for each tournament'''
+    return []
+
+class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
+    '''store each tournament to return its data properly'''
+    
+    name = models.CharField(max_length=15, blank=True, null=True, choices=game_options)
+    mode = models.CharField(max_length=15,  blank=True, null=True, choices=mode_options)
+    specific = models.CharField(max_length=25, blank=True, null=True)
+    desc = models.TextField()
+    date = models.DateTimeField(auto_now_add=False)
+    rules = models.JSONField(default=rules)
+    pool = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
+    placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
+    registered = models.ManyToManyField('AccountPreference', related_name='registered_users')
+    register_limit = models.IntegerField(default=75)
+    thumbnail = models.ImageField(blank=True, null=True, upload_to='thumbnails/tournaments/')
+    rating = models.IntegerField(default=0)
+    
+    
+    class Meta:
+        verbose_name_plural = 'Tournaments'
+        
+    def __str__(self):
+        return f'{self.name}'
+    
+    
+class Transaction(ExportModelOperationsMixin('Transaction'),models.Model):
+    ''''store each transaction for stripe/balance accuracy'''
+    
+        
+    hash = models.CharField(max_length=255, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=False)
+    desc = models.CharField(max_length=255, blank=True, null=True)
+    amount = models.DecimalField(default=0.00, decimal_places=2, max_digits=7)
+    action = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(max_length=100, blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = 'Transactions'
+        
+        
+    def __str__(self):
+        
+        return f'{self.amount} : {self.hash}'
+    
+    
+def stripe_user():
+    '''return a dict for the stripe user'''
+    return {'id': None, 'hash': None}
+
+def crypto_user():
+    '''return a dict for the crypto user'''
+    return {'id': None, 'hash': None, }
+
+class Wallet(ExportModelOperationsMixin('Wallet'),models.Model):
+    '''store each wallet for the user'''
+    
+    strip_data = models.JSONField(default=stripe_user)
+    crypto_data = models.JSONField(default=crypto_user)
+    balance = models.DecimalField(default=0.00, decimal_places=2, max_digits=7)
+    is_active = models.BooleanField(default=True)
+    transactions = models.ManyToManyField('Transaction', related_name='wallet_transactions')
+
+    class Meta: 
+        verbose_name_plural = 'Wallets'
+        
+    def __str__(self):
+        
+        return f'{self.balance} - Active ({self.is_active})'
+        
+    
+    
