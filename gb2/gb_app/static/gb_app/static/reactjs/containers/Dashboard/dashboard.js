@@ -142,7 +142,7 @@ const Dashboard = () => {
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
                             
                             <div className='flex'>
-                                <p className='text-center mt-4 justify-center align-center  mx-auto text-black'> <SparklesText text='Popular Tournaments' /> <i className="fa-solid fa-star"></i> </p>
+                                <p className='text-center mt-4 justify-center align-center  mx-auto text-black'> <SparklesText text='Popular Tournaments' /></p>
                                 <Spacer></Spacer>
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
@@ -163,7 +163,7 @@ const Dashboard = () => {
                                         />
                                 </CardBody>
                                 <CardFooter>
-                                    <Button variant='bordered' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                    <Button variant='ghost' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
                                 </CardFooter>
                                 </Card>
                                 <Card className='bg-transparent' isFooterBlurred>
@@ -176,7 +176,7 @@ const Dashboard = () => {
                                         />
                                     </CardBody>
                                     <CardFooter>
-                                        <Button variant='bordered' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
+                                        <Button variant='ghost' className='justify-center align-center mx-auto' color='success' startContent={<i className="fa-solid fa-bag-shopping"></i>}> Buy Now </Button>
                                     </CardFooter>
                                 </Card>
                             </div>

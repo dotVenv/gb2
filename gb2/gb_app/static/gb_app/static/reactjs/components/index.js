@@ -1,3 +1,4 @@
+//dashboard
 export { default as CustomSidebar } from './Sidebar/sidebar';
 export { default as ACMELogo } from './ACMELogo/acme';
 export { default as UserDropdown } from './Sidebar/userdropdown';
@@ -20,13 +21,17 @@ export { default as ExtraPlayerStats } from './PlayerStats/extrastats';
 export { default as MostRecentMatches } from './PlayerStats/recentmatches';
 export { default as PopularTournaments } from './Carousels/populartournaments';
 
-
 export { SparklesText } from './Magicui/sparkles-text';
 export { Dock, DockIcon, dockVariants } from './Magicui/dock';
 export{ ShineBorder } from './Magicui/shine-border';
 export { Globe } from './Magicui/globe';
 export { MagicCard } from './Magicui/magic-card';
 export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';
+
+
+
+//profile
+export { default as ProfileSide } from './ProfileSide/profileside';
 
 
 //experimental
