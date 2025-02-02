@@ -60,6 +60,13 @@ const MyProfile = () => {
                       
                        
                     </section>
+
+                    <section  className='h-full justify-center align-center mx-auto'>
+                        <Card isBlurred className='shadow-2xl bg-gray-100 w-full'>
+                            
+
+                        </Card>
+                    </section>
                 </div>               
             </div>
             </Layout>
