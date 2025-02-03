@@ -153,6 +153,7 @@ game_options = [
 mode_options = [
     ('tourney', 'tourney'),
     ('elim', 'elim'),
+    ('speedrun', 'speedrun')
 ]
 
 def rules():
