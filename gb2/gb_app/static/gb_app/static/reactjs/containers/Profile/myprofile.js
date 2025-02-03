@@ -59,6 +59,7 @@ const MyProfile = () => {
                             <div className=' float start justify-start mx-auto'>
                                 <ActionCard
                                         className='bg-gray-400 h-15 mb-2 w-full'
+                                        color='primary'
                                         isCompleted={true}
                                         description="Complete account setup."
                                         icon={<i className="fa-solid fa-user-astronaut"></i>}
@@ -69,6 +70,7 @@ const MyProfile = () => {
                                     />
                                     <ActionCard
                                         className='bg-gray-400 h-15 w-full mb-2'
+                                        color={userInfo.membership.toLowerCase() == 'free'? 'danger' : 'success'}
                                         isCompleted={userInfo.membership.toLowerCase() == 'free'?  false : true }
                                         description="Activate membership."
                                         icon={<i className="fa-solid fa-gem"></i>}
@@ -79,6 +81,7 @@ const MyProfile = () => {
                                     />
                                     <ActionCard
                                         className='bg-gray-400 h-15 w-full mb-2'
+                                        color={userInfo.mfa.toLowerCase() == 'false' ? 'danger' : 'success'}
                                         isCompleted={userInfo.mfa.toLowerCase() == 'false' ? false : true}
                                         description="Enable 2FA Security"
                                         icon={<i className="fa-solid fa-user-lock"></i>}

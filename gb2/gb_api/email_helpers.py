@@ -49,7 +49,6 @@ class EmailHelper():
                 self.email_data['verification_code'] = self.__generate_email_code()
                 check_email.update(code=self.email_data['verification_code'], created_at=timezone.now(), attempts=0, expired=False)
               
-                return
         
             else:
                 try:
@@ -59,14 +58,10 @@ class EmailHelper():
                         email_data.save()
                 except dce.RequestAborted:
                     return 
-                
-           
-               
-            
         else:
             self.email_data['verification_code'] = self.__generate_email_code()
         
-        #new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
+        new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
     
         if new_email:
             return True

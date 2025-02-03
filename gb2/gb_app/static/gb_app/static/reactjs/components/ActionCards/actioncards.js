@@ -47,7 +47,6 @@ const ActionCard = React.forwardRef(
         isFooterBlurred
         isPressable
         isBlurred
-        isDisabled={isCompleted}
         className={cn("border-small", colors?.card, className)}
         shadow="sm"
         {...props}
