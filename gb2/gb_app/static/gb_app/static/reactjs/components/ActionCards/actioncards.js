@@ -47,13 +47,13 @@ const ActionCard = React.forwardRef(
         isFooterBlurred
         isPressable
         isBlurred
-        isDisabled={!isCompleted}
+        isDisabled={isCompleted}
         className={cn("border-small", colors?.card, className)}
         shadow="sm"
         {...props}
       >
         <CardBody className="flex h-full flex-row items-start gap-3 p-2">
-            <Checkbox color={isCompleted ? 'success' : 'danger'} defaultSelected={true} variant='light'  className='bg-transparent'></Checkbox>
+            <Checkbox isDisabled color={isCompleted ? 'success' : 'danger'} isSelected={true} defaultSelected={true} variant='light'  className='bg-transparent'></Checkbox>
           <div className={cn("item-center flex rounded-medium border p-2", colors?.iconWrapper)}>
                 { icon }
           </div>

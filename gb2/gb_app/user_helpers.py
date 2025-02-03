@@ -49,13 +49,14 @@ class UserHelper():
 
         self.serialized = {
             "username": str(self.cu.username),
-            "mfa": bool(self.cu.mfa_active),
+            "mfa": str(bool(self.cu.mfa_active)),
             "profile_pic": str(self.cu.profile_pic),
             "fname": str(self.cu.first_name),
             "lname": str(self.cu.last_name),
         
         }
         
+       
         
         self.serialized['membership'] = 'none '
         if self.cu_ap:

@@ -20,7 +20,8 @@ const UserDropdown = ({ userInfo }) => {
                 color="secondary"
                 name={userInfo.username}
                 size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                src={userInfo.profile_pic}
+                showFallback={true}
             />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Dropdown"   className='p-2 mx-auto text-gray-400' radius='lg'  variant="faded"

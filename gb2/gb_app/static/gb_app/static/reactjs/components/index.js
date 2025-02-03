@@ -33,6 +33,7 @@ export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carousela
 //profile
 export { default as ProfileSide } from './ProfileSide/profileside';
 export { default as ActionCard } from './ActionCards/actioncards';
+export { default as CompCard } from './CompCard/compcard';
 
 
 //experimental

@@ -2,12 +2,11 @@
 
 import React, {useState,useContext} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Divider, } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, User, Badge, Tooltip } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 import { ButtonGroup } from "flowbite-react";
-import { ProfileSide, ShineBorder, ActionCard } from "../../components";
-
+import { ProfileSide, ShineBorder, ActionCard, CompCard } from "../../components";
 
 const MyProfile = () => {
 
@@ -70,21 +69,31 @@ const MyProfile = () => {
                                     />
                                     <ActionCard
                                         className='bg-gray-400 h-15 w-full mb-2'
-                                        isCompleted={false}
+                                        isCompleted={userInfo.membership.toLowerCase() == 'free'?  false : true }
                                         description="Activate membership."
-                                        icon={<i className="fa-solid fa-user-astronaut"></i>}
+                                        icon={<i className="fa-solid fa-gem"></i>}
                                         title="Active membership"
                                         onPress={() => {
                                         console.log("Create a new agreement");
                                         }}
                                     />
+                                    <ActionCard
+                                        className='bg-gray-400 h-15 w-full mb-2'
+                                        isCompleted={userInfo.mfa.toLowerCase() == 'false' ? false : true}
+                                        description="Enable 2FA Security"
+                                        icon={<i className="fa-solid fa-user-lock"></i>}
+                                        title="Active 2FA"
+                                        onPress={() => {
+                                        console.log("Create a new agreement");
+                                        }}
+                                    />
                             </div>
-                            <div >
-                                <Button>
-                                    Hello World
-                                </Button>
-                            </div>
+                            <CompCard userInfo={userInfo} />
+                            
                         </div>
+                        <Card className='w-full h-full'>
+
+                        </Card>
                     </section> 
                 </div>               
             </div>

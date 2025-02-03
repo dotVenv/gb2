@@ -69,8 +69,7 @@ const DescriptionSplit = () => {
                                     <ul className='justify-center align-center mx-auto px-8  space-y-8'>
                                         <li> 
                                             <Card  
-                                                isFooterBlurred className=" py-0 justify-center align-center mx-auto"
-                                                isPressable shadow="sm" onPress={() => console.log("item pressed")}>
+                                                isFooterBlurred className=" py-0 justify-center align-center mx-auto">
                                                 <CardBody className="overflow-visible ">
                                                     <img
                                                     alt="Card background"
@@ -159,7 +158,6 @@ const DescriptionSplit = () => {
                                     <ul className='px-8 justify-center align-center mx-auto gap-3 space-y-3'>
                                         <li> 
                                             <Card  
-                                                isPressable shadow="sm" onPress={() => console.log("item pressed")}
                                                 className='justify-center align-center  mx-auto mr-4'>
                                                 <CardBody>
                                                     <img src={batman_banner} style={{'height': '100px'}} className='object-cover' radius='full' />
@@ -193,6 +191,7 @@ const DescriptionSplit = () => {
                                                             src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                                                             isBordered : true,
                                                             radius : 'md',
+                                                            showFallback: true,
                                                         }}
                                                         description="Tournaments Won: 27 "
                                                         name="@gdub"
