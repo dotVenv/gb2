@@ -35,10 +35,9 @@ const MyProfile = () => {
             <br></br>
           
             <div className='mt-4 ml-4 col-9 justify-center align-center mx-auto'>
-                <div className="ml-4 flex gap-0 mb-4 w-full">
+                <div className="lg:flex sm:grid sm:grid-cols-2 gap-0 space-0 mb-4 w-full">
                     <ProfileSide userInfo={userInfo} />
-                    <br></br>
-                    <section className='h-full w-full justify-center align-center mx-auto'>
+                        <section className='h-full w-full justify-center align-center mx-auto'>
                         <div>
                             <ShineBorder className='flex gap-4 mx-auto bg-zinc-400  bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
                                 <div className='grid grid-cols-3 gap-2'>
@@ -57,8 +56,8 @@ const MyProfile = () => {
                                 </div>
                             </ShineBorder>
                         </div>
-                        <div className='w-full flex mt-3 mx-auto gap-x-7 space-x-8'>
-                            <div classname='col-7 float start justify-start mx-auto flex'>
+                        <div className='w-full flex mt-3 mx-auto gap-x-7 space-x-8 grid sm: grid-cols-1 lg:grid-cols-2 gap-0'>
+                            <div className=' float start justify-start mx-auto'>
                                 <ActionCard
                                         className='bg-gray-400 h-15 mb-2 w-full'
                                         isCompleted={true}
@@ -80,7 +79,7 @@ const MyProfile = () => {
                                         }}
                                     />
                             </div>
-                            <div className='col-12'>
+                            <div >
                                 <Button>
                                     Hello World
                                 </Button>
