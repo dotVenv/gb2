@@ -12,14 +12,14 @@ const ProfileSide = ({userInfo}) => {
     return(
         <>
         
-        <aside className='col-9'>
+        <aside className='w-50'>
             <Card isBlurred  className='shadow-2xl bg-gray-100 h-full rounded-border rounded-large w-80 shrink-0 overflow-y-auto'>
                 <CardHeader>
                 <div className="p-3">
                     <User
                         className='text-black'
                         avatarProps={{
-                            src: "/profile_pics/"+userInfo.profile_pic,
+                            src: userInfo.profile_pic,
                             size:'lg',
                             isBordered: true,
                             className: 'h-16 w-16 rounded-lg',
