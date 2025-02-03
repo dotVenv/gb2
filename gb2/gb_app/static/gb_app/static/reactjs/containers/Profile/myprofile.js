@@ -34,9 +34,10 @@ const MyProfile = () => {
             <Spacer></Spacer>
             <br></br>
           
-            <div className='mt-4  col-9 justify-center align-center mx-auto'>
-                <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-0 mb-4 w-full">
+            <div className='mt-4 ml-4 col-9 justify-center align-center mx-auto'>
+                <div className="ml-4 flex gap-0 mb-4 w-full">
                     <ProfileSide userInfo={userInfo} />
+                    <br></br>
                     <section className='h-full w-full justify-center align-center mx-auto'>
                         <div>
                             <ShineBorder className='flex gap-4 mx-auto bg-zinc-400  bg-transparent' color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
@@ -79,7 +80,7 @@ const MyProfile = () => {
                                         }}
                                     />
                             </div>
-                            <div>
+                            <div className='col-12'>
                                 <Button>
                                     Hello World
                                 </Button>
