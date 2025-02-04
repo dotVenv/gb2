@@ -19,7 +19,8 @@ const ProfileSide = ({userInfo}) => {
     
 
     const [editAccount, setEditAccount] = useState(false);
-
+    const [editPassword, setEditPassword] = useState(false);
+    
     return(
         <>
         
