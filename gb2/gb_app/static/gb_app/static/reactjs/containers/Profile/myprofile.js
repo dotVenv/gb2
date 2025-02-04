@@ -7,7 +7,11 @@ import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 import { ButtonGroup } from "flowbite-react";
 import { ProfileSide, ShineBorder, ActionCard, CompCard } from "../../components";
+import { signal } from "@preact/signals-react";
 
+const userQA = signal([
+    {status: 'Answered', Q: 'Can i use meta mask to withdrawal?', A: 'No metamask is not supported', staff: 'Admin G'}
+]);
 const MyProfile = () => {
 
     const cu = useContext(ConnContext);
@@ -111,13 +115,16 @@ const MyProfile = () => {
                     <Accordion variant="splitted h-[10vh]" radius='lg'>
                         <AccordionItem key="1" aria-label="Accordion 1" title={<p className='text-black'>Your support tickets <i className="fa-solid fa-circle-question" style={{'color': 'black'}}></i></p>} className='p-1 text-small text-black'>
                             <ul className='col-9'>
-                                <li>
-                                    <Chip variant='flat' color='success' className='text-small text-black  mb-3' radius='lg' sz='sm'> Answered </Chip>
-                                    <Spacer></Spacer>
-                                    <p className='text-tiny text-degfault-800'>Q: Am i able to withdrawal via metamask?</p>
-                                    <p className='text-black text-small ml-4 mt-2'><b>A: <i>{defaultContent} </i></b> <i className='text-tiny text-defualt-300'> - by Admin G</i></p>
-                                    <hr style={{'color': 'black'}}></hr>
-                                </li>
+                                { userQA.value.map((key, index) => {
+                                    return(<li key={index}>
+                                        <Chip variant='flat' color='success' className='text-small text-black  mb-3' radius='lg' sz='sm'> {key.status} </Chip>
+                                        <Spacer></Spacer>
+                                        <p className='text-tiny text-degfault-800'>Q:{key.Q}</p>
+                                        <p className='text-black text-small ml-4 mt-2'><b>A: <i>{key.A} </i></b> <i className='text-tiny text-defualt-300'> - by {key.staff}</i></p>
+                                        <hr style={{'color': 'black'}}></hr>
+                                    </li>)
+                                })}
+                                
                                 
                             </ul>
                         </AccordionItem>

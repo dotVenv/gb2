@@ -53,6 +53,7 @@ class UserHelper():
             "profile_pic": str(self.cu.profile_pic),
             "fname": str(self.cu.first_name),
             "lname": str(self.cu.last_name),
+            "email": str(self.cu.email),
         
         }
         

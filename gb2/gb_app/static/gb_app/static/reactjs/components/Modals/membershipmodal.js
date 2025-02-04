@@ -25,13 +25,13 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
 
     return(
         <>
-        <Modal backdrop='blur' className='bg-transparent' size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal backdrop='blur' size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
                 <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'> Choose your memberhsip  <span className='text-tiny text-white'> Powered by <i className="fa-brands fa-cc-stripe fa-md"></i></span></i></ModalHeader>
-                <ModalBody >
-                    <div className="flex flex-col px-4">
+                
+                    <div className="flex flex-col px-4 p-4">
                     <Tabs variant='flat' className='text-black' color='primary' aria-label="Membership Options" >
                         { memInfo.map((key, index) => {
                             return(
@@ -43,14 +43,13 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
                                                             ? 'Official '
                                                             : undefined
                                                 }>
-                                        <Card  shadow className='bg-gradient-to-r from-gray-800 to-zinc-800'>
-                                            <CardBody>
+                                      
                                             <p className='text-semibold'>{key.name.toLowerCase() == 'free' 
-                                                    ? <span><b>Free Membership</b> <i className='text-green-500'>${key.price}</i></span>
+                                                    ? <span><b style={{'color': 'blue'}}>Free</b> Membership <i className='text-green-500'>${key.price}</i></span>
                                                     : key.name.toLowerCase() == '7day' 
-                                                        ? <span><b>Trial Membership</b> <i  className='text-green-500'>${key.price}</i></span>
+                                                        ? <span><b style={{'color': 'blue'}}>Trial</b>  Membership <i  className='text-green-500'>${key.price}</i></span>
                                                         : key.name.toLowerCase() == 'monthly'
-                                                            ? <span><b>Official Membership</b> <i  className='text-green-500'>${key.price}/month</i></span>
+                                                            ? <span><b style={{'color': 'blue'}}>Official</b>  Membership <i  className='text-green-500'>${key.price}/month</i></span>
                                                             : undefined}</p>
                                                             
                                             {key.name.toLowerCase() == '7day' ? <><Chip className=' text-tiny p-3' size='sm' variant='flat' color='warning'><i>$14.99 after 7 days</i></Chip><Spacer></Spacer></> : undefined }
@@ -68,19 +67,17 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
                                                         return(<li key={vet} className='text-tiny'> <i className="fa-solid fa-circle-check"></i> { ket} </li>)
                                                     })}
                                                 </ul>
-                                            </CardBody>
-                                            <CardFooter>
+                                            
+                                          
                                                 <Button variant='flat' color='secondary' isDisabled={key.name.toLowerCase() =='free' ? true : false } startContent={<i className="fa-solid fa-cart-plus"></i>}>
                                                     { key.name.toLowerCase() == 'free' ? undefined : 'Subscribe'}
                                                 </Button>
-                                            </CardFooter>
-                                        </Card>
+                                          
                                         </Tab>
                                        )
                                     })}
                     </Tabs>
                   </div>
-                </ModalBody>
                 <ModalFooter>
                     <Button color="danger" variant="shadow" onPress={(e) => { setModal(false)}}>
                         Close

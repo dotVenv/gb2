@@ -5,9 +5,20 @@ import React, {useState,useContext} from "react";
 import { User, Card, CardBody, CardFooter, Spacer, Button, Chip, cn, CardHeader, Tooltip, } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ButtonGroup } from "flowbite-react";
+import { EditAccountModal } from '../../components';
 
+
+
+const editOptions = [
+    {title: 'editAccount', content: 'Edit account details', icon: <i className="fa-solid fa-user-pen"></i>,  },
+    {title: 'editPassword', content: 'Change account password', icon: <i className="fa-solid fa-key"></i>},
+    {title: 'edit2FA', content: 'Change account 2FA', icon: <i className="fa-solid fa-fingerprint"></i>},
+]
 
 const ProfileSide = ({userInfo}) => {
+    
+
+    const [editAccount, setEditAccount] = useState(false);
 
     return(
         <>
@@ -53,21 +64,17 @@ const ProfileSide = ({userInfo}) => {
                 </CardHeader>
                 <CardBody>
                     <ButtonGroup className='justify-center align-center mx-auto gap-2' size='lg'>
-                        <Tooltip  className="capitalize" color='secondary' content='Edit account details'>
-                            <Button variant='flat' color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
-                                <i className="fa-solid fa-user-pen"></i>
-                            </Button>
-                        </Tooltip>
-                        <Tooltip  className="capitalize" color='secondary' content='Change account password'>
-                            <Button variant='flat' color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
-                                <i className="fa-solid fa-key"></i>
-                            </Button>
-                        </Tooltip>
-                        <Tooltip  className="capitalize" color='secondary' content='Change 2FA settings'>
-                            <Button variant='flat' color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
-                                <i className="fa-solid fa-fingerprint"></i>
-                            </Button>
-                        </Tooltip>
+                        { editOptions.map((key, index) => {
+                            return(
+                                <Tooltip key={index} className="capitalize" color='secondary' content={key.content}>
+                                    <Button variant='flat' onPress={(e) => { key.title == 'editAccount' ? setEditAccount(!editAccount) : undefined }} color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
+                                        {key.icon}
+                                    </Button>
+                                </Tooltip>
+                                )
+                        })}
+                       
+                     
                     </ButtonGroup>
                 </CardBody>
                 <CardFooter>
@@ -76,6 +83,8 @@ const ProfileSide = ({userInfo}) => {
             </Card>
         
         </aside>
+
+        { editAccount ? <EditAccountModal isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} /> : undefined }
         </>
     );
 };

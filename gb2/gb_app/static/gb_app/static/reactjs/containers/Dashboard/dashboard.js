@@ -142,7 +142,7 @@ const Dashboard = () => {
                         <Card className="bg-transparent shadow-2xl  h-full mb-4 p-4">
                             
                             <div className='flex'>
-                                <p className='text-center mt-4 justify-center align-center  mx-auto text-black'> <SparklesText text='Popular Tournaments' /></p>
+                                <span className='text-center mt-4 justify-center align-center  mx-auto text-black'> <SparklesText text='Popular Tournaments' /></span>
                                 <Spacer></Spacer>
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
