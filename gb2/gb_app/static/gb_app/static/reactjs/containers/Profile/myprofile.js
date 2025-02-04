@@ -2,7 +2,7 @@
 
 import React, {useState,useContext} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, User, Badge, Tooltip } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 import { ButtonGroup } from "flowbite-react";
@@ -12,6 +12,8 @@ const MyProfile = () => {
 
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
+
+    const defaultContent = 'Test Desc';
 
     return(
         <>
@@ -92,13 +94,37 @@ const MyProfile = () => {
                                     />
                             </div>
                             <CompCard userInfo={userInfo} />
-                            
-                        </div>
-                        <Card className='w-full h-full'>
-
-                        </Card>
-                    </section> 
-                </div>               
+                           
+                            <Button variant='ghost' color='success' radius="lg" className='w-full mt-4 col-8' startContent={<i className="fa-solid fa-money-bill-transfer"></i>}>
+                                    Withdrawal Balance
+                            </Button>  
+                          
+                            <Button variant='ghost' color='primary' radius="lg" className='w-full mt-4 col-8' startContent={<i className="fa-solid fa-money-bill-transfer"></i>}>
+                                    Manage Membership
+                            </Button>  
+                            </div>
+                        <br></br>  
+                                   
+                    </section>
+                </div>    
+                <Card className='w-full h-full overflow-y bg-gray-100' isBlurred >
+                    <Accordion variant="splitted h-[10vh]" radius='lg'>
+                        <AccordionItem key="1" aria-label="Accordion 1" title={<p className='text-black'>Your support tickets <i className="fa-solid fa-circle-question" style={{'color': 'black'}}></i></p>} className='p-1 text-small text-black'>
+                            <ul className='col-9'>
+                                <li>
+                                    <Chip variant='flat' color='success' className='text-small text-black  mb-3' radius='lg' sz='sm'> Answered </Chip>
+                                    <Spacer></Spacer>
+                                    <p className='text-tiny text-degfault-800'>Q: Am i able to withdrawal via metamask?</p>
+                                    <p className='text-black text-small ml-4 mt-2'><b>A: <i>{defaultContent} </i></b> <i className='text-tiny text-defualt-300'> - by Admin G</i></p>
+                                    <hr style={{'color': 'black'}}></hr>
+                                </li>
+                                
+                            </ul>
+                        </AccordionItem>
+                        
+                        
+                    </Accordion>
+                </Card>                 
             </div>
             </Layout>
         </>

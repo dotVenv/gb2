@@ -12,7 +12,7 @@ const ProfileSide = ({userInfo}) => {
     return(
         <>
         
-        <aside className='mb-3 w-50'>
+        <aside className='relative mb-3 w-50'>
             <Card isBlurred  className='shadow-2xl bg-gray-100 h-full rounded-border rounded-large w-80 shrink-0 overflow-y-auto'>
                 <CardHeader>
                 <div className="p-3">
