@@ -37,7 +37,7 @@ const PreferencesAlert = ({cu}) => {
     const [prefResponse, setPrefResponse] = useState(null);
 
     const savePreferences = async() => {
-        console.log(preferenceData.value.console, preferenceData.value.server);
+        
 
         if (preferenceData.value.server == '' || preferenceData.value.server == null || preferenceData.value.console == '' || preferenceData.value.console == null ){
             toastData.value.toastType = 'error';

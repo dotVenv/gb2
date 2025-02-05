@@ -5,9 +5,9 @@ import React, {useState,useContext} from "react";
 import { User, Card, CardBody, CardFooter, Spacer, Button, Chip, cn, CardHeader, Tooltip, } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ButtonGroup } from "flowbite-react";
-import { EditAccountModal } from '../../components';
-
-
+import { EditAccountModal, CustomToast } from '../../components';
+import { ConnContext } from "../../connector";
+import { signal } from "@preact/signals-react";
 
 const editOptions = [
     {title: 'editAccount', content: 'Edit account details', icon: <i className="fa-solid fa-user-pen"></i>,  },
@@ -15,11 +15,49 @@ const editOptions = [
     {title: 'edit2FA', content: 'Change account 2FA', icon: <i className="fa-solid fa-fingerprint"></i>},
 ]
 
+
+const toastData = signal({
+    toastType: '',
+    desc: '',
+});
+
+
 const ProfileSide = ({userInfo}) => {
     
 
+    const cu = useContext(ConnContext);
+
     const [editAccount, setEditAccount] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
+    
+
+  
+    const [newToastAlert, setNewToastAlert] = useState();
+
+
+
+    const updateAccount = async(e) =>{
+
+        let data = Object.fromEntries(new FormData(e.currentTarget));
+        let response = await cu.updateAccount(data);
+        if (response){
+            
+            if (response.status == 'successful'){
+                toastData.value.desc = 'Successfully updated account';
+                toastData.value.toastType = 'success';
+            
+                setNewToastAlert(true);
+                setEditAccount(false);
+            }else{
+
+                toastData.value.desc = 'Failed to update account';
+                toastData.value.toastType = 'error';
+                setNewToastAlert(true);
+                
+            };
+        };
+
+    };
     
     return(
         <>
@@ -85,7 +123,11 @@ const ProfileSide = ({userInfo}) => {
         
         </aside>
 
-        { editAccount ? <EditAccountModal isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} /> : undefined }
+        { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} /> : undefined }
+
+        { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }     
+        
+      
         </>
     );
 };

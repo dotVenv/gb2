@@ -43,6 +43,10 @@ class APPViews(TemplateView):
     def myprofile(self, request):
         '''return the myprofile view for the user'''
         
+        if request.method == 'POST':
+            
+            return getres().res('200', new_msg={'status': str('successful')})
+        
         context = {}
         return render(request, 'gb_app/templates/index.html', context=context)
     
@@ -95,7 +99,7 @@ class APPViews(TemplateView):
     
         
         #onGET
-        mem_data = []
+        mem_data = [] #membership data
     
         for value in Membership.objects.all():
             mem_data.append({

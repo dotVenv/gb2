@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Modal,
     ModalContent,
@@ -14,11 +14,14 @@ import {
     Input,
   } from "@nextui-org/react";
   
+import { signal } from '@preact/signals-react';
 
-const EditAccountModal = ({ userInfo, setModal, isModalOpen}) => {
+const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => {
+
 
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
     return(
         <>
 
@@ -30,7 +33,7 @@ const EditAccountModal = ({ userInfo, setModal, isModalOpen}) => {
                 <ModalBody >
                     <div className="flex flex-col px-4">
                         <Form
-                            onSubmit={(e) => {e.preventDefault(); console.log(Object.fromEntries(new FormData(e.currentTarget)))}}>
+                            onSubmit={(e) => {e.preventDefault(); updateAccount(e);}}>
                             <div className='flex'>
                                 <Input
                                     name="fname"
@@ -76,13 +79,9 @@ const EditAccountModal = ({ userInfo, setModal, isModalOpen}) => {
 
                             <Spacer></Spacer>
                             
-                                <Button color='primary' variant='flat' type='submit'>
+                                <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
                                     Save Changes
                                 </Button>
-                               
-
-                
-                            
                         </Form>
                         
                   </div>

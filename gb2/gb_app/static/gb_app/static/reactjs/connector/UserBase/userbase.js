@@ -97,4 +97,27 @@ export default class CurrentUser{
         };
     };
     
+    async updateAccount(data, poststep){
+        
+        let res = await axios({
+            url:location.href,
+            method: 'post',
+            data : {uid: this.uid, poststep: poststep, input: data },
+            headers:{ 
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data'
+            },
+        }).then(resp => {
+            if (resp){
+                return resp.data.message;
+            }
+
+        }).catch(err => {
+            if ( err.response.status){
+                return err.response.data.message;
+            };
+        });
+
+        return res;
+    };
 };
