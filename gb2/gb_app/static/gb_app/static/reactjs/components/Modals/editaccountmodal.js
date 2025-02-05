@@ -33,7 +33,7 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                 <ModalBody >
                     <div className="flex flex-col px-4">
                         <Form
-                            onSubmit={(e) => {e.preventDefault(); updateAccount(e);}}>
+                            onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'update_account');}}>
                             <div className='flex'>
                                 <Input
                                     name="fname"

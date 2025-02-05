@@ -35,7 +35,7 @@ class UserHelper():
         return True
         
     
-    def get_user(self):
+    def __get_user__(self):
         '''get the user data to return to the view'''
         
         self.cu_ap = None
@@ -88,6 +88,7 @@ class UserHelper():
         '''run checks if a check is invalid/false return will be empty/none'''
         
         #should always return true unless an error occr
+        self.__get_user__()
         if self.__check_setupsteps():
             return True
         return False
@@ -135,6 +136,7 @@ class UserHelper():
                         
                     }
                     return True
+                
             case 'email-submit':
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:
@@ -180,7 +182,7 @@ class UserHelper():
                 server = str(self.request.POST.get('userInput[server]'))
                 if not console or not server:
                     return False
-                self.get_user()
+                self.__get_user__()
                 if self.cu:
                     acc_pref = AccountPreference.objects.filter(user=self.cu)
                     if not acc_pref:
@@ -221,4 +223,44 @@ class UserHelper():
         return False
         
         
+    def update_account(self):
+        '''update the account based on the poststep and inputs'''
         
+        
+        poststep = str(self.request.POST.get('poststep'))
+    
+        if not poststep: return False 
+
+        match poststep:
+            case 'update_account':
+                email = str(self.request.POST.get('input[email]'))
+                fname = str(self.request.POST.get('input[fname]'))
+                lname = str(self.request.POST.get('input[lname]'))
+                profile_pic = self.request.FILES.get('input[profile_pic]')
+                
+                #non empty fields  to be updated
+                try:
+                    cu = gbUser.objects.get(id=self.request.user.id)
+                
+                    if cu:
+                        if email: 
+                            print('updating email')
+                            cu.email = email
+                        if fname: 
+                            print('updating first')
+                            cu.firstname = fname
+                        if lname: 
+                            print('updating last')
+                            cu.lastname = lname
+                        if profile_pic: 
+                            print('updating pic')
+                            cu.profile_pic = profile_pic
+                        cu.save()
+                        print('saving current user update')
+                        return True
+                except dce.RequestAborted:
+                    return False
+                except dce.ObjectDoesNotExist:
+                    return False
+                
+        return False

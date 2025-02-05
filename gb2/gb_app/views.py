@@ -43,9 +43,17 @@ class APPViews(TemplateView):
     def myprofile(self, request):
         '''return the myprofile view for the user'''
         
+        cu  = UserHelper(request)
+        
         if request.method == 'POST':
             
-            return getres().res('200', new_msg={'status': str('successful')})
+            if not cu.is_valid_req():
+                return getres().res('401', new_msg={'status': str('failed')})
+            
+            if cu.update_account():
+                return getres().res('200', new_msg={'status': str('successful')})
+            
+            return getres().res('401', new_msg={'status': str('failed')})
         
         context = {}
         return render(request, 'gb_app/templates/index.html', context=context)
@@ -65,7 +73,7 @@ class APPViews(TemplateView):
                 return getres().res('401')
             
             #if req is valid set/get the serialized user
-            cu.get_user()
+            
             if cu.setupchecks():
                 return getres().res('200', new_msg=cu.serialized)
     

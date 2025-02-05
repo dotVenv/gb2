@@ -36,25 +36,21 @@ const ProfileSide = ({userInfo}) => {
 
 
 
-    const updateAccount = async(e) =>{
+    const updateAccount = async(e, poststep) =>{
 
         let data = Object.fromEntries(new FormData(e.currentTarget));
-        let response = await cu.updateAccount(data);
+        let response = await cu.updateAccount(data, poststep);
         if (response){
             
             if (response.status == 'successful'){
                 toastData.value.desc = 'Successfully updated account';
                 toastData.value.toastType = 'success';
-            
-                setNewToastAlert(true);
                 setEditAccount(false);
             }else{
-
                 toastData.value.desc = 'Failed to update account';
                 toastData.value.toastType = 'error';
-                setNewToastAlert(true);
-                
             };
+            setNewToastAlert(true);
         };
 
     };
@@ -124,7 +120,6 @@ const ProfileSide = ({userInfo}) => {
         </aside>
 
         { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} /> : undefined }
-
         { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }     
         
       
