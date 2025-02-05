@@ -12,7 +12,8 @@ import {
     Form,
     Spacer,
     Input,
-    InputOtp
+    InputOtp,
+    ButtonGroup
   } from "@nextui-org/react";
   
 import { signal } from '@preact/signals-react';
@@ -42,7 +43,17 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                                 onValueChange={setotpInput}
                                 description='Enter the 4 digit code sent to your email address.'
                             />
-                            <Button variant='flat' color='primary' type='submit' size='sm' radius='lg'> Verify Change </Button>
+                            <div className='flex gap-2'>
+                                <Button 
+                                    variant='flat' 
+                                    color='primary' 
+                                    type='submit' 
+                                    size='sm' radius='lg' startContent={<i className="fa-solid fa-envelope-circle-check"></i>}> Verify Change </Button>
+                                <Button 
+                                    variant='flat' 
+                                    color='secondary' 
+                                    size='sm' radius='lg' startContent={<i className="fa-solid fa-rotate-right"></i>}> resend </Button>
+                            </div>
                         </Form>:
                         <Form
                             onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'update_account', setemailChangeSub);}}>
