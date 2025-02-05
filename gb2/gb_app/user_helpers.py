@@ -221,7 +221,16 @@ class UserHelper():
                     return True
     
         return False
+    
+    
+    def attempt_email_change(self):
+        '''send a new otp to the current email, if correct update user after submission'''
         
+        new_email = EmailHelper()
+        new_email.email_data['recipient'] = str(self.request.user.email)
+        new_email.email_data['username'] = str(self.request.user.username)
+        return new_email.verify_account(request=self.request)  
+       
         
     def update_account(self):
         '''update the account based on the poststep and inputs'''
@@ -243,9 +252,9 @@ class UserHelper():
                     cu = gbUser.objects.get(id=self.request.user.id)
                 
                     if cu:
-                        if email: 
+                        """if email: 
                             print('updating email')
-                            cu.email = email
+                            cu.email = email"""
                         if fname: 
                             print('updating first')
                             cu.firstname = fname

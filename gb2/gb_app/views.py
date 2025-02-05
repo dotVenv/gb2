@@ -50,9 +50,15 @@ class APPViews(TemplateView):
             if not cu.is_valid_req():
                 return getres().res('401', new_msg={'status': str('failed')})
             
-            if cu.update_account():
-                return getres().res('200', new_msg={'status': str('successful')})
-            
+            match request.POST.get('poststep'):
+                case 'update_account':
+                    if cu.update_account():
+                        return getres().res('200', new_msg={'status': str('successful')})
+                
+                case 'verify_email':
+                    if cu.attempt_email_change():
+                        return getres().res('200', new_msg={'status': str('successful')})
+                    
             return getres().res('401', new_msg={'status': str('failed')})
         
         context = {}

@@ -12,14 +12,15 @@ import {
     Form,
     Spacer,
     Input,
+    InputOtp
   } from "@nextui-org/react";
   
 import { signal } from '@preact/signals-react';
 
 const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => {
 
-
-
+    const [emailChangeSub, setemailChangeSub] = useState(false);
+    const [otpInput, setotpInput] = useState();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
@@ -32,8 +33,19 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                 <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'> Edit Account </i></ModalHeader>
                 <ModalBody >
                     <div className="flex flex-col px-4">
+                        { emailChangeSub ? 
+                        <Form onSubmit={(e)=>{ e.preventDefault(); updateAccount(e, 'verify_email_now', null)}}>
+                            <p className='text-white text-small'><i> Confirm email change.</i></p>
+                            <InputOtp length={4} minLength={4}
+                                value={otpInput}
+                                name='otp'
+                                onValueChange={setotpInput}
+                                description='Enter the 4 digit code sent to your email address.'
+                            />
+                            <Button variant='flat' color='primary' type='submit' size='sm' radius='lg'> Verify Change </Button>
+                        </Form>:
                         <Form
-                            onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'update_account');}}>
+                            onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'update_account', setemailChangeSub);}}>
                             <div className='flex'>
                                 <Input
                                     name="fname"
@@ -83,6 +95,7 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                                     Save Changes
                                 </Button>
                         </Form>
+                        }
                         
                   </div>
                 </ModalBody>

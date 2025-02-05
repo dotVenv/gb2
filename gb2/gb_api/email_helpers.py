@@ -61,8 +61,8 @@ class EmailHelper():
         else:
             self.email_data['verification_code'] = self.__generate_email_code()
         
-        new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
-    
+        #new_email = send_mail(self.templates['verify_account'], self.email_data, self.email_host,[self.email_data['recipient']])
+        new_email = True 
         if new_email:
             return True
         return False    

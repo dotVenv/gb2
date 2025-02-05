@@ -36,22 +36,45 @@ const ProfileSide = ({userInfo}) => {
 
 
 
-    const updateAccount = async(e, poststep) =>{
+    const updateAccount = async(e, poststep, extra) =>{
 
         let data = Object.fromEntries(new FormData(e.currentTarget));
-        let response = await cu.updateAccount(data, poststep);
-        if (response){
-            
-            if (response.status == 'successful'){
-                toastData.value.desc = 'Successfully updated account';
-                toastData.value.toastType = 'success';
-                setEditAccount(false);
+        try{
+            if (data.email != null || data.email != ''){
+                let response = await cu.updateAccount(data, 'verify_email');
+                if (response){
+                    extra(true);
+                }else{
+                    toastData.value.desc = 'Failed to update account';
+                    toastData.value.toastType = 'error';
+                };
+            }else if(data.otp != null || data.otp != '' || data.otp != undefined ){
+
+                console.log(data.otp);
+
             }else{
-                toastData.value.desc = 'Failed to update account';
-                toastData.value.toastType = 'error';
+    
+                let response = await cu.updateAccount(data, poststep);
+                if (response){
+                    
+                    if (response.status == 'successful'){
+                        toastData.value.desc = 'Successfully updated account';
+                        toastData.value.toastType = 'success';
+                        setEditAccount(false);
+                    }else{
+                        toastData.value.desc = 'Failed to update account';
+                        toastData.value.toastType = 'error';
+                    };
+                 
+                };
             };
-            setNewToastAlert(true);
+
+        }catch (e){
+            toastData.value.desc = 'Failed to update account';
+            toastData.value.toastType = 'error';
         };
+        
+        setNewToastAlert(true);
 
     };
     
