@@ -59,6 +59,10 @@ class APPViews(TemplateView):
                     if cu.attempt_email_change():
                         return getres().res('200', new_msg={'status': str('successful'), 'temp_time': cu.temp_time})
                 
+                case 'uname_change_req':
+                    print('open ticket for username request')
+                    return getres().res('200', new_msg={'status': 'successful'})
+                
                     
             return getres().res('401', new_msg={'status': str('failed')})
         

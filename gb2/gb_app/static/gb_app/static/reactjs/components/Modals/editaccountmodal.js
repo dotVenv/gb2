@@ -22,6 +22,7 @@ import Countdown from 'react-countdown';
 const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen, formholder}) => {
 
     const [emailChangeSub, setemailChangeSub] = useState(false);
+    const [ticketSubmitted, setticketSubmitted] = useState(false);
     const [otpInput, setotpInput] = useState();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const renderer = ({ completed }) => {
@@ -109,7 +110,10 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen, form
                                 type='text'
                                 endContent={<Button isIconOnly><i className="fa-solid fa-lock"></i></Button>}
                                 />
-                                <Button color='secondary' variant='ghost' type='submit'>
+                                <Button size='sm' radius='lg' isDisabled={ticketSubmitted} 
+                                    color='secondary' 
+                                    variant='ghost' 
+                                    onPress={(e) => {setticketSubmitted(true);updateAccount(e,'uname_change_req', null)}}>
                                     Request Username Change
                                 </Button>
                             <Spacer></Spacer>

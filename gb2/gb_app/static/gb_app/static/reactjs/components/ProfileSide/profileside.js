@@ -39,60 +39,76 @@ const ProfileSide = ({userInfo}) => {
 
     const updateAccount = async(e, poststep, extra) =>{
 
-        let data = Object.fromEntries(new FormData(e.currentTarget));
-        try{
-            if (data.email && data.email.toLowerCase() != userInfo.email.toLowerCase()){
-                let response = await cu.updateAccount(data, 'verify_email');
-                if (response.status == 'successful'){
-                    formholder.value = data;
-                    formholder.value = {...formholder.value, time_left: response.temp_time}
-                    extra(true);
-                }else{
-                    toastData.value.desc = 'Failed to update account';
-                    toastData.value.toastType = 'error';
-                };
-            }else if(data.otp){
-                console.log(formholder.value);
-                let response = await cu.updateAccount(formholder.value, poststep);
-                if (response){
-                    
-                    if (response.status == 'successful'){
-                        toastData.value.desc = 'Successfully updated account';
-                        toastData.value.toastType = 'success';
-                        !data.email ? undefined : userInfo.email = data.email;
-                        !data.fname ? undefined : userInfo.fname = data.fname;
-                        !data.lname ? undefined : userInfo.lname = data.lname;
-                        setEditAccount(false);
-                    }else{
-                        toastData.value.desc = 'Invalid OTP, try again';
-                        toastData.value.toastType = 'error';
-                    };
-                 
-                };
-
+        if (poststep == 'uname_change_req'){
+            //username change request
+            let response = await cu.updateAccount(null, 'uname_change_req')
+            if (response.status == 'successful'){
+                toastData.value.desc = 'Username change request submitted';
+                toastData.value.toastType = 'success';
             }else{
-                
-                let response = await cu.updateAccount(data, poststep);
-                if (response){
-                    
+                toastData.value.desc = 'Unable to request username change';
+                toastData.value.toastType = 'error';
+            };
+           
+        }else{
+
+            
+            let data = Object.fromEntries(new FormData(e.currentTarget));
+            try{
+                if (data.email && data.email.toLowerCase() != userInfo.email.toLowerCase()){
+                    //email verification for updating user email
+                    let response = await cu.updateAccount(data, 'verify_email');
                     if (response.status == 'successful'){
-                        toastData.value.desc = 'Successfully updated account';
-                        toastData.value.toastType = 'success';
-                        !data.fname ? undefined : userInfo.fname = data.fname;
-                        !data.lname ? undefined : userInfo.lname = data.lname;
-                       
-                        setEditAccount(false);
+                        formholder.value = data;
+                        formholder.value = {...formholder.value, time_left: response.temp_time}
+                        extra(true);
                     }else{
                         toastData.value.desc = 'Failed to update account';
                         toastData.value.toastType = 'error';
                     };
-                 
-                };
-            };
+                }else if(data.otp){
+                    //verify otp for email change
+                    let response = await cu.updateAccount(formholder.value, poststep);
+                    if (response){
+                        
+                        if (response.status == 'successful'){
+                            toastData.value.desc = 'Successfully updated account';
+                            toastData.value.toastType = 'success';
+                            !data.email ? undefined : userInfo.email = data.email;
+                            !data.fname ? undefined : userInfo.fname = data.fname;
+                            !data.lname ? undefined : userInfo.lname = data.lname;
+                            setEditAccount(false);
+                        }else{
+                            toastData.value.desc = 'Invalid OTP, try again';
+                            toastData.value.toastType = 'error';
+                        };
+                    
+                    };
 
-        }catch (e){
-            toastData.value.desc = 'Failed to update account';
-            toastData.value.toastType = 'error';
+                }else{
+                    //no email change needed submit regular
+                    let response = await cu.updateAccount(data, poststep);
+                    if (response){
+                        
+                        if (response.status == 'successful'){
+                            toastData.value.desc = 'Successfully updated account';
+                            toastData.value.toastType = 'success';
+                            !data.fname ? undefined : userInfo.fname = data.fname;
+                            !data.lname ? undefined : userInfo.lname = data.lname;
+                        
+                            setEditAccount(false);
+                        }else{
+                            toastData.value.desc = 'Failed to update account';
+                            toastData.value.toastType = 'error';
+                        };
+                    
+                    };
+                };
+
+            }catch (e){
+                toastData.value.desc = 'Failed to update account';
+                toastData.value.toastType = 'error';
+            };
         };
         
         setNewToastAlert(true);
