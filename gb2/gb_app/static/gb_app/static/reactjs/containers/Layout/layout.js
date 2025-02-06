@@ -51,6 +51,7 @@ const Layout = ({ children }) => {
                         { accountProgress < 4 ? undefined :  userInfo.membership == 'free'
                             ?    <Alert
                                         color="warning"
+                                        aria-describedby="No active membership"
                                         variant='bordered'
                                         description={<i className="text-black">You are not subscribed to a membership plan, please upgrade to unlock more features</i>}
 

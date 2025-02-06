@@ -67,16 +67,17 @@ class UserHelper():
             if not self.cu_ap.server:
                 self.serialized['server'] = None
             else:
-                self.serialized['server'] = self.cu_ap.server
+                self.serialized['server'] = str(self.cu_ap.server)
             
             if not self.cu_ap.platform:
                 self.serialized['platform'] = None
             else:
-                self.serialized['platform'] = self.cu_ap.platform.name
+                self.serialized['platform'] = str(self.cu_ap.platform.name)
             
-            self.serialized['balance'] = self.cu_ap.wallet.balance
-            self.serialized['entries'] = self.cu_ap.entries
-            self.serialized['membership'] = self.cu_ap.membership.name
+            self.serialized['balance'] = float(self.cu_ap.wallet.balance)
+            self.serialized['utok'] = int(self.cu_ap.uname_change_token)
+            self.serialized['entries'] = int(self.cu_ap.entries)
+            self.serialized['membership'] = str(self.cu_ap.membership.name)
             
     
         
@@ -229,6 +230,12 @@ class UserHelper():
     def attempt_email_change(self):
         '''send a new otp to the current email, if correct update user after submission'''
         
+        email = str(self.request.POST.get('input[email]'))
+        if email != self.request.user.email:
+            check_usr = gbUser.objects.filter(email=self.email).exists()
+            if check_usr:
+                return 'exists'
+            
         new_email = EmailHelper()
         new_email.email_data['recipient'] = str(self.request.user.email)
         new_email.email_data['username'] = str(self.request.user.username)
@@ -255,6 +262,7 @@ class UserHelper():
                 profile_pic = self.request.FILES.get('input[profile_pic]')
                 
                 #non empty fields  to be updated
+          
                 try:
                     with transaction.atomic():
                         cu = gbUser.objects.get(id=self.request.user.id)

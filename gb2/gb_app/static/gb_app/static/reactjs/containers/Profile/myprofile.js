@@ -2,15 +2,17 @@
 
 import React, {useState,useContext} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip,
+    Table, TableHeader, TableColumn, TableBody, TableRow, TableCell
+} from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
-import { ButtonGroup } from "flowbite-react";
 import { ProfileSide, ShineBorder, ActionCard, CompCard } from "../../components";
 import { signal } from "@preact/signals-react";
 
 const userQA = signal([
-    {status: 'Answered', Q: 'Can i use meta mask to withdrawal?', A: 'No metamask is not supported', staff: 'Admin G'}
+    {status: 'Answered', Q: 'Can i use meta mask to withdrawal?', A: 'No metamask is not supported', staff: 'Admin G'},
+    {status: 'Pending', Q: 'Why can i not enter tournaments with my membership?', A: 'Pending Answer', staff: 'Pending Staff'}
 ]);
 const MyProfile = () => {
 
@@ -64,7 +66,7 @@ const MyProfile = () => {
                         <div className='w-full flex mt-3 mx-auto gap-x-7 space-x-8 grid sm: grid-cols-1 lg:grid-cols-2 gap-0'>
                             <div className=' float start justify-start mx-auto'>
                                 <ActionCard
-                                        className='bg-gray-400 h-15 mb-2 w-full'
+                                        className='bg-gray-100 h-15 mb-2 w-full'
                                         color='primary'
                                         isCompleted={true}
                                         description="Complete account setup."
@@ -75,7 +77,7 @@ const MyProfile = () => {
                                         }}
                                     />
                                     <ActionCard
-                                        className='bg-gray-400 h-15 w-full mb-2'
+                                        className='bg-gray-100 h-15 w-full mb-2'
                                         color={userInfo.membership.toLowerCase() == 'free'? 'danger' : 'success'}
                                         isCompleted={userInfo.membership.toLowerCase() == 'free'?  false : true }
                                         description="Activate membership."
@@ -86,7 +88,7 @@ const MyProfile = () => {
                                         }}
                                     />
                                     <ActionCard
-                                        className='bg-gray-400 h-15 w-full mb-2'
+                                        className='bg-gray-100 h-15 w-full mb-2'
                                         color={userInfo.mfa.toLowerCase() == 'false' ? 'danger' : 'success'}
                                         isCompleted={userInfo.mfa.toLowerCase() == 'false' ? false : true}
                                         description="Enable 2FA Security"
@@ -114,19 +116,31 @@ const MyProfile = () => {
                 <Card className='w-full h-full overflow-y bg-gray-100' isBlurred >
                     <Accordion variant="splitted h-[10vh]" radius='lg'>
                         <AccordionItem key="1" aria-label="Accordion 1" title={<p className='text-black'>Your support tickets <i className="fa-solid fa-circle-question" style={{'color': 'black'}}></i></p>} className='p-1 text-small text-black'>
-                            <ul className='col-9'>
-                                { userQA.value.map((key, index) => {
-                                    return(<li key={index}>
-                                        <Chip variant='flat' color='success' className='text-small text-black  mb-3' radius='lg' sz='sm'> {key.status} </Chip>
-                                        <Spacer></Spacer>
-                                        <p className='text-tiny text-degfault-800'>Q:{key.Q}</p>
-                                        <p className='text-black text-small ml-4 mt-2'><b>A: <i>{key.A} </i></b> <i className='text-tiny text-defualt-300'> - by {key.staff}</i></p>
-                                        <hr style={{'color': 'black'}}></hr>
-                                    </li>)
-                                })}
-                                
-                                
-                            </ul>
+                        <Table aria-label="QA Ticket Table" className='bg-gray-100' isCompact removeWrapper>
+                            <TableHeader>
+                                <TableColumn>Question</TableColumn>
+                                <TableColumn>Answer</TableColumn>
+                                <TableColumn>Status</TableColumn>
+                                <TableColumn>Assigned Staff</TableColumn>
+                            </TableHeader>
+                            <TableBody>
+                               { userQA.value.map((key, index) => {
+                                    return(
+                                        <TableRow key={index}>
+                                            <TableCell className='text-tiny'>{key.Q}</TableCell>
+                                            <TableCell><i>{key.A}</i></TableCell>
+                                            <TableCell>
+                                                <Chip variant='shadow'  radius='lg' size='sm' color={key.status.toLowerCase() == 'answered' ? 'success' : 'danger'} className='text-tiny text-black  mb-3'>
+                                                    {key.status} 
+                                                 </Chip>
+                                            </TableCell>
+                                            <TableCell className='text-tiny'>{key.staff}</TableCell>
+                                        </TableRow>
+                                    );
+                               })}
+                               
+                            </TableBody>
+                            </Table>
                         </AccordionItem>
                         
                         

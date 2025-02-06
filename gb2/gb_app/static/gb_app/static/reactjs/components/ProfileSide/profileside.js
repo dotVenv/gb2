@@ -59,9 +59,13 @@ const ProfileSide = ({userInfo}) => {
                     //email verification for updating user email
                     let response = await cu.updateAccount(data, 'verify_email');
                     if (response.status == 'successful'){
+
                         formholder.value = data;
                         formholder.value = {...formholder.value, time_left: response.temp_time}
                         extra(true);
+                    }else if (response.status == 'exists'){
+                        toastData.value.desc = 'Email already exists';
+                        toastData.value.toastType = 'error';
                     }else{
                         toastData.value.desc = 'Failed to update account';
                         toastData.value.toastType = 'error';
@@ -95,7 +99,6 @@ const ProfileSide = ({userInfo}) => {
                             toastData.value.toastType = 'success';
                             !data.fname ? undefined : userInfo.fname = data.fname;
                             !data.lname ? undefined : userInfo.lname = data.lname;
-                        
                             setEditAccount(false);
                         }else{
                             toastData.value.desc = 'Failed to update account';

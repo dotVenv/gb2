@@ -12,6 +12,7 @@ from .user_helpers import *
 from gb.response_helpers import Response_Helpers as getres
 from django_hosts.resolvers import reverse 
 from gb_api.models import Membership, Announc
+from .ticket_helper import SupportTicketer
 
 from cryptography.fernet import Fernet
         
@@ -56,17 +57,28 @@ class APPViews(TemplateView):
                         return getres().res('200', new_msg={'status': str('successful')})
                 
                 case 'verify_email':
-                    if cu.attempt_email_change():
+                    aec = cu.attempt_email_change() 
+                    if aec is True:
                         return getres().res('200', new_msg={'status': str('successful'), 'temp_time': cu.temp_time})
-                
-                case 'uname_change_req':
-                    print('open ticket for username request')
-                    return getres().res('200', new_msg={'status': 'successful'})
-                
+                    elif aec == 'exists':
+                        return getres().res('401', new_msg={'status': str(aec), 'msg': 'Email already exists.'})
                     
+                case 'uname_change_req':
+                    
+                    ticketer = SupportTicketer(request).create_ticket(sev='medium', topic='username change request')
+                    if ticketer:
+                        return getres().res('200', new_msg={'status': 'successful'})
+                
+                case 'user_tickets':
+                   ticketer = SupportTicketer(request).get_tickets()
+                   if ticketer:
+                        return getres().res('200', new_msg={'status': 'successful', 'ticket': ticketer.tickets})
             return getres().res('401', new_msg={'status': str('failed')})
         
+        
+        
         context = {}
+        
         return render(request, 'gb_app/templates/index.html', context=context)
     
     

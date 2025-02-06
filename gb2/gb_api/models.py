@@ -113,6 +113,7 @@ class AccountPreference(ExportModelOperationsMixin('AccountPreference'),models.M
     wallet = models.ForeignKey('Wallet', blank=True, null=True, on_delete=models.CASCADE, related_name='user_wallet')
     fl = models.ManyToManyField('AccountPreference', related_name='friends_list')
     entries = models.IntegerField(default=0)
+    uname_change_token = models.IntegerField(default=0)
     
     class Meta:
         verbose_name_plural = 'Account Preferences'
@@ -244,3 +245,38 @@ class Announc(ExportModelOperationsMixin('Announc'),models.Model):
     
     def __str__(self):
         return f'{self.title} - {self.created_by.username}'
+    
+    
+    
+    
+ticket_severity_options = [
+    ('low', 'low'),
+    ('medium', 'medium'),
+    ('high', 'high'),
+    ('critical', 'critical')
+]
+ticket_status_options = [
+    ('answered', 'answered'),
+    ('pending', 'pending'),
+    ('closed', 'closed'),
+    ('open', 'open')
+]
+class SupportTicket(ExportModelOperationsMixin('SupportTicket'), models.Model):
+    '''store support tickets for users in the db'''
+    
+    user = models.ForeignKey('gbUser', on_delete=models.PROTECT, related_name='ticket_owner')
+    severity = models.CharField(choices=ticket_severity_options, max_length=25)
+    topic = models.CharField(max_length=255)
+    status = models.CharField(choices=ticket_status_options, max_length=25, default='open')
+    answer = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    closed_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = 'Support Tickets'
+        
+    def __str__(self):
+        return f'{self.user.email} : {self.severity} - {self.status}'
+    
+        
+    
