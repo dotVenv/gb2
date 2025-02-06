@@ -59,7 +59,9 @@ const ProfileSide = ({userInfo}) => {
                     if (response.status == 'successful'){
                         toastData.value.desc = 'Successfully updated account';
                         toastData.value.toastType = 'success';
-                        cu.setAtoms();
+                        !data.email ? undefined : userInfo.email = data.email;
+                        !data.fname ? undefined : userInfo.fname = data.fname;
+                        !data.lname ? undefined : userInfo.lname = data.lname;
                         setEditAccount(false);
                     }else{
                         toastData.value.desc = 'Invalid OTP, try again';
@@ -76,8 +78,9 @@ const ProfileSide = ({userInfo}) => {
                     if (response.status == 'successful'){
                         toastData.value.desc = 'Successfully updated account';
                         toastData.value.toastType = 'success';
-                        
-                        cu.setAtoms();
+                        !data.fname ? undefined : userInfo.fname = data.fname;
+                        !data.lname ? undefined : userInfo.lname = data.lname;
+                       
                         setEditAccount(false);
                     }else{
                         toastData.value.desc = 'Failed to update account';
