@@ -28,4 +28,15 @@ class SupportTicketer():
         
         check_tickets = SupportTicket.objects.filter(topic__lte=topic, severity=sev, user_id=self.request.user.id, status='open')
         return check_tickets.exists()
+    
+    def get_tickets(self):
+        '''return all tickets for the current user'''
+        
+        ticks = SupportTicket.objects.filter(user_id=self.request.user.id)
+        if ticks.exists():
+            self.tickets = {}
+            for key, val in ticks.items():
+                print(key,val)
+                
+        
         
