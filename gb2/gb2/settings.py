@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
+    'django_s3_storage',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -115,7 +116,8 @@ PASSWORD_HASHERS = [
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "django_s3_storage.storage.S3Storage",
+        
     },
     "staticfiles": {
         "BACKEND": 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -189,11 +191,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# The AWS region to connect to.
+
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = BASE_DIR / "mediafiles"
+MEDIA_URL = 'https://gbv1.s3.us-east-2.amazonaws.com/media/'
+MEDIA_ROOT = "media"
 LOGIN_URL = 'http://www.gamers-bounty-dev.com:8000'
 
 # Default primary key field type
