@@ -120,4 +120,31 @@ export default class CurrentUser{
 
         return res;
     };
+
+    async getTickets(){
+
+     
+        let res = await axios({
+            url: location.href,
+            method: 'post',
+            data:{uid: this.uid, poststep: 'user_tickets'},
+            headers:{ 
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data'
+            },
+        }).then(resp => {
+            if (resp){
+                return resp.data.message.tickets;
+            };
+        }).catch(err => {
+            if (err.response.status){
+                return err.response.data.message;
+            };
+        });
+
+        if (res){
+            this.currentTickets = res;
+        };
+        return;
+    };
 };

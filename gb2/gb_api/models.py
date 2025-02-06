@@ -266,11 +266,12 @@ class SupportTicket(ExportModelOperationsMixin('SupportTicket'), models.Model):
     
     user = models.ForeignKey('gbUser', on_delete=models.PROTECT, related_name='ticket_owner')
     severity = models.CharField(choices=ticket_severity_options, max_length=25)
-    topic = models.CharField(max_length=255)
+    topic = models.CharField(max_length=255, blank=True)
     status = models.CharField(choices=ticket_status_options, max_length=25, default='open')
     answer = models.TextField(blank=True, null=True)
+    assigned_to = models.ForeignKey('gbUser', on_delete=models.PROTECT, related_name='ticket_staff', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    closed_at = models.DateTimeField(auto_now_add=True)
+    closed_at = models.DateTimeField(auto_now_add=True, blank=True)
     
     class Meta:
         verbose_name_plural = 'Support Tickets'

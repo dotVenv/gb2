@@ -70,9 +70,9 @@ class APPViews(TemplateView):
                         return getres().res('200', new_msg={'status': 'successful'})
                 
                 case 'user_tickets':
-                   ticketer = SupportTicketer(request).get_tickets()
-                   if ticketer:
-                        return getres().res('200', new_msg={'status': 'successful', 'ticket': ticketer.tickets})
+                   ticketer = SupportTicketer(request)
+                   if ticketer.get_tickets():
+                        return getres().res('200', new_msg={'status': 'successful', 'tickets': ticketer.tickets['ticket_data']})
             return getres().res('401', new_msg={'status': str('failed')})
         
         

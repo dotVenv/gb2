@@ -1,25 +1,21 @@
 'use client';
 
-import React, {useState,useContext} from "react";
+import React, {useState,useContext, useEffect, Suspense} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip,
-    Table, TableHeader, TableColumn, TableBody, TableRow, TableCell
-} from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
-import { ProfileSide, ShineBorder, ActionCard, CompCard } from "../../components";
+import { ProfileSide, ShineBorder, ActionCard, CompCard, TicketTable } from "../../components";
 import { signal } from "@preact/signals-react";
 
-const userQA = signal([
-    {status: 'Answered', Q: 'Can i use meta mask to withdrawal?', A: 'No metamask is not supported', staff: 'Admin G'},
-    {status: 'Pending', Q: 'Why can i not enter tournaments with my membership?', A: 'Pending Answer', staff: 'Pending Staff'}
-]);
+
 const MyProfile = () => {
 
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
+    cu.getTickets();
+    
 
-    const defaultContent = 'Test Desc';
 
     return(
         <>
@@ -113,39 +109,10 @@ const MyProfile = () => {
                                    
                     </section>
                 </div>    
-                <Card className='w-full h-full overflow-y bg-gray-100' isBlurred >
-                    <Accordion variant="splitted h-[10vh]" radius='lg'>
-                        <AccordionItem key="1" aria-label="Accordion 1" title={<p className='text-black'>Your support tickets <i className="fa-solid fa-circle-question" style={{'color': 'black'}}></i></p>} className='p-1 text-small text-black'>
-                        <Table aria-label="QA Ticket Table" className='bg-gray-100' isCompact removeWrapper>
-                            <TableHeader>
-                                <TableColumn>Question</TableColumn>
-                                <TableColumn>Answer</TableColumn>
-                                <TableColumn>Status</TableColumn>
-                                <TableColumn>Assigned Staff</TableColumn>
-                            </TableHeader>
-                            <TableBody>
-                               { userQA.value.map((key, index) => {
-                                    return(
-                                        <TableRow key={index}>
-                                            <TableCell className='text-tiny'>{key.Q}</TableCell>
-                                            <TableCell><i>{key.A}</i></TableCell>
-                                            <TableCell>
-                                                <Chip variant='shadow'  radius='lg' size='sm' color={key.status.toLowerCase() == 'answered' ? 'success' : 'danger'} className='text-tiny text-black  mb-3'>
-                                                    {key.status} 
-                                                 </Chip>
-                                            </TableCell>
-                                            <TableCell className='text-tiny'>{key.staff}</TableCell>
-                                        </TableRow>
-                                    );
-                               })}
-                               
-                            </TableBody>
-                            </Table>
-                        </AccordionItem>
-                        
-                        
-                    </Accordion>
-                </Card>                 
+                    <Suspense>
+                       
+                        <TicketTable cu={cu} userInfo={userInfo} />
+                    </Suspense>
             </div>
             </Layout>
         </>

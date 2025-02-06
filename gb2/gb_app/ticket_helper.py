@@ -35,8 +35,7 @@ class SupportTicketer():
         ticks = SupportTicket.objects.filter(user_id=self.request.user.id)
         if ticks.exists():
             self.tickets = {}
-            for key, val in ticks.items():
-                print(key,val)
-                
-        
-        
+            for key in ticks:
+                self.tickets['ticket_data'] = {'id': key.id, 'status': key.status, 'Q': key.topic, 'A': key.answer, 'staff': key.assigned_to}
+            return True
+        return False
