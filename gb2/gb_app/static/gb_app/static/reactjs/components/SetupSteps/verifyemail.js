@@ -74,7 +74,6 @@ const VerifyEmailAlert = ({cu}) => {
     if (completed) {
         if (submissionz.value == 0){
             // Render a completed state
-            console.log('submitting expired');
             cu.submitSetup('email-submit', 'expired');
             submissionz.value ++;
             isExpired.value = true;

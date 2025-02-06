@@ -1,6 +1,8 @@
 #django imports
 import django.core.exceptions as dce
 from django.utils import timezone
+from django.db import transaction
+from django.utils.decorators import method_decorator
 
 
 #app imports
@@ -117,7 +119,7 @@ class UserHelper():
            
         return True
     
-    
+    @method_decorator(transaction.atomic)
     def get_setupdata(self):
         '''return the data for the current setup step '''
         
@@ -186,15 +188,16 @@ class UserHelper():
                 if self.cu:
                     acc_pref = AccountPreference.objects.filter(user=self.cu)
                     if not acc_pref:
-                        new_wallet = Wallet.objects.create()
-                        if new_wallet:
-                            new_wallet.save()
-                            acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'), wallet=new_wallet)
-                            if acc_pref:
-                                acc_pref.save()
-                                self.setup_data = {'step': 'passed'}
-                                return True
-                   
+                        with transaction.atomic():
+                            new_wallet = Wallet.objects.create()
+                            if new_wallet:
+                                new_wallet.save()
+                                acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'), wallet=new_wallet)
+                                if acc_pref:
+                                    acc_pref.save()
+                                    self.setup_data = {'step': 'passed'}
+                                    return True
+                    
                 self.setup_data =  {'step': 'failed'}
                 return False
                 
@@ -229,15 +232,19 @@ class UserHelper():
         new_email = EmailHelper()
         new_email.email_data['recipient'] = str(self.request.user.email)
         new_email.email_data['username'] = str(self.request.user.username)
-        return new_email.verify_account(request=self.request)  
+        new_email.verify_account(request=self.request)  
+        if new_email:
+            self.temp_time = new_email.temp_time
+            return True
+        return False
        
-        
+    @method_decorator(transaction.atomic)
     def update_account(self):
         '''update the account based on the poststep and inputs'''
         
         
         poststep = str(self.request.POST.get('poststep'))
-    
+        print(self.request.POST)
         if not poststep: return False 
 
         match poststep:
@@ -249,24 +256,21 @@ class UserHelper():
                 
                 #non empty fields  to be updated
                 try:
-                    cu = gbUser.objects.get(id=self.request.user.id)
-                
-                    if cu:
-                        """if email: 
-                            print('updating email')
-                            cu.email = email"""
-                        if fname: 
-                            print('updating first')
-                            cu.firstname = fname
-                        if lname: 
-                            print('updating last')
-                            cu.lastname = lname
-                        if profile_pic: 
-                            print('updating pic')
-                            cu.profile_pic = profile_pic
-                        cu.save()
-                        print('saving current user update')
-                        return True
+                    with transaction.atomic():
+                        cu = gbUser.objects.get(id=self.request.user.id)
+                    
+                        if cu:
+                            if email:
+                                if email != self.request.user.id:
+                                    cu.email = email
+                            if fname: 
+                                cu.first_name = fname
+                            if lname: 
+                                cu.last_name = lname
+                            if profile_pic: 
+                                cu.profile_pic = profile_pic
+                            cu.save()
+                            return True
                 except dce.RequestAborted:
                     return False
                 except dce.ObjectDoesNotExist:

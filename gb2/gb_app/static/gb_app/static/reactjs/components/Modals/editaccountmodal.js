@@ -17,12 +17,30 @@ import {
   } from "@nextui-org/react";
   
 import { signal } from '@preact/signals-react';
+import Countdown from 'react-countdown';
 
-const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => {
+const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen, formholder}) => {
 
     const [emailChangeSub, setemailChangeSub] = useState(false);
     const [otpInput, setotpInput] = useState();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const renderer = ({ completed }) => {
+        if (completed) {
+            if (submissionz.value == 0){
+                // Render a completed state
+                cu.submitSetup('email-submit', 'expired');
+                submissionz.value ++;
+                isExpired.value = true;
+                toastData.value.toastType = 'error';
+                toastData.value.toastDesc = 'Verification code expired';
+             
+                return <CustomToast sev={toastData.value.toastType} desc={toastData.value.toastDesc} />
+            }
+        } else {
+            // Render a countdown
+            return <span> </span>;
+        }
+        };
 
     return(
         <>
@@ -35,12 +53,14 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                 <ModalBody >
                     <div className="flex flex-col px-4">
                         { emailChangeSub ? 
-                        <Form onSubmit={(e)=>{ e.preventDefault(); updateAccount(e, 'verify_email_now', null)}}>
+                        <Form onSubmit={(e)=>{ e.preventDefault(); updateAccount(e, 'update_account', null)}}>
                             <p className='text-white text-small'><i> Confirm email change.</i></p>
                             <InputOtp length={4} minLength={4}
                                 value={otpInput}
                                 name='otp'
+                                className='text-white'
                                 onValueChange={setotpInput}
+                                isRequired 
                                 description='Enter the 4 digit code sent to your email address.'
                             />
                             <div className='flex gap-2'>
@@ -54,6 +74,7 @@ const EditAccountModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => 
                                     color='secondary' 
                                     size='sm' radius='lg' startContent={<i className="fa-solid fa-rotate-right"></i>}> resend </Button>
                             </div>
+                            <Countdown renderer={renderer} className='justify-center align-center mx-auto' date={new Date(formholder.value.time_left).toUTCString()} />
                         </Form>:
                         <Form
                             onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'update_account', setemailChangeSub);}}>

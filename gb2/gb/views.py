@@ -3,6 +3,9 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout 
 import django.core.exceptions as dce
+from django.db import transaction
+from django.utils.decorators import method_decorator
+
 
 
 #app imports 
@@ -72,7 +75,7 @@ class UIViews(TemplateView):
         except dce.RequestAborted:
             return getres().res('401')
         
-    
+    @method_decorator(transaction.atomic)
     def signup_view(self, request):
         '''signup the user with the given request data'''
         
@@ -82,10 +85,11 @@ class UIViews(TemplateView):
                 signup = hlp.Current_Session(request=request)
                 submit_signup = signup.signup()
                 if submit_signup[0] is True:
-                    if signup.register_user():
-                        return getres().res('200',new_msg=submit_signup[1])
-                    else:
-                        return getres().res('401', 'Something went wrong please try again.')
+                    with transaction.atomic():
+                        if signup.register_user():
+                            return getres().res('200',new_msg=submit_signup[1])
+                        else:
+                            return getres().res('401', 'Something went wrong please try again.')
                 return getres().res('401', new_msg=submit_signup[1])
                 
                 return getres().res('401', new_msg=submit_signup[1])

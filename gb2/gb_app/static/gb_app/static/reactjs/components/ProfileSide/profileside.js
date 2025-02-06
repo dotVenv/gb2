@@ -21,6 +21,7 @@ const toastData = signal({
     desc: '',
 });
 
+const formholder = signal({});
 
 const ProfileSide = ({userInfo}) => {
     
@@ -40,26 +41,43 @@ const ProfileSide = ({userInfo}) => {
 
         let data = Object.fromEntries(new FormData(e.currentTarget));
         try{
-            if (data.email != null || data.email != ''){
+            if (data.email && data.email.toLowerCase() != userInfo.email.toLowerCase()){
                 let response = await cu.updateAccount(data, 'verify_email');
-                if (response){
+                if (response.status == 'successful'){
+                    formholder.value = data;
+                    formholder.value = {...formholder.value, time_left: response.temp_time}
                     extra(true);
                 }else{
                     toastData.value.desc = 'Failed to update account';
                     toastData.value.toastType = 'error';
                 };
-            }else if(data.otp != null || data.otp != '' || data.otp != undefined ){
-
-                console.log(data.otp);
+            }else if(data.otp){
+                console.log(formholder.value);
+                let response = await cu.updateAccount(formholder.value, poststep);
+                if (response){
+                    
+                    if (response.status == 'successful'){
+                        toastData.value.desc = 'Successfully updated account';
+                        toastData.value.toastType = 'success';
+                        cu.setAtoms();
+                        setEditAccount(false);
+                    }else{
+                        toastData.value.desc = 'Invalid OTP, try again';
+                        toastData.value.toastType = 'error';
+                    };
+                 
+                };
 
             }else{
-    
+                
                 let response = await cu.updateAccount(data, poststep);
                 if (response){
                     
                     if (response.status == 'successful'){
                         toastData.value.desc = 'Successfully updated account';
                         toastData.value.toastType = 'success';
+                        
+                        cu.setAtoms();
                         setEditAccount(false);
                     }else{
                         toastData.value.desc = 'Failed to update account';
@@ -142,7 +160,7 @@ const ProfileSide = ({userInfo}) => {
         
         </aside>
 
-        { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} /> : undefined }
+        { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} formholder={formholder} /> : undefined }
         { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }     
         
       

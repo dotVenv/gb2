@@ -6,6 +6,7 @@ from django.utils import timezone
 #other imports
 from mail_templated import send_mail, EmailMessage
 from gb_api.models import EmailVerification
+import datetime
 import random
 
 class EmailHelper():
@@ -47,7 +48,9 @@ class EmailHelper():
             check_email = EmailVerification.objects.filter(user=request.user.id)
             if check_email.exists():
                 self.email_data['verification_code'] = self.__generate_email_code()
-                check_email.update(code=self.email_data['verification_code'], created_at=timezone.now(), attempts=0, expired=False)
+                tnow = timezone.now()
+                self.temp_time  = datetime.datetime.strftime(tnow  + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC')
+                check_email.update(code=self.email_data['verification_code'], created_at=tnow, attempts=0, expired=False)
               
         
             else:

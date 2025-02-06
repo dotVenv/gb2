@@ -57,7 +57,8 @@ class APPViews(TemplateView):
                 
                 case 'verify_email':
                     if cu.attempt_email_change():
-                        return getres().res('200', new_msg={'status': str('successful')})
+                        return getres().res('200', new_msg={'status': str('successful'), 'temp_time': cu.temp_time})
+                
                     
             return getres().res('401', new_msg={'status': str('failed')})
         
