@@ -264,6 +264,7 @@ class UserHelper():
           
                 try:
                     with transaction.atomic():
+                        
                         cu = gbUser.objects.get(id=self.request.user.id)
                     
                         if cu:
@@ -283,5 +284,23 @@ class UserHelper():
                     return False
                 except dce.ObjectDoesNotExist:
                     return False
+                
+            case 'change_password':
+                current_p = self.request.POST.get('input[current-password]')
+                new_p = self.request.POST.get('input[new-password]')
+                rnew_p = self.request.POST.get('input[rnew-password]')
+                
+                
+                if not self.request.user.check_password(current_p): return False
+                elif (new_p) != rnew_p: return False
+                else:
+                    cu = gbUser.objects.get(id=self.request.user.id)
+                    with transaction.atomic():
+                        cu = cu.set_password(new_p)
+                        cu.save()
+                        
+
+                return True
+                
                 
         return False

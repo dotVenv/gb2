@@ -73,6 +73,9 @@ class APPViews(TemplateView):
                    ticketer = SupportTicketer(request)
                    if ticketer.get_tickets():
                         return getres().res('200', new_msg={'status': 'successful', 'tickets': ticketer.tickets['ticket_data']})
+                    
+                case 'change_password':
+                    if cu.update_account(): return getres().res('200', new_msg={'status': 'successful'})
             return getres().res('401', new_msg={'status': str('failed')})
         
         

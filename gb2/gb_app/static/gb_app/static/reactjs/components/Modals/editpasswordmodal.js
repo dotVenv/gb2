@@ -10,7 +10,8 @@ import {
     ModalFooter,
     Button,
     Form,
-    Input
+    Input,
+    useDisclosure,
   } from "@nextui-org/react";
   
 import { signal } from '@preact/signals-react';
@@ -22,8 +23,9 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, for
     
     const [pwdValue, setpwdValue] = useState('');
     const [newPwdValue, setnewpwdValue] = useState('');
-
     const [rnewPwdValue, setrnewpwdValue] = useState('');
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
         <>
@@ -50,7 +52,7 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, for
                                 
                                 } />
                             <Input 
-                                name='new_password' 
+                                name='new-password' 
                                 label='New password' 
                                 placeholder='Enter new passowrd' 
                                 type='password' 
@@ -65,7 +67,7 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, for
                                 
                                 } />
                             <Input 
-                                name='rnew_password' 
+                                name='rnew-password' 
                                 label='Repear password' 
                                 placeholder='Repeat new passowrd' 
                                 type='password' 
