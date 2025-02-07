@@ -9,7 +9,11 @@ storage = S3Storage(aws_s3_bucket_name='gbv1')
 # Create your models here.
 class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     '''db table for users'''
+<<<<<<< HEAD
     profile_pic = models.ImageField(default='profile_pics/default.png', blank=True, null=True, storage=storage)
+=======
+    profile_pic = models.ImageField(default='profile_pics/default.png', blank=True, null=True, upload_to=storage)
+>>>>>>> db2d8d4 (wip: amazon s3)
     mfa_active = models.BooleanField(default=False)
     ip_address = models.CharField(max_length=255, blank=True, null=True)
     account_verified = models.BooleanField(default=False)

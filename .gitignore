@@ -3,3 +3,4 @@
 *staticfiles
 *media
 *node_modules
+*.env
