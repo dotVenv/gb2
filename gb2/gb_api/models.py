@@ -258,12 +258,14 @@ ticket_severity_options = [
     ('high', 'high'),
     ('critical', 'critical')
 ]
+
 ticket_status_options = [
     ('answered', 'answered'),
     ('pending', 'pending'),
     ('closed', 'closed'),
     ('open', 'open')
 ]
+
 class SupportTicket(ExportModelOperationsMixin('SupportTicket'), models.Model):
     '''store support tickets for users in the db'''
     
