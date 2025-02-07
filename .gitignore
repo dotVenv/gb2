@@ -4,3 +4,5 @@
 *media
 *node_modules
 *.env
+gb2/gb2/.env.*
+*.env.local

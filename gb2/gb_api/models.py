@@ -2,14 +2,16 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_prometheus.models import ExportModelOperationsMixin
 from django_s3_storage.storage import S3Storage
+from django.conf import settings 
 
-storage = S3Storage(aws_s3_bucket_name='gbv1')
+profilepic_storage = S3Storage(aws_s3_bucket_name='gbprofilepics')
 
 
 # Create your models here.
 class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     '''db table for users'''
-    profile_pic = models.ImageField(default='profile_pics/default.png', blank=True, null=True, upload_to=storage)
+    
+    profile_pic = models.ImageField(default='default.png', blank=True, null=True, storage=profilepic_storage)
     mfa_active = models.BooleanField(default=False)
     ip_address = models.CharField(max_length=255, blank=True, null=True)
     account_verified = models.BooleanField(default=False)

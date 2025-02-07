@@ -3,12 +3,13 @@ import django.core.exceptions as dce
 from django.utils import timezone
 from django.db import transaction
 from django.utils.decorators import method_decorator
-
+from django.conf import settings
 
 #app imports
 from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet
 from gb_api.email_helpers import EmailHelper
 import datetime
+import random
 
 class UserHelper():
     '''define a user helper to handle actions for the users profile'''
@@ -52,14 +53,12 @@ class UserHelper():
         self.serialized = {
             "username": str(self.cu.username),
             "mfa": str(bool(self.cu.mfa_active)),
-            "profile_pic": str(self.cu.profile_pic),
+            "profile_pic": str(f'https://{settings.AWS_BUCKS["profile_pics"]}{self.cu.profile_pic}'),
             "fname": str(self.cu.first_name),
             "lname": str(self.cu.last_name),
             "email": str(self.cu.email),
         
         }
-        
-       
         
         self.serialized['membership'] = 'none '
         if self.cu_ap:
@@ -276,6 +275,7 @@ class UserHelper():
                             if lname: 
                                 cu.last_name = lname
                             if profile_pic: 
+                                profile_pic.name = f'{self.request.user.id}{random.randint(111,888)}{profile_pic.name}'
                                 cu.profile_pic = profile_pic
                             cu.save()
                             return True

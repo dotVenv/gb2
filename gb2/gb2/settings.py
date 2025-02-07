@@ -116,7 +116,7 @@ PASSWORD_HASHERS = [
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
         
     },
     "staticfiles": {
@@ -192,11 +192,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 #aws
+AWS_ACCESS_KEY_ID = os.environ.get('AWSKID')
+AWS_SECRET_ACCESS_KEY  = os.environ.get('AWSSAK')
 
+AWS_S3_BUCKET_AUTH = False
+AWS_DEFAULT_ACL = 'public-read'
+AWS_BUCKS = {"profile_pics": 'gbprofilepics.s3.us-east-2.amazonaws.com/'}
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = 'https://gbv1.s3.us-east-2.amazonaws.com/media/'
+MEDIA_URL =  'https://gbmediafiles.s3.us-east-2.amazonaws.com/'
 MEDIA_ROOT = "media"
 LOGIN_URL = 'http://www.gamers-bounty-dev.com:8000'
 
