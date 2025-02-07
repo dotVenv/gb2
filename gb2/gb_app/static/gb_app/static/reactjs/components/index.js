@@ -36,6 +36,8 @@ export { default as ActionCard } from './ActionCards/actioncards';
 export { default as CompCard } from './CompCard/compcard';
 export { default as EditAccountModal } from './Modals/editaccountmodal';
 export { default as TicketTable } from './Tables/tickettable';
+export { default as EditPasswordModal } from './Modals/editpasswordmodal';
+
 
 
 //experimental

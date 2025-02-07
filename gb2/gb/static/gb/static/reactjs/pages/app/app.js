@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { UserContext, udata } from "../../connector";
 

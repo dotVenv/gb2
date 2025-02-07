@@ -5,7 +5,7 @@ import React, {useState,useContext} from "react";
 import { User, Card, CardBody, CardFooter, Spacer, Button, Chip, cn, CardHeader, Tooltip, } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ButtonGroup } from "flowbite-react";
-import { EditAccountModal, CustomToast } from '../../components';
+import { EditAccountModal, CustomToast, EditPasswordModal } from '../../components';
 import { ConnContext } from "../../connector";
 import { signal } from "@preact/signals-react";
 
@@ -165,7 +165,7 @@ const ProfileSide = ({userInfo}) => {
                         { editOptions.map((key, index) => {
                             return(
                                 <Tooltip key={index} className="capitalize" color='secondary' content={key.content}>
-                                    <Button variant='flat' onPress={(e) => { key.title == 'editAccount' ? setEditAccount(!editAccount) : undefined }} color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
+                                    <Button variant='flat' onPress={(e) => { key.title == 'editAccount' ? setEditAccount(!editAccount) : key.title == 'editPassword' ? setEditPassword(!editPassword) : undefined  }} color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
                                         {key.icon}
                                     </Button>
                                 </Tooltip>
@@ -183,7 +183,9 @@ const ProfileSide = ({userInfo}) => {
         </aside>
 
         { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} formholder={formholder} /> : undefined }
-        { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }     
+        { editPassword ? <EditPasswordModal updateAccount={updateAccount} isModalOpen={editPassword} setModal={setEditPassword} userInfo={userInfo} formholder={formholder} /> : undefined }
+        { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }  
+           
         
       
         </>
