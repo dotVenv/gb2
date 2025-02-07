@@ -36,7 +36,9 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, for
                 <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'>Change Password </i></ModalHeader>
                 <ModalBody >
                     <div className="flex flex-col px-4">
-                        <Form onSubmit={(e) => { e.preventDefault(); updateAccount(e, 'change_password', null)}}>
+                        <Form 
+                            validationBehavior="native"
+                            onSubmit={(e) => { e.preventDefault(); updateAccount(e, 'change_password', null)}}>
                             <Input name='current-password' 
                                 label='Current password' 
                                 placeholder='Enter current password' 
@@ -78,8 +80,8 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, for
                                 value={rnewPwdValue}
                                 onValueChange={setrnewpwdValue}
                                 validate={(value) => { 
-                                if (value == newPwdValue || value ==  ''){
-                                    return 'Please repeat your new password';
+                                if (value !== newPwdValue || value ==  ''){
+                                    return 'Passwords must match.';
                                 }else{
                                     return null;
                                 }}}

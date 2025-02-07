@@ -250,7 +250,6 @@ class UserHelper():
         
         
         poststep = str(self.request.POST.get('poststep'))
-        print(self.request.POST)
         if not poststep: return False 
 
         match poststep:
