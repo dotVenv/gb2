@@ -116,11 +116,7 @@ PASSWORD_HASHERS = [
 
 STORAGES = {
     "default": {
-<<<<<<< HEAD
-        "BACKEND": "django_s3_storage.storage.S3Storage",
-=======
         "BACKEND": "django.core.files.storage.FileSystemStorage",
->>>>>>> db2d8d4 (wip: amazon s3)
         
     },
     "staticfiles": {
@@ -195,11 +191,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-<<<<<<< HEAD
-# The AWS region to connect to.
-=======
 #aws
->>>>>>> db2d8d4 (wip: amazon s3)
 
 
 STATIC_URL = '/staticfiles/'
