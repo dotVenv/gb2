@@ -3,7 +3,7 @@
 import React, { Suspense, useContext, useState } from "react";
 import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions} from "../../components";
 import { AccountSetup } from '../index';
-import { Spacer, Card, Alert, Button} from "@nextui-org/react";
+import { Spacer, Card, Alert, Button, Chip} from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from 'jotai';
 import { signal } from "@preact/signals-react";
@@ -81,10 +81,18 @@ const Layout = ({ children }) => {
                                     variant="faded"
                                 /> 
                         }
-                    
+
+                        
                         </div>
-                       
+                        <br></br>
+                        <span className='flex col-9  mx-auto'>
+                            <Chip variant='light'size='sm' radius='lg' color={userInfo.mfa.toLowerCase() == 'true' ? 'success' : 'danger'}
+                                startContent={<i className="fa-solid fa-fingerprint"></i>}>
+                                <i>{userInfo.mfa.toLowerCase() == 'true' ? 'MFA Active' : 'MFA Inactive' }</i>
+                            </Chip>
+                        </span>
                     </section>
+                   
                     {/* 
                     <section className='mx-auto justify-center align-center col-10'>    
                     
@@ -142,6 +150,7 @@ const Layout = ({ children }) => {
 
                     */ }
                         <div>
+                        
                        
                         {children}
                         </div>

@@ -8,6 +8,7 @@ from django.conf import settings
 #app imports
 from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet
 from gb_api.email_helpers import EmailHelper
+from .mfa_helper import MFAHelper
 import datetime
 import random
 
@@ -83,9 +84,6 @@ class UserHelper():
 
         return True
         
-        
-        
-    
     def setupchecks(self):
         '''run checks if a check is invalid/false return will be empty/none'''
         
@@ -305,3 +303,12 @@ class UserHelper():
         return False
 
 
+    def toggle_2fa(self):
+        '''execute steps for the mfa action'''
+        
+        if self.request.user.mfa_active is True:
+            print('user has mfa active, action: deactivate')
+        else:
+            print('user does not have active mfa, action: activate')
+            
+        return True 

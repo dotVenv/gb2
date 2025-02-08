@@ -19,7 +19,7 @@ import Countdown from 'react-countdown';
 
 
 
-const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen, formholder}) => {
+const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen}) => {
     
     const [pwdValue, setpwdValue] = useState('');
     const [newPwdValue, setnewpwdValue] = useState('');

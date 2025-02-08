@@ -5,7 +5,7 @@ import React, {useState,useContext} from "react";
 import { User, Card, CardBody, CardFooter, Spacer, Button, Chip, cn, CardHeader, Tooltip, } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ButtonGroup } from "flowbite-react";
-import { EditAccountModal, CustomToast, EditPasswordModal } from '../../components';
+import { EditAccountModal, CustomToast, EditPasswordModal, Edit2FAModal } from '../../components';
 import { ConnContext } from "../../connector";
 import { signal } from "@preact/signals-react";
 
@@ -30,7 +30,7 @@ const ProfileSide = ({userInfo}) => {
 
     const [editAccount, setEditAccount] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
-    
+    const [edit2FA, setedit2FA] = useState(false);
 
   
     const [newToastAlert, setNewToastAlert] = useState();
@@ -165,7 +165,7 @@ const ProfileSide = ({userInfo}) => {
                         { editOptions.map((key, index) => {
                             return(
                                 <Tooltip key={index} className="capitalize" color='secondary' content={key.content}>
-                                    <Button variant='flat' onPress={(e) => { key.title == 'editAccount' ? setEditAccount(!editAccount) : key.title == 'editPassword' ? setEditPassword(!editPassword) : undefined  }} color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
+                                    <Button variant='flat' onPress={(e) => { key.title == 'editAccount' ? setEditAccount(!editAccount) : key.title == 'editPassword' ? setEditPassword(!editPassword) : key.title == 'edit2FA' ? setedit2FA(!edit2FA) : undefined  }} color='primary' size='lg' style={{'color': 'orange'}} isIconOnly>
                                         {key.icon}
                                     </Button>
                                 </Tooltip>
@@ -183,7 +183,8 @@ const ProfileSide = ({userInfo}) => {
         </aside>
 
         { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} formholder={formholder} /> : undefined }
-        { editPassword ? <EditPasswordModal updateAccount={updateAccount} isModalOpen={editPassword} setModal={setEditPassword} userInfo={userInfo} formholder={formholder} /> : undefined }
+        { editPassword ? <EditPasswordModal updateAccount={updateAccount} isModalOpen={editPassword} setModal={setEditPassword} userInfo={userInfo}  /> : undefined }
+        { edit2FA ? <Edit2FAModal updateAccount={updateAccount} isModalOpen={edit2FA} setModal={setedit2FA} userInfo={userInfo} /> : undefined }
         { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }  
            
         

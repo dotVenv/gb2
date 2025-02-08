@@ -37,7 +37,7 @@ export { default as CompCard } from './CompCard/compcard';
 export { default as EditAccountModal } from './Modals/editaccountmodal';
 export { default as TicketTable } from './Tables/tickettable';
 export { default as EditPasswordModal } from './Modals/editpasswordmodal';
-
+export { default as Edit2FAModal } from './Modals/edit2famodal';
 
 
 //experimental

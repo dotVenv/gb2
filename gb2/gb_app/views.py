@@ -76,6 +76,10 @@ class APPViews(TemplateView):
                     
                 case 'change_password':
                     if cu.update_account(): return getres().res('200', new_msg={'status': 'successful'})
+                
+                case 'change_2fa':
+                    if cu.toggle_2fa(): return getres().res('200', new_msg={'status': 'successful', 'mfa_data': None})
+                    
             return getres().res('401', new_msg={'status': str('failed')})
         
         
