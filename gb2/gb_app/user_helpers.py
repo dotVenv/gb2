@@ -305,10 +305,18 @@ class UserHelper():
 
     def toggle_2fa(self):
         '''execute steps for the mfa action'''
+        try:
+            if self.request.user.mfa_active is True:
+                print('user has mfa active, action: deactivate')
+            else:
+                mfa = MFAHelper(self.request)
+                if self.has_mfa:
+                    #reactivate the mfa 
+                    print('reactivate mfa')
+                else:
+                    print('create new mfa')
+                    
+        except dce.RequestAborted:
+            return False
         
-        if self.request.user.mfa_active is True:
-            print('user has mfa active, action: deactivate')
-        else:
-            print('user does not have active mfa, action: activate')
-            
         return True 

@@ -286,5 +286,22 @@ class SupportTicket(ExportModelOperationsMixin('SupportTicket'), models.Model):
     def __str__(self):
         return f'{self.user.email} : {self.severity} - {self.status}'
     
-        
+
+
+class MFA_Rotator(ExportModelOperationsMixin('MFA_Rotator'), models.Model):
+    '''mfa/2fa rotator for users'''
     
+    user = models.ForeignKey('gbUser', on_delete=models.CASCADE, related_name='mfa_user')
+    attempts = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
+    locked = models.IntegerField(default=0)
+    b32 = models.CharField(max_length=255, null=True, blank=True)
+    bhex = models.CharField(max_length=255, null=True, blank=True)
+    last_used = models.DateTimeField(blank=True, null=True, auto_now_add=False)
+    
+    
+    class Meta:
+        verbose_name_plural = 'Mfa Rotator'
+    
+    def __str__(self):
+        return f'User:{self.user.user}'

@@ -1,8 +1,8 @@
 #django imports
-
+import django.core.exceptions as dce 
 
 #imports
-from gb_api.models import gbUser
+from gb_api.models import gbUser, MFA_Rotator
 import pyotp
 import qrcode
 
@@ -44,9 +44,12 @@ class MFAHelper():
         
         '''check if the current users account is locked'''   
         #if mfa is active
-        if self.cu.mfa_active == 1:
-            return True
-        return False
+        try:
+            self.mfa = MFA_Rotator.objects.get(user_id=self.request.user.id)
+            if self.mfa:
+                return True
+        except dce.ObjectDoesNotExists:
+            return False
     
     
     
