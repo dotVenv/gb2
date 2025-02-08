@@ -147,4 +147,8 @@ export default class CurrentUser{
         };
         return;
     };
+
+    setQR(uri){
+        this.QR_uri = uri;
+    };
 };

@@ -21,7 +21,7 @@ import Countdown from 'react-countdown';
 
 
 
-const Edit2FAModal = ({updateAccount, userInfo, setModal, isModalOpen }) => {
+const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen }) => {
 
 
     const [mfaToggle, setmfaToggle] = useState()
@@ -45,6 +45,13 @@ const Edit2FAModal = ({updateAccount, userInfo, setModal, isModalOpen }) => {
                             {userInfo.mfa.toLowerCase() == 'true' ? 'MFA Active' : 'MFA Inactive' }
                         </Chip>
                         <br></br>
+
+                        {showQR ? <>
+                                <Chip variant='light' size='sm' color='danger' radius='lg'> Do not close this page without scanning the QR, as it is unretreivable.</Chip>
+                                <Image src={cu.QR_uri} alt='mfa_qr' /> 
+                                </>
+                                
+                                : undefined }
                         <Switch
                             defaultSelected={userInfo.mfa.toLowerCase() == 'true' ? true : false }
                             color="success"

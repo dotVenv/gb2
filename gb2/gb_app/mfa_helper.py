@@ -9,6 +9,8 @@ import pyotp
 import qrcode
 import boto3
 from botocore.exceptions import ClientError
+import datetime
+
 
 
 
@@ -88,19 +90,17 @@ class MFAHelper():
             self.qr.make(fit=True)
 
             self.img = self.qr.make_image(fill_color="black", back_color="white")
-            appender = f'TEST{random.randint(111,9999)}-{random.randint(111,9999)}'
+            appender = f'{self.request.user.id}QR{random.randint(111,9999)}{datetime.datetime.microsecond()}-{random.randint(111,9999)}'
             self.img.save(os.path.join('./mediafiles/tmphold/', f'{appender}.png'), 'PNG')
             s3 = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
             
             try:
-                
-                def test_response():
-                    response = s3.upload_file(os.path.join('./mediafiles/tmphold/', f'{appender}.png') ,"gbqrcodes", Key=f'{appender}.png', ExtraArgs={'ACL': 'public-read','ContentType':'image/png'})
-                    return True
-                self.assertEqual(test_response(), True)
+                response = s3.upload_file(os.path.join('./mediafiles/tmphold/', f'{appender}.png') ,"gbqrcodes", Key=f'{appender}.png', ExtraArgs={'ACL': 'public-read','ContentType':'image/png'})
+                self.mfa_qr = f"https://{settings.AWS_BUCK['qrcodes']}{appender}"
+                self.__delet_qr__(appender)
+                return True   
             except ClientError as e:
                 self.__delet_qr__(appender)
-                logging.error(e)
                 return False
             return True
         self.__delet_qr__(appender)

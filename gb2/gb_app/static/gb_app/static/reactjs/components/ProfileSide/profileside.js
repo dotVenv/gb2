@@ -31,7 +31,7 @@ const ProfileSide = ({userInfo}) => {
     const [editAccount, setEditAccount] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     const [edit2FA, setedit2FA] = useState(false);
-
+    const [showQR, setShowQR] = useState(false);
   
     const [newToastAlert, setNewToastAlert] = useState();
 
@@ -93,18 +93,35 @@ const ProfileSide = ({userInfo}) => {
                     //no email change needed submit regular
                     let response = await cu.updateAccount(data, poststep);
                     if (response){
-                        
-                        if (response.status == 'successful'){
-                            toastData.value.desc = 'Successfully updated account';
-                            toastData.value.toastType = 'success';
-                            !data.fname ? undefined : userInfo.fname = data.fname;
-                            !data.lname ? undefined : userInfo.lname = data.lname;
-                            setEditAccount(false);
+                        //if qr is the step
+                        if (poststep == 'change_2fa'){
+                            if (response.mfa_data != 'deactivated' || response.mfa_data != 'activated'){
+                                //qr code is generated
+                                cu.setQR(response.mfa_data);
+                                toastData.value.desc = 'MFA ready to complete';
+                                toastData.value.toastType = 'warning';
+                                !data.fname ? undefined : userInfo.fname = data.fname;
+                                !data.lname ? undefined : userInfo.lname = data.lname;
+                                setShowQR(true);
+                            }else{
+                                toastData.value.desc = 'MFA is '+ response.mfa_data;
+                                toastData.value.toastType = 'success';
+                                !data.fname ? undefined : userInfo.fname = data.fname;
+                                !data.lname ? undefined : userInfo.lname = data.lname;
+                                setEditAccount(false);
+                            }
                         }else{
-                            toastData.value.desc = 'Failed to update account';
-                            toastData.value.toastType = 'error';
-                        };
-                    
+                            if (response.status == 'successful'){
+                                toastData.value.desc = 'Successfully updated account';
+                                toastData.value.toastType = 'success';
+                                !data.fname ? undefined : userInfo.fname = data.fname;
+                                !data.lname ? undefined : userInfo.lname = data.lname;
+                                setEditAccount(false);
+                            }else{
+                                toastData.value.desc = 'Failed to update account';
+                                toastData.value.toastType = 'error';
+                            };
+                        }
                     };
                 };
 
@@ -184,7 +201,7 @@ const ProfileSide = ({userInfo}) => {
 
         { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} formholder={formholder} /> : undefined }
         { editPassword ? <EditPasswordModal updateAccount={updateAccount} isModalOpen={editPassword} setModal={setEditPassword} userInfo={userInfo}  /> : undefined }
-        { edit2FA ? <Edit2FAModal updateAccount={updateAccount} isModalOpen={edit2FA} setModal={setedit2FA} userInfo={userInfo} /> : undefined }
+        { edit2FA ? <Edit2FAModal showQR={showQR} updateAccount={updateAccount} isModalOpen={edit2FA} setModal={setedit2FA} userInfo={userInfo} /> : undefined }
         { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }  
            
         
