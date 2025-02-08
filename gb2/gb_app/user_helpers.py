@@ -314,7 +314,10 @@ class UserHelper():
                     #reactivate the mfa 
                     print('reactivate mfa')
                 else:
-                    print('create new mfa')
+                    if mfa.create_mfa():
+                        print('new mfa created')
+                    else:
+                        return False
                     
         except dce.RequestAborted:
             return False

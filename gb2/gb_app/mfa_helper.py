@@ -1,10 +1,14 @@
 #django imports
 import django.core.exceptions as dce 
+from django.utils import timezone
+
 
 #imports
 from gb_api.models import gbUser, MFA_Rotator
 import pyotp
 import qrcode
+import boto3
+from botocore.exceptions import ClientError
 
 
 
@@ -19,7 +23,7 @@ class MFAHelper():
         
     
     
-    def __generate_key__(self):
+    def __generate_keys__(self):
         '''generate a key for the users mfa/2fa'''
         
         
@@ -52,6 +56,77 @@ class MFAHelper():
             return False
     
     
+    def __upload_to_bucket__(self):
+        
+        '''save the QR code in the bucket until expirey'''
+        
+        
+        s3 = boto3.client('s3')
+        try:
+            response = s3.upload_file(self.img.save(f'{self.request.user.id}{random.randint(1111,9999)}QR{self.request.user.email[0:2]}.png'), settings.AWS_BUCKS['qrcode'])
+            if response:
+                return True
+        except ClientError as e:
+            logging.error(e)
+            return False
+    
+        return False
+    
+    
+    def __generate_qr__(self):    
+        '''generate QR code to display to the user'''
+        
+        self.pytotp = pyotp.totp.TOTP(self.b32).provisioning_uri(name=self.provisioning_data['name'], issuer_name=self.provisioning_data['issuer'])
+        if self.pytotp:
+            self.qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=4,
+            )
+            self.qr.add_data(self.pytotp)
+            self.qr.make(fit=True)
+
+            self.img = self.qr.make_image(fill_color="black", back_color="white")
+            appender = f'TEST{random.randint(111,9999)}-{random.randint(111,9999)}'
+            self.img.save(os.path.join('./mediafiles/tmphold/', f'{appender}.png'), 'PNG')
+            s3 = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+            
+            try:
+                
+                def test_response():
+                    response = s3.upload_file(os.path.join('./mediafiles/tmphold/', f'{appender}.png') ,"gbqrcodes", Key=f'{appender}.png', ExtraArgs={'ACL': 'public-read','ContentType':'image/png'})
+                    return True
+                self.assertEqual(test_response(), True)
+            except ClientError as e:
+                self.__delet_qr__(appender)
+                logging.error(e)
+                return False
+            return True
+        self.__delet_qr__(appender)
+        return False
+        
+    def __delet_qr__(self, appender):
+        '''delete the current QR stored in tmp folder'''
+        
+        
+        if os.path.isfile(os.path.join('./mediafiles/tmphold/', f'{appender}.png')):
+            os.remove(os.path.join('./mediafiles/tmphold/', f'{appender}.png'))
+        
+                    
+    def create_mfa(self):
+        '''create a new mfa object for the user'''
+        
+        self.__generate_keys__()
+        self.cu.mfa_active = True
+        self.mfa = MFA_Rotator.objects.create(user_id=self.request.user.id, b32=self.b32, hex=self.hex, last_used=timezone.now())
+        if self.mfa:
+            self.cu.save()
+            if self.__generate_qr__(): 
+                return True
+        
+        return False
+            
     
 
         
