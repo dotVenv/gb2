@@ -14,6 +14,8 @@ import {
     useDisclosure,
     Chip,
     Switch,
+    Snippet,
+    InputOtp,
   } from "@nextui-org/react";
   
 import { signal } from '@preact/signals-react';
@@ -21,7 +23,7 @@ import Countdown from 'react-countdown';
 
 
 
-const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen }) => {
+const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, cu  }) => {
 
 
     const [mfaToggle, setmfaToggle] = useState()
@@ -33,7 +35,7 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen })
 
     return(
         <>
-        <Modal backdrop='blur'  size='sm' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal backdrop='blur'  size='md' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
@@ -47,8 +49,33 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen })
                         <br></br>
 
                         {showQR ? <>
-                                <Chip variant='light' size='sm' color='danger' radius='lg'> Do not close this page without scanning the QR, as it is unretreivable.</Chip>
-                                <Image src={cu.QR_uri} alt='mfa_qr' /> 
+                                <Chip variant='light' size='sm' color='danger' radius='lg'>
+                                    <i className='text-tiny'>This is your first time turning on mfa. <br></br> Do not refresh/close this page <br></br>without scanning the QR</i>
+                                </Chip>
+                                <br></br>
+                                <img className='justify-center align-center mx-auto' src={cu.QR_uri} alt='mfa_qr' /> 
+                                <br></br>
+                                <b> On Mobile? </b> <Snippet>{cu.b32}</Snippet>
+                                <br></br>
+
+
+                                <br></br>
+                                <Form onSubmit={(e) => {e.preventDefault(); updateAccount(e, 'verify_2fa', null)}}>
+                                <InputOtp
+                                    name = 'otp_attempt'
+                                    label='OTP Authentication Code'
+                                    description='Enter OTP Authentication Code'
+                                    maxLength={6}
+                                    length={6}
+                                    endContent={
+                                        <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
+                                            Verify 2FA
+                                        </Button>
+                                        
+                                    }
+                                    />
+                                    </Form>
+                                
                                 </>
                                 
                                 : undefined }
@@ -63,9 +90,7 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen })
                             Toggle 2FA
                             </Switch>
                         <br></br>                             
-                        <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
-                            Save Changes
-                        </Button>
+                        
                     </div>
                 </ModalBody>
                 <ModalFooter>

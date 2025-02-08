@@ -301,7 +301,7 @@ class MFA_Rotator(ExportModelOperationsMixin('MFA_Rotator'), models.Model):
     
     
     class Meta:
-        verbose_name_plural = 'Mfa Rotator'
+        verbose_name_plural = 'Mfa Rotators'
     
     def __str__(self):
-        return f'User:{self.user.user}'
+        return f'User:{self.user.username}'

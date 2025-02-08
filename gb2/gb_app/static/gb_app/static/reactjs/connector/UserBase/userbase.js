@@ -148,7 +148,8 @@ export default class CurrentUser{
         return;
     };
 
-    setQR(uri){
-        this.QR_uri = uri;
+    setQR(data){
+        this.QR_uri = data[1];
+        this.b32 = data[0];
     };
 };

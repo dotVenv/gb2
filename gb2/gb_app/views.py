@@ -78,7 +78,13 @@ class APPViews(TemplateView):
                     if cu.update_account(): return getres().res('200', new_msg={'status': 'successful'})
                 
                 case 'change_2fa':
-                    if cu.toggle_2fa(): return getres().res('200', new_msg={'status': 'successful', 'mfa_data': cu.mfa_qr})
+                    tog2f = cu.toggle_2fa()
+                    if tog2f: return getres().res('200', new_msg={'status': 'successful', 'mfa_data': cu.mfa_return})
+                case 'verify_2fa':
+                    
+                    #TODO
+                    verif2f = cu.verify_2fa()
+                    if verif2f: return getres().res('200', new_msg={'status': 'successful', 'mfa_data': cu.mfa_return})
                     
             return getres().res('401', new_msg={'status': str('failed')})
         

@@ -94,10 +94,11 @@ const ProfileSide = ({userInfo}) => {
                     let response = await cu.updateAccount(data, poststep);
                     if (response){
                         //if qr is the step
-                        if (poststep == 'change_2fa'){
+                        if (poststep == 'change_2fa' || poststep == 'verify_2fa'){
                             if (response.mfa_data != 'deactivated' || response.mfa_data != 'activated'){
                                 //qr code is generated
                                 cu.setQR(response.mfa_data);
+                                userInfo.mfa.toLowerCase() == 'true'
                                 toastData.value.desc = 'MFA ready to complete';
                                 toastData.value.toastType = 'warning';
                                 !data.fname ? undefined : userInfo.fname = data.fname;
@@ -201,7 +202,7 @@ const ProfileSide = ({userInfo}) => {
 
         { editAccount ? <EditAccountModal updateAccount={updateAccount} isModalOpen={editAccount} setModal={setEditAccount} userInfo={userInfo} formholder={formholder} /> : undefined }
         { editPassword ? <EditPasswordModal updateAccount={updateAccount} isModalOpen={editPassword} setModal={setEditPassword} userInfo={userInfo}  /> : undefined }
-        { edit2FA ? <Edit2FAModal showQR={showQR} updateAccount={updateAccount} isModalOpen={edit2FA} setModal={setedit2FA} userInfo={userInfo} /> : undefined }
+        { edit2FA ? <Edit2FAModal cu={cu} showQR={showQR} updateAccount={updateAccount} isModalOpen={edit2FA} setModal={setedit2FA} userInfo={userInfo} /> : undefined }
         { newToastAlert ?  <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }  
            
         

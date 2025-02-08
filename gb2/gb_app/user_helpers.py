@@ -310,12 +310,16 @@ class UserHelper():
                 print('user has mfa active, action: deactivate')
             else:
                 mfa = MFAHelper(self.request)
-                if self.has_mfa:
+                #user has table inside mfa rotater but may not have mfa active
+                if mfa.has_mfa:
                     #reactivate the mfa 
                     print('reactivate mfa')
                 else:
-                    if mfa.create_mfa():
+                    mfa.create_mfa()
+                    if mfa.mfa_return is not None:
+                        self.mfa_return = mfa.mfa_return
                         print('new mfa created')
+                        return True
                     else:
                         return False
                     
