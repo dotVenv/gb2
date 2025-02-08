@@ -121,8 +121,8 @@ class MFAHelper():
         self.cu.mfa_active = True
         self.mfa = MFA_Rotator.objects.create(user_id=self.request.user.id, b32=self.b32, hex=self.hex, last_used=timezone.now())
         if self.mfa:
-            self.cu.save()
             if self.__generate_qr__(): 
+                self.cu.save()
                 return True
         
         return False
