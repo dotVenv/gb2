@@ -101,14 +101,11 @@ const ProfileSide = ({userInfo}) => {
                                 userInfo.mfa.toLowerCase() == 'true'
                                 toastData.value.desc = 'MFA ready to complete';
                                 toastData.value.toastType = 'warning';
-                                !data.fname ? undefined : userInfo.fname = data.fname;
-                                !data.lname ? undefined : userInfo.lname = data.lname;
                                 setShowQR(true);
                             }else{
                                 toastData.value.desc = 'MFA is '+ response.mfa_data;
                                 toastData.value.toastType = 'success';
-                                !data.fname ? undefined : userInfo.fname = data.fname;
-                                !data.lname ? undefined : userInfo.lname = data.lname;
+                                data.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
                                 setEditAccount(false);
                             }
                         }else{

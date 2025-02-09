@@ -35,7 +35,7 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, c
 
     return(
         <>
-        <Modal backdrop='blur'  size='md' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal isDismissable={false} backdrop='blur'  size='md' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
@@ -67,19 +67,17 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, c
                                     description='Enter OTP Authentication Code'
                                     maxLength={6}
                                     length={6}
-                                    endContent={
-                                        <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
+                                    validate={(value) => {value.length <= 5 ? updateAccount(value, 'verify_2fa', null) : undefined }}
+                                    />
+                                      <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
                                             Verify 2FA
                                         </Button>
-                                        
-                                    }
-                                    />
                                     </Form>
                                 
                                 </>
                                 
                                 : undefined }
-                        <Switch
+                        { !showQR ? <Switch
                             defaultSelected={userInfo.mfa.toLowerCase() == 'true' ? true : false }
                             color="success"
                             endContent={<i className="fa-solid fa-lock"></i>}
@@ -89,6 +87,7 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, c
                             >
                             Toggle 2FA
                             </Switch>
+                            : undefined }
                         <br></br>                             
                         
                     </div>

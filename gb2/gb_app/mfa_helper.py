@@ -67,8 +67,8 @@ class MFAHelper():
             self.qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
-                box_size=10,
-                border=4,
+                box_size=5,
+                border=2,
             )
             self.qr.add_data(self.pytotp)
             self.qr.make(fit=True)
@@ -118,8 +118,30 @@ class MFAHelper():
       
         return False
             
-    
 
+    def __get_mfa_user__(self):
+        '''get the current mfa object and return it'''
+        
+        try:
+            return MFA_Rotator.objects.get(user_id=self.request.user.id)
+        except dce.ObjectDoesNotExist:
+            return None 
+        return None
+    
+    def _verify_(self):
+        '''verify the current mfa_code'''
+        
+        self.is_valid = False
+        
+        self.mfa = self.__get_mfa_user__()
+        if self.mfa is not None:
+            current_totp = int(pyotp.totp.TOTP(self.mfa.b32).now())
+            print(self.request.POST)
+            current_totp_attempt = int(self.request.POST.get('input[otp_attempt]'))
+            if current_totp_attempt == current_totp:
+                self.is_valid = True
+
+        return 
         
     
     

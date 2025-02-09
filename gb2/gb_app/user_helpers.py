@@ -327,3 +327,12 @@ class UserHelper():
             return False
         
         return True 
+    
+    def verify_2fa(self):
+       
+        mfa  = MFAHelper(self.request)
+        mfa._verify_()
+        if mfa.is_valid:
+            return True
+        
+        return False

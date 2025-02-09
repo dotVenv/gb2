@@ -84,7 +84,7 @@ class APPViews(TemplateView):
                     
                     #TODO
                     verif2f = cu.verify_2fa()
-                    if verif2f: return getres().res('200', new_msg={'status': 'successful', 'mfa_data': cu.mfa_return})
+                    if verif2f: return getres().res('200', new_msg={'status': 'successful', 'mfa_data': 'activated'})
                     
             return getres().res('401', new_msg={'status': str('failed')})
         
