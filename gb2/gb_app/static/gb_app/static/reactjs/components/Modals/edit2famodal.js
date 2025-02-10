@@ -28,6 +28,7 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, c
 
     const [mfaToggle, setmfaToggle] = useState()
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [otpValue, setotpValue] = useState();
 
     const Swap2FA = () => {
         userInfo.mfa.toLowerCase() != 'true' ? userInfo.mfa = 'true' : userInfo.mfa = 'false'; setmfaToggle(userInfo.mfa)
@@ -67,7 +68,8 @@ const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, c
                                     description='Enter OTP Authentication Code'
                                     maxLength={6}
                                     length={6}
-                                    validate={(value) => {value.length <= 5 ? updateAccount(value, 'verify_2fa', null) : undefined }}
+                                    value={otpValue}
+                                    onValueChange={setotpValue}
                                     />
                                       <Button color='primary' variant='flat' type='submit' size='sm' radius='lg'>
                                             Verify 2FA

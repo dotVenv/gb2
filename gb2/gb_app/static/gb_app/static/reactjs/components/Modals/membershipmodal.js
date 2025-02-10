@@ -25,7 +25,7 @@ const MembershipModal = ({cu, setModal, isModalOpen }) => {
 
     return(
         <>
-        <Modal backdrop='blur' size='3xl' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal backdrop='blur' size='md' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>

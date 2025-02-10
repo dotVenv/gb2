@@ -50,7 +50,7 @@ const MyProfile = () => {
                                     </span>
                                     <span className='w-full'>
                                         <dt className="text-small text-center mx-auto font-medium text-gray-700">Report Status</dt>
-                                        <dd className="text-lg text-center mx-auto font-semibold text-gray-500"><i style={{'color': 'green'}}> Clean </i></dd>
+                                        <dd className="text-lg text-center mx-auto font-semibold text-gray-500"><i style={{'color': 'green'}}> {userInfo.report_status} </i></dd>
                                     </span>
                                     <span className='w-full'>
                                         <dt className="text-small text-center mx-auto font-medium text-gray-700">Balance</dt>

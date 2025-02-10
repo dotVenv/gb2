@@ -94,20 +94,28 @@ const ProfileSide = ({userInfo}) => {
                     let response = await cu.updateAccount(data, poststep);
                     if (response){
                         //if qr is the step
-                        if (poststep == 'change_2fa' || poststep == 'verify_2fa'){
-                            if (response.mfa_data != 'deactivated' || response.mfa_data != 'activated'){
+                        if (poststep == 'change_2fa'){
                                 //qr code is generated
+                            if (response.mfa_data !== 'activated' || response.mfa_data !== 'deactivated'){
+                                setShowQR(true);
                                 cu.setQR(response.mfa_data);
                                 userInfo.mfa.toLowerCase() == 'true'
                                 toastData.value.desc = 'MFA ready to complete';
                                 toastData.value.toastType = 'warning';
-                                setShowQR(true);
                             }else{
                                 toastData.value.desc = 'MFA is '+ response.mfa_data;
                                 toastData.value.toastType = 'success';
                                 data.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
                                 setEditAccount(false);
-                            }
+                            }; 
+                        }else if ( poststep == 'verify_2fa'){
+                            console.log('inside 2');
+                            toastData.value.desc = 'MFA is '+ response.mfa_data;
+                            toastData.value.toastType = 'success';
+                            response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
+                            setShowQR(false); 
+                            setEditAccount(false);
+                        }
                         }else{
                             if (response.status == 'successful'){
                                 toastData.value.desc = 'Successfully updated account';
@@ -120,7 +128,7 @@ const ProfileSide = ({userInfo}) => {
                                 toastData.value.toastType = 'error';
                             };
                         }
-                    };
+                    
                 };
 
             }catch (e){

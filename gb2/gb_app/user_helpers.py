@@ -78,6 +78,7 @@ class UserHelper():
             self.serialized['utok'] = int(self.cu_ap.uname_change_token)
             self.serialized['entries'] = int(self.cu_ap.entries)
             self.serialized['membership'] = str(self.cu_ap.membership.name)
+            self.serialized['report_status'] = 'clean'
             
     
         
@@ -334,5 +335,4 @@ class UserHelper():
         mfa._verify_()
         if mfa.is_valid:
             return True
-        
         return False
