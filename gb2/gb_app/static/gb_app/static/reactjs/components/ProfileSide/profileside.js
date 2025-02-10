@@ -116,23 +116,30 @@ const ProfileSide = ({userInfo}) => {
                             response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
                             setShowQR(!showQR); 
                             setEditAccount(!editAccount);
-                        }
                         }else{
                             if (response.status == 'successful'){
                                 toastData.value.desc = 'Successfully updated account';
                                 toastData.value.toastType = 'success';
+                        
                                 !data.fname ? undefined : userInfo.fname = data.fname;
                                 !data.lname ? undefined : userInfo.lname = data.lname;
                                 setEditAccount(false);
                             }else{
+                                //response but not successful
                                 toastData.value.desc = 'Failed to update account';
                                 toastData.value.toastType = 'error';
                             };
-                        }
+                        };
+                    }else{
+                        //no response
+                        toastData.value.desc = 'Failed to update account';
+                        toastData.value.toastType = 'error';
+                    };
                     
                 };
 
             }catch (e){
+                //error 
                 toastData.value.desc = 'Failed to update account';
                 toastData.value.toastType = 'error';
             };

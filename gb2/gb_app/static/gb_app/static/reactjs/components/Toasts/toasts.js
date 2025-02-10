@@ -3,7 +3,7 @@ import React, { useState, SyntheticEvent } from "react";
 import { Alert, Snackbar, SnackbarCloseReason} from "@mui/material";
 
 
-const CustomToast = ({ sev, title, desc }) => {
+const CustomToast = ({ sev, title, desc,}) => {
 
     const [open, setOpen] = useState(true);
 
@@ -21,9 +21,11 @@ const CustomToast = ({ sev, title, desc }) => {
     return(
         <>
         <Snackbar
+        key={Math.random().toString(36).substring(2,7)}
         open={open}
         autoHideDuration={3500}
         onClose={handleClose}
+      
         >
             <Alert severity={sev} variant="filled"sx={{ width: '100%' }} > 
                 <span className="text-tiny">{desc}</span>

@@ -5,8 +5,7 @@ from django_s3_storage.storage import S3Storage
 from django.conf import settings 
 
 profilepic_storage = S3Storage(aws_s3_bucket_name='gbprofilepics')
-
-
+tournament_thumbnail_storage = S3Storage(aws_s3_bucket_name='tournament_thumbnails')
 # Create your models here.
 class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     '''db table for users'''
@@ -180,9 +179,8 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
     registered = models.ManyToManyField('AccountPreference', related_name='registered_users')
     register_limit = models.IntegerField(default=75)
-    thumbnail = models.ImageField(blank=True, null=True, upload_to='thumbnails/tournaments/')
+    thumbnail = models.ImageField(blank=True, null=True, storage=tournament_thumbnail_storage)
     rating = models.IntegerField(default=0)
-    
     
     class Meta:
         verbose_name_plural = 'Tournaments'

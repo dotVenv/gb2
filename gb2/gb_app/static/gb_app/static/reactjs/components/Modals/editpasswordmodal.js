@@ -56,7 +56,7 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen}) =>
                             <Input 
                                 name='new-password' 
                                 label='New password' 
-                                placeholder='Enter new passowrd' 
+                                placeholder='Enter new password' 
                                 type='password' 
                                 autocomplete='off' 
                                 isRequired
@@ -71,7 +71,7 @@ const EditPasswordModal = ({ updateAccount, userInfo, setModal, isModalOpen}) =>
                             <Input 
                                 name='rnew-password' 
                                 label='Repear password' 
-                                placeholder='Repeat new passowrd' 
+                                placeholder='Repeat new password' 
                                 type='password' 
                                 autocomplete='off' 
                                 isRequired
