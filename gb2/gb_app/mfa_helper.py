@@ -110,10 +110,8 @@ class MFAHelper():
                     self.cu.save()
                     return True
         except TypeError as e:
-            raise Exception(f'Something went wrong, rolling back sqlcommit \n {e}')
             return False
         except NameError as e:
-            raise Exception(f'Something went wrong, rolling back sqlcommit \n {e}')
             return False 
       
         return False

@@ -309,7 +309,6 @@ class UserHelper():
         try:
             cu = gbUser.objects.get(id=self.request.user.id)
             if cu.mfa_active is True:
-                print('deactivated')
                 cu.mfa_active = False
                 cu.save()
                 self.mfa_return = 'deactivated'
@@ -318,7 +317,6 @@ class UserHelper():
                 mfa = MFAHelper(self.request)
                 #user has table inside mfa rotater but may not have mfa active
                 if mfa.has_mfa:
-                    print('reactive the users mfa')
                     cu.mfa_active = True
                     cu.save()
                     self.mfa_return = 'activated'
@@ -327,7 +325,6 @@ class UserHelper():
                     mfa.create_mfa()
                     if mfa.mfa_return is not None:
                         self.mfa_return = mfa.mfa_return
-                        print('new mfa created')
                         return True
                     else:
                         return False
