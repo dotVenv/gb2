@@ -136,11 +136,9 @@ class MFAHelper():
         self.mfa = self.__get_mfa_user__()
         if self.mfa is not None:
             current_totp = int(pyotp.totp.TOTP(self.mfa.b32).now())
-            print(self.request.POST.get('input[otp_attempt]'), current_totp)
             current_totp_attempt = self.request.POST.get('input[otp_attempt]')
             if int(current_totp_attempt) == int(current_totp):
                 self.is_valid = True
-                print('valid otp')
         return 
         
     

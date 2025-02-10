@@ -307,14 +307,22 @@ class UserHelper():
     def toggle_2fa(self):
         '''execute steps for the mfa action'''
         try:
-            if self.request.user.mfa_active is True:
-                print('user has mfa active, action: deactivate')
+            cu = gbUser.objects.get(id=self.request.user.id)
+            if cu.mfa_active is True:
+                print('deactivated')
+                cu.mfa_active = False
+                cu.save()
+                self.mfa_return = 'deactivated'
+                return True
             else:
                 mfa = MFAHelper(self.request)
                 #user has table inside mfa rotater but may not have mfa active
                 if mfa.has_mfa:
-                    #reactivate the mfa 
-                    print('reactivate mfa')
+                    print('reactive the users mfa')
+                    cu.mfa_active = True
+                    cu.save()
+                    self.mfa_return = 'activated'
+                    return True
                 else:
                     mfa.create_mfa()
                     if mfa.mfa_return is not None:
@@ -327,7 +335,7 @@ class UserHelper():
         except dce.RequestAborted:
             return False
         
-        return True 
+
     
     def verify_2fa(self):
        

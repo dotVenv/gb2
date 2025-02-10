@@ -96,7 +96,8 @@ const ProfileSide = ({userInfo}) => {
                         //if qr is the step
                         if (poststep == 'change_2fa'){
                                 //qr code is generated
-                            if (response.mfa_data !== 'activated' || response.mfa_data !== 'deactivated'){
+                            console.log(response.mfa_data);
+                            if (response.mfa_data.toLowerCase() != 'activated' && response.mfa_data.toLowerCase() != 'deactivated'){
                                 setShowQR(true);
                                 cu.setQR(response.mfa_data);
                                 userInfo.mfa.toLowerCase() == 'true'
@@ -105,16 +106,16 @@ const ProfileSide = ({userInfo}) => {
                             }else{
                                 toastData.value.desc = 'MFA is '+ response.mfa_data;
                                 toastData.value.toastType = 'success';
-                                data.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
-                                setEditAccount(false);
+                                response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
+                                setedit2FA(!edit2FA);
                             }; 
                         }else if ( poststep == 'verify_2fa'){
                             console.log('inside 2');
                             toastData.value.desc = 'MFA is '+ response.mfa_data;
                             toastData.value.toastType = 'success';
                             response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
-                            setShowQR(false); 
-                            setEditAccount(false);
+                            setShowQR(!showQR); 
+                            setEditAccount(!editAccount);
                         }
                         }else{
                             if (response.status == 'successful'){
