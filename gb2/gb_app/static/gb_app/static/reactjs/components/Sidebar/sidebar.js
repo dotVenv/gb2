@@ -83,11 +83,6 @@ const CustomSidebar = ({userInfo}) => {
                         <i className="fa-solid fa-ranking-star fa-xl" style={uri_endpoint.value== 'rankings' ? {'color': '#ADD8E6'} : {}}></i>
                     </a>
                 </Tooltip>
-                <Tooltip content="Tournament Rules" className="text-white" placement='bottom' showArrow={true}>
-                    <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                        <i className="fa-solid fa-scale-balanced fa-xl" style={uri_endpoint.value== 'rules' ? {'color': '#ADD8E6'} : {}}></i>
-                    </a>
-                </Tooltip>
                 <Tooltip content="Report a bug." className="text-white" placement='bottom' showArrow={true}>
                     <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i className="fa-solid fa-bug fa-xl"></i>

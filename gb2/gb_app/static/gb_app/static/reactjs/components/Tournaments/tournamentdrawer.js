@@ -30,7 +30,6 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
 
   const cu = useContext(ConnContext);
   const [ userInfo ] = useAtom(cu.userAtom);
-  console.log(tournamentInfo.rules);
   return (
     <>
       <Drawer
@@ -79,8 +78,9 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                     }
                     variant="flat"
                   >
-                    Enter Tournament
+                    Enter Now
                   </Button>
+                  <p className='text-white text-small mt-2' >{tournamentInfo.limit - tournamentInfo.registered_count} Spots Left</p>
                 </div>
                
               </DrawerHeader>
@@ -96,7 +96,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                   />
                 </div>
                 <div className="flex flex-col gap-2 py-4">
-                  <h1 className="text-white text-2xl font-bold leading-7">{tournamentInfo.name.toUpperCase()} Tournament</h1>
+                  <h1 className="text-white text-2xl font-bold leading-7">${tournamentInfo.pool} {tournamentInfo.name.toUpperCase()} Tournament</h1>
                   <p className="text-sm text-default-500">
                     Restrictions/Specifications: ({tournamentInfo.specific})
                   </p>
@@ -161,12 +161,34 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                             </svg>
                           }
                           className="group gap-x-0.5 text-medium text-foreground font-medium"
-                          href="https://www.google.com/maps/place/555+California+St,+San+Francisco,+CA+94103"
+                          href="#"
                           rel="noreferrer noopener"
                         >
                           Gamers-Bounty.com
                         </Link>
                         <p className="text-small text-default-500">Compete from home! </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3 items-center">
+                      <div className="flex-none border-1 border-default-200/50 rounded-small text-center w-11 overflow-hidden py-0.5">
+                        <i className="fa-solid fa-headset fa-md text-default-400 h-6 mt-2" style={{'color': 'default-400'}}></i>
+                      </div>
+                      <div className="flex flex-col gap-0.5">
+                        <p className="text-medium text-foreground font-medium">
+                          Platform Options
+                        </p>
+                        <p className="text-small text-default-500">
+                          { tournamentInfo.platform.map((key, index) => {
+                            return( <i key={index}> {key.id} {key.id == 'Xbox' 
+                              ? <i className="fa-brands fa-xbox"></i> 
+                              : key.id == 'PSN' 
+                                ? <i className="fa-brands fa-playstation"></i>
+                                : key.id == 'PC' 
+                                  ? <i className="fa-solid fa-computer"></i>
+                                  : undefined }</i>)
+                          })}  
+                        </p>
                       </div>
                     </div>
                     <div className="flex flex-col mt-4 gap-3 items-start">
@@ -237,7 +259,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                                   avatarProps={{
                                     src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                                   }}
-                                  description="1st Place - 1420 pts."
+                                  description="2nd Place - 1420 pts."
                                   name={<span className='text-white'>"Jane Doe"</span>}
                                 />
                              </Card>
@@ -250,7 +272,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                                   avatarProps={{
                                     src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                                   }}
-                                  description="1st Place - 1420 pts."
+                                  description="3rd Place - 1420 pts."
                                   name={<span className='text-white'>"Jane Doe"</span>}
                                 />
                              </Card>
@@ -260,7 +282,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                         </ul>
                     </div>
                     <div className="flex flex-col mt-4 gap-3 items-start">
-                      <span className="text-small text-default-500">105 Going</span>
+                      <span className="text-small text-default-500">{ tournamentInfo.registered_count }/{tournamentInfo.limit} Competing</span>
                       <div className="flex gap-2 items-center">
                         <AvatarGroup
                           isBordered
@@ -269,7 +291,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                             count: "text-default-500 text-tiny bg-default-100",
                           }}
                           size="sm"
-                          total={101}
+                          total={tournamentInfo.registered_count}
                         >
                           <Tooltip content="Alex">
                             <Avatar
@@ -278,27 +300,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                               src="https://i.pravatar.cc/150?u=a04258114e29026708c"
                             />
                           </Tooltip>
-                          <Tooltip content="Joe">
-                            <Avatar
-                              className="data-[hover=true]:!translate-x-0"
-                              name="Joe"
-                              src="https://i.pravatar.cc/150?u=a04258114e290267084"
-                            />
-                          </Tooltip>
-                          <Tooltip content="John">
-                            <Avatar
-                              className="data-[hover=true]:!translate-x-0"
-                              name="John"
-                              src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-                            />
-                          </Tooltip>
-                          <Tooltip content="Jane">
-                            <Avatar
-                              className="data-[hover=true]:!translate-x-0"
-                              name="Jane"
-                              src="https://i.pravatar.cc/150?u=a04258114e29026702d"
-                            />
-                          </Tooltip>
+                          
                         </AvatarGroup>
                       </div>
                     </div>

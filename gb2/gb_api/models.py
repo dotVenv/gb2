@@ -135,14 +135,13 @@ platform_choices = [
     ('Xbox', 'Xbox'),
     ('PSN', 'PSN'),
     ('PC', 'PC'),
+
 ]
 
 class Platform(ExportModelOperationsMixin('Platform'),models.Model):
     '''store the platform option for avilable on the site'''
     
-    name = models.CharField(max_length=15, choices=platform_choices)
-    tournaments = models.ManyToManyField('Tournament', related_name='platform_tournaments')
-    
+    name = models.CharField(max_length=25, choices=platform_choices) 
     
     class Meta:
         verbose_name_plural = 'Platforms'
@@ -214,6 +213,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     registered = models.ManyToManyField('AccountPreference', related_name='registered_users', blank=True)
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
+    platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
     rating = models.IntegerField(default=0)
     
     def update_dates(self):

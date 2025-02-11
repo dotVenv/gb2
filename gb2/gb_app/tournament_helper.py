@@ -50,15 +50,16 @@ class TnHelper():
                     'limit': int(val.register_limit),
                     'thumbnail': thumbnail_options[val.thumbnail],
                     'rating': val.rating,
+                    'platform':[{'id':x['name']} for x in val.platforms.values()],
+                    'registered_count': val.registered.count(),
+                    'registered': None,
                         
                 }
                 
-                if val.registered.count() > 0: 
-                    new_tl['registered'] = [x.user.username for x in val.registered ]
-                    new_tl['registerd_count'] = val.registered.count()
-                    
-                else: new_tl['registered_count'] = 0
-            self.tournaments_list.append(new_tl)
+                print(new_tl['platform'])
+                
+                if val.registered.count() > 0: new_tl['registered'] = [x['user']['username'] for x in val.registered ]
+                self.tournaments_list.append(new_tl)
             return True
         
         return False
