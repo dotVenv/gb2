@@ -11,12 +11,12 @@ import marvel_r from '../../../imgs/pngs/marvel_r.png';
 
 const descItems = [
     {text: "COMPETE HEAD-TO-HEAD", 
-        desc: "Compete head-to-head or form a team and go for a top placement. We designed a unique matchmaking system for indiviual players and teams. Tournament run daily from 6pm-9pm EST.",
+        desc: "Compete head-to-head or form a team and go for a top placement. We DO NOT implement SBMM, we believe all level of skill should be determined at playtime. Rankings are used to unlock Top Dollar Tournaments. Tournament run daily from 6pm-9pm EST.",
         img: beargif ,
         ref: null,},
     
     {text: "BECOME A BOUNTY HUNTER", 
-        desc: "Win enough to earn the Bounty-Hunter badge and become eligible for prizes along-side the prize pool for every tournament you enter.",
+        desc: "Win enough to earn to rank up to Bounty-Hunter. This allows you become eligible to enter into BIGGER prize pool tournaments but comes at the cost of competing amongst the most elite.",
         img: medalgif,
         ref: null},
 ]
