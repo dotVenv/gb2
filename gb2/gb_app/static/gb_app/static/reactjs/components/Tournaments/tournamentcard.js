@@ -35,7 +35,7 @@ const TournamentCard = ({tournamentInfo}) => {
             <div className="flex gap-2 justify-center align-items-center mx-auto pb-2 mt-3">
                 <Chip radius='lg' size='md' variant='flat' color='default'
                     startContent={<i className="fa-solid fa-money-bills"></i>}>
-                    <b>${tournamentInfo.pool}</b>
+                    <b>${tournamentInfo.pool}</b> 
                 </Chip>
                 <Divider orientation="vertical" />
                 <Chip radius='lg' size='md' variant='flat' color='default'

@@ -41,7 +41,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
         }}
         isOpen={isOpen}
       >
-        <ScrollShadow size={30} hideScrollBar>
+        <ScrollShadow size={30} >
         <DrawerContent>
           {(onClose) => (
             <>
