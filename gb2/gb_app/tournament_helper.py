@@ -56,8 +56,6 @@ class TnHelper():
                         
                 }
                 
-                print(new_tl['platform'])
-                
                 if val.registered.count() > 0: new_tl['registered'] = [x['user']['username'] for x in val.registered ]
                 self.tournaments_list.append(new_tl)
             return True

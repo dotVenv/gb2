@@ -20,7 +20,8 @@ import {
     Card,
     User,
     Spacer,
-    CardBody, } from "@nextui-org/react";
+    CardBody,
+    ButtonGroup, } from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 
@@ -95,6 +96,10 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                     src={tournamentInfo.thumbnail}
                   />
                 </div>
+                <ButtonGroup>
+                  <Button variant='flat' color='secondary' radius="lg" size='sm'> Ask Manager </Button>
+                  <Button  variant='flat' color='primary' radius="lg" size='sm'> Ask Team Manager </Button>
+                </ButtonGroup>
                 <div className="flex flex-col gap-2 py-4">
                   <h1 className="text-white text-2xl font-bold leading-7">${tournamentInfo.pool} {tournamentInfo.name.toUpperCase()} Tournament</h1>
                   <p className="text-sm text-default-500">
