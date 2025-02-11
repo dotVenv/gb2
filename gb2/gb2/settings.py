@@ -197,7 +197,9 @@ AWS_SECRET_ACCESS_KEY  = os.environ.get('AWSSAK')
 
 AWS_S3_BUCKET_AUTH = False
 AWS_DEFAULT_ACL = 'public-read'
-AWS_BUCKS = {"profile_pics": 'gbprofilepics.s3.us-east-2.amazonaws.com/', "qrcode": 'gbqrcodes.s3.us-east-2.amazonaws.com/'}
+AWS_BUCKS = {"profile_pics": 'gbprofilepics.s3.us-east-2.amazonaws.com/',
+             "qrcode": 'gbqrcodes.s3.us-east-2.amazonaws.com/',
+             "thumbnails":'gbthumbnails.s3.us-east-2.amazonaws.com/'}
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles"

@@ -133,6 +133,15 @@ class APPViews(TemplateView):
         return getres().res('403')
     
     @method_decorator(login_required)
+    def tournaments(self, request):
+        '''return all tournaments for the user to view'''
+        
+        context = {}
+        return render(request, 'gb_app/templates/index.html', context)
+    
+    
+    
+    @method_decorator(login_required)
     def all_memberships(self, request):
         '''return all memberships on get and save memberships on post'''
         

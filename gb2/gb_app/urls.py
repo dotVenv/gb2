@@ -10,6 +10,7 @@ urlpatterns = [
     path('user-defaults', appviews.user_defaults, name='user_defaults'),
     path('all-memberships', appviews.all_memberships, name='all_memberships'),
     path('myprofile', appviews.myprofile,  name='my_profile'),
+    path('tournaments', appviews.tournaments,  name='all_tournaments'),
     
     #steupsteps
     path('setup-steps', appviews.setup_steps , name='setup_steps'), 

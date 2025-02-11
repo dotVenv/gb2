@@ -3,9 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from django_prometheus.models import ExportModelOperationsMixin
 from django_s3_storage.storage import S3Storage
 from django.conf import settings 
+from django.utils import timezone
+
+import datetime
+
 
 profilepic_storage = S3Storage(aws_s3_bucket_name='gbprofilepics')
-tournament_thumbnail_storage = S3Storage(aws_s3_bucket_name='tournament_thumbnails')
+tournament_thumbnail_storage = S3Storage(aws_s3_bucket_name='gbthumbnails')
 # Create your models here.
 class gbUser(ExportModelOperationsMixin('gbUser'), AbstractUser):
     '''db table for users'''
@@ -164,7 +168,25 @@ mode_options = [
 
 def rules():
     '''return a default list for each tournament'''
-    return []
+    return [{"Disconnection": "If a player disconnects, click the 'Opponent Disconnected' button. This will allow a 2 minute window for the opponent to re-establish connection and confirm it as well. This can only be done once per match."}
+]
+
+
+def set_dates(sore):
+    '''set the start date automatically for the current tournament'''
+    
+    match sore:
+        case 'start':
+            today = datetime.datetime.today().date()
+            desired_time = datetime.time(18,00)
+            new_date = datetime.datetime.combine(today, desired_time)
+            return new_date
+        case 'end':
+            today = timezone.datetime.today().date()
+            desired_time = datetime.time(21,00)
+            new_date = datetime.datetime.combine(today, desired_time, tzinfo=timezone.now().tzinfo)
+            return new_date
+ 
 
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
@@ -173,15 +195,21 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     mode = models.CharField(max_length=15,  blank=True, null=True, choices=mode_options)
     specific = models.CharField(max_length=25, blank=True, null=True)
     desc = models.TextField()
-    date = models.DateTimeField(auto_now_add=False)
+    start = models.DateTimeField(auto_now_add=False, default=set_dates('start'))
+    end = models.DateTimeField(auto_now_add=False, default=set_dates('end'))
     rules = models.JSONField(default=rules)
     pool = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
     placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
-    registered = models.ManyToManyField('AccountPreference', related_name='registered_users')
+    registered = models.ManyToManyField('AccountPreference', related_name='registered_users', blank=True)
     register_limit = models.IntegerField(default=75)
     thumbnail = models.ImageField(blank=True, null=True, storage=tournament_thumbnail_storage)
     rating = models.IntegerField(default=0)
     
+    def update_dates(self):
+        self.start = set_dates('start')
+        self.end = set_dates('end')
+        self.save()
+        
     class Meta:
         verbose_name_plural = 'Tournaments'
         
