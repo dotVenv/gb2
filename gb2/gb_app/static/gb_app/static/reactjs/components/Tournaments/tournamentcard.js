@@ -3,20 +3,19 @@
 import React, { useState } from "react";
 import { Button, Card, CardHeader, CardBody, CardFooter, Chip, Divider, Spacer, } from "@nextui-org/react";
 import { TournamentDrawer } from '../../components';
-import marvel_r from '../../../imgs/pngs/marvel_r.png';
-    
-const TournamentCard = () => {
+
+const TournamentCard = ({tournamentInfo}) => {
 
     const [isOpen, setisOpen] = useState(false);
     
 
     return(
         <>
-        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-no w-full h-[300px]" radius='lg'>
+        <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-no w-[250px] h-[300px]" radius='lg'>
 
             <img 
-                className="object-cover h-full"
-                 src={marvel_r} alt='tournament thumbnail' 
+                className="object-cover w-[250px] h-[300px]"
+                 src='https://gbthumbnails.s3.us-east-2.amazonaws.com/nba2k_restricted.png' alt='tournament thumbnail' 
             />
           
           <CardFooter className="p-2 grid grid-cols-1 fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">

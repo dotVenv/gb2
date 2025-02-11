@@ -4,11 +4,12 @@ import { signal } from "@preact/signals-react";
 import { atom } from "jotai";
 import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
-import { AllMemberships } from '../index';
+import { AllMemberships, TournamentBase } from '../index';
 
-export default class CurrentUser{
+export default class CurrentUser extends TournamentBase{
 
-    constructor(){
+    constructor(props){
+        super(props);
         this.setAtoms();
 
 
@@ -151,5 +152,9 @@ export default class CurrentUser{
     setQR(data){
         this.QR_uri = data[1];
         this.b32 = data[0];
+    };
+
+    setTournaments(){
+        this.getTournaments();
     };
 };

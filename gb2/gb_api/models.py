@@ -187,6 +187,17 @@ def set_dates(sore):
             new_date = datetime.datetime.combine(today, desired_time, tzinfo=timezone.now().tzinfo)
             return new_date
  
+aws_thumbnail_url = 'https://gbthumbnails.s3.us-east-2.amazonaws.com'
+thumbnail_options = [
+    ('NBA2K_STRICT',f'{aws_thumbnail_url}/nba2k_restricted.png'),
+    ('NBA2K_UNSTRICT',f'{aws_thumbnail_url}/nba2k_unrestricted.png'),
+    
+    ('MADDEN_STRICT', f'{aws_thumbnail_url}/madden_restricted'),
+    ('MADDEN_UNSTRICT', f'{aws_thumbnail_url}/madden_unrestricted'),
+    
+    ('MARVEL_STRICT', f'{aws_thumbnail_url}/marvel_restricted'),
+    ('MARVEL_UNSTRICT', f'{aws_thumbnail_url}/marvel_unrestricted'),
+]
 
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
@@ -202,7 +213,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
     registered = models.ManyToManyField('AccountPreference', related_name='registered_users', blank=True)
     register_limit = models.IntegerField(default=75)
-    thumbnail = models.ImageField(blank=True, null=True, storage=tournament_thumbnail_storage)
+    thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     rating = models.IntegerField(default=0)
     
     def update_dates(self):

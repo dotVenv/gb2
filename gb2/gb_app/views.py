@@ -136,6 +136,12 @@ class APPViews(TemplateView):
     def tournaments(self, request):
         '''return all tournaments for the user to view'''
         
+        if request.method == 'POST':
+            poststep = str(request.POST.get('poststep'))
+            if poststep:
+                print(poststep)
+                
+            
         context = {}
         return render(request, 'gb_app/templates/index.html', context)
     
