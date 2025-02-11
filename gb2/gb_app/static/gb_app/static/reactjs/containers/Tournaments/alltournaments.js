@@ -1,18 +1,29 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 import { Layout } from '../index';
 import { Breadcrumbs, BreadcrumbItem, Card,  CardBody, CardFooter, Spacer, Button, Chip, Image } from "@nextui-org/react";
-import { TournamentCard } from '../../components';
+import { TournamentList } from '../../components';
+import { signal } from '@preact/signals-react';
 
+const fetched = signal(0);
 
 const AllTournaments = () => {
 
+
+    
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
-    cu.setTournaments()
+    const setT = async() => { await cu.setTournaments();}
+
+    if (fetched.value == 0){
+        setT();
+        fetched.value ++;
+    };
+    
+    
     return(
         <>
         <Layout>
@@ -33,7 +44,8 @@ const AllTournaments = () => {
             <section className='h-full'>
                 <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                     <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                        <TournamentCard tournamentInfo={null} />
+                        <TournamentList cu={cu} />
+                      
                     </div>
                 </div>
             </section>

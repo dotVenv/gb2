@@ -6,12 +6,12 @@ import { useDotButton, DotButton } from "./carouseldots";
 import useEmblaCarousel from "embla-carousel-react";
 import { TournamentCard } from '../../components';
 
-const PopularTournaments = () => {
+const PopularTournaments = ({cu}) => {
 
 
 
-    const SLIDE_COUNT = 5
-    const slides  = Array.from(Array(SLIDE_COUNT).keys());
+    
+    const slides  = cu.tournaments.tournaments;
     const options ={ loop: false }
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
@@ -28,13 +28,13 @@ const PopularTournaments = () => {
     
     return(
         <>
-        
+        <br></br>
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
-                <div className="embla__container1 gap-1 ">
-                {slides.map((index) => (
+                <div className="embla__container1 gap-0  ">
+                {slides.map((key,index) => (
                     <div className="embla__slide" key={index}>
-                        <TournamentCard tournamentInfo={null} />
+                        <TournamentCard tournamentInfo={key} />
                     </div>
                 ))}
                 </div>

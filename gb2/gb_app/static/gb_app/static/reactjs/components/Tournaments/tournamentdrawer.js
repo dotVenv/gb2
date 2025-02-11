@@ -16,7 +16,7 @@ import {
     AvatarGroup, } from "@nextui-org/react";
 
 
-const TournamentDrawer = ({isOpen, setisOpen}) => {
+const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
 
 
 
@@ -87,21 +87,21 @@ const TournamentDrawer = ({isOpen, setisOpen}) => {
                   <Image
                     isBlurred
                     isZoomed
-                    alt="Event image"
+                    alt="Tournament Thumbnail"
                     className="aspect-square w-full hover:scale-110"
                     height={300}
-                    src="https://nextuipro.nyc3.cdn.digitaloceanspaces.com/components-images/places/san-francisco.png"
+                    src={tournamentInfo.thumbnail}
                   />
                 </div>
                 <div className="flex flex-col gap-2 py-4">
-                  <h1 className="text-white text-2xl font-bold leading-7">SF Bay Area Meetup in November</h1>
+                  <h1 className="text-white text-2xl font-bold leading-7">{tournamentInfo.name.toUpperCase()} Tournament</h1>
                   <p className="text-sm text-default-500">
-                    555 California St, San Francisco, CA 94103
+                    Restrictions/Specifications: ({tournamentInfo.specific})
                   </p>
                   <div className="mt-4 flex flex-col gap-3">
                     <div className="flex gap-3 items-center">
                       <div className="flex-none border-1 border-default-200/50 rounded-small text-center w-11 overflow-hidden">
-                        <div className="text-tiny bg-default-100 py-0.5 text-default-500">Nov</div>
+                        <div className="text-tiny bg-default-100 py-0.5 text-default-500">{ new Date().getUTCMonth()}</div>
                         <div className="flex items-center justify-center font-semibold text-medium h-6 text-default-500">
                           19
                         </div>

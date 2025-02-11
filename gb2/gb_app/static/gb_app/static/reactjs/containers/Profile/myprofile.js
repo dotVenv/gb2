@@ -8,12 +8,17 @@ import { ConnContext } from "../../connector";
 import { ProfileSide, ShineBorder, ActionCard, CompCard, TicketTable } from "../../components";
 import { signal } from "@preact/signals-react";
 
+const fetched = signal(0);
 
 const MyProfile = () => {
 
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
-    cu.getTickets();
+    if (fetched.value == 0){
+        cu.getTickets();
+    
+        fetched.value ++;
+    };
     
 
 

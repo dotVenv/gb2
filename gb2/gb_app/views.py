@@ -13,6 +13,7 @@ from gb.response_helpers import Response_Helpers as getres
 from django_hosts.resolvers import reverse 
 from gb_api.models import Membership, Announc
 from .ticket_helper import SupportTicketer
+from .tournament_helper import TnHelper
 
 from cryptography.fernet import Fernet
         
@@ -23,6 +24,12 @@ class APPViews(TemplateView):
     def dashboard(self, request):
         '''return the dashboard view for the user'''
 
+        if request.method == 'POST':
+            #get popular tournamnets
+            
+            thelper = TnHelper(request)
+            if thelper.get_tournaments(filter='rating'):
+                return getres().res('200', new_msg={'status': 'successful', 'tournaments': thelper.tournaments_list})
 
         context = {}
         context['announcment'] = "No announcment"
@@ -47,11 +54,10 @@ class APPViews(TemplateView):
         cu  = UserHelper(request)
         
         if request.method == 'POST':
-            
             if not cu.is_valid_req():
                 return getres().res('401', new_msg={'status': str('failed')})
             
-            match request.POST.get('poststep'):
+            match str(request.POST.get('poststep')):
                 case 'update_account':
                     if cu.update_account():
                         return getres().res('200', new_msg={'status': str('successful')})
@@ -136,11 +142,16 @@ class APPViews(TemplateView):
     def tournaments(self, request):
         '''return all tournaments for the user to view'''
         
+        cu = UserHelper(request)
+        thelper = TnHelper(request)
+        
         if request.method == 'POST':
-            poststep = str(request.POST.get('poststep'))
-            if poststep:
-                print(poststep)
-                
+            match str(request.POST.get('poststep')):
+                case 'get_all':
+                    if thelper.get_tournaments():
+                        return getres().res('200', new_msg={'status': 'successful', 'tournaments': thelper.tournaments_list})
+                    
+            return getres().res('401', new_msg={'status': 'failed'})     
             
         context = {}
         return render(request, 'gb_app/templates/index.html', context)

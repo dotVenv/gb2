@@ -21,6 +21,7 @@ const Dashboard = () => {
     
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
+    cu.PopularTournaments();
 
 
     return(
@@ -146,7 +147,7 @@ const Dashboard = () => {
                                 <Spacer></Spacer>
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
-                            <PopularTournaments />
+                            <PopularTournaments cu={cu} />
                             
 
                             <hr></hr>

@@ -39,6 +39,7 @@ export { default as TicketTable } from './Tables/tickettable';
 export { default as EditPasswordModal } from './Modals/editpasswordmodal';
 export { default as Edit2FAModal } from './Modals/edit2famodal';
 
-
+//tournaments
+export { default as TournamentList } from './Tournaments/tournamenlist';
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge'; 

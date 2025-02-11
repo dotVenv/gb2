@@ -1,10 +1,10 @@
 'use server';
 
-import { signal } from "@preact/signals-react";
 import { atom } from "jotai";
 import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
-import { AllMemberships, TournamentBase } from '../index';
+import TournamentBase from "../TournamentsBase/tournamentbase";
+
 
 export default class CurrentUser extends TournamentBase{
 
@@ -154,7 +154,11 @@ export default class CurrentUser extends TournamentBase{
         this.b32 = data[0];
     };
 
-    setTournaments(){
-        this.getTournaments();
+    async setTournaments(){
+        await this.getTournaments('get_all');
     };
+
+    async PopularTournaments(){
+        await this.getTournaments('rating');
+    }
 };

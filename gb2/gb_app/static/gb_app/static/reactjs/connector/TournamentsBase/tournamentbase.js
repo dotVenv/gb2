@@ -6,24 +6,22 @@ import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
 
 
-export  class TournamentBase{
+export default class TournamentBase{
 
-    constructor(props){
+    constructor(){};
 
-    };
-
-    async getTournaments(){
-        this.tournaments = await axios({
-                url: '/tournaments',
+    async getTournaments(filter){
+        let res = await axios({
+                url: location.href,
                 method: 'post',
-                data: {uid: this.uid, poststep: 'all_tournaments'},
+                data: {uid: this.uid, poststep: filter},
                 headers:{
                     'X-CSRFTOKEN': GETCSRFToken(),
                     'Content-Type': 'multipart/form-data',
                 }
             }).then(resp => {
-                if (resp.status == 200 ){
-                    console.log('resp was successful');
+                if (resp){
+
                     return resp.data.message;
                 }
                 
@@ -34,10 +32,11 @@ export  class TournamentBase{
                 };
 
             });
-
-            return 
-
-        
+     
+      if (res){
+        this.tournaments = res;
+      };
+     return
     };
 
 };

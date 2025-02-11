@@ -149,10 +149,8 @@ const Layout = ({ children }) => {
                     </section>
 
                     */ }
-                        <div>
-                        
-                       
-                        {children}
+                        <div >
+                            {children}
                         </div>
                                                     
                        
