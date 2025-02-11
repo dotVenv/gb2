@@ -1,7 +1,7 @@
 'use client';
 
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { 
     Drawer,
     DrawerContent,
@@ -13,13 +13,20 @@ import {
     Link,
     Tooltip,
     Avatar,
-    AvatarGroup, } from "@nextui-org/react";
+    AvatarGroup,
+    ScrollShadow,
+    Card,
+    Spacer, } from "@nextui-org/react";
+import { ConnContext } from "../../connector";
+import { useAtom } from "jotai";
 
 
 const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
 
 
-
+  const cu = useContext(ConnContext);
+  const [ userInfo ] = useAtom(cu.userAtom);
+  console.log(tournamentInfo.rules);
   return (
     <>
       <Drawer
@@ -30,6 +37,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
         }}
         isOpen={isOpen}
       >
+        <ScrollShadow size={30} hideScrollBar>
         <DrawerContent>
           {(onClose) => (
             <>
@@ -101,16 +109,19 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                   <div className="mt-4 flex flex-col gap-3">
                     <div className="flex gap-3 items-center">
                       <div className="flex-none border-1 border-default-200/50 rounded-small text-center w-11 overflow-hidden">
-                        <div className="text-tiny bg-default-100 py-0.5 text-default-500">{ new Date().getUTCMonth()}</div>
+                        <div className="text-tiny bg-default-100 py-0.5 text-default-500">{ months[new Date().getMonth()]}</div>
                         <div className="flex items-center justify-center font-semibold text-medium h-6 text-default-500">
-                          19
+                          { new Date().getDay()}
                         </div>
                       </div>
                       <div className="flex flex-col gap-0.5">
                         <p className="text-medium text-foreground font-medium">
-                          Tuesday, November 19
+                          {new Date(tournamentInfo.start).toDateString()}
                         </p>
-                        <p className="text-small text-default-500">5:00 PM - 9:00 PM PST</p>
+                        <p className="text-small text-default-500">
+                          {new Date(tournamentInfo.start).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')}
+                           {' '}-{' '} 
+                          {new Date(tournamentInfo.end).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')}</p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-center">
@@ -159,36 +170,34 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                           href="https://www.google.com/maps/place/555+California+St,+San+Francisco,+CA+94103"
                           rel="noreferrer noopener"
                         >
-                          555 California St suite 500
+                          Gamers-Bounty.com
                         </Link>
-                        <p className="text-small text-default-500">San Francisco, California</p>
+                        <p className="text-small text-default-500">Compete from home! </p>
                       </div>
                     </div>
                     <div className="flex flex-col mt-4 gap-3 items-start">
-                      <span className="text-medium font-medium">About the event</span>
+                      <span className="text-medium font-medium text-white">About the event</span>
                       <div className="text-medium text-default-500 flex flex-col gap-2">
                         <p>
-                          Hey Bay Area! We are excited to announce our next meetup on Tuesday,
-                          November 19th.
+                          <b>Hey {userInfo.username}</b>! As always, we are exicted to host another unofficial { tournamentInfo.name.toUpperCase() } event!
+                          <Spacer></Spacer>
+                            <i className='text-tiny'>Although we would love to partner up down the road and host official events. 👌 </i>
+                          <Spacer></Spacer>
+                          Read more about the tournament below to decide if you want to compete in this one or not!
                         </p>
-                        <p>
-                          Join us for an evening of insightful discussions and hands-on workshops
-                          focused on the latest developments in web development and design. Our
-                          featured speakers will share their experiences with modern frontend
-                          frameworks, responsive design patterns, and emerging web technologies.
-                          You&apos;ll have the opportunity to network with fellow developers and
-                          designers while enjoying refreshments and snacks.
-                        </p>
-                        <p>
-                          During the main session, we&apos;ll dive deep into practical examples of
-                          building scalable applications, exploring best practices for component
-                          architecture, and understanding advanced state management techniques. Our
-                          interactive workshop portion will let you apply these concepts directly,
-                          with experienced mentors available to provide guidance and answer your
-                          questions. Whether you&apos;re a seasoned developer or just starting your
-                          journey, you&apos;ll find valuable takeaways from this session.
-                        </p>
-
+                        <Card className="p-4">
+                          <b className='text-medium font-semibold'> Description:</b>
+                          <ul>
+                            <li className='text-small'>
+                              {tournamentInfo.desc}
+                            </li>
+                          </ul>
+                        </Card>
+                        <br></br>
+                        <b>Rules:</b><i className="text-tiny"> Any rulebreak/violation can result in a permanent ban.</i>
+                        <ul>
+                         
+                        </ul>
                         <p className="mt-4">
                           Brought to you by the{" "}
                           <Link className="text-default-700" href="https://heroui.com">
@@ -266,6 +275,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
             </>
           )}
         </DrawerContent>
+        </ScrollShadow>
       </Drawer>
     </>);
 };
@@ -275,3 +285,6 @@ export default TournamentDrawer;
 
 
 
+
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+  "Aug", "Sep", "Oct", "Nov", "Dec"];
