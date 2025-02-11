@@ -15,8 +15,12 @@ import {
     Avatar,
     AvatarGroup,
     ScrollShadow,
+    Accordion, 
+    AccordionItem,
     Card,
-    Spacer, } from "@nextui-org/react";
+    User,
+    Spacer,
+    CardBody, } from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 
@@ -69,23 +73,13 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                   <Button
                     className="font-medium text-small text-default-500"
                     size="sm"
+                    color='primary'
                     startContent={
-                      <svg
-                        height="16"
-                        viewBox="0 0 16 16"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M3.85.75c-.908 0-1.702.328-2.265.933-.558.599-.835 1.41-.835 2.29V7.88c0 .801.23 1.548.697 2.129.472.587 1.15.96 1.951 1.06a.75.75 0 1 0 .185-1.489c-.435-.054-.752-.243-.967-.51-.219-.273-.366-.673-.366-1.19V3.973c0-.568.176-.993.433-1.268.25-.27.632-.455 1.167-.455h4.146c.479 0 .828.146 1.071.359.246.215.43.54.497.979a.75.75 0 0 0 1.483-.23c-.115-.739-.447-1.4-.99-1.877C9.51 1 8.796.75 7.996.75zM7.9 4.828c-.908 0-1.702.326-2.265.93-.558.6-.835 1.41-.835 2.29v3.905c0 .879.275 1.69.833 2.289.563.605 1.357.931 2.267.931h4.144c.91 0 1.705-.326 2.268-.931.558-.599.833-1.41.833-2.289V8.048c0-.879-.275-1.69-.833-2.289-.563-.605-1.357-.931-2.267-.931zm-1.6 3.22c0-.568.176-.992.432-1.266.25-.27.632-.454 1.168-.454h4.145c.54 0 .92.185 1.17.453.255.274.43.698.43 1.267v3.905c0 .569-.175.993-.43 1.267-.25.268-.631.453-1.17.453H7.898c-.54 0-.92-.185-1.17-.453-.255-.274-.43-.698-.43-1.267z"
-                          fill="currentColor"
-                          fillRule="evenodd"
-                        />
-                      </svg>
+                        <i className="fa-solid fa-ticket-simple"></i>
                     }
                     variant="flat"
                   >
-                    Copy Link
+                    Enter Tournament
                   </Button>
                 </div>
                
@@ -183,40 +177,87 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                           <Spacer></Spacer>
                             <i className='text-tiny'>Although we would love to partner up down the road and host official events. 👌 </i>
                           <Spacer></Spacer>
-                          Read more about the tournament below to decide if you want to compete in this one or not!
+                          <br></br>
+                          Read more about the tournament below to decide if you want to compete.
                         </p>
                         <Card className="p-4">
-                          <b className='text-medium font-semibold'> Description:</b>
+                          <b className='text-small font-semibold'> Description:</b>
+                          <br></br>
                           <ul>
-                            <li className='text-small'>
+                            <li className='text-tiny'>
                               {tournamentInfo.desc}
                             </li>
                           </ul>
                         </Card>
                         <br></br>
                         <b>Rules:</b><i className="text-tiny"> Any rulebreak/violation can result in a permanent ban.</i>
-                        <ul>
-                         
-                        </ul>
-                        <p className="mt-4">
-                          Brought to you by the{" "}
-                          <Link className="text-default-700" href="https://heroui.com">
-                            HeroUI team
-                          </Link>
-                          .
-                        </p>
+                        <ScrollShadow size={30} hideScrollBar>
+                        <Accordion className='h-40 overflow-y-auto'>
+                          { tournamentInfo.rules.map((key, index) => {
+                            return (
+                             
+                                <AccordionItem
+                                  key={index}
+                                  aria-label={key.id}
+                                  subtitle="Press to expand"
+                                  title={key.id}
+                                >
+                                  
+                                    <i className='text-tiny'>{key.value}</i>
+                                </AccordionItem>
+                            )
+                            
+                          })}
+                         </Accordion>
+                         </ScrollShadow>
+                       <hr></hr>
                       </div>
                     </div>
-                    <div className="flex flex-col mt-4 gap-3 items-start">
-                      <span className="text-small text-default-500">Hosted By</span>
-                      <div className="flex gap-2 items-center">
-                        <Avatar
-                          name="HeroUI"
-                          size="sm"
-                          src="https://heroui.com/android-chrome-192x192.png"
-                        />
-                        <span className="text-small text-default-500">HeroUI Team</span>
-                      </div>
+                    <div className="grid grid-cols-1">
+                      <b className='text-white'>Top 3</b>
+                      <Spacer></Spacer>
+                      <ul className='gap-y-2 space-y-2'>
+                        <li className='rounded-border rounded-large items-start '>
+                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
+                              <User
+                               
+                                  avatarProps={{
+                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                  }}
+                                  description="1st Place - 1420 pts."
+                                  name={<span className='text-white'>"Jane Doe"</span>}
+                                />
+                             </Card>
+                             <Spacer></Spacer>
+                        </li>
+                        <li className='rounded-border rounded-large items-start '>
+                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
+                              <User
+                               
+                                  avatarProps={{
+                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                  }}
+                                  description="1st Place - 1420 pts."
+                                  name={<span className='text-white'>"Jane Doe"</span>}
+                                />
+                             </Card>
+                             <Spacer></Spacer>
+                        </li>
+                        <li className='rounded-border rounded-large items-start '>
+                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
+                              <User
+                               
+                                  avatarProps={{
+                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                  }}
+                                  description="1st Place - 1420 pts."
+                                  name={<span className='text-white'>"Jane Doe"</span>}
+                                />
+                             </Card>
+                             <Spacer></Spacer>
+                        </li>
+                       
+                        </ul>
                     </div>
                     <div className="flex flex-col mt-4 gap-3 items-start">
                       <span className="text-small text-default-500">105 Going</span>
@@ -265,9 +306,14 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                 </div>
               </DrawerBody>
               <DrawerFooter className="flex flex-col gap-1">
-                <Link className="text-default-400" href="mailto:hello@heroui.com" size="sm">
-                  Contact the host
-                </Link>
+              <p className='text-white'>Brought to you by{" "}
+                  <Link className="text-default-700 text-tiny" href="https://gamers-bounty.com">
+                  
+                  <i className="fa-regular fa-hand-point-right fa-sm"></i>{'  '}<Spacer></Spacer> Gamers-Bounty
+                  </Link>
+                  .
+                </p>
+              
                 <Link className="text-default-400" href="mailto:hello@heroui.com" size="sm">
                   Report event
                 </Link>

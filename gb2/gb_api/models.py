@@ -168,7 +168,7 @@ mode_options = [
 
 def rules():
     '''return a default list for each tournament'''
-    return [{"Disconnection": "If a player disconnects, click the 'Opponent Disconnected' button. This will allow a 2 minute window for the opponent to re-establish connection and confirm it as well. This can only be done once per match."}
+    return [{"id":"Disconnection", "value": "If a player disconnects, click the 'Opponent Disconnected' button. This will allow a 2 minute window for the opponent to re-establish connection and confirm it as well. This can only be done once per match."}
 ]
 
 

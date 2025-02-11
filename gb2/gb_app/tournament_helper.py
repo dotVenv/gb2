@@ -44,7 +44,7 @@ class TnHelper():
                     'desc': str(val.desc),
                     'start': val.start,
                     'end': val.end,
-                    'rules': list(val.rules),
+                    'rules': val.rules,
                     'pool': float(val.pool),
                     'placement': float(val.placement),
                     'limit': int(val.register_limit),
