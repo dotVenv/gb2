@@ -1,8 +1,11 @@
 #django imports
 import django.core.exceptions as dce
+from django.db import transaction
+from django.utils.decorators import method_decorator
+
 
 #other imports
-from gb_api.models import Tournament
+from gb_api.models import Tournament, Leaderboard, TournamentLike
 
 class TnHelper():
     '''a class for helping manage tournaments'''
@@ -38,6 +41,7 @@ class TnHelper():
             for val in tl:
                 
                 new_tl = {
+                    'hash': str(val.tournament_hash),
                     'name': str(val.name),
                     'mode': str(val.mode),
                     'specific': str(val.specific),
@@ -53,11 +57,81 @@ class TnHelper():
                     'platform':[{'id':x['name']} for x in val.platforms.values()],
                     'registered_count': val.registered.count(),
                     'registered': None,
+                    'host': str(val.hosted_by)
                         
                 }
+                
+                try:
+                    isLiked = TournamentLike.objects.get(user_id=self.request.user.id, tournament=val.tournament_hash)
+                    new_tl['likedbyme'] = bool(isLiked.status)
+                except dce.ObjectDoesNotExist:
+                    new_tl['likedbyme'] = bool(False)
                 
                 if val.registered.count() > 0: new_tl['registered'] = [x['user']['username'] for x in val.registered ]
                 self.tournaments_list.append(new_tl)
             return True
         
         return False
+    
+    
+    def get_leaderboard(self):
+        '''get the current leaderboard for the tournament id'''
+        
+        tuid = self.request.POST.get('tuid')
+        if not tuid:
+            return False
+        
+        try:
+            leaderboard = Leaderboard.objects.get(tournament=tuid)
+            if leaderboard:
+                print('leader board caught')
+                
+        except dce.ObjectDoesNotExist:
+            return False
+        except dce.RequestAborted:
+            return False
+        return False
+            
+        
+    @method_decorator(transaction.atomic)
+    def set_liked(self):
+        '''update the likes for the current tournament'''
+        
+        tuid = self.request.POST.get('tuid')
+        self.status = bool(self.request.POST.get('status'))
+        if not tuid or not self.status:
+            return False
+        try:
+            with transaction.atomic():
+                tournament = Tournament.objects.get(tournament_hash=tuid)
+                if tournament:        
+                    like_monitor = TournamentLike.objects.filter(user_id=self.request.user.id, tournament=tuid)
+                    if like_monitor.exists():
+                        for item in like_monitor:
+                            if item.status is False:
+                                like_monitor.update(status=True)
+                                tournament.rating = tournament.rating + 1
+                                break
+                            elif item.status is True:
+                                tournament.rating = tournament.rating - 1
+                                like_monitor.update(status=False)
+                                break
+                        tournament.save()
+                        return True 
+                    else:
+                        new_like = TournamentLike.objects.create(user_id=self.request.user.id, tournament=tournament, status=True)
+                        if new_like:
+                            new_like.save()
+                            tournament.rating = tournament.rating + 1
+                            tournament.save()
+                            return True
+                            
+                
+        except dce.ObjectDoesNotExist:
+            pass
+        except dce.RequestAborted:
+            pass
+            
+        
+        return False
+    

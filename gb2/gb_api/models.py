@@ -220,7 +220,9 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
     tournament_hash = models.CharField(max_length=255, default=gen_uuid(), unique=True)
+    hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
+    
     
     def update_dates(self):
         self.start = set_dates('start')
@@ -414,6 +416,20 @@ class Leaderboard(ExportModelOperationsMixin('Leaderboard'), models.Model):
         verbose_name_plural = 'Leaderboards'
         
     def __str__(self):
-        return f'{self.tournament.name} leaderboards'
+        return f'{self.tournament.name} leaderboard'
     
+
+class TournamentLike(ExportModelOperationsMixin('TournamentLike'), models.Model):
+    '''store which users like which tournaments'''
+    
+    user = models.ForeignKey('gbUser', on_delete=models.CASCADE, related_name='tournament_liker')
+    tournament = models.ForeignKey('Tournament', to_field='tournament_hash', on_delete=models.CASCADE, related_name='specific_tournament')
+    status = models.BooleanField(default=False)
+    
+    
+    class Meta:
+        verbose_name_plural = 'Tournament Likes'
+        
+    def __str__(self):
+        return f'{self.user.username} likes {self.tournament.name} '
     

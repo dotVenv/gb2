@@ -38,5 +38,50 @@ export default class TournamentBase{
       };
      return
     };
+    
 
+    async getTournamentLeaderboard(tuid){
+        let res = axios({
+            url: '/tournaments',
+            method: 'post',
+            data: {uid: this.uid, tuid: tuid, poststep: 'get_leaderboard'},
+            headers: {
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data',
+            }
+        }).then(resp => {
+            if (resp){
+                return resp.data.message;
+            };
+        }).catch(err => {
+            if (err.reponse){
+                return err.reponse.data.message;
+            };
+        });
+
+        return res;
+    }
+
+    async setTournamentLike(tuid, status){
+        let res = axios({
+            url: '/tournaments',
+            method: 'post',
+            data: {uid: this.uid, tuid: tuid, status: status, poststep: 'set_liked'},
+            headers: {
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data',
+            }
+        }).then(resp => {
+            if (resp){
+                return resp.data.message;
+            };
+        }).catch(err => {
+            if (err.reponse){
+                return err.reponse.data.message;
+            };
+        });
+
+        return res;
+        
+    };
 };

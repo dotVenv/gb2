@@ -15,13 +15,18 @@ import { GamesPlayedStat,
         SparklesText} from "../../components";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
+import { signal } from "@preact/signals-react";
 
-
+const fetched = signal(0);
 const Dashboard = () => {
     
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
-    cu.PopularTournaments();
+    if (fetched.value <= 0){
+        cu.PopularTournaments();
+        fetched.value ++;
+    };
+    
 
 
     return(

@@ -150,7 +150,17 @@ class APPViews(TemplateView):
                 case 'get_all':
                     if thelper.get_tournaments():
                         return getres().res('200', new_msg={'status': 'successful', 'tournaments': thelper.tournaments_list})
-                    
+                
+                case 'get_leaderboard':
+                    if thelper.get_leaderboard():
+                        return getres().res('200', new_msg={'status': 'successful', 'leaderboard': thelper.leaderboard})  
+                    else:  
+                        return getres().res('200', new_msg={'status': 'failed_empty'})  
+                case 'set_liked':
+                    if thelper.set_liked():
+                        return getres().res('200', new_msg={'status': 'successful', 'action': thelper.status})  
+                        
+                     
             return getres().res('401', new_msg={'status': 'failed'})     
             
         context = {}

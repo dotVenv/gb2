@@ -21,9 +21,19 @@ import {
     User,
     Spacer,
     CardBody,
-    ButtonGroup, } from "@nextui-org/react";
+    ButtonGroup,
+    Alert, } from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
+import { effect, signal } from "@preact/signals-react";
+import { CustomToast } from '../../components';
+
+const fetched = signal(0);
+const leaderboard = signal([]);
+const toastData = signal({
+  toastType: '',
+  desc: '',
+});
 
 
 const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
@@ -31,6 +41,46 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
 
   const cu = useContext(ConnContext);
   const [ userInfo ] = useAtom(cu.userAtom);
+
+  const [hasLiked, sethasLiked] = useState(tournamentInfo.likedbyme);
+  const [newToastAlert,setNewToastAlert] = useState();
+
+
+  const handleLiked = async() => {
+
+    let res = await cu.setTournamentLike(tournamentInfo.hash,!hasLiked);
+    if (res){
+      if (res.status == 'successful'){
+       
+        let action_res = res.action;
+        !hasLiked ? action_res = 'Liked' : action_res = 'Removed like from';
+        toastData.value.desc = ''+action_res + ' Tournament' ;
+        toastData.value.toastType = 'success';
+        action_res ? tournamentInfo.rating = tournamentInfo.rating -- : tournamentInfo.rating = tournamentInfo.rating ++;
+        sethasLiked(!hasLiked);
+        setNewToastAlert(true);
+      }else{
+        toastData.value.desc = 'Unable to'+ !hasLiked ? 'Liked' : 'False ' +'tournament';
+        toastData.value.toastType = 'error';
+        setNewToastAlert(true);
+      };
+      
+    }else{
+      toastData.value.desc = 'Unable to'+ !hasLiked ? 'Liked' : 'False ' +'tournament';
+      toastData.value.toastType = 'error';
+      setNewToastAlert(true);
+    };
+  };
+  
+
+
+  effect(async() => {
+    if (fetched.value <= 0){
+      fetched.value ++;
+      leaderboard.value = await cu.getTournamentLeaderboard(tournamentInfo.hash);
+    };
+  });
+
   return (
     <>
       <Drawer
@@ -85,7 +135,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                 </div>
                
               </DrawerHeader>
-              <ScrollShadow size={20} >
+              <ScrollShadow size={40} >
               <DrawerBody className="pt-16">
                 <div className="flex w-full justify-center items-center pt-4">
                   <Image
@@ -254,46 +304,28 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                       <b className='text-white'>Top 3</b>
                       <Spacer></Spacer>
                       <ul className='gap-y-2 space-y-2'>
-                        <li className='rounded-border rounded-large items-start '>
-                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
-                              <User
-                               
-                                  avatarProps={{
-                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                                  }}
-                                  description="1st Place - 1420 pts."
-                                  name={<span className='text-white'>"Jane Doe"</span>}
-                                />
-                             </Card>
+                        { !leaderboard.value ? undefined 
+                          : leaderboard.value.status == 'failed_empty' 
+                          ? <li className='text-white text-tiiny'><Alert variant='flat' color='danger' size='sm' radius='lg' className='text-tiny'><p className='text-tiny'>It's pretty empty right now...No one has registered. <i className="fa-regular fa-face-grimace fa-sm"></i></p> </Alert></li>
+                          : leaderboard.value.map((key, index) => {
+                            return (
+                                <li key={key}> 
+                                  <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
+                                      <User
+                                        avatarProps={{
+                                          src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                        }}
+                                        description="1st Place - 1420 pts."
+                                        name={<span className='text-white'>"Jane Doe"</span>}
+                                      />
+                                  </Card>
                              <Spacer></Spacer>
-                        </li>
-                        <li className='rounded-border rounded-large items-start '>
-                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
-                              <User
-                               
-                                  avatarProps={{
-                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                                  }}
-                                  description="2nd Place - 1420 pts."
-                                  name={<span className='text-white'>"Jane Doe"</span>}
-                                />
-                             </Card>
-                             <Spacer></Spacer>
-                        </li>
-                        <li className='rounded-border rounded-large items-start '>
-                            <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
-                              <User
-                               
-                                  avatarProps={{
-                                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                                  }}
-                                  description="3rd Place - 1420 pts."
-                                  name={<span className='text-white'>"Jane Doe"</span>}
-                                />
-                             </Card>
-                             <Spacer></Spacer>
-                        </li>
-                       
+
+                            
+                                </li>)
+                          })
+                        }
+
                         </ul>
                     </div>
                     <div className="flex flex-col mt-4 gap-3 items-start">
@@ -328,10 +360,13 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
               <p className='text-white'>Brought to you by{" "}
                   <Link className="text-default-700 text-tiny" href="https://gamers-bounty.com">
                   
-                  <i className="fa-regular fa-hand-point-right fa-sm"></i>{'  '}<Spacer></Spacer> Gamers-Bounty
+                  <i className="fa-regular fa-hand-point-right fa-sm"></i>{'  '}<Spacer></Spacer> {tournamentInfo.host} {' '}
                   </Link>
                   .
                 </p>
+                  <Button isIconOnly aria-label="Take a photo" color="warning" variant="faded" size='sm' radius='lg' onPress={(e) => {handleLiked();}}>
+                    { hasLiked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i> }
+                  </Button>
               
                 <Link className="text-default-400" href="mailto:hello@heroui.com" size="sm">
                   Report event
@@ -341,6 +376,9 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
           )}
         </DrawerContent>
       </Drawer>
+
+
+      {newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
     </>);
 };
 
