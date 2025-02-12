@@ -132,10 +132,10 @@ const Dashboard = () => {
                             <MostRecentMatches />
                             <div className='grid sm:grid-grid-cols-1 lg:grid-cols-2 gap-4 justify-center align-center mx-auto '>
                                 <div>
-                                    <GamesPlayedStat />
+                                    <GamesPlayedStat userInfo={userInfo} />
                                 </div>
                                 <div>
-                                    <ExtraPlayerStats />
+                                    <ExtraPlayerStats userInfo={userInfo}/>
                                 </div>
                             
                             </div>

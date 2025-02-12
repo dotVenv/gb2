@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.conf import settings
 
 #app imports
-from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet
+from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet, PlayerStat
 from gb_api.email_helpers import EmailHelper
 from .mfa_helper import MFAHelper
 import datetime
@@ -46,7 +46,7 @@ class UserHelper():
         try:
             self.cu = gbUser.objects.get(id=self.uid)
             self.cu_ap = AccountPreference.objects.get(user=self.cu)
-            
+            self.stats = PlayerStat.objects.get(user_id=self.cu_ap.id)
         except dce.ObjectDoesNotExist:
             pass
         
@@ -76,9 +76,12 @@ class UserHelper():
             
             self.serialized['balance'] = float(self.cu_ap.wallet.balance)
             self.serialized['utok'] = int(self.cu_ap.uname_change_token)
-            self.serialized['entries'] = int(self.cu_ap.entries)
+            self.serialized['entries'] = int(self.cu_ap.entries.count())
             self.serialized['membership'] = str(self.cu_ap.membership.name)
             self.serialized['report_status'] = 'clean'
+            self.serialized['wins'] = int(self.stats.wins)
+            self.serialized['losses'] = int(self.stats.losses)
+            self.serialized['favorites'] = [str(self.stats.fav_platform), str(self.stats.fav_tournament)]
             
     
         

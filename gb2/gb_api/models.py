@@ -121,7 +121,7 @@ class AccountPreference(ExportModelOperationsMixin('AccountPreference'),models.M
     platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.CASCADE, related_name='user_platform')
     wallet = models.ForeignKey('Wallet', blank=True, null=True, on_delete=models.CASCADE, related_name='user_wallet')
     fl = models.ManyToManyField('AccountPreference', related_name='friends_list')
-    entries = models.IntegerField(default=0)
+    entries = models.ManyToManyField('Tournament', blank=True, related_name='entered_tournament')
     uname_change_token = models.IntegerField(default=0)
     
     class Meta:
@@ -219,7 +219,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
-    tournament_hash = models.CharField(max_length=255, default=gen_uuid())
+    tournament_hash = models.CharField(max_length=255, default=gen_uuid(), unique=True)
     rating = models.IntegerField(default=0)
     
     def update_dates(self):
@@ -231,7 +231,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
         verbose_name_plural = 'Tournaments'
         
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.specific}'
 
 
     
@@ -388,5 +388,32 @@ class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
         
     def __str__(self):
         return f'{self.user} : {self.wins}-{self.losses}'    
-    
 
+
+matchmaking_options = [
+    ('idle', 'idle'),
+    ('connecting', 'connecting'),
+    ('matchmaking', 'matchmaking'),
+    ('connected', 'connected'),
+    ('disconnected', 'disconnected')
+]
+
+class Leaderboard(ExportModelOperationsMixin('Leaderboard'), models.Model):
+    '''store the leaderboard for each uuid the tournament generates so they can later be archived'''
+    
+    tournament = models.ForeignKey('Tournament', to_field='tournament_hash', on_delete=models.PROTECT,  related_name='current_tournament_hash', blank=True)
+    player = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='current_tournament_player', blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    points = models.IntegerField(default=0)
+    wins = models.IntegerField(default=0)
+    losses = models.IntegerField(default=0)
+    previous_opponent = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='prev_opponent', blank=True, null=True)
+    matchmaking = models.CharField(max_length=35, choices=matchmaking_options, null=True, blank=True)
+    
+    class Meta:
+        verbose_name_plural = 'Leaderboards'
+        
+    def __str__(self):
+        return f'{self.tournament.name} leaderboards'
+    
+    

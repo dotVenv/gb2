@@ -16,11 +16,12 @@ const TournamentCard = ({tournamentInfo}) => {
     current_time = current_time.replace(':', '');
     var tournament_start = new Date(tournamentInfo.start).toISOString().slice(11,19).replace(':', '')
     var tournment_end = new Date(tournamentInfo.end).toISOString().slice(11,19).replace(':', '')
-
+    console.log( parseInt(current_time) - parseInt(tournament_start));
+    console.log((parseInt(tournament_start) - parseInt('1730:00')));
     const checkLive = () => {
         if ( parseInt(current_time) >= parseInt(tournament_start) && parseInt(current_time) <= parseInt(tournment_end)){
             return true;
-        }else if( parseInt(current_time) - parseInt(tournament_start) <= (parseInt(tournament_start) - parseInt('0030:00'))){
+        }else if( parseInt(current_time) - parseInt(tournament_start) <= (parseInt(tournament_start) - parseInt('1730:00'))){
         
             return 'soon'
         }else{
@@ -36,7 +37,7 @@ const TournamentCard = ({tournamentInfo}) => {
                 {isLive == true 
                     ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b><br></br> <i className='text-tiny' style={{'color': '#AAFF00'}}> Leader: </i></span>
                     : isLive == 'soon' 
-                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> Starting Soon</span>
+                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> <b className='text-tiny'>Starting Soon </b></span>
                         : undefined 
                 }
             </p>

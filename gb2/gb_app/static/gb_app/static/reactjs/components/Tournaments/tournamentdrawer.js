@@ -107,7 +107,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                 {isLive == true 
                     ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b></span>
                     : isLive == 'soon' 
-                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> Starting Soon</span>
+                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> <b className='text-tiny'>Starting soon </b></span>
                             : undefined 
                     }
                 </p>

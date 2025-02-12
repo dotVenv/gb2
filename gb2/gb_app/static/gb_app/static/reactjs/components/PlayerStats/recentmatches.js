@@ -14,7 +14,7 @@ import { Table,
     Tooltip, 
     Spacer,} from "@nextui-org/react";
 
-const MostRecentMatches = () => {
+const MostRecentMatches = ({cu}) => {
 
     const [checked, setChecked] = useState(false);
 

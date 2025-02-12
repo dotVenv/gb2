@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardBody, CardHeader, ScrollShadow, Spacer } from "@nextui-org/react";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
-const GamesPlayedStat = () => {
+const GamesPlayedStat = ({userInfo}) => {
 
 
     return(
@@ -13,11 +13,11 @@ const GamesPlayedStat = () => {
             <div className='grid grid-cols-2 gap-0 space-0 mb-4'>
                 <Card className='bg-transparent col-6  justify-center align-center mx-auto p-2'>
                     <p className='justify-center align-center mx-auto text-black'> Wins </p>
-                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> 0 </h4>
+                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> {userInfo.wins} </h4>
                 </Card>
                 <Card className='bg-transparent col-6  justify-center align-center mx-auto p-2'>
                     <p className='justify-center align-center mx-auto text-black'> Losses </p>
-                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> 0 </h4>
+                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> {userInfo.losses} </h4>
                 </Card>
             </div>    
             <Spacer></Spacer>

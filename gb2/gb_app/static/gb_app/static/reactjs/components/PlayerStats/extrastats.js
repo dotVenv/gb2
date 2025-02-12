@@ -46,7 +46,7 @@ const tourneyCategoryData = [
     },
   ];
 
-const ExtraPlayerStats = () => {
+const ExtraPlayerStats = ({userInfo}) => {
 
 
     return(
@@ -78,7 +78,7 @@ const ExtraPlayerStats = () => {
                 
                 <Card className='bg-gray-100 col-6  justify-center align-center mx-auto p-2'>
                     <p className='justify-center align-center mx-auto text-black text-tiny'> Favorite </p>
-                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> PC </h4>
+                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> {userInfo.favorites[0] == null ? 'N/A' : userInfo.favorites[0] } </h4>
                 </Card>
             </div>    
             <Spacer></Spacer>
