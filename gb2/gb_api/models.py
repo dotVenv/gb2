@@ -4,7 +4,7 @@ from django_prometheus.models import ExportModelOperationsMixin
 from django_s3_storage.storage import S3Storage
 from django.conf import settings 
 from django.utils import timezone
-
+import uuid
 import datetime
 
 
@@ -128,7 +128,7 @@ class AccountPreference(ExportModelOperationsMixin('AccountPreference'),models.M
         verbose_name_plural = 'Account Preferences'
         
     def __str__(self):
-        return f'{self.user} preferences'
+        return f'{self.user}'
     
 
 platform_choices = [
@@ -198,6 +198,11 @@ thumbnail_options = [
     ('MARVEL_UNSTRICT', f'{aws_thumbnail_url}/marvel_unrestricted'),
 ]
 
+
+def gen_uuid():
+    '''generate a new uuid'''
+    return str(uuid.uuid4())
+
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
     
@@ -214,6 +219,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
+    tournament_hash = models.CharField(max_length=255, default=gen_uuid())
     rating = models.IntegerField(default=0)
     
     def update_dates(self):
@@ -226,7 +232,8 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
         
     def __str__(self):
         return f'{self.name}'
-    
+
+
     
 class Transaction(ExportModelOperationsMixin('Transaction'),models.Model):
     ''''store each transaction for stripe/balance accuracy'''
@@ -343,3 +350,43 @@ class MFA_Rotator(ExportModelOperationsMixin('MFA_Rotator'), models.Model):
     
     def __str__(self):
         return f'User:{self.user.username}'
+    
+
+class Match(ExportModelOperationsMixin('Match'), models.Model):
+    '''store each match played'''
+    
+    players = models.ManyToManyField('AccountPreference', related_name='opponents')
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    winner = models.ForeignKey('AccountPreference', on_delete=models.CASCADE, related_name='match_winner')
+    winner_points_earned = models.IntegerField(default=55)
+    winner_rank_points_earned = models.IntegerField(default=2.5)
+    loser_points_earned = models.IntegerField(default=8)
+    loser_rank_points_loss = models.IntegerField(default=-2)
+    score = models.CharField(max_length=25, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    tournament = models.ForeignKey('Tournament', on_delete=models.PROTECT, related_name='current_tournament', blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = 'Matches'
+        
+    def __str__(self):
+        return f'{self.winner} : {self.points_earned}'
+    
+    
+class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
+    '''store player statistics'''
+    
+    user = models.ForeignKey('AccountPreference', on_delete=models.CASCADE, related_name='player')
+    wins = models.IntegerField(default=0)
+    losses = models.IntegerField(default=0)
+    fav_tournament = models.CharField(max_length=150, blank=True, null=True)
+    fav_platform = models.CharField(max_length=25, blank=True, null=True)
+    matches = models.ManyToManyField('Match', related_name='all_matches', blank=True)
+    
+    class Meta:
+        verbose_name_plural = 'Player Stats'
+        
+    def __str__(self):
+        return f'{self.user} : {self.wins}-{self.losses}'    
+    
+
