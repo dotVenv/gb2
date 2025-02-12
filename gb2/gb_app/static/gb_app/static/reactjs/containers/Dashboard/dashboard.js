@@ -152,7 +152,7 @@ const Dashboard = () => {
                                 <Spacer></Spacer>
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
-                            <PopularTournaments cu={cu} />
+                                <PopularTournaments cu={cu} />
                             
 
                             <hr></hr>
