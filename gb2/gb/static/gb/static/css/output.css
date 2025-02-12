@@ -14374,6 +14374,10 @@ html, body {
     align-items: center;
   }
 
+  .sm\:justify-center {
+    justify-content: center;
+  }
+
   .sm\:gap-y-0 {
     row-gap: 0px;
   }

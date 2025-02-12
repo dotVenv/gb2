@@ -43,7 +43,7 @@ const AllTournaments = () => {
                 </section>
             <section className='h-full'>
                 <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
-                    <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                    <div className="sm:justify-center mx-auto grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                         <TournamentList cu={cu} />
                       
                     </div>

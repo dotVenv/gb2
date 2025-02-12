@@ -8,18 +8,47 @@ const TournamentCard = ({tournamentInfo}) => {
 
     const [isOpen, setisOpen] = useState(false);
     
+    var current_date = new Date();
+    var hours = current_date.getHours();
+    var minutes = current_date.getMinutes();
+    var seconds = current_date.getSeconds();
+    var current_time = hours + ':' + minutes + ':' + seconds;
+    current_time = current_time.replace(':', '');
+    var tournament_start = new Date(tournamentInfo.start).toISOString().slice(11,19).replace(':', '')
+    var tournment_end = new Date(tournamentInfo.end).toISOString().slice(11,19).replace(':', '')
 
+    const checkLive = () => {
+        if ( parseInt(current_time) >= parseInt(tournament_start) && parseInt(current_time) <= parseInt(tournment_end)){
+            return true;
+        }else if( parseInt(current_time) - parseInt(tournament_start) <= (parseInt(tournament_start) - parseInt('0030:00'))){
+        
+            return 'soon'
+        }else{
+            return false;
+        }
+    };
+
+    const [isLive, setisLive] = useState(checkLive());
     return(
         <>
         <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-no w-[250px] h-[300px]" radius='lg'>
-
+            <p className='text-white absolute mt-2 ml-2'>
+                {isLive == true 
+                    ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b><br></br> <i className='text-tiny' style={{'color': '#AAFF00'}}> Leader: </i></span>
+                    : isLive == 'soon' 
+                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> Starting Soon</span>
+                        : undefined 
+                }
+            </p>
             <img 
                 className="object-cover w-[250px] h-[300px]"
                  src={tournamentInfo.thumbnail} alt='tournament thumbnail' 
             />
           
           <CardFooter className="p-2 grid grid-cols-1 fixed bottom justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+          
             <span className='justify-center align-center mx-auto'> <b className='text-gray-100'>
+          
                 {tournamentInfo.name.toUpperCase()} ({tournamentInfo.specific})
                 </b>
                 { tournamentInfo.platform.map((key, index) => {
@@ -56,7 +85,7 @@ const TournamentCard = ({tournamentInfo}) => {
         </Card>
 
 
-        {isOpen ? <TournamentDrawer tournamentInfo={tournamentInfo} isOpen={isOpen} setisOpen={setisOpen} /> : undefined }
+        {isOpen ? <TournamentDrawer tournamentInfo={tournamentInfo} isOpen={isOpen} setisOpen={setisOpen} isLive={isLive} /> : undefined }
       
         </>
     );

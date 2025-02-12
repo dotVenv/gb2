@@ -26,7 +26,7 @@ import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 
 
-const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
+const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
 
 
   const cu = useContext(ConnContext);
@@ -41,7 +41,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
         }}
         isOpen={isOpen}
       >
-        <ScrollShadow size={30} >
+        
         <DrawerContent>
           {(onClose) => (
             <>
@@ -85,6 +85,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                 </div>
                
               </DrawerHeader>
+              <ScrollShadow size={20} >
               <DrawerBody className="pt-16">
                 <div className="flex w-full justify-center items-center pt-4">
                   <Image
@@ -100,7 +101,16 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                   <Button variant='flat' color='secondary' radius="lg" size='sm'> Ask Manager </Button>
                   <Button  variant='flat' color='primary' radius="lg" size='sm'> Ask Team Manager </Button>
                 </ButtonGroup>
+                
                 <div className="flex flex-col gap-2 py-4">
+                <p className='text-white'>
+                {isLive == true 
+                    ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b></span>
+                    : isLive == 'soon' 
+                        ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> Starting Soon</span>
+                            : undefined 
+                    }
+                </p>
                   <h1 className="text-white text-2xl font-bold leading-7">${tournamentInfo.pool} {tournamentInfo.name.toUpperCase()} Tournament</h1>
                   <p className="text-sm text-default-500">
                     Restrictions/Specifications: ({tournamentInfo.specific})
@@ -312,6 +322,8 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
                   </div>
                 </div>
               </DrawerBody>
+
+              </ScrollShadow>
               <DrawerFooter className="flex flex-col gap-1">
               <p className='text-white'>Brought to you by{" "}
                   <Link className="text-default-700 text-tiny" href="https://gamers-bounty.com">
@@ -328,7 +340,6 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo}) => {
             </>
           )}
         </DrawerContent>
-        </ScrollShadow>
       </Drawer>
     </>);
 };
