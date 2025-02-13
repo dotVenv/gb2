@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_prometheus.models import ExportModelOperationsMixin
+from django.core.serializers.json import DjangoJSONEncoder
 from django_s3_storage.storage import S3Storage
 from django.conf import settings 
 from django.utils import timezone
 import uuid
 import datetime
+import json
 
 
 profilepic_storage = S3Storage(aws_s3_bucket_name='gbprofilepics')
@@ -168,7 +170,7 @@ mode_options = [
 
 def rules():
     '''return a default list for each tournament'''
-    return [{"id":"Disconnection", "value": "If a player disconnects, click the 'Opponent Disconnected' button. This will allow a 2 minute window for the opponent to re-establish connection and confirm it as well. This can only be done once per match."}
+    return [{"Disconnection":"If a player disconnects, click the 'Opponent Disconnected' button. This will allow a 2 minute window for the opponent to re-establish connection and confirm it as well. This can only be done once per match."}
 ]
 
 
@@ -192,11 +194,11 @@ thumbnail_options = [
     ('NBA2K_STRICT',f'{aws_thumbnail_url}/nba2k_restricted.png'),
     ('NBA2K_UNSTRICT',f'{aws_thumbnail_url}/nba2k_unrestricted.png'),
     
-    ('MADDEN_STRICT', f'{aws_thumbnail_url}/madden_restricted'),
-    ('MADDEN_UNSTRICT', f'{aws_thumbnail_url}/madden_unrestricted'),
+    ('MADDEN_STRICT', f'{aws_thumbnail_url}/madden_restricted.png'),
+    ('MADDEN_UNSTRICT', f'{aws_thumbnail_url}/madden_unrestricted.png'),
     
-    ('MARVEL_STRICT', f'{aws_thumbnail_url}/marvel_restricted'),
-    ('MARVEL_UNSTRICT', f'{aws_thumbnail_url}/marvel_unrestricted'),
+    ('MARVEL_STRICT', f'{aws_thumbnail_url}/marvels_restricted.png'),
+    ('MARVEL_UNSTRICT', f'{aws_thumbnail_url}/marvels_unrestricted.png'),
 ]
 
 
@@ -208,6 +210,13 @@ def prev_hashes():
     '''default list for storing old hashes'''
     return {'hashes':[]}
 
+
+class UUIDEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, uuid.UUID):
+            return str(obj)
+        return super().default(obj)
+    
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
     
@@ -220,19 +229,21 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     end = models.DateTimeField(auto_now_add=False, default=set_dates('end'))
     rules = models.JSONField(default=rules)
     pool = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
-    placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
+    placement = models.DecimalField(default=10.0, decimal_places=2, max_digits=7)
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
-    tournament_hash = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)
+    tournament_hash = models.CharField(max_length=255, default=gen_uuid, unique=True)
+    last_displacement = models.DecimalField(default=33.0, max_digits=7, decimal_places=2)
     hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
     previous_hashes = models.JSONField(default=prev_hashes, blank=True, null=True)
     
-    def swap_uuid():
-        for v in previous_hashes.values():
+    def swap_uuid(self):
+        for v in self.previous_hashes.values():
             v.append(self.tournament_hash)
-        self.tournament_hash = gen_uuid()
+        new_uuid = uuid.uuid4()
+        self.tournament_hash = str(uuid.uuid4())
         self.save()
     
     def update_dates(self):

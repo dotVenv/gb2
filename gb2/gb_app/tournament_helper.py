@@ -24,11 +24,11 @@ class TnHelper():
             'NBA2K_STRICT':f'{aws_thumbnail_url}/nba2k_restricted.png',
             'NBA2K_UNSTRICT':f'{aws_thumbnail_url}/nba2k_unrestricted.png',
             
-            'MADDEN_STRICT': f'{aws_thumbnail_url}/madden_restricted',
-            'MADDEN_UNSTRICT': f'{aws_thumbnail_url}/madden_unrestricted',
+            'MADDEN_STRICT': f'{aws_thumbnail_url}/madden_restricted.png',
+            'MADDEN_UNSTRICT': f'{aws_thumbnail_url}/madden_unrestricted.png',
             
-            'MARVEL_STRICT': f'{aws_thumbnail_url}/marvel_restricted',
-            'MARVEL_UNSTRICT': f'{aws_thumbnail_url}/marvel_unrestricted',
+            'MARVEL_STRICT': f'{aws_thumbnail_url}/marvels_restricted.png',
+            'MARVEL_UNSTRICT': f'{aws_thumbnail_url}/marvels_unrestricted.png',
         }
         
         self.tournaments_list = []

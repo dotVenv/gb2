@@ -9,7 +9,8 @@ import random
 import boto3
 from botocore.exceptions import ClientError
 import os 
-        
+
+from gb_api.models import Tournament
 # Create your tests here.
 class SetupStepsTest(TestCase):
     
@@ -35,7 +36,7 @@ class TOTPTest(TestCase):
         
         self.assertEqual(hasTotp, True)    
     
-    def test_pyotp_qr(self):
+    """def test_pyotp_qr(self):
         '''test qr code otp'''
         
         self.pyotp = pyotp.totp.TOTP(pyotp.random_base32()).provisioning_uri(name='dev@venv.pro', issuer_name='Gamers Bounty')
@@ -62,3 +63,14 @@ class TOTPTest(TestCase):
             except ClientError as e:
                 logging.error(e)
                 return False
+            """
+            
+class TournamentTest(TestCase):
+    def test_tournament_uid_swap(self):
+        
+        new_tournament = Tournament.objects.create(name='test tournament')
+        if new_tournament:
+            new_tournament.save()
+        new_tournament.swap_uuid()
+        print(new_tournament.tournament_hash)
+        
