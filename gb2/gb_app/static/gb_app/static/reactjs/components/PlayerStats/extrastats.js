@@ -78,19 +78,19 @@ const ExtraPlayerStats = ({userInfo}) => {
                 
                 <Card className='bg-gray-100 col-6  justify-center align-center mx-auto p-2'>
                     <p className='justify-center align-center mx-auto text-black text-tiny'> Favorite </p>
-                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> {userInfo.favorites[0] == null ? 'N/A' : userInfo.favorites[0] } </h4>
+                    <h4 className='justify-center align-center mx-auto text-black font-semibold'> {userInfo.favorites[0] == 'None' ? 'N/A' : userInfo.favorites[0] } </h4>
                 </Card>
             </div>    
             <Spacer></Spacer>
             <div className='w-full mt-4'>
                 <Card className='p-4  bg-transparent h-15 justify-center align-center mx-auto col-9'>
-                    <p className='text-black text-center justify-center align-center mx-auto font-semibold text-tiny'> <i>Favorite Tournament Category</i> </p>
+                    <p className='text-black text-center justify-center align-center mx-auto font-semibold text-tiny'> <i>Favorite Tournament</i> </p>
                     <Chip 
                         color='success' 
                         variant='flat' 
                         className='justify-center align-center mx-auto'
                         startContent={<i className="fa-solid fa-gamepad fa-sm"></i>}
-                        > <span className='text-black text-center justify-center align-center mx-auto '> Marvel Rivals </span>
+                        > <span className='text-black text-center justify-center align-center mx-auto '> {userInfo.favorites[1] == 'None' ? 'N/A' : userInfo.favorites[1] } </span>
                     </Chip>
 
                         

@@ -79,10 +79,17 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
     if (res){
       
       if (res.status == 'successful'){
-        toastData.value.desc = 'Successfully updated entry!';
-        toastData.value.toastType = 'success';
-        setNewToastAlert(true);
-        window.location.reload();
+        if (res.action == 'PlatformFull'){
+          toastData.value.desc = 'Platform is not supported or tournament is full.'
+          toastData.value.toastType = 'error';
+          setNewToastAlert(true);
+        }else{
+          
+          toastData.value.desc = 'Successfully updated entry!';
+          toastData.value.toastType = 'success';
+          setNewToastAlert(true);
+          window.location.reload();
+        }
 
       }else{
         toastData.value.desc = 'Unable to update entry.';

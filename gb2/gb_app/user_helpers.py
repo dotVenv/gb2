@@ -197,8 +197,11 @@ class UserHelper():
                                 acc_pref = AccountPreference.objects.create(user=self.cu,  server=server, platform=Platform.objects.get(name=console), membership=Membership.objects.get(name='free'), wallet=new_wallet)
                                 if acc_pref:
                                     acc_pref.save()
-                                    self.setup_data = {'step': 'passed'}
-                                    return True
+                                    playerStats = PlayerStat.objects.create(user=acc_pref)
+                                    if playerStats:
+                                        playerStats.save()
+                                        self.setup_data = {'step': 'passed'}
+                                        return True
                     
                 self.setup_data =  {'step': 'failed'}
                 return False

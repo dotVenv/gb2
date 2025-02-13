@@ -383,6 +383,7 @@ class Match(ExportModelOperationsMixin('Match'), models.Model):
     def __str__(self):
         return f'{self.winner} : {self.points_earned}'
     
+
     
 class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
     '''store player statistics'''

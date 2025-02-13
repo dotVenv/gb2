@@ -210,24 +210,26 @@ class TnHelper():
                         is_registered = self.__check_current__(tuid)
                         #user wants to unregister
                         if is_registered:
-                            print('user is registered')
                             leaderboard = Leaderboard.objects.get(tournament=tuid, player=self.cu_stats)
                             #remove from tournament so no re-entries are allowed.
                             leaderboard.delete()
                             removed = self.__remove_current__(tournament)
                             if removed:
-                                print('user unregistered')
-                                self.return_status = 'unregistered from'
+                                self.return_status = 'Successfully '
                                 return True 
                         else:
                             #user wants to register
-                            register_now = self.__add_current__(tournament)
-                            if register_now:
-                                leaderboard = Leaderboard.objects.create(tournament=tournament, player=self.cu_stats, matchmaking='idle')
-                                if leaderboard:
-                                    leaderboard.save()
-                                    self.return_status = 'registered to'
-                                    return True            
+                            if tournament.platforms.filter(name=self.cu_ap.platform.name).exists() or Leaderboard.objects.filter(tournament=tournament).count() >= tournament.register_limit:
+                                register_now = self.__add_current__(tournament)
+                                if register_now:
+                                    leaderboard = Leaderboard.objects.create(tournament=tournament, player=self.cu_stats, matchmaking='idle')
+                                    if leaderboard:
+                                        leaderboard.save()
+                                        self.return_status = 'Successfully'
+                                        return True    
+                            else:
+                                self.return_status = 'PlatformFull'
+                                return True         
         except dce.ObjectDoesNotExist:
             pass
         except dce.RequestAborted:
