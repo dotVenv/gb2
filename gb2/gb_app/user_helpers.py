@@ -82,6 +82,7 @@ class UserHelper():
             self.serialized['wins'] = int(self.stats.wins)
             self.serialized['losses'] = int(self.stats.losses)
             self.serialized['favorites'] = [str(self.stats.fav_platform), str(self.stats.fav_tournament)]
+            self.serialized['social_count'] = [int(self.cu_ap.followers.count()), int(self.cu_ap.following.count())]
             
     
         

@@ -51,7 +51,7 @@ const MyProfile = () => {
                                 <div className='grid grid-cols-3 gap-2'>
                                     <span className='w-full'>
                                         <dt className="text-small text-center mx-auto font-medium text-gray-700">Games Played</dt>
-                                        <dd className="text-lg text-center mx-auto font-semibold text-gray-500">15</dd>
+                                        <dd className="text-lg text-center mx-auto font-semibold text-gray-500">{ userInfo.wins + userInfo.losses}</dd>
                                     </span>
                                     <span className='w-full'>
                                         <dt className="text-small text-center mx-auto font-medium text-gray-700">Report Status</dt>
@@ -73,8 +73,7 @@ const MyProfile = () => {
                                         description="Complete account setup."
                                         icon={<i className="fa-solid fa-user-astronaut"></i>}
                                         title="Create a new agreement"
-                                        onPress={() => {
-                                        console.log("Create a new agreement");
+                                        onPress={() => {undefined
                                         }}
                                     />
                                     <ActionCard
@@ -84,8 +83,7 @@ const MyProfile = () => {
                                         description="Activate membership."
                                         icon={<i className="fa-solid fa-gem"></i>}
                                         title="Active membership"
-                                        onPress={() => {
-                                        console.log("Create a new agreement");
+                                        onPress={() => {udefined
                                         }}
                                     />
                                     <ActionCard
@@ -95,8 +93,7 @@ const MyProfile = () => {
                                         description="Enable 2FA Security"
                                         icon={<i className="fa-solid fa-user-lock"></i>}
                                         title="Active 2FA"
-                                        onPress={() => {
-                                        console.log("Create a new agreement");
+                                        onPress={() => {undefined
                                         }}
                                     />
                             </div>

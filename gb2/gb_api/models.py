@@ -120,7 +120,8 @@ class AccountPreference(ExportModelOperationsMixin('AccountPreference'),models.M
     server = models.CharField(choices=server_options, max_length=50, blank=True, null=True)
     platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.CASCADE, related_name='user_platform')
     wallet = models.ForeignKey('Wallet', blank=True, null=True, on_delete=models.CASCADE, related_name='user_wallet')
-    fl = models.ManyToManyField('AccountPreference', related_name='friends_list')
+    followers = models.ManyToManyField('AccountPreference', related_name='user_followers')
+    following = models.ManyToManyField('AccountPreference', related_name='user_following')
     entries = models.ManyToManyField('Tournament', blank=True, related_name='entered_tournament')
     uname_change_token = models.IntegerField(default=0)
     

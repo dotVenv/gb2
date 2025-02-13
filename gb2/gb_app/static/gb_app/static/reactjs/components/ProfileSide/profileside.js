@@ -176,14 +176,14 @@ const ProfileSide = ({userInfo}) => {
                     <ul className="flex text-sm text-black">
                         <li className="me-2">
                             
-                            <span className="font-semibold text-gray-900 dark:text-white">799</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{ userInfo.social_count[1] }</span>
                             {'    '}
                             <span>Following</span>
                             
                         </li>
                         <li>
                             
-                            <span className="font-semibold text-gray-900 dark:text-white">3,758</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{ userInfo.social_count[0] }</span>
                             {'    '}
                             <span>Followers</span>
                         
