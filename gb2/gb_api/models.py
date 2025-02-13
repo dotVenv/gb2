@@ -205,13 +205,14 @@ def gen_uuid():
 
 def prev_hashes():
     '''default list for storing old hashes'''
-    return {[]}
+    return {'hashes':[]}
 
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
     
     name = models.CharField(max_length=15, blank=True, null=True, choices=game_options)
     mode = models.CharField(max_length=15,  blank=True, null=True, choices=mode_options)
+    
     specific = models.CharField(max_length=25, blank=True, null=True)
     desc = models.TextField()
     start = models.DateTimeField(auto_now_add=False, default=set_dates('start'))
@@ -222,7 +223,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
-    tournament_hash = models.CharField(max_length=255, default=gen_uuid(), unique=True)
+    tournament_hash = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)
     hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
     previous_hashes = models.JSONField(default=prev_hashes, blank=True, null=True)
@@ -366,8 +367,8 @@ class MFA_Rotator(ExportModelOperationsMixin('MFA_Rotator'), models.Model):
 class Match(ExportModelOperationsMixin('Match'), models.Model):
     '''store each match played'''
     
-    players = models.ManyToManyField('AccountPreference', related_name='opponents')
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    players = models.ManyToManyField('AccountPreference', related_name='opponents')
     winner = models.ForeignKey('AccountPreference', on_delete=models.CASCADE, related_name='match_winner')
     winner_points_earned = models.IntegerField(default=55)
     winner_rank_points_earned = models.IntegerField(default=2.5)
@@ -381,10 +382,28 @@ class Match(ExportModelOperationsMixin('Match'), models.Model):
         verbose_name_plural = 'Matches'
         
     def __str__(self):
-        return f'{self.winner} : {self.points_earned}'
+        return f'{self.winner} : {self.winner_points_earned}'
     
 
     
+rank_options = [
+    ('Low Tier 1', 'Low Tier 1'),
+    ('Low Tier 2', 'Low Tier 2'),
+    ('Low Tier 3', 'Low Tier 3'),
+    ('Mid Tier 1', 'Mid Tier 1'),
+    ('Mid Tier 2', 'Mid Tier 2'),
+    ('Mid Tier 3', 'Mid Tier 3'),
+    ('High Tier 1', 'High Tier 1'),
+    ('High Tier 2', 'High Tier 2'),
+    ('High Tier 3', 'High Tier 3'),
+    ('Bounty Hunter', 'Bounty Hunter'),
+
+]
+
+def prev_seasons():
+    '''store previous season ranks for the current user'''
+    return {}
+
 class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
     '''store player statistics'''
     
@@ -394,7 +413,44 @@ class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
     fav_tournament = models.CharField(max_length=150, blank=True, null=True)
     fav_platform = models.CharField(max_length=25, blank=True, null=True)
     matches = models.ManyToManyField('Match', related_name='all_matches', blank=True)
+    rank_points = models.IntegerField(default=0) 
+    csr = models.CharField(max_length=75, default='Low Tier 1', choices=rank_options)
+    previous_seasons = models.JSONField(default=prev_seasons)
     
+    
+    def update_season(self, current_season):
+        '''a new season reset'''
+        self.previous_season[current_season] = {'wins': self.wins, 'losses': self.losses, 'matches': self.matches.count(), 'rank_points': self.rank_points, 'rank': self.current_season_rank}
+        self.wins = 0
+        self.losses = 0
+        self.matches.clear()
+        #full rank reset
+        match self.csr:
+            case 'Low Tier 3':
+                self.csr = 'Low Tier 1'
+            case 'Low Tier 2':
+                self.csr = 'Low Tier 1'
+            case 'Low Tier 1':
+                self.csr = 'Low Tier 1'
+            case 'Mid Tier 3':
+                self.csr = 'Low Tier 1'
+            case 'Mid Tier 2':
+                self.csr = 'Low Tier 2'
+            case 'Mid Tier 1':
+                self.csr = 'Mid Tier 3'
+            case 'High Tier 3':
+                self.csr = 'Mid Tier 1'
+            case 'High Tier 2': 
+                self.csr = 'Mid Tier 2'
+            case 'High Tier 1':
+                self.csr = 'High Tier 3'
+            case 'Bounty-Hunter':
+                self.csr = 'High Tier 3'
+        
+        self.rank_points = 0       
+        self.save()
+        
+        
     class Meta:
         verbose_name_plural = 'Player Stats'
         
@@ -445,3 +501,40 @@ class TournamentLike(ExportModelOperationsMixin('TournamentLike'), models.Model)
         return f'{self.user.username} likes {self.tournament.name} '
 
 
+
+
+
+"""current_season_rank = models.CharField(max_length=75, choices=rank_options, blank=True, null=True)
+    
+    def update_season(self, current_season):
+        '''a new season reset'''
+        self.previous_season[current_season] = {'wins': self.wins, 'losses': self.losses, 'matches': self.matches.count(), 'rank_points': self.rank_points, 'rank': self.current_season_rank}
+        self.wins = 0
+        self.losses = 0
+        self.matches.clear()
+        self.current_season_rank = 'Low Tier 1'
+        #full rank reset
+        match self.current_season_rank:
+            case 'Low Tier 3':
+                self.current_season_rank = 'Low Tier 1'
+            case 'Low Tier 2':
+                self.current_season_rank = 'Low Tier 1'
+            case 'Low Tier 1':
+                self.current_season_rank = 'Low Tier 1'
+            case 'Mid Tier 3':
+                self.current_season_rank = 'Low Tier 1'
+            case 'Mid Tier 2':
+                self.current_season_rank = 'Low Tier 2'
+            case 'Mid Tier 1':
+                self.current_season_rank = 'Mid Tier 3'
+            case 'High Tier 3':
+                self.current_season_rank = 'Mid Tier 1'
+            case 'High Tier 2': 
+                self.current_season_rank = 'Mid Tier 2'
+            case 'High Tier 1':
+                self.current_season_rank = 'High Tier 3'
+            case 'Bounty-Hunter':
+                self.current_season_rank = 'High Tier 3'
+        
+        self.rank_points = 0       
+        self.save()   """
