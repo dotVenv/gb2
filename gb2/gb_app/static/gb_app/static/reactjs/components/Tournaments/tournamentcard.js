@@ -15,9 +15,10 @@ const TournamentCard = ({tournamentInfo}) => {
     var current_time = hours + ':' + minutes + ':' + seconds;
     current_time = current_time.replace(':', '');
     var tournament_start = new Date(tournamentInfo.start).toISOString().slice(11,19).replace(':', '')
-    var tournment_end = new Date(tournamentInfo.end).toISOString().slice(11,19).replace(':', '')
+    var tournament_end = new Date(tournamentInfo.end).toISOString().slice(11,19).replace(':', '')
+ 
     const checkLive = () => {
-        if ( parseInt(current_time) >= parseInt(tournament_start) && parseInt(current_time) <= parseInt(tournment_end)){
+        if ( parseInt(current_time) >= parseInt(tournament_start) && parseInt(current_time) <= parseInt(tournament_end)){
             return true;
         }else if( parseInt(current_time) >= parseInt('1730:00') && parseInt(current_time) < parseInt('18:00')){
             return 'soon'

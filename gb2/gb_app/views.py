@@ -161,7 +161,7 @@ class APPViews(TemplateView):
                         return getres().res('200', new_msg={'status': 'successful', 'action': thelper.status})  
                 case 'set_entry':
                     if thelper.set_entry():
-                        return gegetres().res('200', new_msg={'status': 'successful', 'action': thelper.entry_status})  
+                        return getres().res('200', new_msg={'status': 'successful', 'action': thelper.return_status})  
                         
                      
             return getres().res('401', new_msg={'status': 'failed'})     

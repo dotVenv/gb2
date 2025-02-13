@@ -205,7 +205,7 @@ def gen_uuid():
 
 def prev_hashes():
     '''default list for storing old hashes'''
-    return []
+    return {[]}
 
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
@@ -219,18 +219,17 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     rules = models.JSONField(default=rules)
     pool = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
     placement = models.DecimalField(default=0.0, decimal_places=2, max_digits=7)
-    registered = models.ManyToManyField('AccountPreference', related_name='registered_users', blank=True)
     register_limit = models.IntegerField(default=75)
     thumbnail = models.CharField(max_length=255, choices=thumbnail_options, blank=True, null=True)
     platforms = models.ManyToManyField('Platform',related_name='platform_option', blank=True)
     tournament_hash = models.CharField(max_length=255, default=gen_uuid(), unique=True)
     hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
-    previous_hashes = models.JSONField(default=prev_hashes)
-    
+    previous_hashes = models.JSONField(default=prev_hashes, blank=True, null=True)
     
     def swap_uuid():
-        self.previous_hashes.append(self.tournament_hash)
+        for v in previous_hashes.values():
+            v.append(self.tournament_hash)
         self.tournament_hash = gen_uuid()
         self.save()
     
@@ -422,11 +421,12 @@ class Leaderboard(ExportModelOperationsMixin('Leaderboard'), models.Model):
     previous_opponent = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='prev_opponent', blank=True, null=True)
     matchmaking = models.CharField(max_length=35, choices=matchmaking_options, null=True, blank=True)
     
+ 
     class Meta:
         verbose_name_plural = 'Leaderboards'
         
     def __str__(self):
-        return f'{self.tournament.name} leaderboard'
+        return f'{self.tournament.name}({self.tournament.specific}) {self.player.user.user.username} leaderboard'
     
 
 class TournamentLike(ExportModelOperationsMixin('TournamentLike'), models.Model):

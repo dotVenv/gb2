@@ -4737,6 +4737,10 @@ video {
   --tw-gradient-to: #27272a var(--tw-gradient-to-position);
 }
 
+.to-purple-300 {
+  --tw-gradient-to: #ae7ede var(--tw-gradient-to-position);
+}
+
 .to-90\% {
   --tw-gradient-to-position: 90%;
 }
@@ -8767,6 +8771,14 @@ html, body {
 
 .hover\:bg-gradient-to-br:hover {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+.hover\:bg-gradient-to-r:hover {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.hover\:bg-gradient-to-tr:hover {
+  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
 }
 
 .hover\:text-cyan-700:hover {

@@ -44,6 +44,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
 
   const [hasLiked, sethasLiked] = useState(tournamentInfo.likedbyme);
   const [newToastAlert,setNewToastAlert] = useState();
+  const [RegisterDisabled, setRegisterDisabled] = useState(false);
 
 
   const handleLiked = async() => {
@@ -76,18 +77,26 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
   const handleEntry = async() => {
     let res = await cu.setTournament(tournamentInfo.hash, null, 'set_entry');
     if (res){
-      console.log('returned');
+      
+      if (res.status == 'successful'){
+        toastData.value.desc = 'Successfully updated entry!';
+        toastData.value.toastType = 'success';
+        setNewToastAlert(true);
+        window.location.reload();
 
+      }else{
+        toastData.value.desc = 'Unable to update entry.';
+        toastData.value.toastType = 'error';
+        setNewToastAlert(true);
+      }
+    }else{
+      toastData.value.desc = 'Unable to update entry';
+      toastData.value.toastType = 'error';
+      setNewToastAlert(true);
     };
   };
 
-  effect(async() => {
-    if (fetched.value <= 0){
-      fetched.value ++;
-      leaderboard.value = await cu.getTournamentLeaderboard(tournamentInfo.hash);
-    };
-  });
-
+  
   return (
     <>
       <Drawer
@@ -127,17 +136,19 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                   </Button>
                 </Tooltip>
                 <div className="w-full flex justify-start gap-2">
+
                   <Button
-                    onPress={(e) => {handleEntry();}}
-                    className="font-medium text-small text-default-500"
+                    isDisabled={RegisterDisabled}
+                    onPress={(e) => {setRegisterDisabled(true); handleEntry();}}
+                    className="font-medium text-small text-default-500 hover:bg-gradient-to-tr from-pink-400 to-yello-300"
                     size="sm"
-                    color='primary'
+                    color={tournamentInfo.is_entered ? "danger" : "primary"}
                     startContent={
                         <i className="fa-solid fa-ticket-simple"></i>
                     }
                     variant="flat"
                   >
-                    Enter Now
+                    {tournamentInfo.is_entered ? "Unregister Now" : "Enter Now"}
                   </Button>
                   <p className='text-white text-small mt-2' >{tournamentInfo.limit - tournamentInfo.registered_count} Spots Left</p>
                 </div>
@@ -312,19 +323,24 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                       <b className='text-white'>Top 3</b>
                       <Spacer></Spacer>
                       <ul className='gap-y-2 space-y-2'>
-                        { !leaderboard.value ? undefined 
-                          : leaderboard.value.status == 'failed_empty' 
-                          ? <li className='text-white text-tiiny'><Alert variant='flat' color='danger' size='sm' radius='lg' className='text-tiny'><p className='text-tiny'>It's pretty empty right now...No one has registered. <i className="fa-regular fa-face-grimace fa-sm"></i></p> </Alert></li>
-                          : leaderboard.value.map((key, index) => {
+                        { tournamentInfo.registered_count == 0 
+                          ? <li className='text-white text-tiiny'>
+                                <Alert variant='flat' color='danger' size='sm' radius='lg' className='text-tiny'>
+                                  <p className='text-tiny'>It's pretty empty right now...No one has registered. 
+                                    <i className="fa-regular fa-face-grimace fa-sm"></i>
+                                  </p> 
+                                </Alert>
+                            </li>
+                          : tournamentInfo.top_3.filter((key,index) => index <= 2).map((key, index) => {
                             return (
-                                <li key={key}> 
+                                <li key={index}> 
                                   <Card className='rounded-border rounded-large items-start w-full h-full p-2'>
                                       <User
                                         avatarProps={{
-                                          src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                                          src:key.profile_pic,
                                         }}
-                                        description="1st Place - 1420 pts."
-                                        name={<span className='text-white'>"Jane Doe"</span>}
+                                        description={<><i>{index == 0 ? '1st Place -' : index == 1 ? '2nd Place -' : '3rd Place -'}</i> <span>{key.points}ts. ({parseInt(key.wins)} wins)</span></>}
+                                        name={<span className='text-white'>@{key.username} <Link href={'player.gamers-bounty.com/'+key.username} className='text-tiny' color='secondary' variant='light' underline='hover'> View Esports Profile</Link></span>}
                                       />
                                   </Card>
                              <Spacer></Spacer>
@@ -346,16 +362,31 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                             count: "text-default-500 text-tiny bg-default-100",
                           }}
                           size="sm"
-                          total={tournamentInfo.registered_count}
+                          total={tournamentInfo.registered_count > 20 ? 15 : tournamentInfo.registered_count}
                         >
-                          <Tooltip content="Alex">
-                            <Avatar
-                              className="data-[hover=true]:!translate-x-0"
-                              name="Alex"
-                              src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-                            />
-                          </Tooltip>
-                          
+                          {tournamentInfo.registered_count == 0 ?
+                              <Tooltip  content='No Players'>
+                              <Avatar
+                                className="data-[hover=true]:!translate-x-0"
+                                name='No Players'
+                              
+                                src="https://images.unsplash.com/broken" 
+                              />
+                            </Tooltip> 
+                              : tournamentInfo.top_3.filter((key,index) => index <= tournamentInfo.registered_count > 20 ? 15 : tournamentInfo.registered_count).map((key, index) => {
+                                return (
+                                    <Tooltip key={index} content={key.username}>
+                                    <Avatar
+                                      className="data-[hover=true]:!translate-x-0"
+                                      name={key.username}
+                                      src={key.profile_pic}
+                                    />
+                                  </Tooltip>
+                                )
+                            
+                            })}
+                           
+                  
                         </AvatarGroup>
                       </div>
                     </div>
@@ -372,7 +403,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                   </Link>
                   .
                 </p>
-                  <Button isIconOnly aria-label="Take a photo" color="warning" variant="faded" size='sm' radius='lg' onPress={(e) => {handleLiked();}}>
+                  <Button isIconOnly aria-label="Take a photo" color="warning" variant="faded" size='sm' radius='lg' onPress={(e) => { handleLiked();}}>
                     { hasLiked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i> }
                   </Button>
               

@@ -2,10 +2,11 @@
 import django.core.exceptions as dce
 from django.db import transaction
 from django.utils.decorators import method_decorator
+from django.conf import settings
 
 
 #other imports
-from gb_api.models import Tournament, Leaderboard, TournamentLike
+from gb_api.models import Tournament, Leaderboard, TournamentLike, AccountPreference, Match, PlayerStat
 
 class TnHelper():
     '''a class for helping manage tournaments'''
@@ -36,9 +37,12 @@ class TnHelper():
             tl = Tournament.objects.all().order_by(filter)
             if filter == 'rating':
                 tl = tl[:5]
-            
+                
+        self.__getuser__()
         if tl:
             for val in tl:
+                
+                current_leaderboard =  Leaderboard.objects.filter(tournament=val)
                 
                 new_tl = {
                     'hash': str(val.tournament_hash),
@@ -55,11 +59,14 @@ class TnHelper():
                     'thumbnail': thumbnail_options[val.thumbnail],
                     'rating': val.rating,
                     'platform':[{'id':x['name']} for x in val.platforms.values()],
-                    'registered_count': val.registered.count(),
-                    'registered': None,
-                    'host': str(val.hosted_by)
+                    'registered_count': current_leaderboard.count(),
+                    'top_3': None,
+                    'host': str(val.hosted_by),
+                    'is_entered': bool(self.__check_current__(val.tournament_hash))
                         
                 }
+                
+                
                 
                 try:
                     isLiked = TournamentLike.objects.get(user_id=self.request.user.id, tournament=val.tournament_hash)
@@ -67,7 +74,19 @@ class TnHelper():
                 except dce.ObjectDoesNotExist:
                     new_tl['likedbyme'] = bool(False)
                 
-                if val.registered.count() > 0: new_tl['registered'] = [x['user']['username'] for x in val.registered ]
+                if current_leaderboard.count() > 0: new_tl['top_3'] = [
+                    {   
+                        'stat_id': x['player_id'],
+                        'username':AccountPreference.objects.get(user_id=x['player_id']).user.username,
+                        'wins':x['wins'], 
+                        'points': x['points'], 
+                        'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{AccountPreference.objects.get(user_id=x["player_id"]).user.profile_pic}' 
+                    }
+                    
+                    for x in current_leaderboard.values().order_by('points')[:15]
+                     
+                    ]
+                 
                 self.tournaments_list.append(new_tl)
             return True
         
@@ -82,9 +101,13 @@ class TnHelper():
             return False
         
         try:
-            leaderboard = Leaderboard.objects.get(tournament=tuid)
-            if leaderboard:
-                print('leader board caught')
+            print('checking tournaments')
+            tobj = Tournament.objects.get(tournament_hash=tuid)
+            if tobj:
+                print('tournament valid')
+                leaderboard = Leaderboard.objects.get(tournament=tobj)
+                if leaderboard:
+                    print('leader board caught')
                 
         except dce.ObjectDoesNotExist:
             return False
@@ -136,17 +159,75 @@ class TnHelper():
         return False
     
     
+    def __getuser__(self):
+        '''get the current user'''
+        
+        self.cu_ap = AccountPreference.objects.get(user_id=self.request.user.id)
+        if self.cu_ap:
+            self.cu_stats = PlayerStat.objects.get(user=self.cu_ap)
+            
+    def __check_current__(self, tuid):
+        '''check if user has current tournament in entries'''
+        
+        if self.cu_ap.entries.filter(tournament_hash=tuid).exists():
+            return True
+        return False
+
+    def __remove_current__(self, tobj):
+        '''remove the current tournament from the users entry'''
+        
+        self.cu_ap.entries.remove(tobj.id)
+        rm = self.__check_current__(tobj.tournament_hash)
+        if rm:
+            return False
+        return True
+        
+    def __add_current__(self, tobj):
+        '''add the current tournament to user entires'''
+        self.cu_ap.entries.add(tobj.id)
+        check_new = self.__check_current__(tobj.tournament_hash)
+        if check_new:
+            return True
+        return False
+    
+    @method_decorator(transaction.atomic)
     def set_entry(self):
         '''set the entry for the current tournamnet for the user'''
+        
         
         tuid = self.request.POST.get('tuid')
         if not tuid: 
             return False
+        self.return_status = None
         
         try: 
-            tournament = Tournament.objects.get(tournament_hash=tuid)
-            if tournament:
-                print('tournament found ')
+            with transaction.atomic():
+                tournament = Tournament.objects.get(tournament_hash=tuid)
+                self.__getuser__()
+                if tournament:
+                    if self.cu_ap:
+                        #if the current tournament hash is in user entries.
+                        is_registered = self.__check_current__(tuid)
+                        #user wants to unregister
+                        if is_registered:
+                            print('user is registered')
+                            leaderboard = Leaderboard.objects.get(tournament=tuid, player=self.cu_stats)
+                            #remove from tournament so no re-entries are allowed.
+                            leaderboard.delete()
+                            removed = self.__remove_current__(tournament)
+                            if removed:
+                                print('user unregistered')
+                                self.return_status = 'unregistered from'
+                                return True 
+                        else:
+                            #user wants to register
+                            register_now = self.__add_current__(tournament)
+                            if register_now:
+                                leaderboard = Leaderboard.objects.create(tournament=tournament, player=self.cu_stats, matchmaking='idle')
+                                if leaderboard:
+                                    leaderboard.save()
+                                    self.return_status = 'registered to'
+                                    return True            
         except dce.ObjectDoesNotExist:
             pass
         except dce.RequestAborted:
