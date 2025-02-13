@@ -203,6 +203,10 @@ def gen_uuid():
     '''generate a new uuid'''
     return str(uuid.uuid4())
 
+def prev_hashes():
+    '''default list for storing old hashes'''
+    return []
+
 class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     '''store each tournament to return its data properly'''
     
@@ -222,7 +226,13 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     tournament_hash = models.CharField(max_length=255, default=gen_uuid(), unique=True)
     hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
+    previous_hashes = models.JSONField(default=prev_hashes)
     
+    
+    def swap_uuid():
+        self.previous_hashes.append(self.tournament_hash)
+        self.tournament_hash = gen_uuid()
+        self.save()
     
     def update_dates(self):
         self.start = set_dates('start')
@@ -432,4 +442,5 @@ class TournamentLike(ExportModelOperationsMixin('TournamentLike'), models.Model)
         
     def __str__(self):
         return f'{self.user.username} likes {self.tournament.name} '
-    
+
+

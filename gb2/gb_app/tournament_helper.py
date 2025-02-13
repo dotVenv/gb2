@@ -135,3 +135,23 @@ class TnHelper():
         
         return False
     
+    
+    def set_entry(self):
+        '''set the entry for the current tournamnet for the user'''
+        
+        tuid = self.request.POST.get('tuid')
+        if not tuid: 
+            return False
+        
+        try: 
+            tournament = Tournament.objects.get(tournament_hash=tuid)
+            if tournament:
+                print('tournament found ')
+        except dce.ObjectDoesNotExist:
+            pass
+        except dce.RequestAborted:
+            pass
+       
+        
+        
+        return False

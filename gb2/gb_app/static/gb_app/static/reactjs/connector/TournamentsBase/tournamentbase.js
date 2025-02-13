@@ -62,11 +62,11 @@ export default class TournamentBase{
         return res;
     }
 
-    async setTournamentLike(tuid, status){
+    async setTournament(tuid, status, poststep){
         let res = axios({
             url: '/tournaments',
             method: 'post',
-            data: {uid: this.uid, tuid: tuid, status: status, poststep: 'set_liked'},
+            data: {uid: this.uid, tuid: tuid, status: status, poststep: poststep},
             headers: {
                 'X-CSRFTOKEN': GETCSRFToken(),
                 'Content-Type': 'multipart/form-data',
@@ -84,4 +84,5 @@ export default class TournamentBase{
         return res;
         
     };
+
 };

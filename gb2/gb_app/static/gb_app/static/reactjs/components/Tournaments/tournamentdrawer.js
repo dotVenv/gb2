@@ -48,7 +48,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
 
   const handleLiked = async() => {
 
-    let res = await cu.setTournamentLike(tournamentInfo.hash,!hasLiked);
+    let res = await cu.setTournament(tournamentInfo.hash,!hasLiked, 'set_liked');
     if (res){
       if (res.status == 'successful'){
        
@@ -73,6 +73,13 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
   };
   
 
+  const handleEntry = async() => {
+    let res = await cu.setTournament(tournamentInfo.hash, null, 'set_entry');
+    if (res){
+      console.log('returned');
+
+    };
+  };
 
   effect(async() => {
     if (fetched.value <= 0){
@@ -121,6 +128,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
                 </Tooltip>
                 <div className="w-full flex justify-start gap-2">
                   <Button
+                    onPress={(e) => {handleEntry();}}
                     className="font-medium text-small text-default-500"
                     size="sm"
                     color='primary'
