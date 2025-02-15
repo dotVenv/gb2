@@ -94,20 +94,23 @@ const ProfileSide = ({userInfo}) => {
                     let response = await cu.updateAccount(data, poststep);
                     if (response){
                         //if qr is the step
+                        console.log(response, poststep);
                         if (poststep == 'change_2fa'){
                                 //qr code is generated
-                            console.log(response.mfa_data);
-                            if (response.mfa_data.toLowerCase() != 'activated' && response.mfa_data.toLowerCase() != 'deactivated'){
+                            let poststep_check = response.mfa_data != 'activated' ? response.mfa_data != 'deactivated' : false
+                           
+                            if (poststep_check == false){
+                                toastData.value.desc = 'MFA is '+ response.mfa_data;
+                                toastData.value.toastType = 'success';
+                                response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
+                                setedit2FA(!edit2FA);
+                            }else{
                                 setShowQR(true);
                                 cu.setQR(response.mfa_data);
                                 userInfo.mfa.toLowerCase() == 'true'
                                 toastData.value.desc = 'MFA ready to complete';
                                 toastData.value.toastType = 'warning';
-                            }else{
-                                toastData.value.desc = 'MFA is '+ response.mfa_data;
-                                toastData.value.toastType = 'success';
-                                response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
-                                setedit2FA(!edit2FA);
+                               
                             }; 
                         }else if ( poststep == 'verify_2fa'){
                             console.log('inside 2');
@@ -115,7 +118,7 @@ const ProfileSide = ({userInfo}) => {
                             toastData.value.toastType = 'success';
                             response.mfa_data ==  'activated' ? userInfo.mfa = 'true' : userInfo.mfa = 'false';
                             setShowQR(!showQR); 
-                            setEditAccount(!editAccount);
+                            setedit2FA(!edit2FA);
                         }else{
                             if (response.status == 'successful'){
                                 toastData.value.desc = 'Successfully updated account';
@@ -126,7 +129,7 @@ const ProfileSide = ({userInfo}) => {
                                 setEditAccount(false);
                             }else{
                                 //response but not successful
-                                toastData.value.desc = 'Failed to update account';
+                                toastData.value.desc = 'Failed to update account- not successful';
                                 toastData.value.toastType = 'error';
                             };
                         };

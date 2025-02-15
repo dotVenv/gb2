@@ -73,8 +73,7 @@ const MyProfile = () => {
                                         description="Complete account setup."
                                         icon={<i className="fa-solid fa-user-astronaut"></i>}
                                         title="Create a new agreement"
-                                        onPress={() => {undefined
-                                        }}
+                                        onPress={() => {undefined}}
                                     />
                                     <ActionCard
                                         className='bg-gray-100 h-15 w-full mb-2'
@@ -93,8 +92,7 @@ const MyProfile = () => {
                                         description="Enable 2FA Security"
                                         icon={<i className="fa-solid fa-user-lock"></i>}
                                         title="Active 2FA"
-                                        onPress={() => {undefined
-                                        }}
+                                        onPress={() => {undefined}}
                                     />
                             </div>
                             <CompCard userInfo={userInfo} />

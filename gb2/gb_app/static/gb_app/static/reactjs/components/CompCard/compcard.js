@@ -49,7 +49,7 @@ const CompCard = ({userInfo}) => {
                         radius : 'md',
                         showFallback: true,
                     }}
-                    description="Tournaments Won: 27 "
+                    description={"Tournaments Won: "+userInfo.wins}
                     name={'@' + userInfo.username}
                 />
                 </Badge>
