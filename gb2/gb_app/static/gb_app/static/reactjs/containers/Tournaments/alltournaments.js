@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 import { Layout } from '../index';
@@ -15,6 +15,8 @@ const AllTournaments = () => {
 
     
     const cu = useContext(ConnContext);
+    const [newFilter, setnewFilter] = useState('');
+
     const [userInfo] = useAtom(cu.userAtom);
     const setT = async() => { await cu.setTournaments();}
 
@@ -44,7 +46,7 @@ const AllTournaments = () => {
             <section className='h-full'>
                 <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                     <div className='flex'>
-                        <Input className='col-4 bg-zinc-700' radius='lg' size='lg' 
+                        <Input className='col-4 bg-zinc-700' radius='lg' size='lg'  value={newFilter} onValueChange={(value) => {setnewFilter(value)}}
                             endContent={<Button size='sm' color='default' isIconOnly radius='lg'><i className='fa-solid fa-search'></i></Button>} 
                             placeholder='Search tournaments' />
                             <Spacer></Spacer>
@@ -54,14 +56,16 @@ const AllTournaments = () => {
                                 size='sm'
                                 radius='lg'
                                 label="Filter by Title"
+                                selectedKeys=''
+                                onChange={(e) => setnewFilter(e.target.value)}
                                 >
-                                {(tourney) => <SelectItem className='text-white'>{tourney.name}</SelectItem>}
+                                {(tourney) => <SelectItem className='text-white' key={tourney.name}>{tourney.name}</SelectItem>}
                                 </Select>
                      
                     </div>
                     <br></br>
                     <div className="justify-center align-center mx-auto grid sm:grid-cols-1 lg:grid-cols-3 gap-0 mb-4">
-                        <TournamentList cu={cu} />
+                        <TournamentList cu={cu} newFilter={newFilter} setnewFilter={setnewFilter} />
                       
                     </div>
                 </div>
