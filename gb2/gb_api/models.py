@@ -385,7 +385,7 @@ class Match(ExportModelOperationsMixin('Match'), models.Model):
     winner_points_earned = models.IntegerField(default=55)
     winner_rank_points_earned = models.IntegerField(default=2.5)
     loser_points_earned = models.IntegerField(default=8)
-    loser_rank_points_earned = models.IntegerField(default=int('-2'))
+    loser_rank_points_loss = models.IntegerField(default=-2)
     score = models.CharField(max_length=25, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     tournament = models.ForeignKey('Tournament', on_delete=models.PROTECT, related_name='current_tournament', blank=True, null=True)

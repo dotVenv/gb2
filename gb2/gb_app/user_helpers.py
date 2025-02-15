@@ -132,17 +132,29 @@ class UserHelper():
         
         match toget:
             case 'email':
-                setupdata = EmailVerification.objects.get(user=self.request.user.id)
-                if not self.request.user.account_verified:
-                    self.setup_data = {
-                        'created_at': setupdata.created_at,
-                        'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
-                        'expired': setupdata.expired,
-                        'attempts': setupdata.attempts,
-                        
-                    }
+                try:
+                    setupdata = EmailVerification.objects.get(user_id=self.request.user.id)
+                    if not self.request.user.account_verified:
+                        self.setup_data = {
+                            'created_at': setupdata.created_at,
+                            'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
+                            'expired': setupdata.expired,
+                            'attempts': setupdata.attempts,     
+                        }
                     return True
-                
+                except dce.ObjectDoesNotExist:
+                    new_emv = EmailHelper().verify_account(request=self.request)
+                    if new_emv:
+                        setupdata = EmailVerification.objects.get(user_id=self.request.user.id)
+                        self.setup_data = {
+                            'created_at': setupdata.created_at,
+                            'time_left': datetime.datetime.strftime(setupdata.created_at + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC'),
+                            'expired': setupdata.expired,
+                            'attempts': setupdata.attempts,     
+                        }
+                        return True
+                    return False
+                    
             case 'email-submit':
                 setupdata = EmailVerification.objects.get(user=self.request.user.id)
                 if not self.request.user.account_verified:

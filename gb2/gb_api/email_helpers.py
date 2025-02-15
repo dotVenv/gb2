@@ -34,7 +34,6 @@ class EmailHelper():
         '''generate a 4 digit code to send to the user'''
         
         new_code = random.randint(1111,9999)
-        print(new_code)
         return new_code
 
     
@@ -45,7 +44,7 @@ class EmailHelper():
         
         email_data = None
         if not test:
-            check_email = EmailVerification.objects.filter(user=request.user.id)
+            check_email = EmailVerification.objects.filter(user_id=request.user.id)
             if check_email.exists():
                 self.email_data['verification_code'] = self.__generate_email_code()
                 tnow = timezone.now()
@@ -56,7 +55,7 @@ class EmailHelper():
             else:
                 try:
                     self.email_data['verification_code'] = self.__generate_email_code()
-                    email_data = EmailVerification.objects.create(user=request.user.id, code=self.email_data['verification_code'])
+                    email_data = EmailVerification.objects.create(user_id=request.user.id, code=self.email_data['verification_code'])
                     if email_data:
                         email_data.save()
                 except dce.RequestAborted:
