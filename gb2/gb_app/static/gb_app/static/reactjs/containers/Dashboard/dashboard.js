@@ -71,7 +71,7 @@ const Dashboard = () => {
                             </Card>
                             <Card className='h-[300px] bg-gray-50 shadow-2xl p-4 items-center'>
                              
-                                <RankingStepper />
+                                <RankingStepper rankPoints={userInfo.rankPoints} />
                             </Card>
                             </div>
                         </div>
@@ -153,8 +153,6 @@ const Dashboard = () => {
                                 <Button variant='flat' color='primary' size='md' radius='md'> View All </Button>
                             </div>
                                 <PopularTournaments cu={cu} />
-                            
-
                             <hr></hr>
 
                             <p className='text-center justify-center align-center mx-auto text-black'><i> LIMITED </i> <b>Gamers-Bounty</b> <i> Merch</i></p>

@@ -4,9 +4,9 @@ import { Progress } from "@nextui-org/react";
 import LRank1  from '../../../imgs/ranks/low_rank_one.png';
 import LRank2 from '../../../imgs/ranks/low_rank_two.png';
 
-const RankingStepper = () => {
+const RankingStepper = ({ rankPoints }) => {
 
-    const [rankProgress, setRankProgress] = useState(11);
+    const [rankProgress, setRankProgress] = useState(rankPoints);
     
     return(
             <>
