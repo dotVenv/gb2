@@ -23,14 +23,12 @@ const StickyOptions  = ({userInfo}) => {
                         <i className="fa-solid fa-comments-dollar"></i>
                     </DockIcon>
                 </Badge>
-                <Badge color={parseInt(userInfo.entries) >= 1 ?  "danger ":"warning"}  isOneChar content={userInfo.entries} size='sm' variant={parseInt(userInfo.entries) >= 1 ? "flat": "faded"}>
-                    <DockIcon onClick={(e) => { setisTourneyOpen(!isTourneyOpen) }}>
+                <Badge color={parseInt(userInfo.entries) >= 1 ?  "danger ":"warning"}  isOneChar content={userInfo.entries} size='sm' variant={parseInt(userInfo.entries) >= 1 ? "flat": ""}>
+                    <DockIcon onClick={(e) => { location.href ='#'}}>
                         <i className="fa-solid fa-hand-fist"></i>
                     </DockIcon>
                 </Badge>
             </Dock>
-
-        { isTourneyOpen ? <TourneyModal isModalOpen={isTourneyOpen} /> : undefined }
         </>
     );
 };

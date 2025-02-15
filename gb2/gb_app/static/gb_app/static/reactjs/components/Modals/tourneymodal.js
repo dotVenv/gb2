@@ -19,13 +19,13 @@ import {
   } from "@nextui-org/react";
 
 
-const TourneyModal = ({isModalOpen}) => {
+const TourneyModal = ({isModalOpen, setModal}) => {
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
         <>
-        <Modal isDismissable={true} backdrop='blur'  size='lg' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
+        <Modal isDismissable={true} backdrop='blur'  size='full' placement='center' isOpen={isModalOpen} onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
                 <>
