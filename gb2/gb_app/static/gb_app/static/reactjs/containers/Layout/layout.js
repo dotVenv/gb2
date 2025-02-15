@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
                 <> 
                 <Spacer></Spacer>
                 <div className='sticky-bottom z-index-1 left-25 bottom-1 w-full flex align-center justify-center mx-auto '>
-                    {membershipModal ? undefined : <StickyOptions /> }
+                    {membershipModal ? undefined : <StickyOptions userInfo={userInfo} /> }
                     
                 </div>
                     <section className='mt-3 py-4'>
@@ -93,62 +93,6 @@ const Layout = ({ children }) => {
                         </span>
                     </section>
                    
-                    {/* 
-                    <section className='mx-auto justify-center align-center col-10'>    
-                    
-                        <dl className="sm:grid flex flex-col  justify-center align-center mx-auto py-4 mt-4 grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-3">
-                            <Card  isPressable className=" shadow-2xl p-3 border border-none dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
-                                
-                                <div className="flex">
-                                    <div className="flex flex-col gap-y-2">
-                                    <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
-                                    <dd className="text-2xl font-semibold text-black">{ userInfo.memberhsip == null ? "N/A" : userInfo.memberhsip }</dd>
-                                </div>
-                                    
-                                </div>
-                            </Card>
-                            <Card  isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
-                                <div className="flex">
-                                    <div className="flex flex-col gap-y-2">
-                                    <dt className="text-small text-black font-medium text-default-500">Active Entries <i className="fa-solid fa-ticket-simple"></i></dt>
-                                    <dd className="text-2xl text-black"><b>0</b> <span className='text-tiny text-black'> entries</span></dd>
-                                    </div>
-                                    
-                                </div>
-                            </Card>
-                            <Card  isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
-                                <div className="flex">
-                                    <div className="flex flex-col gap-y-2">
-                                        <dt className="float start text-small text-black font-medium ">Preferences <i className="fa-solid fa-user-gear"></i></dt>
-                                        <div className='flex'>
-                                            <div className='grid grid-cols-1'>
-                                                <dd className="text-2xl font-semibold text-black">{ 
-                                                    userInfo.console == 'PC' 
-                                                        ? <i className="fa-solid fa-computer"></i>
-                                                        : userInfo.console == 'Xbox' 
-                                                            ? <i className='fa-solid fa-xbox'></i>
-                                                            : userInfo.console = 'PSN'
-                                                                ? <i className='fa-solid fa-playstation'></i>
-                                                                : undefined
-                                                    }</dd>
-                                                <span className='text-tiny text-black'><b> { userInfo.console } </b></span>
-                                            </div>
-                                            <Spacer></Spacer>
-                                            <div className='grid grid-cols-1 end justify-end mx-auto'>
-                                                <dd className="text-2xl font-semibold text-black"><i className="fa-solid fa-server"></i></dd>
-                                                <span className='text-tiny text-black'> <b> { userInfo.server } </b></span>
-                                            </div>
-                                        </div>
-                                    
-                                    </div>
-                                    
-                                </div>
-                            </Card>    
-                        </dl>
-                       
-                    </section>
-
-                    */ }
                         <div >
                             {children}
                         </div>
@@ -195,3 +139,63 @@ const data = [
   ];
 
   
+
+
+
+
+  {/* 
+    <section className='mx-auto justify-center align-center col-10'>    
+    
+        <dl className="sm:grid flex flex-col  justify-center align-center mx-auto py-4 mt-4 grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-3">
+            <Card  isPressable className=" shadow-2xl p-3 border border-none dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
+                
+                <div className="flex">
+                    <div className="flex flex-col gap-y-2">
+                    <dt className="text-small text-black font-medium text-default-500">Membership <i className="fa-solid fa-money-check-dollar"></i></dt>
+                    <dd className="text-2xl font-semibold text-black">{ userInfo.memberhsip == null ? "N/A" : userInfo.memberhsip }</dd>
+                </div>
+                    
+                </div>
+            </Card>
+            <Card  isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
+                <div className="flex">
+                    <div className="flex flex-col gap-y-2">
+                    <dt className="text-small text-black font-medium text-default-500">Active Entries <i className="fa-solid fa-ticket-simple"></i></dt>
+                    <dd className="text-2xl text-black"><b>0</b> <span className='text-tiny text-black'> entries</span></dd>
+                    </div>
+                    
+                </div>
+            </Card>
+            <Card  isPressable className="p-3 border border-transparent dark:border-default-100 bg-gradient-to-r from-zinc-400 to-gray-100 dark:bg-gray-900/80">
+                <div className="flex">
+                    <div className="flex flex-col gap-y-2">
+                        <dt className="float start text-small text-black font-medium ">Preferences <i className="fa-solid fa-user-gear"></i></dt>
+                        <div className='flex'>
+                            <div className='grid grid-cols-1'>
+                                <dd className="text-2xl font-semibold text-black">{ 
+                                    userInfo.console == 'PC' 
+                                        ? <i className="fa-solid fa-computer"></i>
+                                        : userInfo.console == 'Xbox' 
+                                            ? <i className='fa-solid fa-xbox'></i>
+                                            : userInfo.console = 'PSN'
+                                                ? <i className='fa-solid fa-playstation'></i>
+                                                : undefined
+                                    }</dd>
+                                <span className='text-tiny text-black'><b> { userInfo.console } </b></span>
+                            </div>
+                            <Spacer></Spacer>
+                            <div className='grid grid-cols-1 end justify-end mx-auto'>
+                                <dd className="text-2xl font-semibold text-black"><i className="fa-solid fa-server"></i></dd>
+                                <span className='text-tiny text-black'> <b> { userInfo.server } </b></span>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+            </Card>    
+        </dl>
+        
+    </section>
+
+    */ }

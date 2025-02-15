@@ -20,6 +20,7 @@ export { default as GamesPlayedStat } from './PlayerStats/gamesplayed';
 export { default as ExtraPlayerStats } from './PlayerStats/extrastats';
 export { default as MostRecentMatches } from './PlayerStats/recentmatches';
 export { default as PopularTournaments } from './Carousels/populartournaments';
+export { default as TourneyModal } from './Modals/tourneymodal';
 
 export { SparklesText } from './Magicui/sparkles-text';
 export { Dock, DockIcon, dockVariants } from './Magicui/dock';
@@ -27,7 +28,6 @@ export{ ShineBorder } from './Magicui/shine-border';
 export { Globe } from './Magicui/globe';
 export { MagicCard } from './Magicui/magic-card';
 export { PrevButton, NextButton, usePrevNextButtons} from './Carousels/carouselarrows';
-
 
 
 //profile

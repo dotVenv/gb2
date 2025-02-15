@@ -275,6 +275,8 @@ class UserHelper():
                         if cu:
                             if email:
                                 if email != self.request.user.id:
+                                    if gbUser.objects.filter(email=email).exist():
+                                        return False
                                     cu.email = email
                             if fname: 
                                 cu.first_name = fname

@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ConnContext } from "../../connector";
 import { useAtom } from "jotai";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Select, SelectItem, Spacer, Button, Input } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Select, SelectItem, Spacer, Button, Input, } from "@nextui-org/react";
 import { TournamentList } from '../../components';
 import { signal } from '@preact/signals-react';
 
