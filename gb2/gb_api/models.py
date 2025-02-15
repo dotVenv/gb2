@@ -222,7 +222,6 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     
     name = models.CharField(max_length=15, blank=True, null=True, choices=game_options)
     mode = models.CharField(max_length=15,  blank=True, null=True, choices=mode_options)
-    
     specific = models.CharField(max_length=25, blank=True, null=True)
     desc = models.TextField()
     start = models.DateTimeField(auto_now_add=False, default=set_dates('start'))
@@ -427,7 +426,7 @@ class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
     matches = models.ManyToManyField('Match', related_name='all_matches', blank=True)
     rank_points = models.IntegerField(default=0) 
     csr = models.CharField(max_length=75, default='Low Tier 1', choices=rank_options)
-    previous_seasons = models.JSONField(default=prev_seasons)
+    previous_seasons = models.JSONField(default=prev_seasons, blank=True)
     
     
     def update_season(self, current_season):

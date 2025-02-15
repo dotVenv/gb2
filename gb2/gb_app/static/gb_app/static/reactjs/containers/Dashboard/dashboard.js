@@ -71,7 +71,7 @@ const Dashboard = () => {
                             </Card>
                             <Card className='h-[300px] bg-gray-50 shadow-2xl p-4 items-center'>
                              
-                                <RankingStepper rankPoints={userInfo.rankPoints} />
+                                <RankingStepper rankPoints={userInfo.rank_points} />
                             </Card>
                             </div>
                         </div>

@@ -18,12 +18,12 @@ const StickyOptions  = ({userInfo}) => {
                     <i className="fa-solid fa-message"></i>
                 </DockIcon>
             
-                <Badge color="warning" content={0} size='sm' isOneChar variant="flat">
+                <Badge color="warning" content={0} size='sm' isOneChar variant="faded">
                     <DockIcon>
                         <i className="fa-solid fa-comments-dollar"></i>
                     </DockIcon>
                 </Badge>
-                <Badge color={parseInt(userInfo.entries) >= 1 ?  "danger ":"warning"}  isOneChar content={userInfo.entries} size='sm' variant={parseInt(userInfo.entries) >= 1 ? "flat": ""}>
+                <Badge color="danger"  isOneChar content={userInfo.entries} size='sm' variant="faded">
                     <DockIcon onClick={(e) => { location.href ='#'}}>
                         <i className="fa-solid fa-hand-fist"></i>
                     </DockIcon>
