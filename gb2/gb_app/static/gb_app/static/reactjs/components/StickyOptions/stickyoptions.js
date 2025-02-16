@@ -15,19 +15,19 @@ const StickyOptions  = ({userInfo}) => {
                 </DockIcon>
                
                 <DockIcon>
-                    <i className="fa-solid fa-message"></i>
+                    <i className="fa-solid fa-message fa-lg"></i>
+                </DockIcon>    
+                <DockIcon>
+                    <Badge color="danger" showOutline={false} content={0} size='sm' placement='bottom-right' isOneChar variant="faded">
+                        <i className="fa-solid fa-comments-dollar fa-lg"></i>
+                    </Badge>
                 </DockIcon>
-            
-                <Badge color="warning" content={0} size='sm' isOneChar variant="faded">
-                    <DockIcon>
-                        <i className="fa-solid fa-comments-dollar"></i>
-                    </DockIcon>
-                </Badge>
-                <Badge color="danger"  isOneChar content={userInfo.entries} size='sm' variant="faded">
-                    <DockIcon onClick={(e) => { location.href ='#'}}>
-                        <i className="fa-solid fa-hand-fist"></i>
-                    </DockIcon>
-                </Badge>
+                <DockIcon onClick={(e) => { location.href ='#'}}>
+                    <Badge color={userInfo.entries >= 1 ? "success" : "danger"} showOutline={false} isOneChar content={userInfo.entries} size='sm' placment='bottom-right' variant="faded">
+                        <i className="fa-solid fa-hand-fist fa-lg"></i>
+                    </Badge>
+                </DockIcon>
+                
             </Dock>
         </>
     );
