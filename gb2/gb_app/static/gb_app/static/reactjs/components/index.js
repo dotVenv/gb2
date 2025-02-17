@@ -44,5 +44,6 @@ export { default as TournamentList } from './Tournaments/tournamenlist';
 
 //tournament
 export { default as HyperText } from './Magicui/hyper-text';
+export { AuroraText } from './Magicui/aurora-text';
 //experimental
 //export { default as BigBadge } from './PlayerBigBadge/playerbigbadge'; 

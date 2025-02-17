@@ -67,7 +67,8 @@ class TnHelper():
                     'registered_count': current_leaderboard.count(),
                     'top_3': None,
                     'host': str(val.hosted_by),
-                    'is_entered': bool(self.__check_current__(val.tournament_hash))
+                    'is_entered': bool(self.__check_current__(val.tournament_hash)),
+                    'last_disp': float(val.last_displacement)
                         
                 }
                 
@@ -93,7 +94,24 @@ class TnHelper():
                     for x in current_leaderboard.values().order_by('points')[:top_count]
                      
                     ]
-                 
+                
+              
+                
+                if filter == 'entry':
+                    for index, user in enumerate(new_tl['top_3']):
+                        if user['username'] == self.request.user.username:
+                            new_tl['user_position'] = index + 1
+                    gl = self.get_leaderboard(val)
+                    if gl:
+                        new_tl['stats'] = {'wins':gl.wins,
+                                           'losses': gl.losses,
+                                           'points': gl.points,
+                                           'matchmaking': gl.matchmaking,
+                                           }
+                    if gl.previous_opponent:
+                        new_tl['stats']['previous_opp'] = gl.previous_opponent.user.user.username
+                        
+                    
                 self.tournaments_list.append(new_tl)
               
             return True
@@ -101,19 +119,28 @@ class TnHelper():
         return False
     
     
-    def get_leaderboard(self):
+    def get_leaderboard(self, tourney=None):
         '''get the current leaderboard for the tournament id'''
         
-        tuid = self.request.POST.get('tuid')
-        if not tuid:
-            return False
-        
+        if not tourney:
+            tuid = self.request.POST.get('tuid')
+            if not tuid:
+                return False
+        else:
+            tobj = tourney
         try:
-            tobj = Tournament.objects.get(tournament_hash=tuid)
-            if tobj:
-                leaderboard = Leaderboard.objects.get(tournament=tobj)
+            if not tourney:
+                tobj = Tournament.objects.get(tournament_hash=tuid)
+                if tobj:
+                
+                    leaderboard = Leaderboard.objects.get(tournament=tobj)
+                    if leaderboard:
+                        return True
+            else:
+                leaderboard = Leaderboard.objects.get(tournament=tobj, player=self.cu_stats)
                 if leaderboard:
-                    return True
+                    return leaderboard
+
                 
         except dce.ObjectDoesNotExist:
             return False

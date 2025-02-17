@@ -3,11 +3,11 @@
 
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Layout from '../Layout/layout';
-import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner, Table, TableHeader, TableBody } from '@nextui-org/react';
+import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner, Table, TableHeader, TableBody, Button, Spacer } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
 import { signal } from '@preact/signals-react';
-import { HyperText } from '../../components';
+import { AuroraText, HyperText } from '../../components';
 
 const fetched = signal(0);
 
@@ -38,24 +38,50 @@ const Tournament = () => {
                         </Breadcrumbs>
                     </section>
                     <section className='h-full'>
-                        <div className='mt-4 py-4 col-9 mx-auto justify-center '>
-                            <Card className='w-25 h-25 float-start'>
+                        <div className='mt-4 py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1'>
+                            <Card className='w-full h-[275px] float-start'>
                                 <img src={cu.currentTourney.thumbnail} className='object-cover'/>
                             </Card>
                             <div>
-                                <HyperText className='jutsify-center align-center mx-auto font-bold' text={ "$"+cu.currentTourney.pool +" "+ cu.currentTourney.name + " " + "("+cu.currentTourney.specific +")"} />
-                                <h1 className="text-4xl font-semibold tracking-tighter md:text-5xl lg:text-7xl">
-                                    Ship <span className='justify-center align-center mx-auto bg-gradient-to-r from-pink-500 to-purple-800'>beautiful</span>
-                                </h1>
+                                <HyperText  className='text-center mx-auto' text={ "$"+cu.currentTourney.pool +" "+ cu.currentTourney.name + " " + "("+cu.currentTourney.specific +")"} />
+                                <h4 className="text-2xl font-semibold tracking-tighter md:text-2xl lg:text-5xl justify-center align-center mx-auto flex gap-2 mr-3">
+                                    Place {' '} <AuroraText>#{ cu.currentTourney.user_position }</AuroraText>
+                                </h4>
+                                <ul className='mx-auto items-center flex gap-1'>
+                                    <li className='justify-center mx-auto'> Games Played <b>{cu.currentTourney.stats.wins + cu.currentTourney.stats.losses}</b></li>
+                                    <li className='justify-center mx-auto'> Games Won <b>{cu.currentTourney.stats.wins} </b></li>
+                                    <li className='justify-center mx-auto'> Playing on: { userInfo.platform == 'PC' 
+                                                            ? <i className="fa-solid fa-computer"></i>
+                                                            : userInfo.platform == 'Xbox' 
+                                                                ? <i className='fa-solid fa-xbox'></i>
+                                                                : userInfo.platform = 'PSN'
+                                                                    ? <i className='fa-solid fa-playstation'></i>
+                                                                    : undefined }  </li>
+                                </ul>
+                                <Alert 
+                                    size='sm'
+                                    radiu='lg'
+                                    variant='faded'
+                                    className='col-8 justify-center align-center mx-auto' 
+                                    title={cu.currentTourney.user_position == 1 
+                                        ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100  + (cu.currentTourney.pool / (cu.currentTourney.last_disp / 100) * 3 / 100 ))
+                                        : cu.currentTourney.user_position == 2
+                                            ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100 )
+                                            : cu.currentTourney.user_position > 3 && cu.currentTourney.user_position <= 15 
+                                                ? 'You\'re TOP 15! Finish here to secure $'+ ((cu.currentTourney.pool / (cu.currentTourney.placement * 100)) * 100 / 13 )
+                                                : 'You\'re '+ (cu.currentTourney.user_position - 13) +'away from  top 15!' }
+                                    color={cu.currentTourney.user_position <= 3 
+                                            ? 'success' 
+                                            : cu.currentTourney.user_position > 3 && cu.currentTourney.user_position <= 15 
+                                                ? 'warning' 
+                                                : 'secondary'}
+                                    
+                                />
                             </div>
                         </div>
                         <div className='col-9 mx-auto justify-center '>
 
-                            <Table>
-                                <TableHeader></TableHeader>
-                                <TableBody></TableBody>
-                                
-                            </Table>
+                          
                         </div>
 
                         <br></br>
@@ -67,6 +93,17 @@ const Tournament = () => {
                         <span className='justify-center align-center mx-auto flex'>
                             <Spinner color="warning" className='text-black' label="Taking a while, but still Loading..." />
                         </span>
+                        <br></br>
+                        <Spacer></Spacer>
+                        <div className='justify-center align-center mx-auto flex' >
+                            <Button startContent={<i className='fa-solid fa-rotate-right fa-xl'></i>} 
+                                onPress={(e) => {window.location.reload()}}
+                                className='justify-center align-center mx-auto' 
+                                radius='lg' size='lg' variant='flat' color='primary'> Refresh me</Button>
+                        </div>
+                        <br></br>
+                        <Spacer></Spacer>
+                        <br></br>
                     </div>
             }
             </Layout>
