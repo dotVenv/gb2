@@ -33,11 +33,12 @@ class TnHelper():
         
         self.tournaments_list = []
         tl = None
-        if filter: #there is no filter
+        if filter != 'id': #there is no filter
             tl = Tournament.objects.all().order_by(filter)
             if filter == 'rating':
                 tl = tl[:5]
-                
+        elif filter == 'single':
+            tl = Tournament.objects.filter(tournament_hash=str(self.request.POST.get('tuid')))       
         self.__getuser__()
         if tl:
             for val in tl:
@@ -67,7 +68,9 @@ class TnHelper():
                 }
                 
                 
-                
+                top_count = 15
+                if filter == 'single':
+                    top_count = new_tl['registered_count']
                 try:
                     isLiked = TournamentLike.objects.get(user_id=self.request.user.id, tournament=val.tournament_hash)
                     new_tl['likedbyme'] = bool(isLiked.status)
@@ -83,7 +86,7 @@ class TnHelper():
                         'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{AccountPreference.objects.get(user_id=x["player_id"]).user.profile_pic}' 
                     }
                     
-                    for x in current_leaderboard.values().order_by('points')[:15]
+                    for x in current_leaderboard.values().order_by('points')[:top_count]
                      
                     ]
                  

@@ -16,8 +16,6 @@ const AllTournaments = () => {
     
     const cu = useContext(ConnContext);
     const [newFilter, setnewFilter] = useState('');
-
-    const [userInfo] = useAtom(cu.userAtom);
     const setT = async() => { await cu.setTournaments();}
 
     if (fetched.value == 0){

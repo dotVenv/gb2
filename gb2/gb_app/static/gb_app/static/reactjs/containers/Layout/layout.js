@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
                 <> 
                 <Spacer></Spacer>
                 <div className='sticky-bottom z-index-1 left-25 bottom-1 w-full flex align-center justify-center mx-auto '>
-                    {membershipModal ? undefined : <StickyOptions userInfo={userInfo} /> }
+                    {membershipModal ? undefined : <StickyOptions cu={cu} userInfo={userInfo} /> }
                     
                 </div>
                     <section className='mt-3 py-4'>

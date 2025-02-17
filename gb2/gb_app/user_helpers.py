@@ -86,7 +86,7 @@ class UserHelper():
             self.serialized['rank_points'] = int(self.stats.rank_points)
             self.serialized['active_entry'] = '#'
             if self.serialized['entries'] > 0:
-                self.serialized['active_entry'] = Leaderboard.objects.get(player=self.stats, is_active=True).id
+                self.serialized['active_entry'] = Leaderboard.objects.get(player=self.stats, is_active=True).tournament.tournament_hash
 
         return True
         

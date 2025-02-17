@@ -177,9 +177,6 @@ class APPViews(TemplateView):
             print('get tournament')
             return getres().res('200')
             
-        
-    
-
         context = {}
         return render(request, 'gb_app/templates/index.html', context)
     

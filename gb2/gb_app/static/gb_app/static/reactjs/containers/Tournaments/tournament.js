@@ -4,8 +4,9 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/layout';
 import { Breadcrumbs, BreadcrumbItem } from '@nextui-org/react';
-const Tournament = () => {
 
+
+const Tournament = () => {
     return (
         <>
             <Layout>
@@ -18,7 +19,7 @@ const Tournament = () => {
                         }}
                         separator="/">
                         <BreadcrumbItem key="dashboard" isCurrent>
-                            <span>Dashboard</span>
+                            <span>Tournament</span>
                         </BreadcrumbItem>
                     
                     </Breadcrumbs>

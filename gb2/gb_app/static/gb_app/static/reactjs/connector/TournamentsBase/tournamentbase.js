@@ -62,7 +62,7 @@ export default class TournamentBase{
         return res;
     }
 
-    async setTournament(tuid, status, poststep){
+    async setTournament(tuid, status, poststep, setInternal=null){
         let res = axios({
             url: '/tournaments',
             method: 'post',
@@ -73,6 +73,9 @@ export default class TournamentBase{
             }
         }).then(resp => {
             if (resp){
+                if (setInternal){
+                    this.currentTournamentAtom = atom(resp.data.message);
+                }
                 return resp.data.message;
             };
         }).catch(err => {
@@ -82,7 +85,9 @@ export default class TournamentBase{
         });
 
         return res;
-        
+    
     };
+
+
 
 };
