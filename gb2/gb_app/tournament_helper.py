@@ -222,7 +222,7 @@ class TnHelper():
                             if tournament.platforms.filter(name=self.cu_ap.platform.name).exists() or Leaderboard.objects.filter(tournament=tournament).count() >= tournament.register_limit:
                                 register_now = self.__add_current__(tournament)
                                 if register_now:
-                                    leaderboard = Leaderboard.objects.create(tournament=tournament, player=self.cu_stats, matchmaking='idle')
+                                    leaderboard = Leaderboard.objects.create(tournament=tournament, player=self.cu_stats, matchmaking='idle', is_active=True)
                                     if leaderboard:
                                         leaderboard.save()
                                         self.return_status = 'Successfully'

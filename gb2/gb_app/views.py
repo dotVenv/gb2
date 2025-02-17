@@ -169,6 +169,19 @@ class APPViews(TemplateView):
         context = {}
         return render(request, 'gb_app/templates/index.html', context)
     
+    @method_decorator(login_required)
+    def tournament(self, request):
+        '''current tournament view'''
+        
+        if request.method == 'POST':
+            print('get tournament')
+            return getres().res('200')
+            
+        
+    
+
+        context = {}
+        return render(request, 'gb_app/templates/index.html', context)
     
     
     @method_decorator(login_required)

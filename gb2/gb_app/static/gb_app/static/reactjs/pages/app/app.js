@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import { Dashboard, MyProfile, AllTournaments } from '../../containers/index';
+import { Dashboard, MyProfile, AllTournaments, Tournament } from '../../containers/index';
 import { ConnContext, Conn } from '../../connector/index';
 import { Preloader } from "../../components";
 
@@ -21,6 +21,7 @@ export default function App(){
                                 <Route path='' element={<Dashboard />}/>
                                 <Route path='/myprofile' element={<MyProfile />}/>
                                 <Route path='/tournaments' element={<AllTournaments />}/>
+                                <Route path='tournament' element={<Tournament />} />
                             </Routes>
                         </BrowserRouter>
                     </ConnContext.Provider>

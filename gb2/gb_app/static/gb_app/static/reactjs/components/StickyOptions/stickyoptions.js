@@ -22,7 +22,7 @@ const StickyOptions  = ({userInfo}) => {
                         <i className="fa-solid fa-comments-dollar fa-lg"></i>
                     </Badge>
                 </DockIcon>
-                <DockIcon onClick={(e) => { location.href ='#'}}>
+                <DockIcon onClick={(e) => { location.href = '/tournament' }}>
                     <Badge color={userInfo.entries >= 1 ? "success" : "danger"} showOutline={false} isOneChar content={userInfo.entries} size='sm' placment='bottom-right' variant="faded">
                         <i className="fa-solid fa-hand-fist fa-lg"></i>
                     </Badge>

@@ -11,6 +11,7 @@ urlpatterns = [
     path('all-memberships', appviews.all_memberships, name='all_memberships'),
     path('myprofile', appviews.myprofile,  name='my_profile'),
     path('tournaments', appviews.tournaments,  name='all_tournaments'),
+    path('tournament', appviews.tournament, name='tournament'),
     
     #steupsteps
     path('setup-steps', appviews.setup_steps , name='setup_steps'), 

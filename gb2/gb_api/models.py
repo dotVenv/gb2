@@ -482,7 +482,7 @@ class Leaderboard(ExportModelOperationsMixin('Leaderboard'), models.Model):
     
     tournament = models.ForeignKey('Tournament', to_field='tournament_hash', on_delete=models.PROTECT,  related_name='current_tournament_hash', blank=True)
     player = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='current_tournament_player', blank=True, null=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     wins = models.IntegerField(default=0)
     losses = models.IntegerField(default=0)

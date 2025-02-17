@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.conf import settings
 
 #app imports
-from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet, PlayerStat
+from gb_api.models import gbUser, EmailVerification, AccountPreference, Platform, Membership, Wallet, PlayerStat, Leaderboard
 from gb_api.email_helpers import EmailHelper
 from .mfa_helper import MFAHelper
 import datetime
@@ -84,9 +84,9 @@ class UserHelper():
             self.serialized['favorites'] = [str(self.stats.fav_platform), str(self.stats.fav_tournament)]
             self.serialized['social_count'] = [int(self.cu_ap.followers.count()), int(self.cu_ap.following.count())]
             self.serialized['rank_points'] = int(self.stats.rank_points)
-            
-    
-        
+            self.serialized['active_entry'] = '#'
+            if self.serialized['entries'] > 0:
+                self.serialized['active_entry'] = Leaderboard.objects.get(player=self.stats, is_active=True).id
 
         return True
         
