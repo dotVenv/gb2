@@ -9,6 +9,9 @@ import { useAtom } from 'jotai';
 import { signal } from "@preact/signals-react";
 import { motion } from "framer-motion";
 
+var checkWindowLoc = window.location.pathname.split('/');
+const fetchedTourney = signal(0);
+
 const toastData = signal({
     toastType: '',
     desc: '',
@@ -23,7 +26,7 @@ const Layout = ({ children }) => {
     const accountProgress = userInfo.setup_step;   
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
- 
+
 
  
     return(

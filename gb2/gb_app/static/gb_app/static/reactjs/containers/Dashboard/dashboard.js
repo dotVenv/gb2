@@ -23,7 +23,7 @@ const Dashboard = () => {
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
     if (fetched.value <= 0){
-        cu.PopularTournaments();
+        cu.getTournaments('get_all');
         fetched.value ++;
     };
     

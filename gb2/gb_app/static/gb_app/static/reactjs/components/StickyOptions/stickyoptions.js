@@ -10,33 +10,13 @@ const toastData = signal({
     desc :'',
 });
 
+
 const StickyOptions  = ({cu, userInfo}) => {
 
     const [isTourneyOpen, setisTourneyOpen] = useState(false);
 
     const [newToast, setNewToast] = useState(false);
-
-    const viewTournament = async() => {
-
-        let res = await cu.setTournament(userInfo.active_entry, null, 'single', true);
-        if (res){
-            if (res.status == 'successful'){
-                
-                location.href = '/tournament';
-            }else{
-                toastData.value.desc = 'Unable to view tournament';
-                toastData.value.toastType = 'error';
-                setNewToast(true);
-
-            };
-        }else{
-
-            toastData.value.desc = 'Unable to view tournament';
-            toastData.value.toastType = 'error';
-            setNewToast(true);
-        }
-
-    };
+   
     return(
         <>
             <Dock direction="middle" className='fixed   justify-center align-center mx-auto left-0 right-0 bottom-10 p-2' >
@@ -52,8 +32,8 @@ const StickyOptions  = ({cu, userInfo}) => {
                         <i className="fa-solid fa-comments-dollar fa-lg"></i>
                     </Badge>
                 </DockIcon>
-                <DockIcon onClick={(e) => { viewTournament(); }}>
-                    <Badge color={userInfo.entries >= 1 ? "success" : "danger"} showOutline={false} isOneChar content={userInfo.entries} size='sm' placment='bottom-right' variant="faded">
+                <DockIcon onClick={(e) => { location.href = '/tournament'}}>
+                    <Badge color={userInfo.entries >= 1 ? "success" : "danger"} showOutline={false} isOneChar content={userInfo.entries >= 1 ? 1 : 0 } size='sm' placment='bottom-right' variant="faded">
                         <i className="fa-solid fa-hand-fist fa-lg"></i>
                     </Badge>
                 </DockIcon>

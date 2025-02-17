@@ -16,7 +16,7 @@ class TnHelper():
     
         
         
-    def get_tournaments(self, filter='id'):
+    def get_tournaments(self, filter=None):
         '''get tournaments, if a filter is set, use the filter'''
         
         aws_thumbnail_url = 'https://gbthumbnails.s3.us-east-2.amazonaws.com'
@@ -30,15 +30,19 @@ class TnHelper():
             'MARVEL_STRICT': f'{aws_thumbnail_url}/marvels_restricted.png',
             'MARVEL_UNSTRICT': f'{aws_thumbnail_url}/marvels_unrestricted.png',
         }
-        
+    
         self.tournaments_list = []
         tl = None
-        if filter != 'id': #there is no filter
+        if filter is None:
+            filter = str(self.request.POST.get('filter'))
+        if filter != 'entry': 
             tl = Tournament.objects.all().order_by(filter)
             if filter == 'rating':
                 tl = tl[:5]
-        elif filter == 'single':
-            tl = Tournament.objects.filter(tournament_hash=str(self.request.POST.get('tuid')))       
+        else:
+            tl = Tournament.objects.filter(tournament_hash=str(self.request.POST.get('tuid')))
+           
+            
         self.__getuser__()
         if tl:
             for val in tl:
@@ -69,7 +73,7 @@ class TnHelper():
                 
                 
                 top_count = 15
-                if filter == 'single':
+                if filter == 'entry':
                     top_count = new_tl['registered_count']
                 try:
                     isLiked = TournamentLike.objects.get(user_id=self.request.user.id, tournament=val.tournament_hash)
@@ -91,6 +95,7 @@ class TnHelper():
                     ]
                  
                 self.tournaments_list.append(new_tl)
+              
             return True
         
         return False
@@ -104,13 +109,11 @@ class TnHelper():
             return False
         
         try:
-            print('checking tournaments')
             tobj = Tournament.objects.get(tournament_hash=tuid)
             if tobj:
-                print('tournament valid')
                 leaderboard = Leaderboard.objects.get(tournament=tobj)
                 if leaderboard:
-                    print('leader board caught')
+                    return True
                 
         except dce.ObjectDoesNotExist:
             return False

@@ -16,10 +16,10 @@ const AllTournaments = () => {
     
     const cu = useContext(ConnContext);
     const [newFilter, setnewFilter] = useState('');
-    const setT = async() => { await cu.setTournaments();}
+    const getT = async() => { await cu.getTournaments('get_all', 'id');}
 
     if (fetched.value == 0){
-        setT();
+        getT();
         fetched.value ++;
     };
     
@@ -44,7 +44,7 @@ const AllTournaments = () => {
             <section className='h-full'>
                 <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
                     <div className='flex'>
-                        <Input className='col-4 bg-zinc-700' radius='lg' size='lg'  value={newFilter} onValueChange={(value) => {setnewFilter(value)}}
+                        <Input className='col-4 bg-zinc-700 rounded-border rounded-large' radius='lg' size='lg'  value={newFilter} onValueChange={(value) => {setnewFilter(value)}}
                             endContent={<Button size='sm' color='default' isIconOnly radius='lg'><i className='fa-solid fa-search'></i></Button>} 
                             placeholder='Search tournaments' />
                             <Spacer></Spacer>

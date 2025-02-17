@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
 import TournamentBase from "../TournamentsBase/tournamentbase";
 
+var checkWindowLoc = window.location.pathname.split('/');
 
 export default class CurrentUser extends TournamentBase{
 
@@ -12,12 +13,13 @@ export default class CurrentUser extends TournamentBase{
         super(props);
         this.setAtoms();
 
-
     };
 
 
    
     setAtoms(){
+        const viewTournament = async(eid) => {await this.setTournament(eid, 'entry', 'get_all')};
+        const viewTickets = async() => {await this.getTickets()};
         this.userAtom = atom(async () => {
               this.uid = document.getElementById('conn0').textContent;
                 let res = await axios({
@@ -27,10 +29,17 @@ export default class CurrentUser extends TournamentBase{
                         headers: { 'X-CSRFTOKEN': GETCSRFToken(), 'Content-Type': 'multipart/form-data'}
                     }).then(resp => {
                         resp.data.message.setup_step < 4 ? this.setupSteps('email') : undefined;
+                        if (checkWindowLoc[1] == 'tournament'){ 
+                            viewTournament(resp.data.message.active_entry);   
+                        };
+                        if (checkWindowLoc[1] == 'myprofile'){ 
+                            viewTickets();   
+                        };
                         return resp.data.message;
                     }).catch(err => {
                         return err.response.data.message;
                     });
+
                     return res;
             });
       
@@ -154,11 +163,4 @@ export default class CurrentUser extends TournamentBase{
         this.b32 = data[0];
     };
 
-    async setTournaments(){
-        await this.getTournaments('get_all');
-    };
-
-    async PopularTournaments(){
-        await this.getTournaments('rating');
-    }
 };

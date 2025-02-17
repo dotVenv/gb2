@@ -14,12 +14,10 @@ const MyProfile = () => {
 
     const cu = useContext(ConnContext);
     const [userInfo] = useAtom(cu.userAtom);
-    if (fetched.value == 0){
-        cu.getTickets();
-    
-        fetched.value ++;
-    };
-    
+    const [ticketsLoaded, setTicketsLoaded ]= useState(false);
+
+    useEffect(() => {cu.currentTickets == undefined ? setTicketsLoaded(false) : setTicketsLoaded(true)}, [cu.currentTickets])
+   
 
 
     return(
