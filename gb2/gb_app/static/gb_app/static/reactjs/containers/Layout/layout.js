@@ -27,11 +27,6 @@ const Layout = ({ children }) => {
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
 
-
-    //start/continue matchmaking
-    if (userInfo.mm_status == 'matchmaking'){
-        setInterval(cu.matchmakingSearch, 1000);
-    };
     
  
     return(

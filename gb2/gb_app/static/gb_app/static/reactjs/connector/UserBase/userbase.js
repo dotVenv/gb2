@@ -4,6 +4,7 @@ import { atom } from "jotai";
 import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
 import TournamentBase from "../TournamentsBase/tournamentbase";
+import MatchmakingBase from '../MatchmakingBase/matchmakingbase';
 
 var checkWindowLoc = window.location.pathname.split('/');
 
@@ -31,10 +32,13 @@ export default class CurrentUser extends TournamentBase{
                         resp.data.message.setup_step < 4 ? this.setupSteps('email') : undefined;
                         if (checkWindowLoc[1] == 'tournament'){ 
                             viewTournament(resp.data.message.active_entry);   
+                            
                         };
                         if (checkWindowLoc[1] == 'myprofile'){ 
                             viewTickets();   
                         };
+                       resp.data.message.mm_status == 'matchmaking' ? setInterval(MatchmakingBase(this.uid, resp.data.message.active_entry).matchmakingSearch, 1000) : undefined;
+                       
                         return resp.data.message;
                     }).catch(err => {
                         return err.response.data.message;
