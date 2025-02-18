@@ -14,6 +14,8 @@ from django_hosts.resolvers import reverse
 from gb_api.models import Membership, Announc
 from .ticket_helper import SupportTicketer
 from .tournament_helper import TnHelper
+from .matchmaking_helper import MatchmakingHelper
+
 
 from cryptography.fernet import Fernet
         
@@ -104,7 +106,6 @@ class APPViews(TemplateView):
     def user_defaults(self,request):
         '''fetch the details depending on the query passed in'''
 
-        
         cu = UserHelper(request)
     
         if request.method == 'POST':
@@ -173,9 +174,17 @@ class APPViews(TemplateView):
     def tournament(self, request):
         '''current tournament view'''
         
+        cu = UserHelper(request)
+        matchmaking = MatchmakingHelper(request)
         if request.method == 'POST':
-            print('get tournament')
-            return getres().res('200')
+            poststep = str(request.POST.get('poststep'))
+            if poststep:
+                match poststep:
+                    case 'set_matchmaking':
+                        if matchmaking.set_matchmaking():
+                            return getres().res('200', new_msg={'status': 'successful', 'matchmaking_status': matchmaking.matchmaking_status})
+
+            return getres().res('401', new_msg={'status': 'failed'})
             
         context = {}
         return render(request, 'gb_app/templates/index.html', context)
@@ -186,6 +195,8 @@ class APPViews(TemplateView):
         '''return all memberships on get and save memberships on post'''
         
         if request.method == 'POST':
+            if not cu.is_valid_req():
+                return getres().res('401', new_msg={'status': str('failed')})
             return getres().res('200')
     
         

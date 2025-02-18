@@ -7,17 +7,44 @@ import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner,Button, Spacer
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
 import { signal } from '@preact/signals-react';
-import { AuroraText, HyperText } from '../../components';
+import { AuroraText, CustomToast, HyperText } from '../../components';
 
 const fetched = signal(0);
 
+
+const toastData = signal({
+    toastType: '',
+    desc: '',
+})
 const Tournament = () => {
 
     const cu = useContext(ConnContext);
     const [ userInfo ] = useAtom(cu.userAtom);
     const [newToast, setNewToast] = useState(false);
     const [isLoaded, setisLoaded] = useState(false);
-    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : setisLoaded(true)}, [cu.currentTourney])
+
+    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : setisLoaded(true)}, [cu.currentTourney]);
+
+    const handleMatchmakingSwitch = async() => {
+        let res = await cu.setMatchmaking('set_matchmaking');
+        if (res){
+            if(res.status == 'successful'){
+                cu.currentTourney.stats.matchmaking = res.matchmaking_status;
+                toastData.value.toastType = 'successful';
+                toastData.value.desc = 'Matchmaking status changed';
+                setNewToast(true);
+            }else{
+                toastData.value.toastType = 'error';
+                toastData.value.desc = 'Unable to update matchmaking';
+                setNewToast(true);
+            };
+        }else{
+            toastData.value.toastType = 'error';
+            toastData.value.desc = 'Unable to update matchmaking';
+            setNewToast(true);
+        };
+    };
+
     return (
         <>
             <Layout>
@@ -79,13 +106,14 @@ const Tournament = () => {
                                 />
                                 <Spacer></Spacer>
                                 <Switch
-                                    className='justify-center align-center mx-auto flex' 
+                                    className='justify-center align-center mx-auto flex text-black' 
                                     defaultSelected={cu.currentTourney.stats.matchmaking == 'idle' ? false : true }
                                     color="secondary"
                                     size="lg"
+                                    onValueChange={(e) => { handleMatchmakingSwitch();}}
                                     thumbIcon={({isSelected, className}) =>
-                                      isSelected ? <SunIcon className={className} /> : <MoonIcon className={className} />
-                                    }> Matchmaking 
+                                      isSelected ? <i className="fa-solid fa-stop"></i> : <i className="fa-solid fa-play"></i>
+                                    }> <span className='text-black text-tiny font-semibold'>Matchmaking : { cu.currentTourney.stats.matchmaking }</span>
                                 </Switch>
                             </div>
                         </div>
@@ -132,6 +160,7 @@ const Tournament = () => {
                         <br></br>
                     </div>
             }
+            { newToast ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined } 
             </Layout>
         </>
     );

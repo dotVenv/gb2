@@ -67,12 +67,38 @@ export default class TournamentBase{
                 return resp.data.message;
             };
         }).catch(err => {
-            if (err.reponse){
-                return err.reponse.data.message;
+            if (err.response){
+                return err.response.data.message;
             };
         });
         
         return res;
+    };
+
+
+    async setMatchmaking(poststep){
+
+        let res = await axios({
+            
+            url: location.href,
+            method: 'post',
+            data: {uid: this.uid, poststep: poststep},
+            headers: {
+                'X-CSRFTOKEN': GETCSRFToken(),
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then(resp => {
+            if (resp){
+                return resp.data.message;
+            };
+        }).then(err => {
+            if (err.response.data.message){
+                return err.response.data.message;
+            };
+        });
+
+        return res;
+        
     };
 
 

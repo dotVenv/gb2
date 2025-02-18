@@ -362,3 +362,10 @@ class UserHelper():
         if mfa.is_valid:
             return True
         return False
+    
+    def _setallu(self):
+        self.__get_user__()
+        if self.cu:
+            return True 
+        return False 
+    
