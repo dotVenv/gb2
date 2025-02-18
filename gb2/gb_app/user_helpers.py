@@ -86,8 +86,18 @@ class UserHelper():
             self.serialized['rank_points'] = int(self.stats.rank_points)
             self.serialized['active_entry'] = '#'
             if self.serialized['entries'] > 0:
-                self.serialized['active_entry'] = Leaderboard.objects.get(player=self.stats, is_active=True).tournament.tournament_hash
-
+                try:
+                    cl = Leaderboard.objects.get(player=self.stats, is_active=True)
+                    self.serialized['active_entry'] = cl.tournament.tournament_hash
+                    self.serialized['mm_status'] = cl.matchmaking
+                    
+                except dce.ObjectDoesNotExist:
+                    self.serialized['entries'] = 0
+                except dce.MultipleObjectsReturned:
+                    self.serialized['entries'] = 0
+                    raise Exception('2 tournaments set to active.')
+                
+                
         return True
         
     def setupchecks(self):

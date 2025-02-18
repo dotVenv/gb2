@@ -63,7 +63,7 @@ const TournamentList = ({cu, newFilter, setnewFilter}) => {
                             Custom
                         </b>
                         {'  '}
-                        Events 
+                        Events - <i className='text-tiny text-black'> (Coming Soon)</i>
                     </h4>
                     <ScrollShadow size={30} hideScrollBar>
                         <div className='flex gap-3 w-full overflow-x-hidden'>

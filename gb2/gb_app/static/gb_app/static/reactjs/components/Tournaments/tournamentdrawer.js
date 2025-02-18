@@ -44,7 +44,7 @@ const TournamentDrawer = ({isOpen, setisOpen, tournamentInfo, isLive}) => {
 
   const [hasLiked, sethasLiked] = useState(tournamentInfo.likedbyme);
   const [newToastAlert,setNewToastAlert] = useState();
-  const [RegisterDisabled, setRegisterDisabled] = useState(false);
+  const [RegisterDisabled, setRegisterDisabled] = useState(userInfo.entries > 0 ? userInfo.active_entry == tournamentInfo.hash ? false : true : false);
 
 
   const handleLiked = async() => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem, User, Button, Badge } from "@nextui-org/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Spacer, Button, Badge, Card } from "@nextui-org/react";
 
 
 
@@ -9,7 +9,7 @@ const NotiDropdown = () => {
         <>
              <Dropdown>
                    
-                <Badge color="danger" content={5}  shape="circle">
+                <Badge color="danger" showOutline={false} content={1}  shape="circle" >
                 <DropdownTrigger>
                     <Button radius='full' size='sm' isIconOnly aria-label="Notifications" color="default">
                         <svg className="size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -20,21 +20,25 @@ const NotiDropdown = () => {
                     
                 </Badge>
                 
-                <DropdownMenu aria-label="Example with disabled actions" >
-                    <DropdownItem key="new" className='text-white'>
-                        <Badge color="primary" size='sm' variant='flat' content={<i className="fa-regular fa-bell"></i>} placement="bottom-left">
-                        <User
-                            avatarProps={{
-                                src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                            }}
-                            description="Sent you a new friend request"
-                            name="Jane Doe"
-                            />
-                        </Badge>
-                        <br></br>
-                        <i className='text-tiny text-gray-100'> 5 minutes ago</i>
+                <DropdownMenu aria-label="User Notifications" >
+                    <DropdownItem key="new" className='text-white'
+                        title={'Prize Claimed'}
+                        description={
+                           <span className='grid grid-cols-1 space-y-0 gap-y-0'>
+                                <p>You have claimed a new prize</p>
+                               
+                                <p className='text-tiny '> 2 minutes ago</p>
+                            </span>
+                           
+                        }>
+                            
+                        <br></br> 
                     </DropdownItem>
-                    <DropdownItem key="copy" className='text-white'></DropdownItem>
+                  
+                    
+                    <DropdownItem key="delete" className="text-danger border-rounded rounded-border rounded-large bg-red-300 mt-4" color="danger" >
+                        Clear Notifications
+                    </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
                    

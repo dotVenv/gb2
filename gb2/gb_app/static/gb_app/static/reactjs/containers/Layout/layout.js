@@ -28,10 +28,15 @@ const Layout = ({ children }) => {
     const [newToastAlert, setNewToastAlert] = useState();
 
 
+    //start/continue matchmaking
+    if (userInfo.mm_status == 'matchmaking'){
+        setInterval(cu.matchmakingSearch, 1000);
+    };
+    
  
     return(
         <>  
-            
+         
             
             <CustomSidebar userInfo={userInfo} />
             {cu.newAnnouncment.toLowerCase() !== 'no announcment'
