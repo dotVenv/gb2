@@ -1711,6 +1711,50 @@ video {
   height: 20;
 }
 
+.h-\[20vh\] {
+  height: 20vh;
+}
+
+.h-\[40vh\] {
+  height: 40vh;
+}
+
+.h-\[70vh\] {
+  height: 70vh;
+}
+
+.h-\[75vh\] {
+  height: 75vh;
+}
+
+.h-\[70\] {
+  height: 70;
+}
+
+.h-\[30vh\] {
+  height: 30vh;
+}
+
+.h-\[75h\] {
+  height: 75h;
+}
+
+.h-\[30\] {
+  height: 30;
+}
+
+.h-\[50\] {
+  height: 50;
+}
+
+.h-\[50vh\] {
+  height: 50vh;
+}
+
+.h-\[65vh\] {
+  height: 65vh;
+}
+
 .max-h-\[20rem\] {
   max-height: 20rem;
 }
@@ -6222,6 +6266,11 @@ video {
 .text-yellow-900 {
   --tw-text-opacity: 1;
   color: rgb(49 33 7 / var(--tw-text-opacity));
+}
+
+.text-default-800 {
+  --tw-text-opacity: 1;
+  color: hsl(var(--nextui-default-800) / var(--nextui-default-800-opacity, var(--tw-text-opacity)));
 }
 
 .underline {

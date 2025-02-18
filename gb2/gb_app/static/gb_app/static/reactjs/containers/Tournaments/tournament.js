@@ -6,17 +6,14 @@ import Layout from '../Layout/layout';
 import { Breadcrumbs, 
         BreadcrumbItem, 
         Alert, 
-        Image, 
+        Chip, 
         Card, 
         Spinner,
         Button, 
         Spacer, 
-        Table, 
-        TableHeader, 
-        TableColumn, 
-        TableBody, 
-        TableRow, 
-        TableCell, 
+        ScrollShadow,
+        Accordion, 
+        AccordionItem,
         Switch,
         User } from '@nextui-org/react';
 import { useAtom } from 'jotai';
@@ -25,7 +22,8 @@ import { signal } from '@preact/signals-react';
 import { AuroraText, CompCard, CustomToast, HyperText, TourneyTable } from '../../components';
 
 const fetched = signal(0);
-
+const tournament_start = signal();
+const tournament_end = signal();
 
 const toastData = signal({
     toastType: '',
@@ -39,7 +37,34 @@ const Tournament = () => {
     const [isLoaded, setisLoaded] = useState(false);
     const  [isUpdated, setIsUpdated] = useState();
 
-    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : setisLoaded(true)}, [cu.currentTourney]);
+    const [isLive, setisLive] = useState(false);
+
+
+    const handleLoader = () => {
+        var current_date = new Date();
+        var hours = current_date.getHours();
+        var minutes = current_date.getMinutes();
+        var seconds = current_date.getSeconds();
+        var current_time = hours + ':' + minutes + ':' + seconds;
+        current_time = current_time.replace(':', '');
+        
+        
+        const checkLive = () => {
+            if ( parseInt(current_time) >= parseInt(tournament_start.value) && parseInt(current_time) <= parseInt(tournament_end.value)){
+                return true;
+            }else if( parseInt(current_time) >= parseInt('1730:00') && parseInt(current_time) < parseInt('18:00')){
+                return 'soon'
+            }else{
+                return false;
+            }
+        };
+        tournament_start.value = new Date(cu.currentTourney.start).toISOString().slice(11,19).replace(':', '');
+        tournament_end.value =  new Date(cu.currentTourney.end).toISOString().slice(11,19).replace(':', '');
+        setisLive(checkLive());
+        setisLoaded(true);
+    };
+
+    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : handleLoader();}, [cu.currentTourney]);
 
     const handleMatchmakingSwitch = async() => {
         let res = await cu.setMatchmaking('set_matchmaking',cu.currentTourney.hash);
@@ -67,6 +92,7 @@ const Tournament = () => {
         };
     };
 
+    
     return (
         <>
             <Layout>
@@ -87,6 +113,17 @@ const Tournament = () => {
                         </Breadcrumbs>
                     </section>
                     <section className='h-full'>
+                        <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
+                            <Chip variant='dot' color={isLive ? 'danger': 'warning'} className='text-black text-tiny'>{isLive ? 'This tournament is Live!' : 'This tournament has not started, or has ended'} </Chip>
+                            <Spacer></Spacer>
+                            <p className="text-large text-default-400">
+
+                                {new Date(cu.currentTourney.start).toDateString()} {'  '}
+                                {new Date(cu.currentTourney.start).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')}
+                                {' '}-{' '} 
+                                {new Date(cu.currentTourney.end).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')
+                            }</p>
+                        </div>
                         <div className='mt-4 py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1 gap-2'>
                             <Card className='w-full h-[275px] float-start'>
                                 <img src={cu.currentTourney.thumbnail} className='object-cover'/>
@@ -152,11 +189,31 @@ const Tournament = () => {
                                 </Switch>
                             </div>
                         </div>
-                        <div className='col-9 mx-auto grid sm:grid-cols-1 lg:grid-cols-2'>
+                        <div className='col-9 mx-auto grid sm:grid-cols-1 lg:grid-cols-2 h-[40vh]'>
                                 
-                            <div className='w-full h-full'>
-                                <TourneyTable allUsers={cu.currentTourney.top_3} />
+                            <div className='w-full'>
+                                    <TourneyTable allUsers={cu.currentTourney.top_3} />
+                               
                             </div>
+                            <ScrollShadow size={20}  >
+                                <Accordion className='bg-dark h-[65vh] overflow-y-hidden col-10 rounded-border rounded-large border-rounded justify-center align-center mx-auto'>
+                                { cu.currentTourney.rules.map((key, index) => {
+                                    return (
+                                    
+                                        <AccordionItem
+                                        key={index}
+                                        aria-label={key.id}
+                                        subtitle="Press to expand"
+                                        title={key.id}
+                                        >
+                                        
+                                            <i className='text-tiny text-white'>{key.value}</i>
+                                        </AccordionItem>
+                                    )
+                                    
+                                })}
+                                </Accordion>
+                            </ScrollShadow>
                             
                         </div>
                         <br></br>
