@@ -37,29 +37,35 @@ class EmailHelper():
         return new_code
 
     
-    def verify_account(self, test=False, request=None):
+    def verify_account(self, test=False, request=None, newsignup=False):
         '''send the verify account email to the user'''
         
         self.email_data['subject'] = 'Gamers-Bounty - Verify your account!'
         
         email_data = None
         if not test:
-            check_email = EmailVerification.objects.filter(user_id=request.user.id)
-            if check_email.exists():
-                self.email_data['verification_code'] = self.__generate_email_code()
-                tnow = timezone.now()
-                self.temp_time  = datetime.datetime.strftime(tnow  + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC')
-                check_email.update(code=self.email_data['verification_code'], created_at=tnow, attempts=0, expired=False)
-              
-        
-            else:
-                try:
+            check_email = None
+            if newsignup is False:
+                check_email = EmailVerification.objects.filter(user_id=request.user.id)
+            try:
+                if check_email.exists():
+                    self.email_data['verification_code'] = self.__generate_email_code()
+                    tnow = timezone.now()
+                    self.temp_time  = datetime.datetime.strftime(tnow  + datetime.timedelta(minutes=10),'%Y-%m-%d %H:%M:%S:%Z').replace(':UTC', ' UTC')
+                    check_email.update(code=self.email_data['verification_code'], created_at=tnow, attempts=0, expired=False)
+                    
+                else:
                     self.email_data['verification_code'] = self.__generate_email_code()
                     email_data = EmailVerification.objects.create(user_id=request.user.id, code=self.email_data['verification_code'])
                     if email_data:
                         email_data.save()
-                except dce.RequestAborted:
-                    return 
+            except AttributeError:
+                self.email_data['verification_code'] = self.__generate_email_code()
+                email_data = EmailVerification.objects.create(user_id=request.id, code=self.email_data['verification_code'])
+                if email_data:
+                    email_data.save()
+              
+              
         else:
             self.email_data['verification_code'] = self.__generate_email_code()
         

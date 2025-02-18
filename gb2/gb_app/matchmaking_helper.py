@@ -34,3 +34,18 @@ class MatchmakingHelper(TnHelper):
         
         return False
     
+    def mm_search(self):
+        '''start searching for another use'''
+        
+        try:
+            leaderboard = self.get_leaderboard(matchmaking=True)
+            if leaderboard:
+                print(leaderboard)
+                
+            else:
+                print('no leaderboard')
+        except dce.ObjectDoesNotExist:
+            return False
+        except dce.RequestAborted:
+            return False
+        return True

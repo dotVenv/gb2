@@ -43,6 +43,7 @@ class UserHelper():
         '''get the user data to return to the view'''
         
         self.cu_ap = None
+        self.stats = None
         try:
             self.cu = gbUser.objects.get(id=self.uid)
             self.cu_ap = AccountPreference.objects.get(user=self.cu)
@@ -235,7 +236,7 @@ class UserHelper():
                 fname = str(self.request.POST.get('userInput[firstname]'))
                 lname = str(self.request.POST.get('userInput[lastname]'))
                 state = str(self.request.POST.get('userInput[userstate]'))
-                consent = str(self.request.POST.get('userInput[consent_verif]'))
+                consent = bool(self.request.POST.get('userInput[consent_verif]'))
                 profile_pic = self.request.FILES.get('userInput[profilepic]')
                 
                 cu = gbUser.objects.get(id=self.request.user.id)
@@ -248,6 +249,7 @@ class UserHelper():
                     cu.first_name = fname
                     cu.last_name = lname
                     cu.state = state
+                    cu.age_consent = consent
                     cu.save()
                     self.setup_data = {'step': 'passed'}
                     return True

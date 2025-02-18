@@ -101,9 +101,9 @@ class Current_Session():
                 new_user.save()
                 #send verification email here                
                 new_email = email_helpers.EmailHelper()
-                new_email.email_data['recipient'] = str(self.request.user.email)
-                new_email.email_data['username'] = str(self.request.user.username)
-                new_email.verify_account(request=self.request)     
+                new_email.email_data['recipient'] = str(new_user.email)
+                new_email.email_data['username'] = str(new_user.username)
+                new_email.verify_account(request=new_user, newsignup=True)     
                 
                 
                 return True

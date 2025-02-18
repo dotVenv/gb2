@@ -119,7 +119,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
             console.log('response returned');
             if (signup_reponse[0] == 'success'){
                 setsignupComplete(signup_reponse[1]);
-                //window.location.href = 'http://gamers-bounty-dev.com:8000';
+                location.reload();
                 
             }else if (signup_reponse[0] == 'failed'){
                 setErrors(signup_reponse[1]);
@@ -183,6 +183,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             errorMessage="Please enter a valid email"
                             placeholder="Enter your email"
                             variant="bordered"
+                            className='text-white'
                             color={invalidEmail ? "danger" : undefined }
                             isInvalid={invalidEmail}
                             value={emailValue}
@@ -196,6 +197,8 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             label="Username"
                             placeholder="Enter your username"
                             value={unameValue}
+
+                            className='text-white'
                             onValueChange={setunameValue}
                             variant="bordered"
                             validate={(value) => {
@@ -216,6 +219,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             placeholder="Enter your password"
                             type="password"
                             variant="bordered"
+                            className='text-white'
                             value={passwordValue}
                             onValueChange={setpasswordValue}
                             errorMessage={getPasswordError(passwordValue)}
@@ -232,6 +236,7 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
                             placeholder="Repeat your password"
                             type="password"
                             variant="bordered"
+                            className='text-white'
                             value={rpasswordValue}
                             onValueChange={setrpasswordValue}
                             validate={(value) => {

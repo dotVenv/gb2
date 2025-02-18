@@ -205,16 +205,22 @@ class TnHelper():
     
     def __getuser__(self):
         '''get the current user'''
+        self.cu_ap = None
+        self.cu_stats = None
         
-        self.cu_ap = AccountPreference.objects.get(user_id=self.request.user.id)
-        if self.cu_ap:
-            self.cu_stats = PlayerStat.objects.get(user=self.cu_ap)
+        try:
+            self.cu_ap = AccountPreference.objects.get(user_id=self.request.user.id)
+            if self.cu_ap:
+                self.cu_stats = PlayerStat.objects.get(user=self.cu_ap)
+        except dce.ObjectDoesNotExist:
+            return False
             
     def __check_current__(self, tuid):
         '''check if user has current tournament in entries'''
         
-        if self.cu_ap.entries.filter(tournament_hash=tuid).exists():
-            return True
+        if self.cu_ap is not None:
+            if self.cu_ap.entries.filter(tournament_hash=tuid).exists():
+                return True
         return False
 
     def __remove_current__(self, tobj):

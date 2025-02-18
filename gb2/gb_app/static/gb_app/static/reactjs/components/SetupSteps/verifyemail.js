@@ -35,11 +35,16 @@ const VerifyEmailAlert = ({cu}) => {
         }else{
             let res = await cu.submitSetup('email-submit', otpInput);
             if (res){
+                if (res.status == 'successful'){
+                    toastData.value.toastType = 'successful';
+                    toastData.value.toastDesc = 'Email verified';
+
+                    settoastAlert(toastData.value.toastDesc);
+                }else{
                 toastData.value.toastType = 'error';
                 toastData.value.toastDesc = 'Invalid verification code';
-
                 settoastAlert(toastData.value.toastDesc);
-                console.log(toastData.value.toastDesc );
+                }  ;
                 
             }else{
                 toastData.value.toastType = 'error';

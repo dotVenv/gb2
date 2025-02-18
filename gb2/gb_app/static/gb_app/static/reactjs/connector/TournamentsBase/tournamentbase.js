@@ -4,11 +4,15 @@ import { signal } from "@preact/signals-react";
 import { atom } from "jotai";
 import axios from 'axios';
 import { GETCSRFToken } from "../Base/getcsrf";
+import MatchmakingBase from "../MatchmakingBase/matchmakingbase";
 
 
 export default class TournamentBase{
 
-    constructor(){};
+    constructor(){
+        this.mm = signal('');
+        this.tuid = signal('');
+        this.mmBase = new MatchmakingBase(this.uid)};
 
     async getTournaments(poststep,filter=null){
         let res = await axios({
