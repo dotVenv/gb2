@@ -3,7 +3,7 @@
 
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Layout from '../Layout/layout';
-import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner, Table, TableHeader, TableBody, Button, Spacer } from '@nextui-org/react';
+import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner,Button, Spacer, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Switch } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
 import { signal } from '@preact/signals-react';
@@ -38,7 +38,7 @@ const Tournament = () => {
                         </Breadcrumbs>
                     </section>
                     <section className='h-full'>
-                        <div className='mt-4 py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1'>
+                        <div className='mt-4 py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1 gap-2'>
                             <Card className='w-full h-[275px] float-start'>
                                 <img src={cu.currentTourney.thumbnail} className='object-cover'/>
                             </Card>
@@ -62,13 +62,13 @@ const Tournament = () => {
                                     size='sm'
                                     radiu='lg'
                                     variant='faded'
-                                    className='col-8 justify-center align-center mx-auto' 
+                                    className='col-5 justify-center align-center mx-auto flex' 
                                     title={cu.currentTourney.user_position == 1 
-                                        ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100  + (cu.currentTourney.pool / (cu.currentTourney.last_disp / 100) * 3 / 100 ))
+                                        ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100  + (cu.currentTourney.pool / (cu.currentTourney.last_disp / 100) * 3 / 100 )).toFixed(2)
                                         : cu.currentTourney.user_position == 2
-                                            ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100 )
+                                            ? 'You\'re #1! Keep the lead to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100 ).toFixed(2)
                                             : cu.currentTourney.user_position > 3 && cu.currentTourney.user_position <= 15 
-                                                ? 'You\'re TOP 15! Finish here to secure $'+ ((cu.currentTourney.pool / (cu.currentTourney.placement * 100)) * 100 / 13 )
+                                                ? 'You\'re TOP 15! Finish here to secure $'+ (cu.currentTourney.pool / (cu.currentTourney.placement / 100) * 3 / 100  - (cu.currentTourney.pool / (cu.currentTourney.last_disp / 100) * 3 / 100 )).toFixed(2)
                                                 : 'You\'re '+ (cu.currentTourney.user_position - 13) +'away from  top 15!' }
                                     color={cu.currentTourney.user_position <= 3 
                                             ? 'success' 
@@ -77,10 +77,36 @@ const Tournament = () => {
                                                 : 'secondary'}
                                     
                                 />
+                                <Spacer></Spacer>
+                                <Switch
+                                    className='justify-center align-center mx-auto flex' 
+                                    defaultSelected={cu.currentTourney.stats.matchmaking == 'idle' ? false : true }
+                                    color="secondary"
+                                    size="lg"
+                                    thumbIcon={({isSelected, className}) =>
+                                      isSelected ? <SunIcon className={className} /> : <MoonIcon className={className} />
+                                    }> Matchmaking 
+                                </Switch>
                             </div>
                         </div>
                         <div className='col-9 mx-auto justify-center '>
+                                
+                        <Table  aria-label="Current Tournament Leaderboard">
+                            <TableHeader>
+                                <TableColumn>NAME</TableColumn>
+                                <TableColumn>ROLE</TableColumn>
+                                <TableColumn>STATUS</TableColumn>
+                            </TableHeader>
+                            <TableBody>
 
+                                <TableRow key="1">
+                                    <TableCell>Tony Reichert</TableCell>
+                                    <TableCell>CEO</TableCell>
+                                    <TableCell>Active</TableCell>
+                                </TableRow>
+
+                            </TableBody>
+                            </Table>
                           
                         </div>
 
