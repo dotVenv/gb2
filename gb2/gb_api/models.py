@@ -471,8 +471,8 @@ class PlayerStat(ExportModelOperationsMixin('PlayerStat'), models.Model):
 
 matchmaking_options = [
     ('idle', 'idle'),
-    ('connecting', 'connecting'),
     ('matchmaking', 'matchmaking'),
+    ('connecting', 'connecting'),
     ('connected', 'connected'),
     ('disconnected', 'disconnected')
 ]

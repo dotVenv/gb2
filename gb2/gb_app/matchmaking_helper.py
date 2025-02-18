@@ -19,11 +19,16 @@ class MatchmakingHelper(TnHelper):
         ''' update the matching status for the users db'''
         
         try:
-            if not self.cu_stats:
-                return False
-            self.matchmaking_status = 'matchmaking'
-            print('ready to set matchmaking status')
-            return True 
+            leaderboard = self.get_leaderboard(matchmaking=True)
+            if leaderboard is not None or leaderboard is not False:
+                if leaderboard.matchmaking == 'idle':
+                    leaderboard.matchmaking = 'matchmaking'
+                elif leaderboard.matchmaking == 'matchmaking':
+                    leaderboard.matchmaking = 'idle'
+                    
+                leaderboard.save()
+                self.matchmaking_status = leaderboard.matchmaking
+                return True 
         except dce.ObjectDoesNotExist:
             return False
         

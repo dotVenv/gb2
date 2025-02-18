@@ -119,7 +119,7 @@ class TnHelper():
         return False
     
     
-    def get_leaderboard(self, tourney=None):
+    def get_leaderboard(self, tourney=None, matchmaking=None):
         '''get the current leaderboard for the tournament id'''
         
         if not tourney:
@@ -132,9 +132,16 @@ class TnHelper():
             if not tourney:
                 tobj = Tournament.objects.get(tournament_hash=tuid)
                 if tobj:
-                
                     leaderboard = Leaderboard.objects.get(tournament=tobj)
                     if leaderboard:
+                        try:
+                            if matchmaking:
+                                return leaderboard
+                        except dce.RequestAborted:
+                            leaderboard.matchmaking = 'connecting'
+                            leaderboard.save()
+                            return False
+                        
                         return True
             else:
                 leaderboard = Leaderboard.objects.get(tournament=tobj, player=self.cu_stats)
@@ -190,7 +197,7 @@ class TnHelper():
             
         
         return False
-    
+
     
     def __getuser__(self):
         '''get the current user'''

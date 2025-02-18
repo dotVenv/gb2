@@ -3,7 +3,21 @@
 
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Layout from '../Layout/layout';
-import { Breadcrumbs, BreadcrumbItem, Alert, Image, Card, Spinner,Button, Spacer, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Switch } from '@nextui-org/react';
+import { Breadcrumbs, 
+        BreadcrumbItem, 
+        Alert, 
+        Image, 
+        Card, 
+        Spinner,
+        Button, 
+        Spacer, 
+        Table, 
+        TableHeader, 
+        TableColumn, 
+        TableBody, 
+        TableRow, 
+        TableCell, 
+        Switch } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
 import { signal } from '@preact/signals-react';
@@ -26,16 +40,19 @@ const Tournament = () => {
     useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : setisLoaded(true)}, [cu.currentTourney]);
 
     const handleMatchmakingSwitch = async() => {
-        let res = await cu.setMatchmaking('set_matchmaking');
+        let res = await cu.setMatchmaking('set_matchmaking',cu.currentTourney.hash);
         if (res){
             if(res.status == 'successful'){
                 cu.currentTourney.stats.matchmaking = res.matchmaking_status;
-                toastData.value.toastType = 'successful';
+                console.log(cu.currentTourney.stats.matchmaking);
+                toastData.value.toastType = 'success';
                 toastData.value.desc = 'Matchmaking status changed';
+                newToast ? setNewToast(false) : undefined;
                 setNewToast(true);
             }else{
                 toastData.value.toastType = 'error';
                 toastData.value.desc = 'Unable to update matchmaking';
+                newToast ? setNewToast(false) : undefined;
                 setNewToast(true);
             };
         }else{
@@ -108,12 +125,25 @@ const Tournament = () => {
                                 <Switch
                                     className='justify-center align-center mx-auto flex text-black' 
                                     defaultSelected={cu.currentTourney.stats.matchmaking == 'idle' ? false : true }
+                                    value={cu.currentTourney.stats.matchmaking == 'idle' ? false : true }
                                     color="secondary"
                                     size="lg"
-                                    onValueChange={(e) => { handleMatchmakingSwitch();}}
+                                    onValueChange={(e) => { handleMatchmakingSwitch()}}
                                     thumbIcon={({isSelected, className}) =>
-                                      isSelected ? <i className="fa-solid fa-stop"></i> : <i className="fa-solid fa-play"></i>
-                                    }> <span className='text-black text-tiny font-semibold'>Matchmaking : { cu.currentTourney.stats.matchmaking }</span>
+                                      isSelected ? <i className="fa-solid fa-xmark"></i>: <i className="fa-solid fa-globe"></i>
+                                    }> 
+                                    <span className='text-black text-small font-semibold flex'>
+                                        Matchmaking : 
+                                        { cu.currentTourney.stats.matchmaking !== 'idle' ? <>
+                                            <Spinner color='secondary' size="sm" /><Spacer></Spacer></> : undefined 
+                                        }
+                                        
+                                        { cu.currentTourney.stats.matchmaking == 'matchmaking' 
+                                            ? 'Searching for opponent' 
+                                            : cu.currentTourney.stats.matchmaking.charAt(0).toUpperCase()+cu.currentTourney.stats.matchmaking.slice(1)
+                                        }
+                                        
+                                    </span>
                                 </Switch>
                             </div>
                         </div>
@@ -145,7 +175,7 @@ const Tournament = () => {
                 :
                     <div className='col 9 justify-center align-center mx-auto'>
                         <span className='justify-center align-center mx-auto flex'>
-                            <Spinner color="warning" className='text-black' label="Taking a while, but still Loading..." />
+                            <Spinner color="warning" className='text-black' label={"Taking a while, but still Loading..."} />
                         </span>
                         <br></br>
                         <Spacer></Spacer>

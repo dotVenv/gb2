@@ -76,25 +76,21 @@ export default class TournamentBase{
     };
 
 
-    async setMatchmaking(poststep){
+    async setMatchmaking(poststep, tuid){
 
         let res = await axios({
             
             url: location.href,
             method: 'post',
-            data: {uid: this.uid, poststep: poststep},
+            data: {uid: this.uid, poststep: poststep, tuid: tuid},
             headers: {
                 'X-CSRFTOKEN': GETCSRFToken(),
                 'Content-Type': 'multipart/form-data',
             },
         }).then(resp => {
-            if (resp){
-                return resp.data.message;
-            };
-        }).then(err => {
-            if (err.response.data.message){
-                return err.response.data.message;
-            };
+            return resp.data.message;
+        }).catch(err => {
+            return err.response.data.message;
         });
 
         return res;
