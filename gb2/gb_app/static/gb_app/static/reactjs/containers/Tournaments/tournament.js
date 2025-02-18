@@ -233,11 +233,9 @@ const Tournament = () => {
                                 </Switch>
                             </div>
                         </div>
-                        <div className='col-9 mx-auto grid sm:grid-cols-1 lg:grid-cols-2 h-[40vh]'>
-                                
-                            <div className='w-full'>
-                                    <TourneyTable allUsers={cu.currentTourney.top_3} />
-                               
+                        <div className='col-9 justify-center align-center mx-auto grid sm:grid-cols-1 lg:grid-cols-2 h-[40vh]'>
+                            <div className='w-full jutify-center align-center mx-auto'>
+                                <TourneyTable allUsers={cu.currentTourney.top_3} />
                             </div>
                             <ScrollShadow size={20}  >
                                 <Accordion className='bg-dark h-[65vh] overflow-y-hidden col-10 rounded-border rounded-large border-rounded justify-center align-center mx-auto'>

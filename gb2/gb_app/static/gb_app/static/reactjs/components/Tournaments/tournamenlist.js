@@ -55,7 +55,25 @@ const TournamentList = ({cu, newFilter, setnewFilter}) => {
                         </div>
                     </ScrollShadow>
                 </div>
-                </>
+                <br></br>
+                <div className='grid grid-cols-1 w-full'>
+                    
+                    <h4 className='font-semibold'>
+                        <b>
+                            Custom
+                        </b>
+                        {'  '}
+                        Events 
+                    </h4>
+                    <ScrollShadow size={30} hideScrollBar>
+                        <div className='flex gap-3 w-full overflow-x-hidden'>
+                            {TournamentInfo.filter((index) => index.host !== 'Gamers-Bounty').map((key, index) => {
+                                return(<TournamentCard key={index} tournamentInfo={key} />)
+                            })}
+                        </div>
+                    </ScrollShadow>
+                </div>
+            </>
         }
                 
         </>

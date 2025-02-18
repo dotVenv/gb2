@@ -20,7 +20,7 @@ const TourneyTable = ({allUsers}) => {
     return(
         <>
             <ScrollShadow size={20} hideScrollBar>
-            <Table removeWrapper aria-label="Tournament leaderboard " className=' h-[30vh] overflow-y-auto '>
+            <Table removeWrapper aria-label="Tournament leaderboard " className='sm:col-9 justify-center align-center mx-auto h-[30vh] overflow-y-auto '>
                 <TableHeader className='bg-gradient-to-r from-pink-200 to-purple-200'>
                     <TableColumn>Current Leaderboard  <i className='text-tiny '>({allUsers.length} players)</i></TableColumn>
                     <TableColumn></TableColumn>
