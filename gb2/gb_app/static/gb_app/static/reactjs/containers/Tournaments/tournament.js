@@ -17,11 +17,12 @@ import { Breadcrumbs,
         TableBody, 
         TableRow, 
         TableCell, 
-        Switch } from '@nextui-org/react';
+        Switch,
+        User } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
 import { signal } from '@preact/signals-react';
-import { AuroraText, CustomToast, HyperText } from '../../components';
+import { AuroraText, CompCard, CustomToast, HyperText, TourneyTable } from '../../components';
 
 const fetched = signal(0);
 
@@ -36,6 +37,7 @@ const Tournament = () => {
     const [ userInfo ] = useAtom(cu.userAtom);
     const [newToast, setNewToast] = useState(false);
     const [isLoaded, setisLoaded] = useState(false);
+    const  [isUpdated, setIsUpdated] = useState();
 
     useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : setisLoaded(true)}, [cu.currentTourney]);
 
@@ -47,13 +49,16 @@ const Tournament = () => {
                 console.log(cu.currentTourney.stats.matchmaking);
                 toastData.value.toastType = 'success';
                 toastData.value.desc = 'Matchmaking status changed';
-                newToast ? setNewToast(false) : undefined;
+                //newToast ? setNewToast(false) : undefined;
                 setNewToast(true);
+                setIsUpdated(true);
+                //
             }else{
                 toastData.value.toastType = 'error';
                 toastData.value.desc = 'Unable to update matchmaking';
                 newToast ? setNewToast(false) : undefined;
                 setNewToast(true);
+                setIsUpdated(true);
             };
         }else{
             toastData.value.toastType = 'error';
@@ -128,12 +133,12 @@ const Tournament = () => {
                                     value={cu.currentTourney.stats.matchmaking == 'idle' ? false : true }
                                     color="secondary"
                                     size="lg"
-                                    onValueChange={(e) => { handleMatchmakingSwitch()}}
+                                    onValueChange={(e) => { handleMatchmakingSwitch(); setIsUpdated();}}
                                     thumbIcon={({isSelected, className}) =>
                                       isSelected ? <i className="fa-solid fa-xmark"></i>: <i className="fa-solid fa-globe"></i>
                                     }> 
                                     <span className='text-black text-small font-semibold flex'>
-                                        Matchmaking : 
+                                        Matchmaking:  
                                         { cu.currentTourney.stats.matchmaking !== 'idle' ? <>
                                             <Spinner color='secondary' size="sm" /><Spacer></Spacer></> : undefined 
                                         }
@@ -147,27 +152,13 @@ const Tournament = () => {
                                 </Switch>
                             </div>
                         </div>
-                        <div className='col-9 mx-auto justify-center '>
+                        <div className='col-9 mx-auto grid sm:grid-cols-1 lg:grid-cols-2'>
                                 
-                        <Table  aria-label="Current Tournament Leaderboard">
-                            <TableHeader>
-                                <TableColumn>NAME</TableColumn>
-                                <TableColumn>ROLE</TableColumn>
-                                <TableColumn>STATUS</TableColumn>
-                            </TableHeader>
-                            <TableBody>
-
-                                <TableRow key="1">
-                                    <TableCell>Tony Reichert</TableCell>
-                                    <TableCell>CEO</TableCell>
-                                    <TableCell>Active</TableCell>
-                                </TableRow>
-
-                            </TableBody>
-                            </Table>
-                          
+                            <div className='w-full h-full'>
+                                <TourneyTable allUsers={cu.currentTourney.top_3} />
+                            </div>
+                            
                         </div>
-
                         <br></br>
                     </section>
                    

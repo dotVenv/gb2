@@ -2,7 +2,7 @@
 
 import React, {useState,useContext, useEffect, Suspense} from "react";
 import { Layout } from '../index';
-import { Breadcrumbs, BreadcrumbItem, Button, Card, CardBody, CardFooter, Spacer, Accordion, AccordionItem, Chip } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button, Spacer } from "@nextui-org/react";
 import { useAtom } from "jotai";
 import { ConnContext } from "../../connector";
 import { ProfileSide, ShineBorder, ActionCard, CompCard, TicketTable } from "../../components";
@@ -80,7 +80,7 @@ const MyProfile = () => {
                                         description="Activate membership."
                                         icon={<i className="fa-solid fa-gem"></i>}
                                         title="Active membership"
-                                        onPress={() => {udefined
+                                        onPress={() => {undefined
                                         }}
                                     />
                                     <ActionCard
@@ -93,7 +93,7 @@ const MyProfile = () => {
                                         onPress={() => {undefined}}
                                     />
                             </div>
-                            <CompCard userInfo={userInfo} />
+                            <CompCard userInfo={userInfo} isViewing={true} />
                            
                             <Button variant='ghost' color='success' radius="lg" className='w-full mt-4 col-8' startContent={<i className="fa-solid fa-money-bill-transfer"></i>}>
                                     Withdrawal Balance

@@ -10,7 +10,7 @@ import LRank1  from '../../../imgs/ranks/low_rank_one.png';
 
 
 
-const CompCard = ({userInfo}) => {
+const CompCard = ({userInfo, isViewing}) => {
 
 
     return(
@@ -55,15 +55,18 @@ const CompCard = ({userInfo}) => {
                 </Badge>
 
             </CardBody>
-            <div className='p-2 flex'>
-                <Button variant='flat' className='text-tiny' color='primary' size='sm' radius='lg' startContent={<i className="fa-regular fa-pen-to-square"></i>}>
-                    Banner
-                </Button>
-                <Spacer></Spacer>
-                <Button className='text-tiny' variant='flat' color='secondary' size='sm' radius='lg' startContent={<i className="fa-solid fa-eye"></i>}>
-                    Esport Profile
-                </Button>
-            </div>
+            { isViewing ?
+                <div className='p-2 flex'>
+                    <Button variant='flat' className='text-tiny' color='primary' size='sm' radius='lg' startContent={<i className="fa-regular fa-pen-to-square"></i>}>
+                        Banner
+                    </Button>
+                    <Spacer></Spacer>
+                    <Button className='text-tiny' variant='flat' color='secondary' size='sm' radius='lg' startContent={<i className="fa-solid fa-eye"></i>}>
+                        Esport Profile
+                    </Button>
+                </div>
+                : undefined 
+            }
         </Card>
         
         

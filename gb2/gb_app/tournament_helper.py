@@ -87,9 +87,14 @@ class TnHelper():
                         'stat_id': x['player_id'],
                         'username':AccountPreference.objects.get(user_id=x['player_id']).user.username,
                         'wins':x['wins'], 
+                        'losses': x['losses'],
                         'points': x['points'], 
-                        'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{AccountPreference.objects.get(user_id=x["player_id"]).user.profile_pic}' 
+                        'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{AccountPreference.objects.get(user_id=x["player_id"]).user.profile_pic}' ,
+                        'server': AccountPreference.objects.get(user_id=x['player_id']).server,
+                        'platform': AccountPreference.objects.get(user_id=x['player_id']).platform.name,
+                        'matchmaking_status': x['matchmaking']
                     }
+                
                     
                     for x in current_leaderboard.values().order_by('points')[:top_count]
                      
