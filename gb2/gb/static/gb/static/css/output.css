@@ -1626,12 +1626,20 @@ video {
   height: 300px;
 }
 
+.h-\[30vh\] {
+  height: 30vh;
+}
+
 .h-\[30vw\] {
   height: 30vw;
 }
 
 .h-\[35vh\] {
   height: 35vh;
+}
+
+.h-\[40vh\] {
+  height: 40vh;
 }
 
 .h-\[450px\] {
@@ -1648,6 +1656,10 @@ video {
 
 .h-\[58px\] {
   height: 58px;
+}
+
+.h-\[65vh\] {
+  height: 65vh;
 }
 
 .h-\[69\%\] {
@@ -1697,62 +1709,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[225px\] {
-  height: 225px;
-}
-
-.h-\[220px\] {
-  height: 220px;
-}
-
-.h-\[20\] {
-  height: 20;
-}
-
-.h-\[20vh\] {
-  height: 20vh;
-}
-
-.h-\[40vh\] {
-  height: 40vh;
-}
-
-.h-\[70vh\] {
-  height: 70vh;
-}
-
-.h-\[75vh\] {
-  height: 75vh;
-}
-
-.h-\[70\] {
-  height: 70;
-}
-
-.h-\[30vh\] {
-  height: 30vh;
-}
-
-.h-\[75h\] {
-  height: 75h;
-}
-
-.h-\[30\] {
-  height: 30;
-}
-
-.h-\[50\] {
-  height: 50;
-}
-
-.h-\[50vh\] {
-  height: 50vh;
-}
-
-.h-\[65vh\] {
-  height: 65vh;
 }
 
 .max-h-\[20rem\] {
@@ -2060,26 +2016,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[275px\] {
-  width: 275px;
-}
-
-.w-\[285px\] {
-  width: 285px;
-}
-
-.w-\[300px\] {
-  width: 300px;
-}
-
-.w-\[350px\] {
-  width: 350px;
-}
-
-.w-\[10\] {
-  width: 10;
 }
 
 .min-w-10 {
@@ -4782,6 +4718,12 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-pink-200 {
+  --tw-gradient-from: #ffb8eb var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(255 184 235 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-pink-400 {
   --tw-gradient-from: #ff71d7 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 113 215 / 0) var(--tw-gradient-to-position);
@@ -4857,12 +4799,6 @@ video {
 .from-zinc-800 {
   --tw-gradient-from: #27272a var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(39 39 42 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-pink-200 {
-  --tw-gradient-from: #ffb8eb var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(255 184 235 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -4998,6 +4934,10 @@ video {
   --tw-gradient-to: #cc3ea4 var(--tw-gradient-to-position);
 }
 
+.to-purple-200 {
+  --tw-gradient-to: #c9a9e9 var(--tw-gradient-to-position);
+}
+
 .to-purple-700 {
   --tw-gradient-to: #481878 var(--tw-gradient-to-position);
 }
@@ -5024,10 +4964,6 @@ video {
 
 .to-zinc-800 {
   --tw-gradient-to: #27272a var(--tw-gradient-to-position);
-}
-
-.to-purple-200 {
-  --tw-gradient-to: #c9a9e9 var(--tw-gradient-to-position);
 }
 
 .to-90\% {
@@ -6266,11 +6202,6 @@ video {
 .text-yellow-900 {
   --tw-text-opacity: 1;
   color: rgb(49 33 7 / var(--tw-text-opacity));
-}
-
-.text-default-800 {
-  --tw-text-opacity: 1;
-  color: hsl(var(--nextui-default-800) / var(--nextui-default-800-opacity, var(--tw-text-opacity)));
 }
 
 .underline {
@@ -8174,6 +8105,16 @@ html, body {
   top: 1px;
 }
 
+.after\:left-\[0\.04em\]::after {
+  content: var(--tw-content);
+  left: 0.04em;
+}
+
+.after\:top-\[0\.04em\]::after {
+  content: var(--tw-content);
+  top: 0.04em;
+}
+
 .after\:-z-10::after {
   content: var(--tw-content);
   z-index: -10;
@@ -8465,6 +8406,22 @@ html, body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.after\:bg-\[linear-gradient\(45deg\2c transparent_45\%\2c var\(--shadow-color\)_45\%\2c var\(--shadow-color\)_55\%\2c transparent_0\)\]::after {
+  content: var(--tw-content);
+  background-image: linear-gradient(45deg,transparent 45%,var(--shadow-color) 45%,var(--shadow-color) 55%,transparent 0);
+}
+
+.after\:bg-\[length\:0\.06em_0\.06em\]::after {
+  content: var(--tw-content);
+  background-size: 0.06em 0.06em;
+}
+
+.after\:bg-clip-text::after {
+  content: var(--tw-content);
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+
 .after\:text-danger::after {
   content: var(--tw-content);
   --tw-text-opacity: 1;
@@ -8505,6 +8462,11 @@ html, body {
   content: var(--tw-content);
   --tw-text-opacity: 1;
   color: hsl(var(--nextui-warning-foreground) / var(--nextui-warning-foreground-opacity, var(--tw-text-opacity)));
+}
+
+.after\:text-transparent::after {
+  content: var(--tw-content);
+  color: transparent;
 }
 
 .after\:opacity-0::after {
@@ -8572,6 +8534,11 @@ html, body {
 
 .after\:content-\[\'\*\'\]::after {
   --tw-content: '*';
+  content: var(--tw-content);
+}
+
+.after\:content-\[attr\(data-text\)\]::after {
+  --tw-content: attr(data-text);
   content: var(--tw-content);
 }
 

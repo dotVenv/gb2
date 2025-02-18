@@ -14,14 +14,14 @@ import { Breadcrumbs,
         ScrollShadow,
         Accordion, 
         AccordionItem,
-        Switch,
-        User } from '@nextui-org/react';
+        Switch } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 import { ConnContext } from '../../connector';
-import { signal } from '@preact/signals-react';
+import { signal, effect } from '@preact/signals-react';
 import { AuroraText, CompCard, CustomToast, HyperText, TourneyTable } from '../../components';
 
 const fetched = signal(0);
+const recentlyupdated = signal(new Date());
 const tournament_start = signal();
 const tournament_end = signal();
 
@@ -36,6 +36,45 @@ const Tournament = () => {
     const [newToast, setNewToast] = useState(false);
     const [isLoaded, setisLoaded] = useState(false);
     const  [isUpdated, setIsUpdated] = useState();
+    var current_date = new Date();
+    var hours = current_date.getHours();
+    var minutes = current_date.getMinutes();
+    var seconds = current_date.getSeconds();
+    var current_time = hours + ':' + minutes + ':' + seconds;
+    current_time = current_time.replace(':', '');
+    const checkLive = () => {
+        if ( parseInt(current_time) >= parseInt(tournament_start.value) && parseInt(current_time) <= parseInt(tournament_end.value)){
+            return true;
+        }else if( parseInt(current_time) >= parseInt('1730:00') && parseInt(current_time) < parseInt('18:00')){
+            return 'soon'
+        }else{
+            return false;
+        }
+    };
+
+    
+    const rePull = async() => {
+        if (checkLive() == false){
+            if (fetched.value == 0){
+                let res = await cu.setTournament(cu.currentTourney.hash, 'entry', 'get_all');
+                if (res){
+                    
+                    fetched.value ++;
+                    if (fetched.value == 1){
+                    
+                        recentlyupdated.value = new Date();
+                        setIsUpdated();
+                    };
+                }else{
+                    fetched.value = 0;
+                };
+            }else{
+                fetched.value = 0;
+            };
+        };
+        
+    };
+    
 
     const [isLive, setisLive] = useState(false);
 
@@ -48,30 +87,29 @@ const Tournament = () => {
         var current_time = hours + ':' + minutes + ':' + seconds;
         current_time = current_time.replace(':', '');
         
-        
-        const checkLive = () => {
-            if ( parseInt(current_time) >= parseInt(tournament_start.value) && parseInt(current_time) <= parseInt(tournament_end.value)){
-                return true;
-            }else if( parseInt(current_time) >= parseInt('1730:00') && parseInt(current_time) < parseInt('18:00')){
-                return 'soon'
-            }else{
-                return false;
-            }
-        };
         tournament_start.value = new Date(cu.currentTourney.start).toISOString().slice(11,19).replace(':', '');
         tournament_end.value =  new Date(cu.currentTourney.end).toISOString().slice(11,19).replace(':', '');
         setisLive(checkLive());
         setisLoaded(true);
+        try{
+
+            setInterval(rePull,35000);
+            setIsUpdated(true);
+            
+        }catch (e){
+            console.log("error" + e);
+            setIsUpdated(true);
+        }
     };
 
-    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : handleLoader();}, [cu.currentTourney]);
+    useEffect(() => {cu.currentTourney == undefined ? setisLoaded(false) : handleLoader();}, [cu.currentTourney, recentlyupdated.value]);
 
+    
     const handleMatchmakingSwitch = async() => {
         let res = await cu.setMatchmaking('set_matchmaking',cu.currentTourney.hash);
         if (res){
             if(res.status == 'successful'){
                 cu.currentTourney.stats.matchmaking = res.matchmaking_status;
-                console.log(cu.currentTourney.stats.matchmaking);
                 toastData.value.toastType = 'success';
                 toastData.value.desc = 'Matchmaking status changed';
                 //newToast ? setNewToast(false) : undefined;
@@ -107,10 +145,11 @@ const Tournament = () => {
                             }}
                             separator="/">
                             <BreadcrumbItem key="dashboard" isCurrent>
-                                <span>Tournament { cu.currentTourney.name }</span>
+                                <span>Tournament  <i className='fa-regular fa-hand-back-fist'></i></span>
                             </BreadcrumbItem>
                       
                         </Breadcrumbs>
+                   
                     </section>
                     <section className='h-full'>
                         <div className='mt-4 py-4 col-9 justify-center align-center mx-auto'>
@@ -122,14 +161,19 @@ const Tournament = () => {
                                 {new Date(cu.currentTourney.start).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')}
                                 {' '}-{' '} 
                                 {new Date(cu.currentTourney.end).toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '')
-                            }</p>
+                            }<i className="fa-solid fa-calendar-days"></i></p>
+                             <p className="text-tiny text-default-400">
+                                Last updated: <b> <i>{ recentlyupdated.value.toLocaleTimeString("en-us",{ timeZone: "UTC", timeZoneName: "short"}).replace('UTC', '') }</i></b> <i className="fa-solid fa-clock-rotate-left"></i>
+                            </p>
                         </div>
-                        <div className='mt-4 py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1 gap-2'>
+                        <div className='py-4 col-9 mx-auto justify-center  grid lg:grid-cols-2 sm:grid-cols-1 gap-2'>
                             <Card className='w-full h-[275px] float-start'>
                                 <img src={cu.currentTourney.thumbnail} className='object-cover'/>
                             </Card>
                             <div>
-                                <HyperText  className='text-center mx-auto' text={ "$"+cu.currentTourney.pool +" "+ cu.currentTourney.name + " " + "("+cu.currentTourney.specific +")"} />
+                                
+                                <HyperText  className='text-center mx-auto' text={ "$"+cu.currentTourney.pool +" "+ cu.currentTourney.name + " " + "("+cu.currentTourney.specific +")" +""} />
+                               
                                 <h4 className="text-2xl font-semibold tracking-tighter md:text-2xl lg:text-5xl justify-center align-center mx-auto flex gap-2 mr-3">
                                     Place {' '} <AuroraText>#{ cu.currentTourney.user_position }</AuroraText>
                                 </h4>

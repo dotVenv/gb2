@@ -68,7 +68,8 @@ class TnHelper():
                     'top_3': None,
                     'host': str(val.hosted_by),
                     'is_entered': bool(self.__check_current__(val.tournament_hash)),
-                    'last_disp': float(val.last_displacement)
+                    'last_disp': float(val.last_displacement),
+                    'weekend_only': bool(val.weekend_only),
                         
                 }
                 
@@ -115,8 +116,6 @@ class TnHelper():
                                            }
                     if gl.previous_opponent:
                         new_tl['stats']['previous_opp'] = gl.previous_opponent.user.user.username
-                        
-                    
                 self.tournaments_list.append(new_tl)
               
             return True

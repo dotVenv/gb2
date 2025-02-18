@@ -62,7 +62,7 @@ const AllTournaments = () => {
                      
                     </div>
                     <br></br>
-                    <div className="justify-center align-center mx-auto grid sm:grid-cols-1 lg:grid-cols-3 gap-0 mb-4">
+                    <div className="justify-center align-center mx-auto  gap-0 mb-4">
                         <TournamentList cu={cu} newFilter={newFilter} setnewFilter={setnewFilter} />
                       
                     </div>

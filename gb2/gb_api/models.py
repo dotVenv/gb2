@@ -237,6 +237,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
     hosted_by = models.CharField(max_length=255, default='Gamers-Bounty')
     rating = models.IntegerField(default=0)
     previous_hashes = models.JSONField(default=prev_hashes, blank=True, null=True)
+    weekend_only = models.BooleanField(default=False)
     
     def swap_uuid(self):
         for v in self.previous_hashes.values():
@@ -254,7 +255,7 @@ class Tournament(ExportModelOperationsMixin('Tournament'),models.Model):
         verbose_name_plural = 'Tournaments'
         
     def __str__(self):
-        return f'{self.name} {self.specific}'
+        return f'{self.name} {self.specific} (WO:{self.weekend_only})'
 
 
     
