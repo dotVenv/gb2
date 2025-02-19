@@ -185,7 +185,8 @@ class APPViews(TemplateView):
                             return getres().res('200', new_msg={'status': 'successful', 'matchmaking_status': matchmaking.matchmaking_status})
                     case 'mm_search':
                         if matchmaking.mm_search():
-                            return getres().res('200', new_msg={'status':'successful', 'mm_status': matchmaking.matchmaking_status})
+                          
+                            return getres().res('200', new_msg=matchmaking.matchmaking_status)
                         
                         
             return getres().res('401', new_msg={'status': 'failed'})

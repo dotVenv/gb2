@@ -10,7 +10,7 @@ import LRank1  from '../../../imgs/ranks/low_rank_one.png';
 
 
 
-const CompCard = ({userInfo, isViewing}) => {
+const CompCard = ({userInfo, isViewing, opponent}) => {
 
 
     return(
@@ -41,19 +41,63 @@ const CompCard = ({userInfo, isViewing}) => {
                             
                             
                         </>}>
+                { userInfo ? 
+                    <User
+                        avatarProps={{
+                            src:userInfo.profile_pic,
+                            isBordered : true,
+                            radius : 'md',
+                            showFallback: true,
+                        }}
+                        description={"Games Won: "+userInfo.wins}
+                        name={<span className='text-tiny'>@{userInfo.username}</span>}
+                    />:
+                    <User
+                            avatarProps={{
+                                src:opponent.value.opponent_profile_pic,
+                                isBordered : true,
+                                radius : 'md',
+                                showFallback: true,
+                            }}
+                            description={
+                                <> 
+                                    <div className='grid grid-cols-1'>
+                                        <span className='text-tiny'>Games Won <b>{opponent.value.wins}</b></span>
+                                    </div>
+                                </>
+                            }
+                            name={<span className='text-tiny'>@{opponent.value.opponent_name}</span>}
+                        />
+                    
+                    }
                 
-                <User
-                    avatarProps={{
-                        src:userInfo.profile_pic,
-                        isBordered : true,
-                        radius : 'md',
-                        showFallback: true,
-                    }}
-                    description={"Tournaments Won: "+userInfo.wins}
-                    name={'@' + userInfo.username}
-                />
                 </Badge>
-
+                {opponent ? 
+                    <>
+                    <br></br>
+                    <Spacer></Spacer>
+                    <span className='text-tiny'>Plaform: { opponent.value.opponent_platform == 'Xbox' 
+                        ? <i className="fa-brands fa-xbox"></i> 
+                        : opponent.value.opponent_platform == 'PSN' 
+                        ? <i className="fa-brands fa-playstation"></i>
+                        : opponent.value.opponent_platform == 'PC' 
+                            ? <i className="fa-solid fa-computer"></i>
+                            : undefined }</span>
+                    <span className='text-tiny'>Server: <b>{ opponent.value.opponent_server }</b></span>
+                    </>
+                :
+                userInfo ? <>
+                <br></br>
+                <Spacer></Spacer>
+                <span className='text-tiny'>Plaform: { userInfo.platform == 'Xbox' 
+                    ? <i className="fa-brands fa-xbox"></i> 
+                    : userInfo.platform == 'PSN' 
+                    ? <i className="fa-brands fa-playstation"></i>
+                    : userInfo.platform == 'PC' 
+                        ? <i className="fa-solid fa-computer"></i>
+                        : undefined }</span>
+                <span className='text-tiny'>Server: <b>{ userInfo.server }</b></span>
+                </>: undefined  }
             </CardBody>
             { isViewing ?
                 <div className='p-2 flex'>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useContext, useState } from "react";
+import React, { Suspense, useContext, useMemo, useState } from "react";
 import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions, ConnectionModal } from "../../components";
 import { AccountSetup } from '../index';
 import { Spacer, Card, Alert, Button, Chip } from "@nextui-org/react";
@@ -17,7 +17,8 @@ const toastData = signal({
     desc: '',
 });
 
-const mmCheck = signal();
+const mmCheck = signal({});
+const fetched = signal(0);
 
 const Layout = ({ children }) => {
 
@@ -33,17 +34,21 @@ const Layout = ({ children }) => {
     const checkMM = async() =>{
 
         let mm_check = await cu.mmBase.matchmakingSearch(cu.uid, userInfo.active_entry);
-        if (mm_check.matchmaking_status.status == 'connecting'){    
+        if (mm_check){  
             
-            cu.mm.value = mm_check.matchmaking_status;
             mmCheck.value = mm_check;
-            setisMMUpdated(cu.mm.value.status);
+            cu.mm.value = mm_check.status;
+            setisMMUpdated(mm_check.status);
         };
     };
 
     if(cu.mm.value == 'matchmaking' || cu.mm.value == 'connecting' ){
-        checkMM();
-        setInterval(checkMM, 9000); 
+        
+        if (fetched.value == 0){
+            checkMM();
+            setInterval(checkMM, 4000); 
+            fetched.value ++;
+        };  
     };
     return(
         <>  
@@ -122,7 +127,7 @@ const Layout = ({ children }) => {
 
                     { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
                     { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
-                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} opponent={mmCheck.value}/> : undefined }
+                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} userInfo={userInfo} opponent={mmCheck}/> : undefined }
                 </> 
             }
             <footer className='col-9 justify-center align-center mx-auto'>

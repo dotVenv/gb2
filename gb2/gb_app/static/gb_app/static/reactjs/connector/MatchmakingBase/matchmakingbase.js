@@ -7,20 +7,18 @@ import axios from "axios";
 import { signal } from "@preact/signals-react";
 
 export default class MatchmakingBase{
-    constructor(){
-       
-    };
+    constructor(){};
 
     async matchmakingSearch(uid, tuid){
 
-        let res = axios({
+        let res = await axios({
             url: '/tournament',
             method: 'post',
             data: {uid: uid, tuid: tuid, poststep:'mm_search'},
             headers: { 'X-CSRFTOKEN': GETCSRFToken(), 'Content-Type': 'multipart/form-data'}
 
         }).then(resp => {
-            if (resp){
+            if (resp){        
                 return resp.data.message;
             };
         }).catch(err => {
@@ -29,6 +27,8 @@ export default class MatchmakingBase{
             };
         });
 
-        return res;
+        if (res){
+            return res;
+        }
     };
 }

@@ -1,5 +1,6 @@
 #django imports
 import django.core.exceptions as dce
+from django.conf import settings
 
 #app imports
 from gb_api.models import PlayerStat, Leaderboard
@@ -52,12 +53,16 @@ class MatchmakingHelper(TnHelper):
         
         if ocu is None:
             print('opponent not found')
-            
+        
+
         self.matchmaking_status = {
             'status': 'connecting', 
             'opponent_name': str(ocu.player.user.user.username), 
             'opponent_server': str(ocu.player.user.server),
             'opponent_platform': str(ocu.player.user.platform.name),
+            'opponent_profile_pic': str(f'https://{settings.AWS_BUCKS["profile_pics"]}{ocu.player.user.user.profile_pic}'),
+            'wins': ocu.wins,
+            'losses': ocu.losses
             }
          
         return True

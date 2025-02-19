@@ -10,21 +10,23 @@ import {
     Button,
     useDisclosure,
     Card,
-    CardHeader,
+    Avatar,
+    Spacer,
   } from "@nextui-org/react";
+import { CompCard } from '../../components';
 
-
-const ConnectionModal = ({ cu, isModalOpen,setModal, opponent}) => {
+const ConnectionModal = ({ userInfo, isModalOpen,setModal, opponent}) => {
 
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    console.log(opponent);
 
     return(
         <>
             <Modal className='from-zinc-800'
                 isDismissable={false} 
                 backdrop='blur'  
-                size='md' 
+                size='xl' 
                 placement='center' 
                 isOpen={isModalOpen} 
                 onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
@@ -33,16 +35,10 @@ const ConnectionModal = ({ cu, isModalOpen,setModal, opponent}) => {
                 <>
                 <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'>Matchmaking -  Player Found</i></ModalHeader>
                 <ModalBody >
-                   <div className='grid grid-cols-3 gap-1'>
-                    <Card className='p-4'>
-                        <span className='text-small'>You <i className="fa-solid fa-location-pin fa-2xs"></i></span>
-                        {cu.mm.value}
-                    </Card>
-                    <p className='text-white font-semibold justify-center align-center mx-auto'> VS </p>
-                    <Card className='p-4'>
-                        <span className='text-small'>Them <i className="fa-solid fa-location-pin fa-2xs"></i></span>
-                       <p> { opponent } </p>
-                    </Card>
+                   <div className='grid sm:grid-cols-1 lg:grid-cols-3 gap-x-0 space-x-0 w-full'>
+                        <CompCard userInfo={userInfo}  />
+                        <span className='text-white text-4xl font-semibold justify-center align-center mx-auto'> VS <br></br><i className="fa-solid fa-hand-fist"></i> </span>
+                        <CompCard opponent={opponent}  />
                    </div>
                 </ModalBody>
                 <ModalFooter>
