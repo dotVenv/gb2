@@ -35,23 +35,38 @@ class MatchmakingHelper(TnHelper):
         return False
     
     
-    def __save_matchup__(self, ocu, cu):
+    def __save_matchup__(self,cu,ocu=None):
         '''save the matchmaking results'''
-        ocu.matchmaking = 'connecting'
-        ocu.next_opponent = cu.player
         
-        cu.matchmaking = 'connecting'
-        cu.next_opponent = ocu.player
-        cu.save()
-        ocu.save()
+        ocu = None
+        if ocu is not None:
+            ocu.matchmaking = 'connecting'
+            ocu.next_opponent = cu.player
+            cu.matchmaking = 'connecting'
+            cu.next_opponent = ocu.player
+            cu.save()
+            ocu.save()
+            
+        else:
+            ocu = Leaderboard.objects.get(player=cu.next_opponent)
         
-        self.matchmaking_status = 'connecting'
+        if ocu is None:
+            print('opponent not found')
+            
+        self.matchmaking_status = {
+            'status': 'connecting', 
+            'opponent_name': str(ocu.player.user.user.username), 
+            'opponent_server': str(ocu.player.user.server),
+            'opponent_platform': str(ocu.player.user.platform.name),
+            }
+         
         return True
         
         
     def mm_search(self):
         '''start searching for another use'''
         
+    
         try:
             potential_next = None
             leaderboard = self.get_leaderboard(matchmaking=True)
@@ -59,9 +74,12 @@ class MatchmakingHelper(TnHelper):
             if leaderboard:
                 
                 cu = Leaderboard.objects.get(player=self.cu_stats)
+                if cu.matchmaking == 'connecting':
+                    if self.__save_matchup__(cu=cu):
+                        return True
                 if cu:
                     for index, user in enumerate(leaderboard.filter(matchmaking='matchmaking').order_by('?').values()):
-                        print(user)
+                     
                         if user['player_id'] == self.request.user.id:
                             continue
                         ocu = Leaderboard.objects.get(player_id=user['player_id'])
@@ -71,17 +89,17 @@ class MatchmakingHelper(TnHelper):
                             if int(user['previous_opponent_id']) != int(ocu.player.id):
                                 if ocu.player.user.server == self.cu_ap.server:
                                     if ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                        self.__save_matchup__(ocu, cu)
-                                        return True
+                                        if self.__save_matchup__(ocu, cu):
+                                            return True
                                     else:
                                         potential_next = user
                                     
                                 elif ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                    self.__save_matchup__(ocu, cu)
-                                    return True
+                                    if self.__save_matchup__(ocu, cu):
+                                        return True
                                 if potential_next:
-                                    self.__save_matchup__(ocu, cu)
-                                    return True
+                                    if self.__save_matchup__(ocu, cu):
+                                        return True
                                 else:
                                     potential_next = ocu
                                     continue

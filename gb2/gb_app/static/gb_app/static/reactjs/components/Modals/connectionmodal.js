@@ -14,7 +14,7 @@ import {
   } from "@nextui-org/react";
 
 
-const ConnectionModal = ({ cu, isModalOpen,setModal}) => {
+const ConnectionModal = ({ cu, isModalOpen,setModal, opponent}) => {
 
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -41,7 +41,7 @@ const ConnectionModal = ({ cu, isModalOpen,setModal}) => {
                     <p className='text-white font-semibold justify-center align-center mx-auto'> VS </p>
                     <Card className='p-4'>
                         <span className='text-small'>Them <i className="fa-solid fa-location-pin fa-2xs"></i></span>
-                        {cu.mm.value}
+                       <p> { opponent } </p>
                     </Card>
                    </div>
                 </ModalBody>

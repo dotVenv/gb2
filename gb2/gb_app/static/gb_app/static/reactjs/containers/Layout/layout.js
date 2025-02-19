@@ -17,6 +17,8 @@ const toastData = signal({
     desc: '',
 });
 
+const mmCheck = signal();
+
 const Layout = ({ children }) => {
 
 
@@ -27,18 +29,21 @@ const Layout = ({ children }) => {
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
     const [isMMUpdated, setisMMUpdated] = useState(!cu.mm.value ? false : cu.mm.value );
-    
-    
-    if(cu.mm.value == 'matchmaking'){
 
-       setInterval(() => { 
-        let mm_check = cu.mmBase.matchmakingSearch(cu.uid, userInfo.active_entry);
-        if (mm_check.matchmaking_status == 'connecting' ){
+    const checkMM = async() =>{
+
+        let mm_check = await cu.mmBase.matchmakingSearch(cu.uid, userInfo.active_entry);
+        if (mm_check.matchmaking_status.status == 'connecting'){    
+            
             cu.mm.value = mm_check.matchmaking_status;
-            setisMMUpdated(cu.mm.value);
-        
-    }}, 9000);
-       
+            mmCheck.value = mm_check;
+            setisMMUpdated(cu.mm.value.status);
+        };
+    };
+
+    if(cu.mm.value == 'matchmaking' || cu.mm.value == 'connecting' ){
+        checkMM();
+        setInterval(checkMM, 9000); 
     };
     return(
         <>  
@@ -117,7 +122,7 @@ const Layout = ({ children }) => {
 
                     { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
                     { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
-                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} /> : undefined }
+                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} opponent={mmCheck.value}/> : undefined }
                 </> 
             }
             <footer className='col-9 justify-center align-center mx-auto'>
