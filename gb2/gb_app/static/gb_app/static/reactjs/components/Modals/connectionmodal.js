@@ -28,7 +28,7 @@ const ConnectionModal = ({ userInfo, isModalOpen,setModal, opponent}) => {
                 backdrop='blur'  
                 size='xl' 
                 placement='center' 
-                isOpen={isModalOpen} 
+                isOpen={isOpen} 
                 onOpenChange={(e) => {onOpenChange(); setModal(isOpen)}} >
             <ModalContent>
             {(onClose) => (
