@@ -116,7 +116,6 @@ const SignUpModal =  ({ isOpen, onOpenChange, handleSignupOpen }) => {
         };
         let signup_reponse = await usrcontext.signupUser(signupdata);
         if (signup_reponse){
-            console.log('response returned');
             if (signup_reponse[0] == 'success'){
                 setsignupComplete(signup_reponse[1]);
                 location.reload();

@@ -27,14 +27,16 @@ const Layout = ({ children }) => {
     const accountProgress = userInfo.setup_step;   
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
+    const [isMMUpdated, setisMMUpdated] = useState();
     
-    if(cu.mm == 'matchmaking'){
+    if(cu.mm.value == 'matchmaking'){
 
        setInterval(() => { 
         let mm_check = cu.mmBase.matchmakingSearch(cu.uid, userInfo.active_entry);
-        if (mm_check.results = 'found' ){
-            console.log('opponent found');
-    }}, 2000);
+        if (mm_check.matchmaking_status == 'connecting' ){
+            cu.mm.value = mm_check.matchmaking_status;
+            setisMMUpdated();
+    }}, 9000);
        
     };
     return(

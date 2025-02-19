@@ -42,7 +42,6 @@ export class initialData {
             }).catch(error =>  {
                 
                 if (error){
-                    console.log(error);
                     res_stat.value = error;
                 };
             });
@@ -106,7 +105,6 @@ export class initialData {
         return contactRequest;
 
         }catch(e){
-            console.log(e);
             return 500
         }
         

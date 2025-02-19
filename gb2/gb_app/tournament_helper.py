@@ -83,28 +83,30 @@ class TnHelper():
                 except dce.ObjectDoesNotExist:
                     new_tl['likedbyme'] = bool(False)
                 
-                if current_leaderboard.count() > 0: new_tl['top_3'] = [
-                    {   
-                        'stat_id': x['player_id'],
-                        'username':AccountPreference.objects.get(user_id=x['player_id']).user.username,
-                        'wins':x['wins'], 
-                        'losses': x['losses'],
-                        'points': x['points'], 
-                        'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{AccountPreference.objects.get(user_id=x["player_id"]).user.profile_pic}' ,
-                        'server': AccountPreference.objects.get(user_id=x['player_id']).server,
-                        'platform': AccountPreference.objects.get(user_id=x['player_id']).platform.name,
-                        'matchmaking_status': x['matchmaking']
-                    }
-                
-                    
-                    for x in current_leaderboard.values().order_by('points')[:top_count]
-                     
-                    ]
-                
-              
-                
+                n = 0
+                if current_leaderboard.count() > 1: 
+                    new_tl['top_3'] = []
+                    for x in current_leaderboard.values().order_by('points')[:top_count]:
+                        try:
+                            cu_ap = AccountPreference.objects.get(user_id=x['player_id'])
+                        
+                            new_tl['top_3'].append(
+                                {   
+                                    'stat_id': x['player_id'],
+                                    'username':cu_ap.user.username,
+                                    'wins':x['wins'], 
+                                    'losses': x['losses'],
+                                    'points': x['points'], 
+                                    'profile_pic': f'https://{settings.AWS_BUCKS["profile_pics"]}{cu_ap.user.profile_pic}' ,
+                                    'server': cu_ap.server,
+                                    'platform': cu_ap.platform.name,
+                                    'matchmaking_status': x['matchmaking']
+                                })
+                        except dce.ObjectDoesNotExist:
+                            break
+             
                 if filter == 'entry':
-                    for index, user in enumerate(new_tl['top_3']):
+                    for index,user in enumerate(new_tl['top_3']):
                         if user['username'] == self.request.user.username:
                             new_tl['user_position'] = index + 1
                     gl = self.get_leaderboard(val)
@@ -136,17 +138,22 @@ class TnHelper():
             if not tourney:
                 tobj = Tournament.objects.get(tournament_hash=tuid)
                 if tobj:
-                    leaderboard = Leaderboard.objects.get(tournament=tobj)
-                    if leaderboard:
-                        try:
+                    try:
+                        leaderboard = Leaderboard.objects.get(tournament=tobj)
+                        if leaderboard:
                             if matchmaking:
                                 return leaderboard
-                        except dce.RequestAborted:
-                            leaderboard.matchmaking = 'connecting'
-                            leaderboard.save()
-                            return False
-                        
-                        return True
+                            
+                    except dce.MultipleObjectsReturned:        
+                        leaderboard = Leaderboard.objects.all().filter(tournament=tobj, is_active=True)
+                        if leaderboard.exists():
+                            if matchmaking:
+                                return leaderboard
+                            
+                    except dce.RequestAborted:
+                        return False
+                    except dce.BadRequest:
+                        return False
             else:
                 leaderboard = Leaderboard.objects.get(tournament=tobj, player=self.cu_stats)
                 if leaderboard:

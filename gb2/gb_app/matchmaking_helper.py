@@ -2,7 +2,7 @@
 import django.core.exceptions as dce
 
 #app imports
-from gb_api.models import PlayerStat
+from gb_api.models import PlayerStat, Leaderboard
 from .tournament_helper import TnHelper
 
 
@@ -34,16 +34,81 @@ class MatchmakingHelper(TnHelper):
         
         return False
     
+    
+    def __save_matchup__(self, ocu, cu):
+        '''save the matchmaking results'''
+        ocu.matchmaking = 'connecting'
+        ocu.next_opponent = cu.player
+        
+        cu.matchmaking = 'connecting'
+        cu.next_opponent = ocu.player
+        cu.save()
+        ocu.save()
+        
+        self.matchmaking_status = 'connecting'
+        return True
+        
+        
     def mm_search(self):
         '''start searching for another use'''
         
         try:
+            potential_next = None
             leaderboard = self.get_leaderboard(matchmaking=True)
+            
             if leaderboard:
-                print(leaderboard)
                 
+                cu = Leaderboard.objects.get(player=self.cu_stats)
+                if cu:
+                    for index, user in enumerate(leaderboard.filter(matchmaking='matchmaking').order_by('?').values()):
+                        print(user)
+                        if user['player_id'] == self.request.user.id:
+                            continue
+                        ocu = Leaderboard.objects.get(player_id=user['player_id'])
+                    
+                        #if previous ocu.player
+                        if user['previous_opponent_id'] is not None: 
+                            if int(user['previous_opponent_id']) != int(ocu.player.id):
+                                if ocu.player.user.server == self.cu_ap.server:
+                                    if ocu.player.user.platform.name == self.cu_ap.platform.name:
+                                        self.__save_matchup__(ocu, cu)
+                                        return True
+                                    else:
+                                        potential_next = user
+                                    
+                                elif ocu.player.user.platform.name == self.cu_ap.platform.name:
+                                    self.__save_matchup__(ocu, cu)
+                                    return True
+                                if potential_next:
+                                    self.__save_matchup__(ocu, cu)
+                                    return True
+                                else:
+                                    potential_next = ocu
+                                    continue
+                        #otherwise if first ocu.player      
+                        else:
+                            if ocu.player.user.server == self.cu_ap.server:
+                                if ocu.player.user.platform.name == self.cu_ap.platform.name:
+                                    self.__save_matchup__(ocu, cu)
+                                    return True
+                                else:
+                                    potential_next = user
+                                    
+                            elif ocu.player.user.platform.name == self.cu_ap.platform.name:
+                                self.__save_matchup__(ocu, cu)
+                                return True
+                            
+                            if potential_next:
+                                self.__save_matchup__(ocu, cu)
+                                return True
+                            else:
+                                potential_next = ocu
+                                continue
+                                
+                return False
             else:
-                print('no leaderboard')
+                return False
+            
         except dce.ObjectDoesNotExist:
             return False
         except dce.RequestAborted:

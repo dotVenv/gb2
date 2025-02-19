@@ -489,6 +489,7 @@ class Leaderboard(ExportModelOperationsMixin('Leaderboard'), models.Model):
     losses = models.IntegerField(default=0)
     previous_opponent = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='prev_opponent', blank=True, null=True)
     matchmaking = models.CharField(max_length=35, choices=matchmaking_options, null=True, blank=True)
+    next_opponent  = models.ForeignKey('PlayerStat', on_delete=models.PROTECT, related_name='next_opponent', blank=True, null=True)
     
  
     class Meta:
