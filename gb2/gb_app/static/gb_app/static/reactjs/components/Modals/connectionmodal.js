@@ -25,7 +25,7 @@ const ConnectionModal = ({ cu, isModalOpen,setModal}) => {
 
     return(
         <>
-            <Modal className='bg-gadient-to-r from-zinc-800 to-green-700'
+            <Modal className=' from-zinc-800 '
                 isDismissable={false} 
                 backdrop='blur'  
                 size='md' 

@@ -129,7 +129,6 @@ const Tournament = () => {
             setNewToast(true);
         };
     };
-
     
     return (
         <>
