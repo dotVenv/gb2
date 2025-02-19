@@ -253,7 +253,6 @@ class UserHelper():
                     cu.save()
                     self.setup_data = {'step': 'passed'}
                     return True
-    
         return False
     
     

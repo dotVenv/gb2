@@ -1,13 +1,12 @@
 'use client';
 
 import React, { Suspense, useContext, useState } from "react";
-import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions} from "../../components";
+import { CustomSidebar, AnnouncmentBanner, MembershipModal, CustomToast, StickyOptions, ConnectionModal } from "../../components";
 import { AccountSetup } from '../index';
-import { Spacer, Card, Alert, Button, Chip} from "@nextui-org/react";
+import { Spacer, Card, Alert, Button, Chip } from "@nextui-org/react";
 import { ConnContext } from "../../connector";
 import { useAtom } from 'jotai';
 import { signal } from "@preact/signals-react";
-import { motion } from "framer-motion";
 
 var checkWindowLoc = window.location.pathname.split('/');
 const fetchedTourney = signal(0);
@@ -27,7 +26,8 @@ const Layout = ({ children }) => {
     const accountProgress = userInfo.setup_step;   
     const [membershipModal, setmembershipModal] = useState();
     const [newToastAlert, setNewToastAlert] = useState();
-    const [isMMUpdated, setisMMUpdated] = useState();
+    const [isMMUpdated, setisMMUpdated] = useState(!cu.mm.value ? false : cu.mm.value );
+    
     
     if(cu.mm.value == 'matchmaking'){
 
@@ -35,7 +35,8 @@ const Layout = ({ children }) => {
         let mm_check = cu.mmBase.matchmakingSearch(cu.uid, userInfo.active_entry);
         if (mm_check.matchmaking_status == 'connecting' ){
             cu.mm.value = mm_check.matchmaking_status;
-            setisMMUpdated();
+            setisMMUpdated(cu.mm.value);
+        
     }}, 9000);
        
     };
@@ -117,7 +118,7 @@ const Layout = ({ children }) => {
                     { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
                     { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
 
-                   
+                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} />: undefined }
                 </> 
             }
             <footer className='col-9 justify-center align-center mx-auto'>

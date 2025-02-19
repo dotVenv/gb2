@@ -33,7 +33,7 @@ const TournamentCard = ({tournamentInfo}) => {
         <Card  isFooterBlurred className="bg-zinc-800 bg-transparent border-no w-[250px] h-[300px]" radius='lg'>
             <p className='text-white absolute mt-2 ml-2'>
                 {isLive == true 
-                    ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b><br></br> <i className='text-tiny' style={{'color': '#AAFF00'}}> Leader: </i></span>
+                    ? <span><i className="fa-solid fa-circle fa-beat fa-sm" style={{"color": 'red '}}></i> <b className='text-tiny'>Live Now </b><br></br></span>
                     : isLive == 'soon' 
                         ?  <span><i className="fa-solid fa-circle fa-beat" style={{"color": 'red '}}></i> <b className='text-tiny'>Starting Soon </b></span>
                         : undefined 

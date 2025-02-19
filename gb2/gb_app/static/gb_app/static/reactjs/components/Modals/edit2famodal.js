@@ -26,7 +26,7 @@ import Countdown from 'react-countdown';
 const Edit2FAModal = ({showQR, updateAccount, userInfo, setModal, isModalOpen, cu  }) => {
 
 
-    const [mfaToggle, setmfaToggle] = useState()
+    const [mfaToggle, setmfaToggle] = useState();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [otpValue, setotpValue] = useState();
 
