@@ -8,13 +8,9 @@ import {
     ModalBody,
     ModalFooter,
     Button,
-    Form,
-    Input,
     useDisclosure,
-    Chip,
-    Switch,
-    Snippet,
-    InputOtp,
+    Card,
+    CardHeader,
   } from "@nextui-org/react";
 
 
@@ -25,7 +21,7 @@ const ConnectionModal = ({ cu, isModalOpen,setModal}) => {
 
     return(
         <>
-            <Modal className=' from-zinc-800 '
+            <Modal className='from-zinc-800'
                 isDismissable={false} 
                 backdrop='blur'  
                 size='md' 
@@ -35,16 +31,26 @@ const ConnectionModal = ({ cu, isModalOpen,setModal}) => {
             <ModalContent>
             {(onClose) => (
                 <>
-                <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'>Update Account 2FA </i></ModalHeader>
+                <ModalHeader className="flex flex-col gap-1"><i className='text-gray-200'>Matchmaking -  Player Found</i></ModalHeader>
                 <ModalBody >
-                   
+                   <div className='grid grid-cols-3 gap-1'>
+                    <Card className='p-4'>
+                        <span className='text-small'>You <i className="fa-solid fa-location-pin fa-2xs"></i></span>
+                        {cu.mm.value}
+                    </Card>
+                    <p className='text-white font-semibold justify-center align-center mx-auto'> VS </p>
+                    <Card className='p-4'>
+                        <span className='text-small'>Them <i className="fa-solid fa-location-pin fa-2xs"></i></span>
+                        {cu.mm.value}
+                    </Card>
+                   </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button startContent={<i className="fa-solid fa-hand-back-fist"></i>} color="success" variant="shadow" size='sm' radius='lg' onPress={(e) => { setModal(false)}}>
-                        Acccept Match
+                    <Button startContent={<i className="fa-solid fa-hand-back-fist" style={{'color': 'white'}}></i>} color="success" variant="shadow" size='sm' radius='lg' onPress={(e) => { setModal(false)}}>
+                        <i className='text-tiny text-white'>Accept Match</i>
                     </Button>
-                    <Button startContent={<i className="fa-solid fa-hand-peace"></i>} color="danger" variant="shadow" size='sm' radius='lg' onPress={(e) => { setModal(false)}}>
-                        Decline Match
+                    <Button startContent={<i className="fa-solid fa-hand-peace" style={{'color': 'white'}}></i>} color="danger" variant="shadow" size='sm' radius='lg' onPress={(e) => { setModal(false)}}>
+                        <i className='text-tiny text-white'>Decline Match</i>
                     </Button>
                 </ModalFooter>
                 </>

@@ -117,8 +117,7 @@ const Layout = ({ children }) => {
 
                     { membershipModal ? <MembershipModal cu={cu} isModalOpen={membershipModal} setModal={setmembershipModal}  /> : undefined}
                     { newToastAlert ? <CustomToast sev={toastData.value.toastType} desc={toastData.value.desc} /> : undefined }
-
-                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} />: undefined }
+                    { isMMUpdated == 'connecting' ? <ConnectionModal isModalOpen={isMMUpdated} setModal={setisMMUpdated} cu={cu} /> : undefined }
                 </> 
             }
             <footer className='col-9 justify-center align-center mx-auto'>
@@ -129,30 +128,6 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-
-
-const data = [
-    {
-      title: "Server Load",
-      value: 38,
-      status: "good",
-      iconName: "solar:server-square-linear",
-    },
-    {
-      title: "Server Load",
-      value: 98,
-      status: "danger",
-      iconName: "solar:server-square-linear",
-    },
-    {
-      title: "Average Memory Used",
-      value: 64,
-      status: "warn",
-      iconName: "solar:sd-card-linear",
-    },
-  ];
-
-  
 
 
 
