@@ -1,10 +1,13 @@
 #django imports
 import django.core.exceptions as dce
 from django.conf import settings
+from django.db import transaction
+from django.utils.decorators import method_decorator
 
 #app imports
 from gb_api.models import PlayerStat, Leaderboard
 from .tournament_helper import TnHelper
+import inspect
 
 
 class MatchmakingHelper(TnHelper):
@@ -20,9 +23,30 @@ class MatchmakingHelper(TnHelper):
         ''' update the matching status for the users db'''
         
         try:
+            print('match making')
             leaderboard = self.get_leaderboard(matchmaking=True)
             if leaderboard is not None or leaderboard is not False:
-                if leaderboard.matchmaking == 'idle':
+                
+                if len(leaderboard) > 1:
+                    self.matchmaking_status = None
+                    for user in leaderboard:
+                        if user.matchmaking == 'connecting' or user.matchmaking == 'matchmaking':
+                        
+                            user.matchmaking='idle'
+                            user.next_opponent = None
+                            self.matchmaking_status = 'idle'
+                            user.save()
+                            
+                        elif user.matchmaking == 'idle':
+                            user.matchmaking = 'matchmaking'
+                            user.next_opponent = None
+                            self.matchmaking_status = 'matchmaking'
+                            
+                            user.save()
+                    
+                    return True
+                    
+                elif leaderboard.matchmaking == 'idle':
                     leaderboard.matchmaking = 'matchmaking'
                 elif leaderboard.matchmaking == 'matchmaking':
                     leaderboard.matchmaking = 'idle'
@@ -35,24 +59,26 @@ class MatchmakingHelper(TnHelper):
         
         return False
     
-    
+    @method_decorator(transaction.atomic)
     def __save_matchup__(self,cu,ocu=None):
         '''save the matchmaking results'''
-        
-        ocu = None
-        if ocu is not None:
-            ocu.matchmaking = 'connecting'
-            ocu.next_opponent = cu.player
-            cu.matchmaking = 'connecting'
-            cu.next_opponent = ocu.player
-            cu.save()
-            ocu.save()
+    
+        with transaction.atomic():
+            if ocu is not None:
+                ocu.matchmaking = 'connecting'
+                ocu.next_opponent = cu.player
+                cu.matchmaking = 'connecting'
+                cu.next_opponent = ocu.player
+                cu.save()
+                ocu.save()
             
-        else:
-            ocu = Leaderboard.objects.get(player=cu.next_opponent)
+            else:
+                ocu = Leaderboard.objects.get(player=cu.next_opponent)
+              
+                
         
         if ocu is None:
-            print('opponent not found')
+            return False
         
 
         self.matchmaking_status = {
@@ -64,7 +90,7 @@ class MatchmakingHelper(TnHelper):
             'wins': ocu.wins,
             'losses': ocu.losses
             }
-         
+        
         return True
         
         
@@ -75,7 +101,6 @@ class MatchmakingHelper(TnHelper):
         try:
             potential_next = None
             leaderboard = self.get_leaderboard(matchmaking=True)
-            
             if leaderboard:
                 
                 cu = Leaderboard.objects.get(player=self.cu_stats)
@@ -94,16 +119,16 @@ class MatchmakingHelper(TnHelper):
                             if int(user['previous_opponent_id']) != int(ocu.player.id):
                                 if ocu.player.user.server == self.cu_ap.server:
                                     if ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                        if self.__save_matchup__(ocu, cu):
+                                        if self.__save_matchup__(cu,ocu):
                                             return True
                                     else:
                                         potential_next = user
                                     
                                 elif ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                    if self.__save_matchup__(ocu, cu):
+                                    if self.__save_matchup__(cu,ocu):
                                         return True
                                 if potential_next:
-                                    if self.__save_matchup__(ocu, cu):
+                                    if self.__save_matchup__(cu,ocu):
                                         return True
                                 else:
                                     potential_next = ocu
@@ -112,18 +137,18 @@ class MatchmakingHelper(TnHelper):
                         else:
                             if ocu.player.user.server == self.cu_ap.server:
                                 if ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                    self.__save_matchup__(ocu, cu)
-                                    return True
+                                    if self.__save_matchup__(cu,ocu):
+                                        return True
                                 else:
                                     potential_next = user
                                     
                             elif ocu.player.user.platform.name == self.cu_ap.platform.name:
-                                self.__save_matchup__(ocu, cu)
-                                return True
+                                if self.__save_matchup__(cu,ocu):
+                                    return True
                             
                             if potential_next:
-                                self.__save_matchup__(ocu, cu)
-                                return True
+                                if self.__save_matchup__(cu,ocu):
+                                    return True
                             else:
                                 potential_next = ocu
                                 continue

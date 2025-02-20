@@ -139,16 +139,14 @@ class TnHelper():
                 tobj = Tournament.objects.get(tournament_hash=tuid)
                 if tobj:
                     try:
-                        leaderboard = Leaderboard.objects.get(tournament=tobj)
+                        leaderboard = Leaderboard.objects.get(tournament=tobj.tournament_hash)
                         if leaderboard:
-                            if matchmaking:
-                                return leaderboard
+                            return leaderboard
                             
-                    except dce.MultipleObjectsReturned:        
-                        leaderboard = Leaderboard.objects.all().filter(tournament=tobj, is_active=True)
+                    except dce.MultipleObjectsReturned: 
+                        leaderboard = Leaderboard.objects.all().filter(tournament=tobj.tournament_hash, is_active=True)
                         if leaderboard.exists():
-                            if matchmaking:
-                                return leaderboard
+                            return leaderboard
                             
                     except dce.RequestAborted:
                         return False
