@@ -128,7 +128,7 @@ class MatchmakingHelper(TnHelper):
                                     if self.__save_matchup__(cu,ocu):
                                         return True
                                 if potential_next:
-                                    if self.__save_matchup__(cu,ocu):
+                                    if self.__save_matchup__(cu,potential_next):
                                         return True
                                 else:
                                     potential_next = ocu
@@ -147,7 +147,7 @@ class MatchmakingHelper(TnHelper):
                                     return True
                             
                             if potential_next:
-                                if self.__save_matchup__(cu,ocu):
+                                if self.__save_matchup__(cu,potential_next):
                                     return True
                             else:
                                 potential_next = ocu
